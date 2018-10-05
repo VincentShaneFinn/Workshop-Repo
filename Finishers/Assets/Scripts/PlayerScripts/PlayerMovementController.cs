@@ -5,9 +5,7 @@ using UnityEngine;
 public class PlayerMovementController : MonoBehaviour {
 
     public Transform forwardObject;
-    public float moveSpeed;
-    public float jumpVelocity;
-    public GameObject PauseMenu;
+    public GameObject PlayerModel;
 
     public float speed = 6.0F;
     public float jumpSpeed = 8.0F;
@@ -17,28 +15,9 @@ public class PlayerMovementController : MonoBehaviour {
 
     public CharacterController controller;
 
-    // Use this for initialization
-    void Start()
-    {
-
-        Cursor.lockState = CursorLockMode.Locked;
-        // Hide cursor when locking
-        Cursor.visible = false;
-    }
-
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseMenu.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
-            SetCursorState();
-            return;
-        }
-
         if (controller.isGrounded)
         {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -52,16 +31,13 @@ public class PlayerMovementController : MonoBehaviour {
 
         }
         moveDirection.y -= gravity * Time.deltaTime;
-        controller.Move(moveDirection * Time.deltaTime);
+        controller.Move(forwardObject.TransformDirection(moveDirection) * Time.deltaTime);
 
         //characterController.Move(forwardObject.TransformDirection(moveDirection) * Time.deltaTime * moveSpeed); // not physics friendly
-    }
-
-    // Apply requested cursor state
-    void SetCursorState()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        // Hide cursor when locking
-        Cursor.visible = true;
+        Vector3 movement = new Vector3(forwardObject.TransformDirection(moveDirection).x, 0.0f, forwardObject.TransformDirection(moveDirection).z);
+        if (movement != Vector3.zero)
+        {
+            PlayerModel.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * 20);
+        }
     }
 }
