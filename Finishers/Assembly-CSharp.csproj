@@ -69,6 +69,8 @@
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\SwordAttack.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovementController.cs" />
      <Compile Include="Assets\Scripts\UIScripts\UIManager.cs" />
+     <Compile Include="Assets\ThrowLimb.cs" />
+     <Compile Include="Assets\ThrowPart.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/GITHUB/Workshop-Repo/Finishers/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

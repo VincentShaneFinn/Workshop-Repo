@@ -34,6 +34,14 @@ public class SwordAttack : MonoBehaviour {
                     transform.localRotation = Quaternion.Euler(0, 60, 0);
                 }
             }
+            //Temporary for siphoning attack
+            if (Input.GetMouseButtonDown(1))
+            {
+                Sword.SetActive(true);
+                swordCount = 0;
+                swordAttackCount = 0;
+                transform.localRotation = Quaternion.Euler(0, 60, 0);
+            }
         }
         else
         {
@@ -43,7 +51,7 @@ public class SwordAttack : MonoBehaviour {
                 transform.Rotate(transform.rotation.x, transform.rotation.y - 120 / swordAttackTime * Time.deltaTime, transform.rotation.z); // broken with small time scale
             }
             else
-            {
+            { 
                 Sword.SetActive(false);
             }
             swordCount += Time.deltaTime;

@@ -24,6 +24,9 @@ public class FinisherMode : MonoBehaviour {
     private GameObject currentTarget;
 
     public GameObject BlastBeam;
+    public GameObject TopHalf;
+    public GameObject BottomHalf;
+    public GameObject SlicedLimb;
 
     void Start()
     {
@@ -126,6 +129,9 @@ public class FinisherMode : MonoBehaviour {
                 print("Commit Runit Finisher");
                 break;
             case FinisherModes.Siphoning:
+                GameObject part1 = Instantiate(TopHalf, new Vector3(currentTarget.transform.position.x, 1f, currentTarget.transform.position.z), currentTarget.transform.rotation);
+                GameObject part2 = Instantiate(BottomHalf, new Vector3(currentTarget.transform.position.x, 0f, currentTarget.transform.position.z), currentTarget.transform.rotation);
+                SlicedLimb.SetActive(true);
                 print("Commit Siphoning Finisher");
                 break;
             case FinisherModes.PressurePoints:
