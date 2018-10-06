@@ -11,10 +11,13 @@ public class SwordAttack : MonoBehaviour {
     public float swordAttackTime = .2f;
     private float swordAttackCount;
 
+    private bool canAttack;
+
 	// Use this for initialization
 	void Start () {
         Sword.SetActive(false);
         swordCount = swordCooldown;
+        canAttack = true;
     }
 	
 	// Update is called once per frame
@@ -23,10 +26,13 @@ public class SwordAttack : MonoBehaviour {
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Sword.SetActive(true);
-                swordCount = 0;
-                swordAttackCount = 0;
-                transform.localRotation = Quaternion.Euler(0, 60, 0);
+                if (canAttack)
+                {
+                    Sword.SetActive(true);
+                    swordCount = 0;
+                    swordAttackCount = 0;
+                    transform.localRotation = Quaternion.Euler(0, 60, 0);
+                }
             }
         }
         else
@@ -43,4 +49,15 @@ public class SwordAttack : MonoBehaviour {
             swordCount += Time.deltaTime;
         }
 	}
+
+    public void PreventAttacking()
+    {
+        canAttack = false;
+        //need to stop current attack
+    }
+
+    public void ResumeAttacking()
+    {
+        canAttack = true;
+    }
 }

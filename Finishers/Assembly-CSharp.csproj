@@ -63,7 +63,9 @@
      <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\CameraTiltController.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\CameraYawController.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\ChangeCameraPerpective.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\FinisherAreaController.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\FinisherMode.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\RunicBeamBlast.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\SwordAttack.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovementController.cs" />
      <Compile Include="Assets\Scripts\UIScripts\UIManager.cs" />
