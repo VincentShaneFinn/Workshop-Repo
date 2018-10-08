@@ -154,4 +154,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1793182956784890}
-  DestroyTime: 0.1
+  DestroyTime: 0.3

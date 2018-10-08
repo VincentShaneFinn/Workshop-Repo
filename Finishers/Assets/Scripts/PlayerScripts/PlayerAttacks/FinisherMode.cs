@@ -28,6 +28,8 @@ public class FinisherMode : MonoBehaviour {
     public GameObject BottomHalf;
     public GameObject SlicedLimb;
 
+    private CameraMovementController cam;
+
     void Start()
     {
         FinisherCount = FinisherTime;
@@ -35,6 +37,7 @@ public class FinisherMode : MonoBehaviour {
         CurrentFinisherMode = FinisherModes.Runic;
         inFinisherMode = false;
         PerfromingFinisher = false;
+        cam = Camera.main.GetComponent<CameraMovementController>();
     }
 
     // Update is called once per frame
@@ -75,7 +78,7 @@ public class FinisherMode : MonoBehaviour {
             }
         }
         else{
-            if (!PerfromingFinisher)
+            if (!PerfromingFinisher && !cam.GetIsMoving())
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -115,6 +118,8 @@ public class FinisherMode : MonoBehaviour {
         currentTarget.transform.parent = EnemyFinisherPlacement;
         currentTarget.GetComponent<EnemyMovementController>().StopMovement();
 
+        cam.MoveToFinisherModeLocation();
+
         //yield return null;
     }
 
@@ -131,7 +136,7 @@ public class FinisherMode : MonoBehaviour {
             case FinisherModes.Siphoning:
                 GameObject part1 = Instantiate(TopHalf, new Vector3(currentTarget.transform.position.x, 1f, currentTarget.transform.position.z), currentTarget.transform.rotation);
                 GameObject part2 = Instantiate(BottomHalf, new Vector3(currentTarget.transform.position.x, 0f, currentTarget.transform.position.z), currentTarget.transform.rotation);
-                SlicedLimb.SetActive(true);
+                try { SlicedLimb.SetActive(true); } catch { }
                 print("Commit Siphoning Finisher");
                 break;
             case FinisherModes.PressurePoints:
@@ -155,6 +160,7 @@ public class FinisherMode : MonoBehaviour {
         currentTarget = null;
         yield return null;
         swordController.ResumeAttacking();
+        cam.MoveToCombatLocation();
     }
 
 

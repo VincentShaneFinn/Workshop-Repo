@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/AIDemo2.unity
+- path: Assets/Scenes/TechDemo.unity
   isLoaded: 1
   isActive: 1

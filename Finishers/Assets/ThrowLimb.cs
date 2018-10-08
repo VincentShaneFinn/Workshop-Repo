@@ -30,9 +30,6 @@ public class ThrowLimb : MonoBehaviour {
         if (col.gameObject.tag == "Enemy")
         {
             Destroy(col.gameObject);
-        }
-        if (col.gameObject.tag != "EditorOnly")
-        {
             Destroy(gameObject);
         }
     }

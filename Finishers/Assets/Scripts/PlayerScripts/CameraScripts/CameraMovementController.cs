@@ -6,17 +6,24 @@ public class CameraMovementController : MonoBehaviour {
 
     public Transform CombatCameraLocation;
     public Transform OOCCameraLocation;
+    public Transform FinisherModeCameraLocation;
 
 	public void MoveToCombatLocation()
     {
         //transform.position = CombatCameraLocation.position;
-        StartCoroutine(moveToX(CombatCameraLocation, .5f));
+        StartCoroutine(moveToX(CombatCameraLocation, .4f));
     }
 
     public void MoveToOOCLocation()
     {
         //transform.position = OOCCameraLocation.position;
-        StartCoroutine(moveToX(OOCCameraLocation, .5f));
+        StartCoroutine(moveToX(OOCCameraLocation, .4f));
+    }
+
+    public void MoveToFinisherModeLocation()
+    {
+        //transform.position = CombatCameraLocation.position;
+        StartCoroutine(moveToX(FinisherModeCameraLocation, .2f));
     }
 
     bool isMoving = false;
@@ -26,7 +33,7 @@ public class CameraMovementController : MonoBehaviour {
         //Make sure there is only one instance of this function running
         if (isMoving)
         {
-            yield break; ///exit if this is still running
+            //yield break; ///exit if this is still running
         }
         isMoving = true;
 
@@ -45,6 +52,11 @@ public class CameraMovementController : MonoBehaviour {
         }
 
         isMoving = false;
+    }
+
+    public bool GetIsMoving()
+    {
+        return isMoving;
     }
 
 }
