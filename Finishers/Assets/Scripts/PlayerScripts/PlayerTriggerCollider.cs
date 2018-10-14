@@ -13,7 +13,7 @@ public class PlayerTriggerCollider : MonoBehaviour {
         {
             col.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
             Vector3 dir = (player.transform.position - col.transform.position).normalized;
-            //StartCoroutine(player.KnockbackPlayer(dir, speed, .15f));
+            StartCoroutine(player.KnockbackPlayer(dir, speed, .15f));
         }
     }
 }

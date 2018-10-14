@@ -220,7 +220,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             grounded = (controller.Move(moveDirection * Time.deltaTime) & CollisionFlags.Below) != 0;
         }
-        if (CanMove && CanTurn)
+        if (CanTurn)
         {
             Vector3 movement = new Vector3((moveDirection).x, 0.0f, (moveDirection).z);
             if (movement != Vector3.zero)

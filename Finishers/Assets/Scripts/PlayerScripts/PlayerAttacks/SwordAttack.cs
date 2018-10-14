@@ -22,11 +22,22 @@ public class SwordAttack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (swordCount >= swordCooldown)
+        if (!Cursor.visible)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (swordCount >= swordCooldown)
             {
-                if (canAttack)
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (canAttack)
+                    {
+                        Sword.SetActive(true);
+                        swordCount = 0;
+                        swordAttackCount = 0;
+                        transform.localRotation = Quaternion.Euler(0, 60, 0);
+                    }
+                }
+                //Temporary for siphoning attack
+                if (Input.GetMouseButtonDown(1))
                 {
                     Sword.SetActive(true);
                     swordCount = 0;
@@ -34,27 +45,19 @@ public class SwordAttack : MonoBehaviour {
                     transform.localRotation = Quaternion.Euler(0, 60, 0);
                 }
             }
-            //Temporary for siphoning attack
-            if (Input.GetMouseButtonDown(1))
-            {
-                Sword.SetActive(true);
-                swordCount = 0;
-                swordAttackCount = 0;
-                transform.localRotation = Quaternion.Euler(0, 60, 0);
-            }
-        }
-        else
-        {
-            if (swordAttackCount <= swordAttackTime)
-            {
-                swordAttackCount += Time.deltaTime;
-                transform.Rotate(transform.rotation.x, transform.rotation.y - 120 / swordAttackTime * Time.deltaTime, transform.rotation.z); // broken with small time scale
-            }
             else
-            { 
-                Sword.SetActive(false);
+            {
+                if (swordAttackCount <= swordAttackTime)
+                {
+                    swordAttackCount += Time.deltaTime;
+                    transform.Rotate(transform.rotation.x, transform.rotation.y - 120 / swordAttackTime * Time.deltaTime, transform.rotation.z); // broken with small time scale
+                }
+                else
+                {
+                    Sword.SetActive(false);
+                }
+                swordCount += Time.deltaTime;
             }
-            swordCount += Time.deltaTime;
         }
 	}
 
