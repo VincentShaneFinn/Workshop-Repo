@@ -45,7 +45,7 @@ public class FinisherMode : MonoBehaviour {
         if (FinisherCount >= FinisherTime)
         {
             Time.timeScale = 1;
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.M))
             {
                 FinisherCount = 0;
                 Time.timeScale = .1f;
@@ -59,7 +59,7 @@ public class FinisherMode : MonoBehaviour {
         if (!inFinisherMode) { 
             if (FinisherModeCount >= FinisherModeTime)
             {
-                if (Input.GetKeyDown(KeyCode.LeftShift))
+                if (Input.GetKeyDown(KeyCode.F))
                 {
                     currentTarget = GetClosestEnemy();
                     if (currentTarget != null)
@@ -107,7 +107,7 @@ public class FinisherMode : MonoBehaviour {
     //IEnumerator EnterFinisherMode()
     public void EnterFinisherMode()
     {
-        Player.GetComponent<PlayerMovementController>().speed = 0.01f;
+        Player.GetComponent<PlayerMovementController>().PreventMoving();
         FinisherModeCount = 0;
         inFinisherMode = true;
         print("Begin Finisher");
@@ -153,7 +153,7 @@ public class FinisherMode : MonoBehaviour {
 
     IEnumerator LeavingFinisherMode()
     {
-        Player.GetComponent<PlayerMovementController>().speed = 6;
+        Player.GetComponent<PlayerMovementController>().AllowMoving();
         inFinisherMode = false;
         PerfromingFinisher = false;
         CurrentFinisherMode = FinisherModes.Runic;

@@ -4,7 +4,7 @@ D:/GITHUB/Workshop-Repo/Finishers/GameBuild/Finishers.exe
 SceneListBegin?
 Assets/Scenes/TechDemo.unity
 SceneListEnd?
-050bca64cc62dc98ba4aeef8fdeb5f96 Assembly-CSharp.dll:.PlayerMovementController
+a6343f03e3c09f0e7ec583c4d9e7a483 Assembly-CSharp.dll:.PlayerMovementController
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 7b803eb2910e9b4cd5e521ae07b9f7d6 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
 486cd95c82d8305219c352c06b776e1f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset

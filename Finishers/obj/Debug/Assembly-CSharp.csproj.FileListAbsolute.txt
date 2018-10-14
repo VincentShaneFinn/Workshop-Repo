@@ -1,0 +1,2 @@
+D:\GITHUB\Workshop-Repo\Finishers\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+D:\GITHUB\Workshop-Repo\Finishers\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
