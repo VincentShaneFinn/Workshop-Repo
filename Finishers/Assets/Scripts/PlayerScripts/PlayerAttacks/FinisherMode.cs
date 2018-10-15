@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum FinisherModes { Runic, Siphoning, PressurePoints}
 
@@ -27,6 +28,10 @@ public class FinisherMode : MonoBehaviour {
     public GameObject TopHalf;
     public GameObject BottomHalf;
     public GameObject SlicedLimb;
+
+    //Controls Slider UI
+    public Slider finisherSlider;
+    public int buildupVal = 5;
 
     private CameraMovementController cam;
 
@@ -74,6 +79,11 @@ public class FinisherMode : MonoBehaviour {
             else
             {
                 FinisherModeCount += Time.deltaTime;
+            }
+
+            //Increase UI slider for Finisher
+            if (Input.GetKeyDown(KeyCode.G)) {
+                finisherSlider.value += buildupVal;
             }
         }
         else{
