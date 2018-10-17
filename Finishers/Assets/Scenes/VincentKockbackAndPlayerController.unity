@@ -1795,6 +1795,8 @@ MonoBehaviour:
   TopHalf: {fileID: 1786564139995998, guid: 5d529feba4335e947a85f58bf49fc210, type: 2}
   BottomHalf: {fileID: 1848987941572450, guid: c9eac2a4d736b2a4e96b86c92f88e4e6, type: 2}
   SlicedLimb: {fileID: 1984092112}
+  finisherSlider: {fileID: 0}
+  buildupVal: 5
 --- !u!1 &620646684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2016,6 +2018,7 @@ GameObject:
   - component: {fileID: 676372665}
   - component: {fileID: 676372664}
   - component: {fileID: 676372663}
+  - component: {fileID: 676372669}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -2126,6 +2129,18 @@ Transform:
   m_Father: {fileID: 1640242364}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &676372669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 676372662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e7e3cbb7544d54db536781f2d25987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 2
 --- !u!1 &685712673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,6 +2309,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 615258568}
+  canDie: 1
+  health: 100
+  healthSlider: {fileID: 0}
+  gameOverText: {fileID: 0}
 --- !u!54 &697642683
 Rigidbody:
   m_ObjectHideFlags: 0

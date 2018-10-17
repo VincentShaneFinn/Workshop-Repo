@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class swordHit : MonoBehaviour {
 
-	void OnTriggerEnter(Collider col)
+    void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Enemy")
+        if (col.gameObject.tag.Equals("Enemy"))
         {
-            Destroy(col.gameObject);
+            Enemyhp e = null;
+            if ((e = col.GetComponent<Enemyhp>()) != null)
+            {
+                e.damage();
+            }
+            else
+            {
+                Destroy(col.gameObject);
+            }
         }
+
     }
 }
