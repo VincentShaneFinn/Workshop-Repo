@@ -15,7 +15,7 @@ public class Enemyhp : MonoBehaviour {
 		
 	}
     void checkhp() {
-        if (currenthp<0) {
+        if (currenthp<=0) {
             Destroy(gameObject);
         }
     }

@@ -2,7 +2,7 @@ WindowsStandalone
 PlayerPath?
 D:/GITHUB/Workshop-Repo/Finishers/GameBuild/Finishers.exe
 SceneListBegin?
-Assets/Scenes/TechDemo.unity
+Assets/Scenes/Week3-4/Week4FinalBuild.unity
 SceneListEnd?
 a6343f03e3c09f0e7ec583c4d9e7a483 Assembly-CSharp.dll:.PlayerMovementController
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
@@ -87,6 +87,7 @@ e90403eeda069970e0b9de1533de13a6 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 2d58ca16854b99daea8c45e9c0f367b7 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 16da51d1b62ef6d4ee1849350434023b UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 76bfb713173de91fcb127557bc4688c3 Assembly-CSharp.dll:UnityEngine.AI.NavMeshSurface
+159bfd2a24740a3a7df43694ebbc18f2 Assembly-CSharp.dll:.PlayerTriggerCollider
 486cd95c82d8305219c352c06b776e1f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 9e61f3535f3c55760a1cedfbd114f4af UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 754551afe4f2531f58476bf14c510657 UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -134,7 +135,7 @@ e6f12981bcbf247534a54d8e04aee4a3 Assembly-CSharp.dll:UnityEngine.AI.NavMeshModif
 486cd95c82d8305219c352c06b776e1f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 eeb471df27da22a09575970f53cba89a Assembly-CSharp.dll:UnityEngine.AI.NavMeshModifierVolume
 eaf0bcdb10d442a4029d615f41d09957 Unity.TextMeshPro.dll:TMPro.TextContainer
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.swordHit
+d100b59d3fdfe9213a24f9193b71a486 Assembly-CSharp.dll:.swordHit
 201273fb4f889724fb090164b7d6c657 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 486cd95c82d8305219c352c06b776e1f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 0f27c39183b9eb95eba0a228bea28273 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -171,9 +172,10 @@ d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 98d69a140ec0084cde3b6a5e09aea295 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
+14dc141be7269dbadd0087d96d152b15 Assembly-CSharp.dll:.Enemyhp
 aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-7681ef8449d50ff79e769cae77e68fdf Assembly-CSharp.dll:.FinisherMode
+29012f69ee6bfb9ee81861f5d32b5190 Assembly-CSharp.dll:.FinisherMode
 5907df802278111317e4a0b357730248 Assembly-CSharp.dll:.EnemyMovementController
 1f1a5c58d7eae7e9cd2f94ea7e282645 Assembly-CSharp.dll:UnityEngine.AI.NavMeshLink
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet

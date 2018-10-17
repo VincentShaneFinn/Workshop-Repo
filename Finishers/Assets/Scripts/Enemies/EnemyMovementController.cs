@@ -16,6 +16,7 @@ public class EnemyMovementController : MonoBehaviour {
         savedSpeed = agent.speed;
         savedAcc = agent.acceleration;
         pauseCount = pauseTime;
+        Target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -37,13 +38,16 @@ public class EnemyMovementController : MonoBehaviour {
 
     public void StopMovement()
     {
+        agent.isStopped = true;
         agent.speed = 0;
         agent.acceleration = 100;
+
         pauseCount = 0;
     }
 
     public void ResumeMovement()
     {
+        agent.isStopped = false;
         agent.speed = savedSpeed;
         agent.acceleration = savedAcc;
     }

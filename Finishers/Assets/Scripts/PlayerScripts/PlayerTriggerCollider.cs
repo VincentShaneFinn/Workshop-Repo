@@ -17,6 +17,9 @@ public class PlayerTriggerCollider : MonoBehaviour {
 
     void Start()
     {
+        healthSlider = GameObject.Find("/Canvas/Sliders/Health Slider").GetComponent<Slider>();
+        gameOverText = GameObject.Find("/Canvas/Game Over").GetComponent<Text>();
+
         healthSlider.value = health;
         gameOverText.text = "";
     }

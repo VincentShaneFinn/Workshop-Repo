@@ -225,6 +225,8 @@ public class PlayerMovementController : MonoBehaviour
             Vector3 movement = new Vector3((moveDirection).x, 0.0f, (moveDirection).z);
             if (movement != Vector3.zero)
             {
+                //print((float)(Time.deltaTime + (1.0 - Time.timeScale)));
+                //this doesnt get run if the timeScale is 0
                 PlayerModel.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * 20);
             }
         }

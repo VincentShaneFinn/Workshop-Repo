@@ -12,12 +12,13 @@ public class FinisherMode : MonoBehaviour {
     public float FinisherTime;
     private float FinisherCount;
 
-    public float FinisherModeTime;
-    private float FinisherModeCount;
+    public float FinisherModeCooldownTime;
+    private float FinisherModeCooldownCount;
 
     private FinisherModes CurrentFinisherMode;
     private bool inFinisherMode;
-    private bool PerfromingFinisher;
+    private bool PerformingFinisher;
+    private bool ExecutingFinisher;
 
     public SwordAttack swordController;
     public Transform EnemyFinisherPlacement;
@@ -31,44 +32,38 @@ public class FinisherMode : MonoBehaviour {
 
     //Controls Slider UI
     public Slider finisherSlider;
-    public int buildupVal = 5;
+    public int buildupVal = 20;
+
+    //slow mo
+    public float slowMoModifier;
 
     private CameraMovementController cam;
 
     void Start()
     {
         FinisherCount = FinisherTime;
-        FinisherModeCount = FinisherModeTime;
+        FinisherModeCooldownCount = FinisherModeCooldownTime;
         CurrentFinisherMode = FinisherModes.Runic;
         inFinisherMode = false;
-        PerfromingFinisher = false;
+        PerformingFinisher = false;
+        ExecutingFinisher = false;
         cam = Camera.main.GetComponent<CameraMovementController>();
+        finisherSlider = GameObject.Find("/Canvas/Sliders/Finisher Slider").GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update() {
-        if (FinisherCount >= FinisherTime)
-        {
-            if (Input.GetKeyDown(KeyCode.M) && !Cursor.visible)
-            {
-                FinisherCount = 0;
-                //Time.timeScale = .1f;
-            }
-        }
-        else
-        {
-            FinisherCount += Time.deltaTime;
-        }
 
         if (!inFinisherMode) { 
-            if (FinisherModeCount >= FinisherModeTime)
+            if (FinisherModeCooldownCount >= FinisherModeCooldownTime)
             {
-                if (Input.GetKeyDown(KeyCode.F) && !Cursor.visible)
+                if (Input.GetKeyDown(KeyCode.F) && !Cursor.visible && finisherSlider.value == 100)
                 {
                     currentTarget = GetClosestEnemy();
                     if (currentTarget != null)
                     {
-                        EnterFinisherMode();
+                        finisherSlider.value = 0;
+                        StartCoroutine(EnterFinisherMode());
                     }
                     else
                     {
@@ -78,46 +73,57 @@ public class FinisherMode : MonoBehaviour {
             }
             else
             {
-                FinisherModeCount += Time.deltaTime;
+                FinisherModeCooldownCount += Time.deltaTime;
             }
 
-            //Increase UI slider for Finisher
+            //Increase UI slider for Finisher && temp cheat
             if (Input.GetKeyDown(KeyCode.G)) {
-                finisherSlider.value += buildupVal;
+                IncreaseFinisherMeter();
             }
         }
         else{
-            if (!PerfromingFinisher && !cam.GetIsMoving())
+            if (PerformingFinisher && !ExecutingFinisher)
             {
                 if (Input.GetMouseButtonDown(0) && !Cursor.visible)
                 {
                     CurrentFinisherMode = FinisherModes.Runic;
-                    StartCoroutine(PerformFinisher());
+                    StartCoroutine(ExecuteFinisher());
                 }
                 else if (Input.GetMouseButtonDown(1) && !Cursor.visible)
                 {
                     CurrentFinisherMode = FinisherModes.Siphoning;
                     print("Commit Siphoning Finisher");
-                    StartCoroutine(PerformFinisher());
+                    StartCoroutine(ExecuteFinisher());
                 }
                 else if (Input.GetMouseButtonDown(2) && !Cursor.visible)
                 {
                     CurrentFinisherMode = FinisherModes.PressurePoints;
                     print("Commit Pressure Points Finisher");
-                    StartCoroutine(PerformFinisher());
+                    StartCoroutine(ExecuteFinisher());
+                }
+
+                if (FinisherCount <= 0)
+                {
+                    FailFinisherMode();
+                }
+                else
+                {
+                    FinisherCount -= Time.unscaledDeltaTime;
                 }
             }
         }
         //print(NearbyEnemies);
     }
 
-
+    public void IncreaseFinisherMeter()
+    {
+        finisherSlider.value += buildupVal;
+    }
     
-    //IEnumerator EnterFinisherMode()
-    public void EnterFinisherMode()
+    IEnumerator EnterFinisherMode()
     {
         Player.GetComponent<PlayerMovementController>().PreventMoving();
-        FinisherModeCount = 0;
+        Player.GetComponent<PlayerMovementController>().PreventTuring();
         inFinisherMode = true;
         print("Begin Finisher");
         swordController.PreventAttacking();
@@ -129,12 +135,22 @@ public class FinisherMode : MonoBehaviour {
 
         cam.MoveToFinisherModeLocation();
 
+        while (cam.GetIsMoving())
+        {
+            yield return null;
+        }
+
+        PerformingFinisher = true;
+        FinisherCount = FinisherTime;
+        Time.timeScale = slowMoModifier;
+        
         //yield return null;
     }
 
-    IEnumerator PerformFinisher()
+    IEnumerator ExecuteFinisher()
     {
-        PerfromingFinisher = true;
+        PerformingFinisher = false;
+        ExecutingFinisher = true;
 
         switch (CurrentFinisherMode)
         {
@@ -158,18 +174,29 @@ public class FinisherMode : MonoBehaviour {
 
         yield return null; // do stuff to perform the finisher
         StartCoroutine(LeavingFinisherMode());
-    } 
+    }
+
+    public void FailFinisherMode()
+    {
+        PerformingFinisher = false;
+        currentTarget.GetComponent<EnemyMovementController>().ResumeMovement();
+        currentTarget.transform.parent = null;
+        StartCoroutine(LeavingFinisherMode());
+    }
 
     IEnumerator LeavingFinisherMode()
     {
         Player.GetComponent<PlayerMovementController>().AllowMoving();
+        Player.GetComponent<PlayerMovementController>().AllowTurning();
         inFinisherMode = false;
-        PerfromingFinisher = false;
+        ExecutingFinisher = false;
         CurrentFinisherMode = FinisherModes.Runic;
         currentTarget = null;
         yield return null;
         swordController.ResumeAttacking();
         cam.MoveToCombatLocation();
+        FinisherModeCooldownCount = 0;
+        Time.timeScale = 1;
     }
 
 

@@ -1,0 +1,29 @@
+ALL LOCATIONS WHERE PLAYER INPUT IS GOTTEN
+	important to know to ensure input can or cannot be pressed depending on a certain state, such as if in finisher mode, player should not be able to attack
+	
+all of these should be prevented if the player is in the pause menu
+FINISHERMODE.CS
+	M key: temporary slo test
+	F key: the finisher button that can only be pressed if the meter is full, and your are not paused or already in finisher mode
+	G key: temporary cheat to fill finisher meter;
+	Left Mouse Button: active only while performing a finisher, and when the camera is not moving? (later will be when an animation is complete)
+		Performs Runic Finisher
+	Right Mouse Button: same thing
+		Performs Siphoning Finisher
+	Middle Mouse Button: same thing
+		Performs Pressure Point finisher, just debug print right now
+		
+SwordAttack.cs
+	Left Mouse Button: If canAttack is true, swing the sword
+	Right Mouse Button: temporary to get the cutting effect for siphoning
+	
+CameraTiltController.cs
+	Move mouse in the Y direction: tilts camera with * deltaTime
+	
+CameraYawController.cs
+	Move mouse in the X direction: rotates camera with * deltaTime
+	
+PlayerMovementController.cs
+	Horizontal Axis & Vertical Axis: controls player movement with WASD, and also allows player to rotate in finisher mode right now
+	Run button: makes the player move faster
+	Jump button: makes the player jump, you can still move

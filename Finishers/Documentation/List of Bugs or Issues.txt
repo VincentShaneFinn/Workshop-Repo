@@ -1,0 +1,8 @@
+BUGS
+
+Bug 1;
+Sword Keeps moving, even if timescale is 0
+
+ISSUES
+
+Right now I check if the game is paused by checking !Cursor.visible, this might not work with controller, so we need update to use a variable or check that the pause menu is inactive
