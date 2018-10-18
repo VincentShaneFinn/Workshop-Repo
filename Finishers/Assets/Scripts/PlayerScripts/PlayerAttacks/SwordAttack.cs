@@ -26,7 +26,7 @@ public class SwordAttack : MonoBehaviour {
         {
             if (swordCount >= swordCooldown)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetButtonDown("PrimaryAttack"))
                 {
                     if (canAttack)
                     {
@@ -37,7 +37,7 @@ public class SwordAttack : MonoBehaviour {
                     }
                 }
                 //Temporary for siphoning attack
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetButtonDown("SecondaryAttack"))
                 {
                     Sword.SetActive(true);
                     swordCount = 0;

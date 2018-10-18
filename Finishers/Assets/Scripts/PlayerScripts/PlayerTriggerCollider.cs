@@ -6,41 +6,21 @@ using UnityEngine.UI;
 public class PlayerTriggerCollider : MonoBehaviour {
 
     public PlayerMovementController player;
-    private float speed = 12;
-
-    //For debugging purposes
-    public bool canDie = true;
-
-    public int health = 100;
-    public Slider healthSlider;
-    public Text gameOverText;
-
-    void Start()
-    {
-        healthSlider = GameObject.Find("/Canvas/Sliders/Health Slider").GetComponent<Slider>();
-        gameOverText = GameObject.Find("/Canvas/Game Over").GetComponent<Text>();
-
-        healthSlider.value = health;
-        gameOverText.text = "";
-    }
+    public PlayerHealthController healthC;
 
     void OnTriggerEnter(Collider col)
     {
         if(col.gameObject.tag == "Enemy")
         {
             col.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
-            Vector3 dir = (player.transform.position - col.transform.position).normalized;
-            StartCoroutine(player.KnockbackPlayer(dir, speed, .15f));
 
+            StartCoroutine(player.KnockbackPlayer(col.gameObject));
 
-            health -= 10;
-            Debug.Log("Health: " + health.ToString());
-            healthSlider.value = health;
-
-            if(health <= 0 && canDie == true)
-            {
-                gameOverText.text = "Game Over";
-            }
+            healthC.PlayerHit();
+        }
+        else if (col.gameObject.tag == "EnemySword")
+        {
+            StartCoroutine(player.KnockbackPlayer(col.transform.parent.gameObject));
         }
     }
 }

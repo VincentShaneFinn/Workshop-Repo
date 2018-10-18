@@ -57,7 +57,7 @@ public class FinisherMode : MonoBehaviour {
         if (!inFinisherMode) { 
             if (FinisherModeCooldownCount >= FinisherModeCooldownTime)
             {
-                if (Input.GetKeyDown(KeyCode.F) && !Cursor.visible && finisherSlider.value == 100)
+                if (Input.GetButtonDown("FinishMode") && !Cursor.visible && finisherSlider.value == 100)
                 {
                     currentTarget = GetClosestEnemy();
                     if (currentTarget != null)
@@ -84,18 +84,18 @@ public class FinisherMode : MonoBehaviour {
         else{
             if (PerformingFinisher && !ExecutingFinisher)
             {
-                if (Input.GetMouseButtonDown(0) && !Cursor.visible)
+                if (Input.GetButtonDown("PrimaryAttack") && !Cursor.visible)
                 {
                     CurrentFinisherMode = FinisherModes.Runic;
                     StartCoroutine(ExecuteFinisher());
                 }
-                else if (Input.GetMouseButtonDown(1) && !Cursor.visible)
+                else if (Input.GetButtonDown("SecondaryAttack") && !Cursor.visible)
                 {
                     CurrentFinisherMode = FinisherModes.Siphoning;
                     print("Commit Siphoning Finisher");
                     StartCoroutine(ExecuteFinisher());
                 }
-                else if (Input.GetMouseButtonDown(2) && !Cursor.visible)
+                else if (Input.GetButtonDown("SpecialAttack") && !Cursor.visible)
                 {
                     CurrentFinisherMode = FinisherModes.PressurePoints;
                     print("Commit Pressure Points Finisher");

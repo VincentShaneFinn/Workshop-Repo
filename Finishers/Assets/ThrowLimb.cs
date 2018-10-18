@@ -18,7 +18,7 @@ public class ThrowLimb : MonoBehaviour {
         {
             transform.Translate(Vector3.forward * Time.deltaTime * 20);
         }
-        if (Input.GetMouseButtonDown(2))
+        if (Input.GetButtonDown("SpecialAttack"))
         {
             firedPressed = true;
             transform.parent = null;

@@ -320,8 +320,13 @@ public class PlayerMovementController : MonoBehaviour
         CanTurn = true;
     }
 
-    public IEnumerator KnockbackPlayer(Vector3 direction, float speed, float time)
+    public IEnumerator KnockbackPlayer(GameObject other)
     {
+        float time = .15f;
+        float speed = 12;
+        other.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
+        Vector3 dir = (transform.position - other.transform.position).normalized;
+
         float count = 0;
         PreventTuring();
         PreventMoving();
@@ -329,7 +334,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             yield return null;
             count += Time.deltaTime;
-            grounded = (controller.Move(direction * speed * Time.deltaTime) & CollisionFlags.Below) != 0;
+            grounded = (controller.Move(dir * speed * Time.deltaTime) & CollisionFlags.Below) != 0;
 
         }
 
