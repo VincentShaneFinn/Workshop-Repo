@@ -26,7 +26,7 @@ public class RunicBeamBlast : MonoBehaviour {
     {
         if (col.gameObject.tag == "Enemy")
         {
-            Destroy(col.gameObject);
+            col.gameObject.GetComponent<EnemyAI>().KillEnemy();
         }
     }
 }

@@ -29,7 +29,7 @@ public class PlayerHealthController : MonoBehaviour {
     public void PlayerHit()
     {
         health -= 10;
-        Debug.Log("Health: " + health.ToString());
+        //Debug.Log("Health: " + health.ToString());
         healthSlider.value = health;
 
         if (health <= 0 && canDie == true)

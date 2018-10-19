@@ -4,59 +4,7 @@ using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
-    //public float speed = 6.0F;
-    //public float jumpSpeed = 8.0F;
-    //public float gravity = 20.0F;
-    //public float rotateSpeed = 6;
-    //public bool limitDiagonalSpeed = true;
-    ////public float DashDistance = 5f;
-    ////public Vector3 Drag = new Vector3(1, 1, 1);
-    //private Vector3 moveDirection = Vector3.zero;
-
-    //public CharacterController controller;
-
-    //public Transform forwardObject;
-    //public GameObject PlayerModel;
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    float inputX = Input.GetAxis("Horizontal");
-    //    float inputY = Input.GetAxis("Vertical");
-    //    // If both horizontal and vertical are used simultaneously, limit speed (if allowed), so the total doesn't exceed normal move speed
-    //    float inputModifyFactor = (inputX != 0.0f && inputY != 0.0f && limitDiagonalSpeed) ? .7071f : 1.0f;
-
-    //    if (controller.isGrounded)
-    //    {
-    //        moveDirection = new Vector3(inputX, 0, inputY);
-    //        moveDirection = transform.TransformDirection(moveDirection);
-    //        moveDirection *= speed;
-
-    //        //transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
-
-    //        if (Input.GetButton("Jump"))
-    //            moveDirection.y = jumpSpeed;
-
-    //    }
-    //    else
-    //    {
-
-    //    }
-    //    moveDirection.y -= gravity * Time.deltaTime;
-    //    print(moveDirection.y);
-
-    //    controller.Move(forwardObject.TransformDirection(moveDirection) * Time.deltaTime);
-
-    //    //characterController.Move(forwardObject.TransformDirection(moveDirection) * Time.deltaTime * moveSpeed); // not physics friendly
-    //    Vector3 movement = new Vector3(forwardObject.TransformDirection(moveDirection).x, 0.0f, forwardObject.TransformDirection(moveDirection).z);
-    //    if (movement != Vector3.zero)
-    //    {
-    //        PlayerModel.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * 20);
-    //    }
-    //}
-
-
-    //larger character controller code
+     //larger character controller code
     //code referenced here http://wiki.unity3d.com/index.php?title=FPSWalkerEnhanced
 
     public float walkSpeed = 6.0f;

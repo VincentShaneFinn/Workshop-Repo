@@ -16,10 +16,6 @@ public class swordHit : MonoBehaviour {
             {
                 e.damage();
             }
-            else
-            {
-                Destroy(col.gameObject);
-            }
         }
 
     }
