@@ -60,7 +60,6 @@
      <Compile Include="Assets\Scripts\Enemies\Basic Enemy\EnemySwordRange.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyGroup.cs" />
-     <Compile Include="Assets\Scripts\Enemies\EnemyStatus.cs" />
      <Compile Include="Assets\Scripts\Enemies\GroupDirector.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshLink.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshModifier.cs" />

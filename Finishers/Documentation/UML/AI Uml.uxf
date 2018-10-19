@@ -4,12 +4,115 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
+      <x>70</x>
       <y>20</y>
-      <w>100</w>
+      <w>280</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>EnemyAI.cs
+--
+Each enemy is told who the director is when
+they are added to the list so they can let
+the director know that they are dead
+
+Basically the Director Uses EnemyGroup
+to Access a list of enemy gameobjects.
+EnemyGroup simply calls ChangeStatus
+with a status [Attacking,Waiting] etc.
+
+If the if this UpdatedStatus is ever different
+from CurrentStatus, then it tries to set the 
+enemy to that status. There may need to be
+an intermediate status, so that it can change 
+to that new UpdatedStatus immidiately,
+instead of waiting for animations and things
+to finish, or not.
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>20</y>
+      <w>310</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>EnemyGroup.cs
+--
+Holds a List&lt;EnemyAI&gt; Enemies
+
+AddEnemy()
+RemoveEnemy(EnemyAI e)
+GetCount()
+
+WakeUpEnemies() set each enemy to active
+
+SetAttackers(int n){
+this will be a good method for now to look for n
+closest enemies to player and make them attack
+}
+
+AllEnemiesWait() use enemy.ChangeStatus to 
+set enemies to Wait, the enemy will handle itself
+
+AllEnemiesAttack() use ChangeStatus to set
+enemies to attac</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>760</x>
+      <y>20</y>
+      <w>280</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>GroupDirector.cs
+--
+A Gameobject with a trigger collider that
+wakes up the enemies and closes exits
+
+Start(){
+Gets a list of Enemies from the children 
+of a given EnemyGroupOject
+and adds them to a list using EnemyGroup
+}
+
+Update(){
+right now, all the enemies we set to wait 
+when the player triggered the collider
+
+we wait 3 seconds to set the enemies to
+attack
+
+it also checks if all enemies are dead, i.e.
+the list is empty so it can open the exits.
+}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>140</y>
+      <w>70</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>Enemy AI </panel_attributes>
-    <additional_attributes/>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>140</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
   </element>
 </diagram>

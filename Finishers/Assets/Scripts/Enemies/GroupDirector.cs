@@ -6,9 +6,10 @@ public class GroupDirector : MonoBehaviour {
 
     public List<GameObject> Exits;
     public GameObject EnemyGroupObject;
+    public PlayerUpdater playerUpdater;
+
     private EnemyGroup Enemies;
     private bool CombatStarted;
-    public PlayerUpdater playerUpdater;
 
 	// Use this for initialization
 	void Start () {
@@ -22,8 +23,6 @@ public class GroupDirector : MonoBehaviour {
                 child.gameObject.GetComponent<EnemyAI>().SetDirector(this);
             }
         }
-
-        //WakeUpEnemies();
     }
 
 
@@ -40,7 +39,6 @@ public class GroupDirector : MonoBehaviour {
         {
             if (test == 0)
             {
-                Enemies.AllEnemiesWait();
             }
             if (test <= 3)
             {
@@ -85,6 +83,9 @@ public class GroupDirector : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
         WakeUpEnemies();
+
+        //Make the enemies wait
+        Enemies.AllEnemiesWait();
 
         //enter combat
         CloseExits();

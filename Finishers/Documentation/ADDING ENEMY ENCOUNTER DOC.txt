@@ -1,0 +1,6 @@
+go to Prefabs > Enemies and find the EnemyGroup and GroupDirector prefabs and add them to the scene.
+Add enemies under the EnemyGroup object
+On the GroupDirector's GroupDirector script, if you have doors or walls that should spawn to trap the player, set the size of exits to that number and drag each door in here
+Next add the EnemyGroup Object to the Enemy Group Object variable.
+
+That should be all to set up new encounter 
