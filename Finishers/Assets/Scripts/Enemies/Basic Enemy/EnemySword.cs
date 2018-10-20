@@ -24,19 +24,9 @@ public class EnemySword : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("PlayerModel"))
         {
-            /* damage calculation
-            if (collision.gameObject.GetComponents<>().Length > 0)
-            {
-                collision.gameObject.GetComponent<>().damage(damage);
-            }
-            */
-
             collision.gameObject.GetComponent<PlayerHealthController>().PlayerHit(damage);
-            //StartCoroutine(playerM.KnockbackPlayer(transform.parent.gameObject));
-
-            //hit back wont work this way
-            //collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * eff);
             
+            //add enemy recoil when they connected with player
             //gameObject.SetActive(false);
         }
         /*movable objects

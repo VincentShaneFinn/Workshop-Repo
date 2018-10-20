@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyBehaviorStatus { Sleeping, Waiting, Attacking, Dead }
+public enum EnemyBehaviorStatus { Sleeping, Waiting, Attacking, Staggered, ReadyForOrder, Dead }
+//Staggered will currently be used for when the enemy is interupted, it will let the director know that it failed to do its task,
+//this way the director can recalculate if necessary
 
 public class EnemyAI : MonoBehaviour {
 
     private GroupDirector Director;
-    private EnemyBehaviorStatus UpdatedStatus; //this is updated by the director using enemygroup
-    private EnemyBehaviorStatus CurrentStatus; //this is what the current status is, and stuff should be done if UpdatedStatus changes
+    private EnemyBehaviorStatus UpdatedStatus = EnemyBehaviorStatus.Sleeping; //this is updated by the director using enemygroup
+    private EnemyBehaviorStatus CurrentStatus = EnemyBehaviorStatus.Sleeping; //this is what the current status is, and stuff should be done if UpdatedStatus changes
     //might have things like WaitingToAttacking as a current status, which represents the intermission time needed to switch from one
     //status to another
 
     // Use this for initialization
     void Start () {
-        UpdatedStatus = EnemyBehaviorStatus.Sleeping;
-        CurrentStatus = EnemyBehaviorStatus.Sleeping;
+
     }
 	
 	// Update is called once per frame
@@ -24,6 +25,7 @@ public class EnemyAI : MonoBehaviour {
         //I am still unsure if the enemygroup class should used by the director to manually update each enemy
         //or simply update the Status variable, and in each enemies update method, change what it is doing if the status has changed
 
+        //I wanted to put this when ChangeStatus was called, but it doesnt make the enemies move for some reason
         if(CurrentStatus != UpdatedStatus)
         {
             UpdateToCurrentStatus();

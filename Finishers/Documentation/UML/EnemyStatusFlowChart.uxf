@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>690</x>
-      <y>360</y>
+      <x>800</x>
+      <y>230</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -15,8 +15,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>130</y>
+      <x>410</x>
+      <y>0</y>
       <w>240</w>
       <h>90</h>
     </coordinates>
@@ -29,8 +29,8 @@ go straight for the player</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>240</y>
+      <x>410</x>
+      <y>110</y>
       <w>240</w>
       <h>90</h>
     </coordinates>
@@ -47,8 +47,8 @@ towards the player
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>240</y>
+      <x>180</x>
+      <y>110</y>
       <w>180</w>
       <h>80</h>
     </coordinates>
@@ -62,8 +62,8 @@ enemy is done with one</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>240</y>
+      <x>350</x>
+      <y>110</y>
       <w>80</w>
       <h>30</h>
     </coordinates>
@@ -73,8 +73,8 @@ enemy is done with one</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>130</y>
+      <x>180</x>
+      <y>0</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -85,8 +85,8 @@ enemy is done with one</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>150</x>
-      <y>150</y>
+      <x>260</x>
+      <y>20</y>
       <w>30</w>
       <h>110</h>
     </coordinates>
@@ -96,8 +96,8 @@ enemy is done with one</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>130</y>
+      <x>640</x>
+      <y>0</y>
       <w>100</w>
       <h>150</h>
     </coordinates>
@@ -107,8 +107,8 @@ enemy is done with one</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>250</y>
+      <x>640</x>
+      <y>120</y>
       <w>180</w>
       <h>150</h>
     </coordinates>
@@ -118,8 +118,8 @@ enemy is done with one</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>460</y>
+      <x>410</x>
+      <y>330</y>
       <w>240</w>
       <h>110</h>
     </coordinates>
@@ -135,8 +135,8 @@ have them spread out</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>590</y>
+      <x>410</x>
+      <y>460</y>
       <w>240</w>
       <h>60</h>
     </coordinates>
@@ -149,8 +149,8 @@ not interested?</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>670</y>
+      <x>410</x>
+      <y>540</y>
       <w>240</w>
       <h>100</h>
     </coordinates>
@@ -165,8 +165,8 @@ change to another foe unless killed.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>370</y>
+      <x>640</x>
+      <y>240</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -176,8 +176,8 @@ change to another foe unless killed.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>370</y>
+      <x>640</x>
+      <y>240</y>
       <w>100</w>
       <h>130</h>
     </coordinates>
@@ -187,8 +187,8 @@ change to another foe unless killed.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>470</y>
+      <x>640</x>
+      <y>340</y>
       <w>100</w>
       <h>160</h>
     </coordinates>
@@ -198,8 +198,8 @@ change to another foe unless killed.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>350</y>
+      <x>410</x>
+      <y>220</y>
       <w>240</w>
       <h>90</h>
     </coordinates>
@@ -215,8 +215,8 @@ for enemies to sidestep, facing player
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>600</y>
+      <x>640</x>
+      <y>470</y>
       <w>100</w>
       <h>110</h>
     </coordinates>
@@ -226,12 +226,64 @@ for enemies to sidestep, facing player
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>350</y>
+      <x>180</x>
+      <y>220</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>Left or Right strafe</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>660</y>
+      <w>240</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Staggered
+--
+UNIQUE: this happens when enemy
+is interupted by the player, and let
+the director know the task given to this
+enemy is free to go to someone else.
+Enemy sets itself to ready when it is.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>800</y>
+      <w>240</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>ReadyForOrder
+--
+This enemy has no order, give it one</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>550</y>
+      <w>100</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;130.0;80.0;130.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>670</y>
+      <w>100</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;150.0;80.0;150.0;80.0;10.0</additional_attributes>
   </element>
 </diagram>

@@ -10,15 +10,16 @@ public class PlayerTriggerCollider : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Enemy")
-        {
-            col.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
+        //if(col.gameObject.tag == "Enemy")
+        //{
+        //    col.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
 
-            StartCoroutine(player.KnockbackPlayer(col.gameObject));
+        //    StartCoroutine(player.KnockbackPlayer(col.gameObject));
 
-            healthC.PlayerHit();
-        }
-        else if (col.gameObject.tag == "EnemySword")
+        //    healthC.PlayerHit();
+        //}
+        //else if
+        if (col.gameObject.tag == "EnemySword")
         {
             StartCoroutine(player.KnockbackPlayer(col.transform.parent.gameObject));
         }
