@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>20</y>
+      <x>110</x>
+      <y>550</y>
       <w>280</w>
       <h>320</h>
     </coordinates>
@@ -34,8 +34,8 @@ to finish, or not.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>410</x>
-      <y>20</y>
+      <x>450</x>
+      <y>550</y>
       <w>310</w>
       <h>320</h>
     </coordinates>
@@ -64,8 +64,8 @@ enemies to attac</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>20</y>
+      <x>800</x>
+      <y>550</y>
       <w>280</w>
       <h>330</h>
     </coordinates>
@@ -96,8 +96,8 @@ the list is empty so it can open the exits.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>140</y>
+      <x>750</x>
+      <y>670</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -107,12 +107,129 @@ the list is empty so it can open the exits.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>340</x>
-      <y>140</y>
+      <x>380</x>
+      <y>670</y>
       <w>90</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>170</y>
+      <w>480</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>GroupDirector (Object)
+--
+-Keeps track of the enemies under EnemyGroup
+-Gives each one a task (Wait, Attack, Flank, Strafe) etc,
+-if they are attacking it should have the closest enemy go straigth to player,
+ the rest attacking should be given a random arc angle
+ </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>170</y>
+      <w>150</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>EnemyGroup (Object)
+-
+(children)
+Enemy
+Enemy1
+Enemy2
+etc.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>200</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>860</x>
+      <y>170</y>
+      <w>290</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>EnemyAI
+--
+-Given a behavior by director
+-Executes that behavior until told to change
+ or dies
+-Lets the director know when it dies so it can
+ remove this enemy from the list</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>210</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>230</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>250</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>80</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Overview</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>470</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>In-depth</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
