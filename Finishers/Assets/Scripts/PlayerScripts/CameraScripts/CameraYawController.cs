@@ -20,7 +20,7 @@ public class CameraYawController : MonoBehaviour {
     // Update is called once per frame
     void LateUpdate()
     {
-        if (!Cursor.visible)
+        if (!GameStatus.GamePaused)
         {
             Vector3 desiredPosition = new Vector3(player.position.x, player.position.y - playerY, player.position.z);
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);

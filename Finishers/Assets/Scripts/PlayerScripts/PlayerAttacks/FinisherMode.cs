@@ -47,7 +47,7 @@ public class FinisherMode : MonoBehaviour {
         inFinisherMode = false;
         PerformingFinisher = false;
         ExecutingFinisher = false;
-        cam = Camera.main.GetComponent<CameraMovementController>();
+        cam = GameObject.FindGameObjectWithTag("CameraTarget").GetComponent<CameraMovementController>();
         finisherSlider = GameObject.Find("/Canvas/Sliders/Finisher Slider").GetComponent<Slider>();
     }
 
@@ -57,7 +57,7 @@ public class FinisherMode : MonoBehaviour {
         if (!inFinisherMode) { 
             if (FinisherModeCooldownCount >= FinisherModeCooldownTime)
             {
-                if (Input.GetButtonDown("FinishMode") && !Cursor.visible && finisherSlider.value == 100)
+                if (Input.GetButtonDown("FinishMode") && !GameStatus.GamePaused && finisherSlider.value == 100)
                 {
                     currentTarget = GetClosestEnemy();
                     if (currentTarget != null)
@@ -84,18 +84,18 @@ public class FinisherMode : MonoBehaviour {
         else{
             if (PerformingFinisher && !ExecutingFinisher)
             {
-                if (Input.GetButtonDown("PrimaryAttack") && !Cursor.visible)
+                if (Input.GetButtonDown("PrimaryAttack") && !GameStatus.GamePaused)
                 {
                     CurrentFinisherMode = FinisherModes.Runic;
                     StartCoroutine(ExecuteFinisher());
                 }
-                else if (Input.GetButtonDown("SecondaryAttack") && !Cursor.visible)
+                else if (Input.GetButtonDown("SecondaryAttack") && !GameStatus.GamePaused)
                 {
                     CurrentFinisherMode = FinisherModes.Siphoning;
                     print("Commit Siphoning Finisher");
                     StartCoroutine(ExecuteFinisher());
                 }
-                else if (Input.GetButtonDown("SpecialAttack") && !Cursor.visible)
+                else if (Input.GetButtonDown("SpecialAttack") && !GameStatus.GamePaused)
                 {
                     CurrentFinisherMode = FinisherModes.PressurePoints;
                     print("Commit Pressure Points Finisher");
@@ -106,7 +106,7 @@ public class FinisherMode : MonoBehaviour {
                 {
                     FailFinisherMode();
                 }
-                else
+                else if (!GameStatus.GamePaused)
                 {
                     FinisherCount -= Time.unscaledDeltaTime;
                 }
@@ -142,6 +142,7 @@ public class FinisherMode : MonoBehaviour {
 
         PerformingFinisher = true;
         FinisherCount = FinisherTime;
+        GameStatus.FinisherModeActive = true;
         Time.timeScale = slowMoModifier;
         
         //yield return null;
@@ -197,6 +198,7 @@ public class FinisherMode : MonoBehaviour {
         cam.MoveToCombatLocation();
         FinisherModeCooldownCount = 0;
         Time.timeScale = 1;
+        GameStatus.FinisherModeActive = false;
     }
 
 

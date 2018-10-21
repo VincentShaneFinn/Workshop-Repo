@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>512</x>
+      <y>16</y>
+      <w>200</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>EnemyAI
+--
+handles itself when given tasks by
+director, and asks for permision before
+commiting an action on its own.
+
+when an enemy takes an action on its
+own, it should update its behavior to
+busy
+
+then the actual actions them selves
+can be commited to, and handled by
+the indivuduals state machine</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>736</x>
+      <y>16</y>
+      <w>200</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>EnemyGroup
+--
+contains the list of EnemyAI and 
+performs is the implementation for 
+any orders the director gives?
+
+I like seperating this from director to 
+improve code readability, but unsure.
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>960</x>
+      <y>16</y>
+      <w>200</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>GroupDirector
+--
+initializes the Enemies into an
+EnemyGroup Object and keeps track
+of the fight.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>584</x>
+      <y>520</y>
+      <w>216</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>EnemyBehaviorList
+--
+global list of tasks that the director gives 
+to enemies. Director tries to give out 
+orders, and recalculates every frame.
+
+Simply give a behavior to an EnemyAI,
+and let it decide what to do with it. and
+return the behavior to the director when
+it is prevented from doing that task</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>88</x>
+      <y>736</y>
+      <w>160</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>PrimaryAttacker 
+--
+Allways give primary attacker
+to the closest enemy. This will
+run directly towards the player.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>736</y>
+      <w>176</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>ArcRunner
+--
+ArcRunners take a random arc
+angle from a list connected to that 
+group, it uses that angle to find a
+point along an arc from itself to the
+player.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>728</x>
+      <y>224</y>
+      <w>144</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>We need to remember
+enemies could be different
+types, melee, ranged,
+shield, heavy, etc.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>496</x>
+      <y>736</y>
+      <w>176</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>SurroundPlayer
+--
+Spread out and form a circle
+around the player</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>416</x>
+      <y>544</y>
+      <w>152</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>If the enemy is busy, skip it 
+and give task to the next guy
+
+could be additional lists for 
+special enemies given out in 
+a special way or handled by
+the indivudual  </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>512</x>
+      <y>224</y>
+      <w>200</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>for example, an enemy's state is set 
+to Primary Attacker by the director, and
+once it gets in range of the player, it
+ASKS the director if it can attack. If the
+director has already handed out 2
+attacks, then it will say no, otherwise
+the director will grant permision and 
+prevent another attack for a time.
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>864</y>
+      <w>184</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>ArcAngles
+--
+-30, -20, -10, 10, 20, 30
+
+Data structure initialized by Director
+and a ref is given to each EnemyAI
+in that group</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>152</x>
+      <y>880</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>could be static, but
+what if there were 
+more than one group.
+want separate lists</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>248</x>
+      <y>152</y>
+      <w>176</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>EnemyActions
+--
+This can be static and basically
+limits simultaneous actions
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>264</x>
+      <y>232</y>
+      <w>176</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>EnemyAttack max = 3
+--
+Start an attack towards the player</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>80</x>
+      <y>184</y>
+      <w>152</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>for example if EnemyAttack
+max is 2, and 2 Enemies
+have recently taken an
+EnemyAttack action, the
+next EnemyAI who asks to
+attack can't</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>360</y>
+      <w>176</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>LeapAttack max = 2
+--
+perform a leap attack towards the
+player</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>256</x>
+      <y>424</y>
+      <w>176</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Taunt max = unlimited
+--
+just an example to show some
+actions may be unlimited.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>16</y>
+      <w>192</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;170.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>288</x>
+      <y>24</y>
+      <w>144</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>asking permission is trying
+to take an action from this 
+Data structure</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>80</x>
+      <y>288</y>
+      <w>152</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>for example if NormalAttack
+max is 2, and 2 Enemies
+have recently taken an
+NormalAttack action, the
+next EnemyAI who asks to
+attack can't. Same if only one
+Normal Attack was taken, but
+two enemies performed leap
+attack, EnemyAttack max
+limits more than 3
+EnemyAttacks</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>296</y>
+      <w>176</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>NormalAttack max = 2
+--
+perform a leap attack towards the
+player</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>224</y>
+      <w>48</w>
+      <h>272</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+ Data
+ Struct</panel_attributes>
+    <additional_attributes>30.0;10.0;10.0;10.0;10.0;320.0;20.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>736</y>
+      <w>120</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Busy
+--
+Enemy is in the middle
+of an action
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>928</x>
+      <y>736</y>
+      <w>120</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Staggered
+--
+Interuppted by player
+or recoiling from attack
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1056</x>
+      <y>736</y>
+      <w>120</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Dying
+--
+pretty much the same
+as staggerd, but could
+be used for reviving</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>704</y>
+      <w>608</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+Data Struct of Behaviors dolled out to enemies by director</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;20.0;740.0;20.0;740.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>704</x>
+      <y>704</y>
+      <w>488</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+Additional Behaviors The EnemyAI sets</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;20.0;590.0;20.0;590.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>704</x>
+      <y>24</y>
+      <w>48</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>928</x>
+      <y>24</y>
+      <w>48</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>712</x>
+      <y>736</y>
+      <w>80</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Ready
+--
+Awaiting order</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

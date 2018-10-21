@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseMenu.SetActive(true);
+            GameStatus.GamePaused = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
             SetCursorState();
@@ -47,7 +48,9 @@ public class UIManager : MonoBehaviour {
         // Hide cursor when locking
         Cursor.visible = false;
         PauseMenu.SetActive(false);
-        Time.timeScale = 1;
+        GameStatus.GamePaused = false;
+        if (!GameStatus.FinisherModeActive)
+            Time.timeScale = 1;
     }
 
     public void RestartGame()

@@ -65,6 +65,8 @@
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshModifier.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshModifierVolume.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshSurface.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\CameraCollider.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\CameraMovementController.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\CameraTiltController.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\CameraYawController.cs" />
@@ -79,6 +81,7 @@
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerTriggerCollider.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerUpdater.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ControlMethodDetector.cs" />
+     <Compile Include="Assets\Scripts\UIScripts\GameStatus.cs" />
      <Compile Include="Assets\Scripts\UIScripts\UIManager.cs" />
      <Compile Include="Assets\ThrowLimb.cs" />
      <Compile Include="Assets\ThrowPart.cs" />

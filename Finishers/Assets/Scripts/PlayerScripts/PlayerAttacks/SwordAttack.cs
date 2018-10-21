@@ -22,7 +22,7 @@ public class SwordAttack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!Cursor.visible)
+        if (!GameStatus.GamePaused)
         {
             if (swordCount >= swordCooldown)
             {
