@@ -8,11 +8,13 @@ public class PlayerUpdater : MonoBehaviour {
 
     public void EnterCombatState()
     {
+        GameStatus.InCombat = true;
         cameraMovement.MoveToCombatLocation();
     }
 
     public void ExitCombatState()
     {
+        GameStatus.InCombat = false;
         cameraMovement.MoveToOOCLocation();
     }
 }

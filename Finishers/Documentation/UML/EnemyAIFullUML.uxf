@@ -101,13 +101,13 @@ run directly towards the player.</panel_attributes>
       <w>176</w>
       <h>96</h>
     </coordinates>
-    <panel_attributes>ArcRunner
+    <panel_attributes>ArcRunner (limited)
 --
 ArcRunners take a random arc
 angle from a list connected to that 
 group, it uses that angle to find a
 point along an arc from itself to the
-player.</panel_attributes>
+player. limit determined by director</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -452,6 +452,22 @@ Additional Behaviors The EnemyAI sets</panel_attributes>
     <panel_attributes>Ready
 --
 Awaiting order</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>80</x>
+      <y>472</y>
+      <w>152</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>There needs to be a way
+the director can hold on to
+these actions, prevent more
+from being taken, and put it 
+back to normal
+bg=blue</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

@@ -39,7 +39,10 @@ public class PlayerMovementController : MonoBehaviour
     public float antiBumpFactor = .75f;
 
     // Player must be grounded for at least this many physics frames before being able to jump again; set to 0 to allow bunny hopping
-    public int antiBunnyHopFactor = 1;
+    public float antiBunnyHopFactor = 1;
+    public float dashFactor = 1;
+    public float dashCooldown = 1;
+    public float dashSpeed = 10;
 
     private Vector3 moveDirection = Vector3.zero;
     private bool grounded = false;
@@ -53,12 +56,16 @@ public class PlayerMovementController : MonoBehaviour
     private float rayDistance;
     private Vector3 contactPoint;
     private bool playerControl = false;
-    private int jumpTimer;
+    private bool dashing = false;
+    private float jumpTimer;
+    private float dashTimer;
     private bool CanMove;
     private bool CanTurn;
 
     public Transform forwardObject;
     public GameObject PlayerModel;
+
+    private Vector3 dashDirection;
 
     void Start()
     {
@@ -68,6 +75,7 @@ public class PlayerMovementController : MonoBehaviour
         rayDistance = controller.height * .5f + controller.radius;
         slideLimit = controller.slopeLimit - .1f;
         jumpTimer = antiBunnyHopFactor;
+        dashTimer = dashFactor;
         CanMove = true;
         CanTurn = true;
     }
@@ -81,9 +89,10 @@ public class PlayerMovementController : MonoBehaviour
 
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
+        float inputXRaw = Input.GetAxisRaw("Horizontal");
+        float inputYRaw = Input.GetAxisRaw("Vertical");
         // If both horizontal and vertical are used simultaneously, limit speed (if allowed), so the total doesn't exceed normal move speed
         float inputModifyFactor = (inputX != 0.0f && inputY != 0.0f && limitDiagonalSpeed) ? .7071f : 1.0f;
-
         if (grounded)
         {
             bool sliding = false;
@@ -133,12 +142,46 @@ public class PlayerMovementController : MonoBehaviour
             }
 
             // Jump! But only if the jump button has been released and player has been grounded for a given number of frames
-            if (!Input.GetButton("Jump"))
-                jumpTimer++;
-            else if (jumpTimer >= antiBunnyHopFactor)
+            // temp switch for dash testing
+            if (GameStatus.InCombat) {
+                if (!Input.GetButtonDown("Jump"))
+                {
+                    jumpTimer += Time.deltaTime;
+                }
+                else if (jumpTimer >= antiBunnyHopFactor)
+                {
+                    moveDirection.y = jumpSpeed;
+                    jumpTimer = 0;
+                }
+            }
+
+            if (!GameStatus.InCombat)
             {
-                moveDirection.y = jumpSpeed;
-                jumpTimer = 0;
+                if (!Input.GetButtonDown("Jump"))
+                {
+                    dashTimer += Time.deltaTime;
+                    if (dashTimer >= dashFactor)
+                    {
+                        dashing = false;
+                    }
+                    else {
+                        //0 to dash factor and start at dashSpeed and reduce to normal speed
+                        float currentDashSpeed = dashSpeed - walkSpeed;
+                        moveDirection = dashDirection * (walkSpeed + currentDashSpeed * (1 - dashTimer/dashFactor));
+                    }
+                }
+                else if (dashTimer >= dashFactor + dashCooldown)
+                {
+                    //do stuff to dodge
+                    print("dash");
+                    dashTimer = 0;
+                    dashing = true;
+                    print(moveDirection);
+                    if (moveDirection.x != 0 || moveDirection.z != 0)
+                        dashDirection = forwardObject.TransformDirection(new Vector3(inputXRaw * inputModifyFactor, 0, inputYRaw * inputModifyFactor));
+                    else
+                        dashDirection = forwardObject.TransformDirection(new Vector3(0, 0, -1));
+                }
             }
         }
         else
@@ -151,7 +194,7 @@ public class PlayerMovementController : MonoBehaviour
             }
 
             // If air control is allowed, check movement but don't touch the y component
-            if (airControl && playerControl)
+            if (airControl && playerControl && !dashing)
             {
                 moveDirection.x = inputX * speed * inputModifyFactor;
                 moveDirection.z = inputY * speed * inputModifyFactor;
@@ -180,75 +223,12 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    //// Store point that we're in contact with for use in FixedUpdate if needed
-    //void OnControllerColliderHit(ControllerColliderHit hit)
-    //{
-    //    contactPoint = hit.point;
-    //    print(hit.gameObject);
-    //}
-
     // If falling damage occured, this is the place to do something about it. You can make the player
     // have hitpoints and remove some of them based on the distance fallen, add sound effects, etc.
     void FallingDamageAlert(float fallDistance)
     {
         print("Ouch! Fell " + fallDistance + " units!");
     }
-
-    //Physics code, need to add colider and rigid body to player with drag,
-
-
-    //public float Speed = 5f;
-    //public float JumpHeight = 2f;
-    //public float GroundDistance = 0.2f;
-    //public float DashDistance = 5f;
-    //public LayerMask Ground;
-    //public Transform GroundTouch;
-
-    //private Rigidbody _body;
-    //private Vector3 _inputs = Vector3.zero;
-    //private bool _isGrounded = true;
-
-    //void Start()
-    //{
-    //    _body = GetComponent<Rigidbody>();
-    //}
-
-    //void Update()
-    //{
-    //    _isGrounded = Physics.CheckSphere(GroundTouch.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
-
-    //    _inputs = Vector3.zero;
-    //    _inputs.x = Input.GetAxis("Horizontal");
-    //    _inputs.z = Input.GetAxis("Vertical");
-    //    _inputs = forwardObject.TransformDirection(_inputs);
-    //    _inputs.y = 0;
-    //    //if (_inputs != Vector3.zero)
-    //    //transform.forward = _inputs;
-
-    //    Vector3 movement = new Vector3(_inputs.x, 0.0f, _inputs.z);
-    //    if (movement != Vector3.zero)
-    //    {
-    //        PlayerModel.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * 20);
-    //    }
-
-    //    if (Input.GetButtonDown("Jump") && _isGrounded)
-    //    {
-    //        _body.velocity += jumpSpeed * Vector3.up;
-    //    }
-    //    if (Input.GetKeyDown(KeyCode.LeftControl))
-    //    {
-    //        print("dash");
-    //        Vector3 dashVelocity = Vector3.Scale(transform.forward, DashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime)));
-    //        print((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime));
-    //        _body.AddForce(dashVelocity, ForceMode.VelocityChange);
-    //    }
-    //}
-
-
-    //void FixedUpdate()
-    //{
-    //    _body.MovePosition(_body.position + _inputs * Speed * Time.fixedDeltaTime);
-    //}
 
     public void PreventMoving()
     {
@@ -271,7 +251,7 @@ public class PlayerMovementController : MonoBehaviour
     public IEnumerator KnockbackPlayer(GameObject other)
     {
         float time = .15f;
-        float speed = 12;
+        float speed = 20; // keep greater than 6
         other.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
         Vector3 dir = (transform.position - other.transform.position).normalized;
 
@@ -282,8 +262,8 @@ public class PlayerMovementController : MonoBehaviour
         {
             yield return null;
             count += Time.deltaTime;
-            grounded = (controller.Move(dir * speed * Time.deltaTime) & CollisionFlags.Below) != 0;
-
+            float currentKnockbackSpeed = speed - walkSpeed;
+            grounded = (controller.Move(dir * (walkSpeed + currentKnockbackSpeed * (1 - count / time)) * Time.deltaTime) & CollisionFlags.Below) != 0;
         }
 
         AllowTurning();

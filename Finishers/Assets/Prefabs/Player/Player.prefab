@@ -1266,7 +1266,10 @@ MonoBehaviour:
   slideSpeed: 12
   airControl: 1
   antiBumpFactor: 0.75
-  antiBunnyHopFactor: 1
+  antiBunnyHopFactor: 0.2
+  dashFactor: 0.5
+  dashCooldown: 1
+  dashSpeed: 30
   forwardObject: {fileID: 4950904701396556}
   PlayerModel: {fileID: 1731101404683352}
 --- !u!114 &114272207488942526
