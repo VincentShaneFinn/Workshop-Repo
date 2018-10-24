@@ -8,7 +8,6 @@ public class PlayerMovementController : MonoBehaviour
     //code referenced here http://wiki.unity3d.com/index.php?title=FPSWalkerEnhanced
 
     public float walkSpeed = 6.0f;
-
     public float runSpeed = 11.0f;
 
     // If true, diagonal speed (when strafing + moving forward or back) can't exceed normal move speed; otherwise it's about 1.4 times faster
@@ -246,8 +245,16 @@ public class PlayerMovementController : MonoBehaviour
         CanTurn = true;
     }
 
+    private float KnockbackTimer;
+    private float KnockbackCount;
+    public PlayerUpdater pUpdater;
+
     public IEnumerator KnockbackPlayer(GameObject other)
     {
+        if (pUpdater.PoiseCount < pUpdater.PoiseTime)
+            yield break;
+        else
+            pUpdater.PoiseCount = 0;
         float time = .15f;
         float speed = 20; // keep greater than 6
         other.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
