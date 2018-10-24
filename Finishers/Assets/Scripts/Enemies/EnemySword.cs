@@ -22,7 +22,7 @@ public class EnemySword : MonoBehaviour {
     {
         col = true;
 
-        if (collision.gameObject.CompareTag("PlayerModel"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerHealthController>().PlayerHit(damage);
             

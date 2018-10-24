@@ -8,7 +8,7 @@ public class EnemySwordRange : MonoBehaviour {
     
     void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "PlayerModel")
+        if(col.gameObject.tag == "Player")
         {
             EnemySword.SetActive(true);
         }
