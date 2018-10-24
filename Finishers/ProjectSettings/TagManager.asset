@@ -8,6 +8,7 @@ TagManager:
   - EnemySword
   - PlayerModel
   - CameraTarget
+  - Platform
   layers:
   - Default
   - TransparentFX

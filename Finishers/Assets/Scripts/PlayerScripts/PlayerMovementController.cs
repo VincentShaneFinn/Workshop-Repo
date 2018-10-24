@@ -106,6 +106,7 @@ public class PlayerMovementController : MonoBehaviour
             // So if the above raycast didn't catch anything, raycast down from the stored ControllerColliderHit point instead
             else
             {
+                print("Contact point " + contactPoint);
                 Physics.Raycast(contactPoint + Vector3.up, -Vector3.up, out hit);
                 if (Vector3.Angle(hit.normal, Vector3.up) > slideLimit)
                     sliding = true;
@@ -218,6 +219,12 @@ public class PlayerMovementController : MonoBehaviour
                 PlayerModel.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * 20);
             }
         }
+    }
+
+    // Store point that we're in contact with for use in FixedUpdate if needed
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        contactPoint = hit.point;
     }
 
     // If falling damage occured, this is the place to do something about it. You can make the player

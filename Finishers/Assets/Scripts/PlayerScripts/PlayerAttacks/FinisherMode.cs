@@ -133,12 +133,14 @@ public class FinisherMode : MonoBehaviour {
         currentTarget.transform.parent = EnemyFinisherPlacement;
         currentTarget.GetComponent<EnemyMovementController>().StopMovement();
 
+        //moves camera
         cam.MoveToFinisherModeLocation();
 
         while (cam.GetIsMoving())
         {
             yield return null;
         }
+        //waits till the camera and or animation is done
 
         PerformingFinisher = true;
         FinisherCount = FinisherTime;
