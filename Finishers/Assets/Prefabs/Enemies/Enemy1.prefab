@@ -38,9 +38,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4607419248445440}
   - component: {fileID: 65882029704194142}
-  - component: {fileID: 114186672793166172}
   - component: {fileID: 23285529721268572}
   - component: {fileID: 33873513752937162}
+  - component: {fileID: 114928175433877712}
   m_Layer: 9
   m_Name: enemySwordAttack
   m_TagString: EnemySword
@@ -312,25 +312,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1755840121962046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf01d0b49a5318b48bd4238e9947f37e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b4f9a76e58044f419a04e871f372737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114186672793166172
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1179145081339504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9292b644ddd7ce54b808ea814ace0e7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 0.1
-  delay: 0.1
-  damage: 10
-  eff: 1
-  playerM: {fileID: 0}
+  hp: 2
 --- !u!114 &114198399913034244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -339,11 +324,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1755840121962046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d3db97cbe4b87b45b9576fd50b932e2, type: 3}
+  m_Script: {fileID: 11500000, guid: d85964c3547138944bc360ebff2f9b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  agent: {fileID: 195343245682928882}
 --- !u!114 &114304453661331706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -352,7 +335,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1623367559403290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9c363c525637c44f8c1fea2c04d3124, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c8842ed2adb3f7439d3bf29a4c4db33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   EnemySword: {fileID: 1179145081339504}
@@ -364,10 +347,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1755840121962046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e7e3cbb7544d54db536781f2d25987, type: 3}
+  m_Script: {fileID: 11500000, guid: 060cd8683ebe5114d8e20ad2e592b46b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 2
+  agent: {fileID: 195343245682928882}
+--- !u!114 &114928175433877712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1179145081339504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25de2d5c49d3e9e43b282439481cc078, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.75
+  delay: 0
+  damage: 10
+  eff: 0
 --- !u!136 &136633353747486164
 CapsuleCollider:
   m_ObjectHideFlags: 1

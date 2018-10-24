@@ -20,7 +20,7 @@ public class FinisherMode : MonoBehaviour {
     private bool PerformingFinisher;
     private bool ExecutingFinisher;
 
-    public SwordAttack swordController;
+    public PlayerSwordAttack swordController;
     public Transform EnemyFinisherPlacement;
 
     private GameObject currentTarget;

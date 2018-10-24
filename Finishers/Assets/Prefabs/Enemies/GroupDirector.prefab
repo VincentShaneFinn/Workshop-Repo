@@ -61,9 +61,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1871332092315854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a008ec4657a6e4b9746d0a38dcde35, type: 3}
+  m_Script: {fileID: 11500000, guid: 4408137244a8e8449b6e1fcda5b973ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Exits: []
   EnemyGroupObject: {fileID: 0}
-  playerUpdater: {fileID: 0}

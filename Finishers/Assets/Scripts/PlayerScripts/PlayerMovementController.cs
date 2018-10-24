@@ -59,8 +59,8 @@ public class PlayerMovementController : MonoBehaviour
     private bool dashing = false;
     private float jumpTimer;
     private float dashTimer;
-    private bool CanMove;
-    private bool CanTurn;
+    public bool CanMove;
+    public bool CanTurn;
 
     public Transform forwardObject;
     public GameObject PlayerModel;
@@ -143,7 +143,7 @@ public class PlayerMovementController : MonoBehaviour
 
             // Jump! But only if the jump button has been released and player has been grounded for a given number of frames
             // temp switch for dash testing
-            if (GameStatus.InCombat) {
+            if (!GameStatus.InCombat) {
                 if (!Input.GetButtonDown("Jump"))
                 {
                     jumpTimer += Time.deltaTime;
@@ -155,7 +155,7 @@ public class PlayerMovementController : MonoBehaviour
                 }
             }
 
-            if (!GameStatus.InCombat)
+            if (GameStatus.InCombat)
             {
                 if (!Input.GetButtonDown("Jump"))
                 {
@@ -173,10 +173,8 @@ public class PlayerMovementController : MonoBehaviour
                 else if (dashTimer >= dashFactor + dashCooldown)
                 {
                     //do stuff to dodge
-                    print("dash");
                     dashTimer = 0;
                     dashing = true;
-                    print(moveDirection);
                     if (moveDirection.x != 0 || moveDirection.z != 0)
                         dashDirection = forwardObject.TransformDirection(new Vector3(inputXRaw * inputModifyFactor, 0, inputYRaw * inputModifyFactor));
                     else
