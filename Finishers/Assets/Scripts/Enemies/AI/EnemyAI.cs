@@ -74,7 +74,7 @@ public class EnemyAI : MonoBehaviour {
                         }
                     }
                     GetEnemyMovementCtrl.StopMovement();
-                    transform.LookAt(GetEnemyMovementCtrl.Target);
+                    transform.LookAt(GetEnemyMovementCtrl.GetTarget());
                     //Debug.Log(dx+","+x);
                     Collider[] c = Physics.OverlapSphere(transform.position, keepPlayerDistance*1.7f);
                     float x = 0.01f;
@@ -94,7 +94,7 @@ public class EnemyAI : MonoBehaviour {
                         if (Mathf.Abs(dx) < 0.3 || x==0)
                     {
                         //guard
-                        StartCoroutine("GuardState");
+                        //StartCoroutine("GuardState");
                     }
                     else
                     {

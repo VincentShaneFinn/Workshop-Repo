@@ -1,19 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyGroup:MonoBehaviour{
+
+    public List<GameObject> Exits;
+    private PlayerUpdater playerUpdater;
 
     private List<EnemyAI> Enemies;
     public void Start()
     {
         Enemies = new List<EnemyAI>(GetComponentsInChildren<EnemyAI>());
+        playerUpdater = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerUpdater>();
     }
 
     public float attackrate=10;
     private float attackcounter=0;
     public void Update()
     {
+        Enemies = Enemies.Where(item => item != null).ToList(); // remove killed enemies from list
+        if (Enemies.Count <= 0)
+        {
+            OpenExits();
+            playerUpdater.ExitCombatState();
+        }
+
         if (attackcounter < 0)
         {
             List<EnemyAI> t = new List<EnemyAI>();
@@ -26,7 +38,6 @@ public class EnemyGroup:MonoBehaviour{
                 {
                     t.Add(e);
                 }
-
             }
             if (t.Count > 0)
             {
@@ -94,8 +105,26 @@ public class EnemyGroup:MonoBehaviour{
 
 
         //enter combat
-        //CloseExits();
+        CloseExits();
+        playerUpdater.EnterCombatState();
+
         gameObject.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    void CloseExits()
+    {
+        foreach (GameObject exit in Exits)
+        {
+            exit.SetActive(true);
+        }
+    }
+
+    void OpenExits()
+    {
+        foreach (GameObject exit in Exits)
+        {
+            exit.SetActive(false);
+        }
     }
 
 }

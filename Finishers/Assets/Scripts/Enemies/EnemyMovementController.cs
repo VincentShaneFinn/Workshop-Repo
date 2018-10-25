@@ -30,6 +30,7 @@ public class EnemyMovementController : MonoBehaviour {
     {
         Target = NewTarget;
     }
+    public Transform GetTarget() { return Target; }
 
     public void PauseMovement()
     {

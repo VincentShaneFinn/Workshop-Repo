@@ -11,7 +11,7 @@ public class CameraFollow : MonoBehaviour {
     public float clampAngle = 80.0f;
     public float inputSensitivity = 150.0f;
     public GameObject CameraObj;
-    public GameObject PlayerObj;
+    public GameObject PlayerModel;
     public float camDistanceXToPlayer;
     public float camDistanceYToPlayer;
     public float camDistanceZToPlayer;
@@ -80,7 +80,7 @@ public class CameraFollow : MonoBehaviour {
 
         if (Time.timeScale != 1) //if game paused
         {
-            PlayerObj.transform.rotation = localRotationJustY;
+            PlayerModel.transform.rotation = localRotationJustY;
         }
     }
 }

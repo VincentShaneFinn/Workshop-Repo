@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class PlayerUpdater : MonoBehaviour {
 
-    public CameraMovementController cameraMovement;
+    private CameraMovementController cameraMovement;
 
     public float ImmuneTime = .5f;
     public float ImmuneCount = .5f;
     public float PoiseTime = .5f;
     public float PoiseCount = .5f;
+
+    void Start()
+    {
+        cameraMovement = GameObject.FindGameObjectWithTag("CameraTarget").GetComponent<CameraMovementController>();
+    }
 
     void Update()
     {

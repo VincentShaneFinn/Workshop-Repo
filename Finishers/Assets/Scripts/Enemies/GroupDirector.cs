@@ -6,26 +6,27 @@ public class GroupDirector : MonoBehaviour {
 
     public List<GameObject> Exits;
     //public GameObject EnemyGroupObject;
-    //public PlayerUpdater playerUpdater;
+    public PlayerUpdater playerUpdater;
 
     //private EnemyGroup Enemies;
     private bool CombatStarted;
-    /*
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start()
+    {
         CombatStarted = false;
 
-        Enemies = new EnemyGroup();
+        //Enemies = new EnemyGroup();
         playerUpdater = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerUpdater>();
-        foreach (Transform child in EnemyGroupObject.transform)
-        {
-            if (child.CompareTag("Enemy")) {
-                Enemies.AddEnemy(child.gameObject.GetComponent<EnemyAI>());
-                child.gameObject.GetComponent<EnemyAI>().SetDirector(this);
-            }
-        }
+        //foreach (Transform child in EnemyGroupObject.transform)
+        //{
+        //    if (child.CompareTag("Enemy"))
+        //    {
+        //        Enemies.AddEnemy(child.gameObject.GetComponent<EnemyAI>());
+        //        child.gameObject.GetComponent<EnemyAI>().SetDirector(this);
+        //    }
+        //}
     }
-    */
 
     /*(
     float test = 0;
@@ -58,7 +59,7 @@ public class GroupDirector : MonoBehaviour {
             
         }
 	}
-    */
+    
     /*
     void WakeUpEnemies()
     {
@@ -95,7 +96,9 @@ public class GroupDirector : MonoBehaviour {
         
 
         //enter combat
-        //CloseExits();
+        CloseExits();
+        playerUpdater.EnterCombatState();
+
         gameObject.GetComponent<BoxCollider>().enabled = false;
         CombatStarted = true;
     }

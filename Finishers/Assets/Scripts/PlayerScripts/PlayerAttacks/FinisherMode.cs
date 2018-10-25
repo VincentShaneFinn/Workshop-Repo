@@ -122,6 +122,7 @@ public class FinisherMode : MonoBehaviour {
     
     IEnumerator EnterFinisherMode()
     {
+        print(Player.transform.rotation.y);
         Player.GetComponent<PlayerMovementController>().PreventMoving();
         Player.GetComponent<PlayerMovementController>().PreventTuring();
         inFinisherMode = true;
@@ -146,7 +147,7 @@ public class FinisherMode : MonoBehaviour {
         FinisherCount = FinisherTime;
         GameStatus.FinisherModeActive = true;
         Time.timeScale = slowMoModifier;
-        
+        print(Player.transform.rotation.y);
         //yield return null;
     }
 
