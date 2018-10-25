@@ -8,7 +8,6 @@ public class PlayerMovementController : MonoBehaviour
     //code referenced here http://wiki.unity3d.com/index.php?title=FPSWalkerEnhanced
 
     public float walkSpeed = 6.0f;
-
     public float runSpeed = 11.0f;
 
     // If true, diagonal speed (when strafing + moving forward or back) can't exceed normal move speed; otherwise it's about 1.4 times faster
@@ -18,7 +17,7 @@ public class PlayerMovementController : MonoBehaviour
     // There must be a button set up in the Input Manager called "Run"
     public bool toggleRun = false;
 
-    public float jumpSpeed = 8.0f;
+    public float jumpHeight= 2.0f;
     public float gravity = 20.0f;
 
     // Units that player can fall before a falling damage function is run. To disable, type "infinity" in the inspector
@@ -39,7 +38,10 @@ public class PlayerMovementController : MonoBehaviour
     public float antiBumpFactor = .75f;
 
     // Player must be grounded for at least this many physics frames before being able to jump again; set to 0 to allow bunny hopping
-    public int antiBunnyHopFactor = 1;
+    public float antiBunnyHopFactor = 1;
+    public float dashFactor = 1;
+    public float dashCooldown = 1;
+    public float dashSpeed = 10;
 
     private Vector3 moveDirection = Vector3.zero;
     private bool grounded = false;
@@ -53,12 +55,21 @@ public class PlayerMovementController : MonoBehaviour
     private float rayDistance;
     private Vector3 contactPoint;
     private bool playerControl = false;
-    private int jumpTimer;
-    private bool CanMove;
-    private bool CanTurn;
+    private bool dashing = false;
+    private float jumpTimer;
+    private float dashTimer;
+    public bool CanMove;
+    public bool CanTurn;
 
     public Transform forwardObject;
     public GameObject PlayerModel;
+
+    private Vector3 dashDirection;
+
+    public Rigidbody myRigidbody;
+    public LayerMask Ground;
+    public Transform _groundChecker;
+    public float GroundDistance = 0.2f;
 
     void Start()
     {
@@ -68,12 +79,15 @@ public class PlayerMovementController : MonoBehaviour
         rayDistance = controller.height * .5f + controller.radius;
         slideLimit = controller.slopeLimit - .1f;
         jumpTimer = antiBunnyHopFactor;
+        dashTimer = dashFactor + dashCooldown;
         CanMove = true;
         CanTurn = true;
     }
 
     void Update()
     {
+        grounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
+
         // If the run button is set to toggle, then switch between walk/run speed. (We use Update for this...
         // FixedUpdate is a poor place to use GetButtonDown, since it doesn't necessarily run every frame and can miss the event)
         if (toggleRun && grounded && Input.GetButtonDown("Run"))
@@ -81,9 +95,10 @@ public class PlayerMovementController : MonoBehaviour
 
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
+        float inputXRaw = Input.GetAxisRaw("Horizontal");
+        float inputYRaw = Input.GetAxisRaw("Vertical");
         // If both horizontal and vertical are used simultaneously, limit speed (if allowed), so the total doesn't exceed normal move speed
         float inputModifyFactor = (inputX != 0.0f && inputY != 0.0f && limitDiagonalSpeed) ? .7071f : 1.0f;
-
         if (grounded)
         {
             bool sliding = false;
@@ -115,30 +130,65 @@ public class PlayerMovementController : MonoBehaviour
             if (!toggleRun)
                 speed = Input.GetButton("Run") ? runSpeed : walkSpeed;
 
-            // If sliding (and it's allowed), or if we're on an object tagged "Slide", get a vector pointing down the slope we're on
-            if ((sliding && slideWhenOverSlopeLimit) || (slideOnTaggedObjects && hit.collider.tag == "Slide"))
-            {
-                Vector3 hitNormal = hit.normal;
-                moveDirection = new Vector3(hitNormal.x, -hitNormal.y, hitNormal.z);
-                Vector3.OrthoNormalize(ref hitNormal, ref moveDirection);
-                moveDirection *= slideSpeed;
-                playerControl = false;
-            }
+            //// If sliding (and it's allowed), or if we're on an object tagged "Slide", get a vector pointing down the slope we're on
+            //if ((sliding && slideWhenOverSlopeLimit) || (slideOnTaggedObjects && hit.collider.tag == "Slide"))
+            //{
+            //    Vector3 hitNormal = hit.normal;
+            //    moveDirection = new Vector3(hitNormal.x, -hitNormal.y, hitNormal.z);
+            //    Vector3.OrthoNormalize(ref hitNormal, ref moveDirection);
+            //    moveDirection *= slideSpeed;
+            //    playerControl = false;
+            //}
             // Otherwise recalculate moveDirection directly from axes, adding a bit of -y to avoid bumping down inclines
-            else
-            {
-                moveDirection = new Vector3(inputX * inputModifyFactor, -antiBumpFactor, inputY * inputModifyFactor);
+            //else
+            //{
+                moveDirection = new Vector3(inputX * inputModifyFactor, 0, inputY * inputModifyFactor);
                 moveDirection = forwardObject.TransformDirection(moveDirection) * speed;
                 playerControl = true;
-            }
+            //}
 
             // Jump! But only if the jump button has been released and player has been grounded for a given number of frames
-            if (!Input.GetButton("Jump"))
-                jumpTimer++;
-            else if (jumpTimer >= antiBunnyHopFactor)
+            // temp switch for dash testing
+            if (!GameStatus.InCombat) {
+                if (!Input.GetButtonDown("Jump"))
+                {
+                    jumpTimer += Time.deltaTime;
+                }
+                else if (jumpTimer >= antiBunnyHopFactor)
+                {
+                    myRigidbody.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+                    jumpTimer = 0;
+                }
+            }
+
+            if (GameStatus.InCombat)
             {
-                moveDirection.y = jumpSpeed;
-                jumpTimer = 0;
+                if (!Input.GetButtonDown("Jump"))
+                {
+                    dashTimer += Time.deltaTime;
+                    if (dashTimer >= dashFactor)
+                    {
+                        dashing = false;
+                    }
+                    else {
+                        //0 to dash factor and start at dashSpeed and reduce to normal speed
+                        float currentDashSpeed = dashSpeed - walkSpeed;
+                        moveDirection = dashDirection * (walkSpeed + currentDashSpeed * (1 - dashTimer/dashFactor));
+                    }
+                }
+                else if (dashTimer >= dashFactor + dashCooldown)
+                {
+                    //do stuff to dodge
+                    dashTimer = 0;
+                    dashing = true;
+                    if (moveDirection.x != 0 || moveDirection.z != 0)
+                        dashDirection = forwardObject.TransformDirection(new Vector3(inputXRaw * inputModifyFactor, 0, inputYRaw * inputModifyFactor));
+                    else
+                        dashDirection = forwardObject.TransformDirection(new Vector3(0, 0, -1));
+
+  
+                    //_body.AddForce(dashVelocity, ForceMode.VelocityChange);
+                }
             }
         }
         else
@@ -151,7 +201,7 @@ public class PlayerMovementController : MonoBehaviour
             }
 
             // If air control is allowed, check movement but don't touch the y component
-            if (airControl && playerControl)
+            if (airControl && playerControl && !dashing)
             {
                 moveDirection.x = inputX * speed * inputModifyFactor;
                 moveDirection.z = inputY * speed * inputModifyFactor;
@@ -160,14 +210,9 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         // Apply gravity
-        moveDirection.y -= gravity * Time.deltaTime;
 
         // Move the controller, and set grounded true or false depending on whether we're standing on something
 
-        if (CanMove)
-        {
-            grounded = (controller.Move(moveDirection * Time.deltaTime) & CollisionFlags.Below) != 0;
-        }
         if (CanTurn)
         {
             Vector3 movement = new Vector3((moveDirection).x, 0.0f, (moveDirection).z);
@@ -180,12 +225,53 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    //// Store point that we're in contact with for use in FixedUpdate if needed
-    //void OnControllerColliderHit(ControllerColliderHit hit)
-    //{
-    //    contactPoint = hit.point;
-    //    print(hit.gameObject);
-    //}
+    private Vector3 desiredVelocity;
+    public float slopeRayHeight = 0;
+    public float steepSlopeAngle = 45;
+    public float slopeThreshold = .2f;
+    public CapsuleCollider myCollider;
+    void FixedUpdate()
+    {
+        if (CanMove)
+        {
+            desiredVelocity = new Vector3(moveDirection.x, myRigidbody.velocity.y, moveDirection.z);
+            myRigidbody.velocity = desiredVelocity;
+        }
+    }
+
+    bool checkMoveableTerrain(Vector3 position, Vector3 desiredDirection, float distance)
+    {
+        Ray myRay = new Ray(position, desiredDirection); // cast a Ray from the position of our gameObject into our desired direction. Add the slopeRayHeight to the Y parameter.
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(myRay, out hit, distance))
+        {
+            if (hit.collider.gameObject.tag == "Ground") // Our Ray has hit the ground
+            {
+                float slopeAngle = Mathf.Deg2Rad * Vector3.Angle(Vector3.up, hit.normal); // Here we get the angle between the Up Vector and the normal of the wall we are checking against: 90 for straight up walls, 0 for flat ground.
+
+                float radius = Mathf.Abs(slopeRayHeight / Mathf.Sin(slopeAngle)); // slopeRayHeight is the Y offset from the ground you wish to cast your ray from.
+
+                if (slopeAngle >= steepSlopeAngle * Mathf.Deg2Rad) //You can set "steepSlopeAngle" to any angle you wish.
+                {
+                    if (hit.distance - myCollider.radius > Mathf.Abs(Mathf.Cos(slopeAngle) * radius) + slopeThreshold) // Magical Cosine. This is how we find out how near we are to the slope / if we are standing on the slope. as we are casting from the center of the collider we have to remove the collider radius.
+                                                                                                                     // The slopeThreshold helps kills some bugs. ( e.g. cosine being 0 at 90° walls) 0.01 was a good number for me here
+                    {
+                        return true; // return true if we are still far away from the slope
+                    }
+
+                    return false; // return false if we are very near / on the slope && the slope is steep
+                }
+
+                return true; // return true if the slope is not steep
+
+            }
+
+        }
+        return true;
+    }
+
 
     // If falling damage occured, this is the place to do something about it. You can make the player
     // have hitpoints and remove some of them based on the distance fallen, add sound effects, etc.
@@ -193,62 +279,6 @@ public class PlayerMovementController : MonoBehaviour
     {
         print("Ouch! Fell " + fallDistance + " units!");
     }
-
-    //Physics code, need to add colider and rigid body to player with drag,
-
-
-    //public float Speed = 5f;
-    //public float JumpHeight = 2f;
-    //public float GroundDistance = 0.2f;
-    //public float DashDistance = 5f;
-    //public LayerMask Ground;
-    //public Transform GroundTouch;
-
-    //private Rigidbody _body;
-    //private Vector3 _inputs = Vector3.zero;
-    //private bool _isGrounded = true;
-
-    //void Start()
-    //{
-    //    _body = GetComponent<Rigidbody>();
-    //}
-
-    //void Update()
-    //{
-    //    _isGrounded = Physics.CheckSphere(GroundTouch.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
-
-    //    _inputs = Vector3.zero;
-    //    _inputs.x = Input.GetAxis("Horizontal");
-    //    _inputs.z = Input.GetAxis("Vertical");
-    //    _inputs = forwardObject.TransformDirection(_inputs);
-    //    _inputs.y = 0;
-    //    //if (_inputs != Vector3.zero)
-    //    //transform.forward = _inputs;
-
-    //    Vector3 movement = new Vector3(_inputs.x, 0.0f, _inputs.z);
-    //    if (movement != Vector3.zero)
-    //    {
-    //        PlayerModel.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * 20);
-    //    }
-
-    //    if (Input.GetButtonDown("Jump") && _isGrounded)
-    //    {
-    //        _body.velocity += jumpSpeed * Vector3.up;
-    //    }
-    //    if (Input.GetKeyDown(KeyCode.LeftControl))
-    //    {
-    //        print("dash");
-    //        Vector3 dashVelocity = Vector3.Scale(transform.forward, DashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime)));
-    //        print((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime));
-    //        _body.AddForce(dashVelocity, ForceMode.VelocityChange);
-    //    }
-    //}
-
-
-    //void FixedUpdate()
-    //{
-    //    _body.MovePosition(_body.position + _inputs * Speed * Time.fixedDeltaTime);
-    //}
 
     public void PreventMoving()
     {
@@ -268,10 +298,18 @@ public class PlayerMovementController : MonoBehaviour
         CanTurn = true;
     }
 
+    private float KnockbackTimer;
+    private float KnockbackCount;
+    public PlayerUpdater pUpdater;
+
     public IEnumerator KnockbackPlayer(GameObject other)
     {
+        if (pUpdater.PoiseCount < pUpdater.PoiseTime)
+            yield break;
+        else
+            pUpdater.PoiseCount = 0;
         float time = .15f;
-        float speed = 12;
+        float speed = 20; // keep greater than 6
         other.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
         Vector3 dir = (transform.position - other.transform.position).normalized;
 
@@ -282,8 +320,8 @@ public class PlayerMovementController : MonoBehaviour
         {
             yield return null;
             count += Time.deltaTime;
-            grounded = (controller.Move(dir * speed * Time.deltaTime) & CollisionFlags.Below) != 0;
-
+            float currentKnockbackSpeed = speed - walkSpeed;
+            myRigidbody.MovePosition(myRigidbody.position + dir * (walkSpeed + currentKnockbackSpeed * (1 - count / time)) * Time.deltaTime);
         }
 
         AllowTurning();

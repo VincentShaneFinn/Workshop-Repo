@@ -8,43 +8,37 @@ public class PlayerHealthController : MonoBehaviour {
     //For debugging purposes
     public bool canDie = true;
 
-    public int health = 100;
-    public Slider healthSlider;
-    public Text gameOverText;
+    public int MaxHealth = 100;
+    private Slider healthSlider;
+    private Text gameOverText;
+    public PlayerUpdater pUpdater;
 
     void Start()
     {
         healthSlider = GameObject.Find("/Canvas/Sliders/Health Slider").GetComponent<Slider>();
         gameOverText = GameObject.Find("/Canvas/Game Over").GetComponent<Text>();
 
-        healthSlider.value = health;
+        healthSlider.value = MaxHealth;
         gameOverText.text = "";
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
-
     public void PlayerHit()
     {
-        health -= 10;
-        //Debug.Log("Health: " + health.ToString());
-        healthSlider.value = health;
-
-        if (health <= 0 && canDie == true)
-        {
-            gameOverText.text = "Game Over";
-        }
+        PlayerHit(10);
     }
 
     public void PlayerHit(int damage)
     {
-        health -= damage;
+        if (pUpdater.ImmuneCount < pUpdater.ImmuneTime)
+            return;
+        else
+            pUpdater.ImmuneCount = 0;
 
-        healthSlider.value = health;
+        MaxHealth -= damage;
 
-        if (health <= 0 && canDie == true)
+        healthSlider.value = MaxHealth;
+
+        if (MaxHealth <= 0 && canDie == true)
         {
             gameOverText.text = "Game Over";
         }

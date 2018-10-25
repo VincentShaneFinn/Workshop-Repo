@@ -319,23 +319,23 @@ MonoBehaviour:
     m_ExpandedIDs: 58fbffffb4fbffffe4fbffff000000005a0d00005e0d0000640d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Slope
+      m_OriginalName: Slope
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: -1008262
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 4
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 2}
     m_SearchString: 
   m_ExpandedScenes:
-  - Week4StartHere
+  - VinceCameraTests
   m_CurrenRootInstanceID: 0
   m_LockTracker:
     m_IsLocked: 0
