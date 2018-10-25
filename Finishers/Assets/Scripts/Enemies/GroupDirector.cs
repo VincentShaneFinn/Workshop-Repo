@@ -5,15 +5,16 @@ using UnityEngine;
 public class GroupDirector : MonoBehaviour {
 
     public List<GameObject> Exits;
-    public GameObject EnemyGroupObject;
-    public PlayerUpdater playerUpdater;
+    //public GameObject EnemyGroupObject;
+    //public PlayerUpdater playerUpdater;
 
-    private EnemyGroup Enemies;
+    //private EnemyGroup Enemies;
     private bool CombatStarted;
-
+    /*
 	// Use this for initialization
 	void Start () {
         CombatStarted = false;
+
         Enemies = new EnemyGroup();
         playerUpdater = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerUpdater>();
         foreach (Transform child in EnemyGroupObject.transform)
@@ -24,19 +25,25 @@ public class GroupDirector : MonoBehaviour {
             }
         }
     }
+    */
 
-
+    /*(
     float test = 0;
 	// Update is called once per frame
+    
 	void Update () {
         if(Enemies.GetCount() <= 0)
         {
             //leave combat
-            OpenExits();
+            //OpenExits();
             playerUpdater.ExitCombatState();
         }
         if (CombatStarted)
         {
+            int i=Random.Range(0, Enemies.GetCount());
+            while (Enemies.) {
+            }
+            /*
             if (test == 0)
             {
             }
@@ -48,20 +55,22 @@ public class GroupDirector : MonoBehaviour {
             {
                 Enemies.AllEnemiesAttack();
             }
+            
         }
 	}
-
+    */
+    /*
     void WakeUpEnemies()
     {
         Enemies.WakeUpEnemies();
     }
-
+    
     //correctly removes the enemy from the list
     public void KillEnemy(EnemyAI enemy)
     {
         Enemies.RemoveEnemy(enemy);
     }
-
+    */
 
 
     void CloseExits()
@@ -79,18 +88,14 @@ public class GroupDirector : MonoBehaviour {
             exit.SetActive(false);
         }
     }
-
+    
     void OnTriggerEnter(Collider col)
     {
-        WakeUpEnemies();
-
-        //Make the enemies wait
-        Enemies.AllEnemiesWait();
+        GetComponent<EnemyGroup>().WakeUpEnemies();
+        
 
         //enter combat
-        CloseExits();
-        playerUpdater.EnterCombatState();
-
+        //CloseExits();
         gameObject.GetComponent<BoxCollider>().enabled = false;
         CombatStarted = true;
     }

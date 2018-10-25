@@ -315,7 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf01d0b49a5318b48bd4238e9947f37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepPlayerDistance: 3
+  hixbox: {fileID: 1927731644631772, guid: 333c3f48a0630594889603663e21ee9e, type: 2}
+  keepPlayerDistance: 5
   sidespeed: 1
   attackrange: 1
   attacking: 0

@@ -7,6 +7,7 @@ public enum EnemyBehaviorStatus { Sleeping, Waiting, Attacking, Staggered, Ready
 //this way the director can recalculate if necessary
 
 public class EnemyAI : MonoBehaviour {
+    public GameObject hixbox;
     public float keepPlayerDistance;
     public float sidespeed;
     public float attackrange=1;
@@ -144,7 +145,7 @@ public class EnemyAI : MonoBehaviour {
     //THIS IS THE ONLY WAY AN ENEMY SHOULD BE KILLED
     public void KillEnemy()
     {
-        Director.KillEnemy(this);
+        //Director.KillEnemy(this);
         Destroy(gameObject);
     }
 
@@ -157,12 +158,19 @@ public class EnemyAI : MonoBehaviour {
     {
         attacking = false;
     }
+    public void wakeup() {
+        CurrentStatus = EnemyBehaviorStatus.Waiting;
+    }
     IEnumerator AttackState()
     {
         GetEnemyMovementCtrl.StopMovement();
         CurrentStatus = EnemyBehaviorStatus.Attacking;
         //set animation
         //attack()
+        GameObject h = Instantiate(hixbox,transform);
+        h.transform.Translate(Vector3.forward);
+        
+        
         yield return new WaitForSeconds(0.5f);//animation time/attack time
         CurrentStatus = EnemyBehaviorStatus.Waiting;
         SetToWait();
