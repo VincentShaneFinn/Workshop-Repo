@@ -54,13 +54,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Enemies\AI\EnemyAI.cs" />
-     <Compile Include="Assets\Scripts\Enemies\AI\EnemyGroup.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\GroupDirector.cs" />
      <Compile Include="Assets\Scripts\Enemies\Enemyhp.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyMovementController.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemySword.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemySwordRange.cs" />
-     <Compile Include="Assets\Scripts\Enemies\GroupDirector.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshLink.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshModifier.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshModifierVolume.cs" />

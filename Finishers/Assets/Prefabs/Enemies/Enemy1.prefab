@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1790822123288666
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,9 +386,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85964c3547138944bc360ebff2f9b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hixbox: {fileID: 1322362313959738}
+  hixbox: {fileID: 1976237148866420}
   keepPlayerDistance: 10
-  sidespeed: 1
+  sidespeed: 5
   attackrange: 1
   attacking: 0
   CurrentStatus: 0

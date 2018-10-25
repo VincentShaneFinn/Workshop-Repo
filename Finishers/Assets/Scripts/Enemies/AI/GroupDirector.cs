@@ -1,97 +1,130 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
-//public class GroupDirector : MonoBehaviour {
+public class GroupDirector : MonoBehaviour{
 
-//    public List<GameObject> Exits;
-//    public GameObject EnemyGroupObject;
+    public List<GameObject> Exits;
+    private PlayerUpdater playerUpdater;
 
-//    private PlayerUpdater playerUpdater;
-//    private EnemyGroup Enemies;
-//    private bool CombatStarted;
+    private List<EnemyAI> Enemies;
+    public void Start()
+    {
+        Enemies = new List<EnemyAI>(GetComponentsInChildren<EnemyAI>());
+        playerUpdater = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerUpdater>();
+    }
 
-//	// Use this for initialization
-//	void Start () {
-//        CombatStarted = false;
-//        Enemies = new EnemyGroup();
-//        playerUpdater = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerUpdater>();
-//        foreach (Transform child in EnemyGroupObject.transform)
-//        {
-//            if (child.CompareTag("Enemy")) {
-//                Enemies.AddEnemy(child.gameObject.GetComponent<EnemyAI>());
-//                child.gameObject.GetComponent<EnemyAI>().SetDirector(this);
-//            }
-//        }
-//    }
+    public float attackrate=10;
+    private float attackcounter=0;
+    public void Update()
+    {
+        Enemies = Enemies.Where(item => item != null).ToList(); // remove killed enemies from list
+        if (Enemies.Count <= 0)
+        {
+            OpenExits();
+            playerUpdater.ExitCombatState();
+        }
+
+        if (attackcounter < 0)
+        {
+            List<EnemyAI> t = new List<EnemyAI>();
+            foreach (EnemyAI e in Enemies)
+            {
+                if (e.CurrentStatus.Equals(EnemyBehaviorStatus.Sleeping))
+                {
+                }
+                if (e.CurrentStatus.Equals(EnemyBehaviorStatus.Waiting))
+                {
+                    t.Add(e);
+                }
+            }
+            if (t.Count > 0)
+            {
+                int i = 0;
+                i = Random.Range(0, t.Count);
+                t[i].SetToAttack();
+                attackcounter = attackrate;
+            }
+        }
+        else {
+            attackcounter -= Time.deltaTime;
+        }
+    }
+    //public GroupDirector() { Enemies = new List<EnemyAI>(); }
+
+    public void AddEnemy(EnemyAI e)
+    {
+        Enemies.Add(e);
+    }
+    public void RemoveEnemy(EnemyAI e)
+    {
+        Enemies.Remove(e);
+    }
+
+    public int GetCount()
+    {
+        return Enemies.Count;
+    }
 
 
-//    float test = 0;
-//	// Update is called once per frame
-//	void Update () {
-//        if(Enemies.GetCount() <= 0)
-//        {
-//            //leave combat
-//            OpenExits();
-//            playerUpdater.ExitCombatState();
-//        }
-//        if (CombatStarted)
-//        {
-//            if (test == 0)
-//            {
-//            }
-//            if (test <= 3)
-//            {
-//                test += Time.deltaTime;
-//            }
-//            else
-//            {
-//                Enemies.AllEnemiesAttack();
-//            }
-//        }
-//	}
+    public void WakeUpEnemies()
+    {
+        foreach (EnemyAI enemy in Enemies)
+        {
+            enemy.gameObject.GetComponent<EnemyAI>().wakeup();
+        }
+    }
 
-//    void WakeUpEnemies()
-//    {
-//        Enemies.WakeUpEnemies();
-//    }
+    //set the n closest enemies as the attackers
+    public void SetAttackers(int n)
+    {
 
-//    //correctly removes the enemy from the list
-//    public void KillEnemy(EnemyAI enemy)
-//    {
-//        Enemies.RemoveEnemy(enemy);
-//    }
+    }
 
+    public void AllEnemiesWait()
+    {
+        foreach(EnemyAI enemy in Enemies)
+        {
+            //enemy.GetEnemyMovementCtrl().StopMovement();
+            enemy.ChangeStatus(EnemyBehaviorStatus.Waiting);
+        }
+    }
+
+    public void AllEnemiesAttack()
+    {
+        foreach (EnemyAI enemy in Enemies)
+        {
+            //enemy.GetEnemyMovementCtrl().ResumeMovement();
+            enemy.ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker);
+        }
+    }
+    void OnTriggerEnter(Collider col)
+    {
+        WakeUpEnemies();
 
 
-//    void CloseExits()
-//    {
-//        foreach(GameObject exit in Exits)
-//        {
-//            exit.SetActive(true);
-//        }
-//    }
+        //enter combat
+        CloseExits();
+        playerUpdater.EnterCombatState();
 
-//    void OpenExits()
-//    {
-//        foreach (GameObject exit in Exits)
-//        {
-//            exit.SetActive(false);
-//        }
-//    }
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+    }
 
-//    void OnTriggerEnter(Collider col)
-//    {
-//        WakeUpEnemies();
+    void CloseExits()
+    {
+        foreach (GameObject exit in Exits)
+        {
+            exit.SetActive(true);
+        }
+    }
 
-//        //Make the enemies wait
-//        Enemies.AllEnemiesWait();
+    void OpenExits()
+    {
+        foreach (GameObject exit in Exits)
+        {
+            exit.SetActive(false);
+        }
+    }
 
-//        //enter combat
-//        CloseExits();
-//        playerUpdater.EnterCombatState();
-
-//        gameObject.GetComponent<BoxCollider>().enabled = false;
-//        CombatStarted = true;
-//    }
-//}
+}

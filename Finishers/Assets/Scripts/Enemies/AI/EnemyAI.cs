@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyBehaviorStatus { Sleeping, Waiting, Attacking, Staggered, ReadyForOrder, Dead }
+public enum EnemyBehaviorStatus { Sleeping, PrimaryAttacker, ArcRunner, Busy, Waiting, Staggered, ReadyForOrder, Dying }
 //Staggered will currently be used for when the enemy is interupted, it will let the director know that it failed to do its task,
 //this way the director can recalculate if necessary
 
@@ -114,7 +114,7 @@ public class EnemyAI : MonoBehaviour {
                 }
                 break;
 
-            case EnemyBehaviorStatus.Attacking:
+            case EnemyBehaviorStatus.Busy:
                 GetEnemyMovementCtrl.StopMovement();
                 break;
             case EnemyBehaviorStatus.Sleeping:
@@ -164,11 +164,10 @@ public class EnemyAI : MonoBehaviour {
     IEnumerator AttackState()
     {
         GetEnemyMovementCtrl.StopMovement();
-        CurrentStatus = EnemyBehaviorStatus.Attacking;
+        CurrentStatus = EnemyBehaviorStatus.Busy;
         //set animation
         //attack()
-        GameObject h = Instantiate(hixbox,transform);
-        h.transform.Translate(Vector3.forward);
+        hixbox.SetActive(true);
         
         
         yield return new WaitForSeconds(0.5f);//animation time/attack time
@@ -178,7 +177,7 @@ public class EnemyAI : MonoBehaviour {
     }
     IEnumerator GuardState() {
         GetEnemyMovementCtrl.StopMovement();
-        CurrentStatus = EnemyBehaviorStatus.Attacking;
+        CurrentStatus = EnemyBehaviorStatus.Busy;
         //set animation
         //guard()
         yield return new WaitForSeconds(0.3f);//animation time
