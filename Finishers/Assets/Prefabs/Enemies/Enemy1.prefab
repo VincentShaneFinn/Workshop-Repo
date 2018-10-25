@@ -315,6 +315,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf01d0b49a5318b48bd4238e9947f37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keepPlayerDistance: 3
+  sidespeed: 1
+  attackrange: 1
+  attacking: 0
+  CurrentStatus: 0
 --- !u!114 &114186672793166172
 MonoBehaviour:
   m_ObjectHideFlags: 1

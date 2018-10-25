@@ -7,16 +7,22 @@ public enum EnemyBehaviorStatus { Sleeping, Waiting, Attacking, Staggered, Ready
 //this way the director can recalculate if necessary
 
 public class EnemyAI : MonoBehaviour {
-
+    public float keepPlayerDistance;
+    public float sidespeed;
+    public float attackrange=1;
     private GroupDirector Director;
-    private EnemyBehaviorStatus UpdatedStatus = EnemyBehaviorStatus.Sleeping; //this is updated by the director using enemygroup
-    private EnemyBehaviorStatus CurrentStatus = EnemyBehaviorStatus.Sleeping; //this is what the current status is, and stuff should be done if UpdatedStatus changes
+    public bool attacking;
+    //private EnemyBehaviorStatus UpdatedStatus = EnemyBehaviorStatus.Sleeping; //this is updated by the director using enemygroup
+    public EnemyBehaviorStatus CurrentStatus = EnemyBehaviorStatus.Sleeping; //this is what the current status is, and stuff should be done if UpdatedStatus changes
     //might have things like WaitingToAttacking as a current status, which represents the intermission time needed to switch from one
     //status to another
 
     // Use this for initialization
     void Start () {
-
+        if (GetEnemyMovementCtrl == null) {
+            GetEnemyMovementCtrl = GetComponent<EnemyMovementController>();
+        }
+        
     }
 	
 	// Update is called once per frame
@@ -26,36 +32,110 @@ public class EnemyAI : MonoBehaviour {
         //or simply update the Status variable, and in each enemies update method, change what it is doing if the status has changed
 
         //I wanted to put this when ChangeStatus was called, but it doesnt make the enemies move for some reason
-        if(CurrentStatus != UpdatedStatus)
+       // if(CurrentStatus != UpdatedStatus)
         {
             UpdateToCurrentStatus();
         }
 	}
 
-    public EnemyAI GetEnemyAI() { return GetComponent<EnemyAI>(); }
-    public EnemyMovementController GetEnemyMovementCtrl() { return GetComponent<EnemyMovementController>(); }
+    //public EnemyAI GetEnemyAI() { return GetComponent<EnemyAI>(); }
+    //public EnemyMovementController GetEnemyMovementCtrl() { return GetComponent<EnemyMovementController>(); }
+    private EnemyMovementController GetEnemyMovementCtrl=null;
 
     public EnemyBehaviorStatus GetCurrentStatus() { return CurrentStatus; }
-    public void ChangeStatus(EnemyBehaviorStatus s) { UpdatedStatus = s; }
+    //public void ChangeStatus(EnemyBehaviorStatus s) { UpdatedStatus = s; }
+    public void ChangeStatus(EnemyBehaviorStatus s) { CurrentStatus = s; }
 
     //in this future this will probably need to be a coroutine, becuase it might take a few seconds to change status and update animation
     //and once that is complete, start up whatever the next status is.
     public void UpdateToCurrentStatus()
     {
-        CurrentStatus = UpdatedStatus;
+       // CurrentStatus = UpdatedStatus;
         switch (CurrentStatus)
         {
             case EnemyBehaviorStatus.Waiting:
-                GetEnemyMovementCtrl().StopMovement();
+
+                
+                if (checkplayer(keepPlayerDistance))
+                {
+                    if (attacking)
+                    {
+                        if (checkplayer(attackrange))
+                        {
+                            //normalattack
+                            StartCoroutine("AttackState");
+                            break;
+                        }
+                        else
+                        {
+                            GetEnemyMovementCtrl.ResumeMovement();
+                            break;
+                        }
+                    }
+                    GetEnemyMovementCtrl.StopMovement();
+                    transform.LookAt(GetEnemyMovementCtrl.Target);
+                    //Debug.Log(dx+","+x);
+                    Collider[] c = Physics.OverlapSphere(transform.position, keepPlayerDistance*1.7f);
+                    float x = 0.01f;
+                    float dx = 0;
+                    foreach (Collider col in c)
+                    {
+                        if (col.tag.Equals("Enemy"))
+                        {
+                            if (!col.transform.Equals(transform))
+                            {
+                                float d = keepPlayerDistance * 1.7f / Vector3.Distance(transform.position, col.transform.position) * transform.InverseTransformPoint(col.transform.position).x;
+                                dx += d;
+                                x += Mathf.Abs(d);
+                            }
+                        }
+                    }
+                        if (Mathf.Abs(dx) < 0.3 || x==0)
+                    {
+                        //guard
+                        StartCoroutine("GuardState");
+                    }
+                    else
+                    {
+                        transform.Translate(Vector3.left * dx / x * Time.deltaTime * sidespeed);
+                    }
+                }
+                else
+                {
+                    if (attacking) {
+                        if (checkplayer(attackrange)) {
+                            //sprintattack
+                            StartCoroutine("AttackState");
+                            break;
+                        }
+                    }
+                    GetEnemyMovementCtrl.ResumeMovement();
+                }
                 break;
+
             case EnemyBehaviorStatus.Attacking:
-                GetEnemyMovementCtrl().ResumeMovement();
+                GetEnemyMovementCtrl.StopMovement();
+                break;
+            case EnemyBehaviorStatus.Sleeping:
+                GetEnemyMovementCtrl.StopMovement();
                 break;
             default:
                 break;
         }
     }
+    private bool checkplayer(float radius) {
+        Collider[] c = Physics.OverlapSphere(transform.position, radius);
+        bool a = false;
 
+        foreach (Collider col in c)
+        {
+            if (col.tag.Equals("Player"))
+            {
+                a = true;
+            }
+        }
+        return a;
+    }
     public void SetDirector(GroupDirector d)
     {
         Director = d;
@@ -70,11 +150,32 @@ public class EnemyAI : MonoBehaviour {
 
     public void SetToAttack()
     {
-        gameObject.GetComponent<EnemyMovementController>().ResumeMovement();
+        attacking = true;
     }
 
     public void SetToWait()
     {
-        gameObject.GetComponent<EnemyMovementController>().StopMovement();
+        attacking = false;
     }
+    IEnumerator AttackState()
+    {
+        GetEnemyMovementCtrl.StopMovement();
+        CurrentStatus = EnemyBehaviorStatus.Attacking;
+        //set animation
+        //attack()
+        yield return new WaitForSeconds(0.5f);//animation time/attack time
+        CurrentStatus = EnemyBehaviorStatus.Waiting;
+        SetToWait();
+        
+    }
+    IEnumerator GuardState() {
+        GetEnemyMovementCtrl.StopMovement();
+        CurrentStatus = EnemyBehaviorStatus.Attacking;
+        //set animation
+        //guard()
+        yield return new WaitForSeconds(0.3f);//animation time
+
+        CurrentStatus = EnemyBehaviorStatus.Waiting;
+    }
+
 }
