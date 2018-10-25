@@ -4,7 +4,7 @@ D:/GITHUB/Workshop-Repo/Finishers/GameBuild/Finishers.exe
 SceneListBegin?
 Assets/Scenes/Week4-5/Week4StartHere.unity
 SceneListEnd?
-9e1b99217c39542571149a359cfd6418 Assembly-CSharp.dll:.PlayerMovementController
+bf7f61351ff9c0f90e2cf9fa0edc2b7e Assembly-CSharp.dll:.PlayerMovementController
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 7b803eb2910e9b4cd5e521ae07b9f7d6 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
 486cd95c82d8305219c352c06b776e1f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -87,9 +87,9 @@ a44114bd4fa541174f78b4bb92bacb48 UnityEngine.UI.dll:UnityEngine.EventSystems.Sta
 e90403eeda069970e0b9de1533de13a6 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 2d58ca16854b99daea8c45e9c0f367b7 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 16da51d1b62ef6d4ee1849350434023b UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
-53146e55a9dad1bd608f7527c6544a2f Assembly-CSharp.dll:.GroupDirector
+d81e0b5f57b4fd4c8b013022f54c5228 Assembly-CSharp.dll:.GroupDirector
 76bfb713173de91fcb127557bc4688c3 Assembly-CSharp.dll:UnityEngine.AI.NavMeshSurface
-86e55bf116386633f1ea33ea59ef7857 Assembly-CSharp.dll:.CameraFollow
+46a51696518bc2ab3c00c76bc10aa7b8 Assembly-CSharp.dll:.CameraFollow
 8f335a4d9a296fc602f749d49c2dba62 Assembly-CSharp.dll:.PlayerTriggerCollider
 8ca77e0825d8d8eefe67be30831db3b5 Assembly-CSharp.dll:.CameraCollider
 486cd95c82d8305219c352c06b776e1f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -119,9 +119,9 @@ da21fc3f8056b1f91c3dd09c7bf4f90a UnityEngine.Networking.dll:UnityEngine.Networki
 529a95e9e8e7686c4816e08fbb37183f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 fc061f3ae8a876c0687e86378d4a447c UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 7ca56e063bd071986fff4f513cc4f477 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.EnemyAI
+3f4bfe61f9cd3fa477ed2ce8582a211a Assembly-CSharp.dll:.EnemyAI
 b058c24786d094dd195afd3cbdae662f Assembly-CSharp.dll:.CameraMovementController
-535309a80e8afc53bd4c0506c9a69c85 Assembly-CSharp.dll:.PlayerUpdater
+4c05a597943267d98f47f8b149035bfc Assembly-CSharp.dll:.PlayerUpdater
 4631cfe703571e63ea33fe0bf340d512 Assembly-CSharp.dll:.ThrowPart
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 382b8ef512fa8d6108723a01b57af65b UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
@@ -134,6 +134,7 @@ dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 96f3ea9f23b6f08e60710ebb4af49174 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 239708595d7f3d322119321248af7ee3 Assembly-CSharp.dll:.RunicBeamBlast
 d100b59d3fdfe9213a24f9193b71a486 Assembly-CSharp.dll:.PlayerSwordHit
+6738a41b8cd3698aa2421782e2e8fb9f Assembly-CSharp.dll:.EnemyGroup
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ThrowLimb
 14dc141be7269dbadd0087d96d152b15 Assembly-CSharp.dll:.Enemyhp
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
@@ -182,6 +183,7 @@ aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 b577b135f46cc1bc719f42b5544239ee Assembly-CSharp.dll:.EnemySword
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 b1a05f2e5ac2c26ae35de3bfc46f4c1c Assembly-CSharp.dll:.FinisherMode
+d81e0b5f57b4fd4c8b013022f54c5228 Assembly-CSharp.dll:.GroupDirector
 1f1a5c58d7eae7e9cd2f94ea7e282645 Assembly-CSharp.dll:UnityEngine.AI.NavMeshLink
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 7ce86a03cb28555418838d085ee78370 Assembly-CSharp.dll:.EnemySwordRange
@@ -191,3 +193,5 @@ e0ddd58be32e857de1349baf9883c3d4 Assembly-CSharp.dll:.UIManager
 d5e6ecff5a6a9b0db9cff4d6bbdbd682 Assembly-CSharp.dll:.PlayerSwordAttack
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 063ea16922c3f05ed5487a474ab4d24b Assembly-CSharp.dll:.PlayerHealthController
+bf7f61351ff9c0f90e2cf9fa0edc2b7e Assembly-CSharp.dll:.PlayerMovementControllerRigidbody
+a4c44f2a3b558493faeba199b4fb4be2 Assembly-CSharp.dll:.PlayerMovementControllerCC
