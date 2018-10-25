@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 195343245682928882}
   - component: {fileID: 114198399913034244}
   - component: {fileID: 114790319703994314}
+  - component: {fileID: 114142803908832230}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -303,6 +304,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.99999994}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114142803908832230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1755840121962046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf01d0b49a5318b48bd4238e9947f37e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hixbox: {fileID: 1927731644631772, guid: 333c3f48a0630594889603663e21ee9e, type: 2}
+  keepPlayerDistance: 5
+  sidespeed: 1
+  attackrange: 1
+  attacking: 0
+  CurrentStatus: 0
 --- !u!114 &114186672793166172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -314,8 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9292b644ddd7ce54b808ea814ace0e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.25
-  delay: 0.5
+  duration: 0.1
+  delay: 0.1
   damage: 10
   eff: 1
   playerM: {fileID: 0}

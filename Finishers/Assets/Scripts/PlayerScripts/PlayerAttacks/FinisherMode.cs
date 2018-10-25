@@ -170,7 +170,7 @@ public class FinisherMode : MonoBehaviour {
             default:
                 break;
         }
-        Destroy(currentTarget);
+        currentTarget.GetComponent<EnemyAI>().KillEnemy();
 
         yield return null; // do stuff to perform the finisher
         StartCoroutine(LeavingFinisherMode());

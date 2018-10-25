@@ -53,11 +53,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Enemies\Enemyattack.cs" />
-     <Compile Include="Assets\Scripts\Enemies\Enemyhp.cs" />
-     <Compile Include="Assets\Scripts\Enemies\EnemyMovementController.cs" />
-     <Compile Include="Assets\Scripts\Enemies\EnemySword.cs" />
-     <Compile Include="Assets\Scripts\Enemies\EnemySwordRange.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Basic Enemy\Enemyattack.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Basic Enemy\Enemyhp.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Basic Enemy\EnemyMovementController.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Basic Enemy\EnemySword.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Basic Enemy\EnemySwordRange.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyAI.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyGroup.cs" />
+     <Compile Include="Assets\Scripts\Enemies\GroupDirector.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshLink.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshModifier.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshModifierVolume.cs" />
@@ -74,21 +77,22 @@
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerHealthController.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovementController.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerTriggerCollider.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerUpdater.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ControlMethodDetector.cs" />
      <Compile Include="Assets\Scripts\UIScripts\UIManager.cs" />
      <Compile Include="Assets\ThrowLimb.cs" />
      <Compile Include="Assets\ThrowPart.cs" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>D:/GITKracken/Workshop-Repo/Finishers/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>D:/GITHUB/Workshop-Repo/Finishers/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>D:/GITKracken/Workshop-Repo/Finishers/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>D:/GITHUB/Workshop-Repo/Finishers/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>D:/GITKracken/Workshop-Repo/Finishers/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>D:/GITHUB/Workshop-Repo/Finishers/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>D:/GITKracken/Workshop-Repo/Finishers/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>D:/GITHUB/Workshop-Repo/Finishers/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>D:/program files d/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

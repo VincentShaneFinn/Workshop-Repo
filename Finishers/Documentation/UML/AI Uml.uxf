@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>550</y>
+      <w>280</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>EnemyAI.cs
+--
+Each enemy is told who the director is when
+they are added to the list so they can let
+the director know that they are dead
+
+Basically the Director Uses EnemyGroup
+to Access a list of enemy gameobjects.
+EnemyGroup simply calls ChangeStatus
+with a status [Attacking,Waiting] etc.
+
+If the if this UpdatedStatus is ever different
+from CurrentStatus, then it tries to set the 
+enemy to that status. There may need to be
+an intermediate status, so that it can change 
+to that new UpdatedStatus immidiately,
+instead of waiting for animations and things
+to finish, or not.
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>550</y>
+      <w>310</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>EnemyGroup.cs
+--
+Holds a List&lt;EnemyAI&gt; Enemies
+
+AddEnemy()
+RemoveEnemy(EnemyAI e)
+GetCount()
+
+WakeUpEnemies() set each enemy to active
+
+SetAttackers(int n){
+this will be a good method for now to look for n
+closest enemies to player and make them attack
+}
+
+AllEnemiesWait() use enemy.ChangeStatus to 
+set enemies to Wait, the enemy will handle itself
+
+AllEnemiesAttack() use ChangeStatus to set
+enemies to attac</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>550</y>
+      <w>280</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>GroupDirector.cs
+--
+A Gameobject with a trigger collider that
+wakes up the enemies and closes exits
+
+Start(){
+Gets a list of Enemies from the children 
+of a given EnemyGroupOject
+and adds them to a list using EnemyGroup
+}
+
+Update(){
+right now, all the enemies we set to wait 
+when the player triggered the collider
+
+we wait 3 seconds to set the enemies to
+attack
+
+it also checks if all enemies are dead, i.e.
+the list is empty so it can open the exits.
+}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>670</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>380</x>
+      <y>670</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>170</y>
+      <w>480</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>GroupDirector (Object)
+--
+-Keeps track of the enemies under EnemyGroup
+-Gives each one a task (Wait, Attack, Flank, Strafe) etc,
+-if they are attacking it should have the closest enemy go straigth to player,
+ the rest attacking should be given a random arc angle
+ </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>170</y>
+      <w>150</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>EnemyGroup (Object)
+-
+(children)
+Enemy
+Enemy1
+Enemy2
+etc.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>200</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>860</x>
+      <y>170</y>
+      <w>290</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>EnemyAI
+--
+-Given a behavior by director
+-Executes that behavior until told to change
+ or dies
+-Lets the director know when it dies so it can
+ remove this enemy from the list</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>210</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>230</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>250</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>80</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Overview</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>470</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>In-depth</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

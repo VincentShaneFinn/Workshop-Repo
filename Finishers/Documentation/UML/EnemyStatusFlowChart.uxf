@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>230</y>
+      <w>180</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>EnemyStatus Flow Chart</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>0</y>
+      <w>240</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Primary Attacker
+--
+One Enemy always should
+go straight for the player</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>110</y>
+      <w>240</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>ArcRusher
+--
+Some enemies are given an
+arc angle and set their
+target to point along this arc
+towards the player
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>110</y>
+      <w>180</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>ArcAngle
+--
+only take from availble arc
+angles and put back when 
+enemy is done with one</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>350</x>
+      <y>110</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>0</y>
+      <w>180</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ArcAngles []
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>20</y>
+      <w>30</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>0</y>
+      <w>100</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>120</y>
+      <w>180</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;130.0;160.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>330</y>
+      <w>240</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Surround
+--
+This could have multiple options 
+like defend escape or cuttoff player, 
+but simply put it keeps enemies
+within a radius of the player and 
+have them spread out</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>460</y>
+      <w>240</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Wander
+--
+Randomly wadle around like they are
+not interested?</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>540</y>
+      <w>240</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Special Task
+--
+Give one a special task like pull an
+environmental lever or something.
+This should be given to one and not
+change to another foe unless killed.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>240</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>240</y>
+      <w>100</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;110.0;80.0;110.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>340</y>
+      <w>100</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;140.0;80.0;140.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>220</y>
+      <w>240</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Strafe Attack
+--
+left or right strafing attack that goes
+out in a wide arc and comes back in
+for a leaping attack. Basically used
+for enemies to sidestep, facing player
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>470</y>
+      <w>100</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;80.0;90.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>220</y>
+      <w>180</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Left or Right strafe</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>660</y>
+      <w>240</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Staggered
+--
+UNIQUE: this happens when enemy
+is interupted by the player, and let
+the director know the task given to this
+enemy is free to go to someone else.
+Enemy sets itself to ready when it is.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>800</y>
+      <w>240</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>ReadyForOrder
+--
+This enemy has no order, give it one</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>550</y>
+      <w>100</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;130.0;80.0;130.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>670</y>
+      <w>100</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;150.0;80.0;150.0;80.0;10.0</additional_attributes>
+  </element>
+</diagram>
