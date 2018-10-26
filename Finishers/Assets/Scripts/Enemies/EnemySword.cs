@@ -4,19 +4,11 @@ using UnityEngine;
 
 public class EnemySword : MonoBehaviour {
     
-    public float duration; //duration is currently the only thing that turns off the attack
-    private float count;
-    public float delay;
     public int damage;
-    public float eff=0;
-    private PlayerMovementController playerM;
-    private bool isAttacking;
 
     //Use this for initialization
     public void OnEnable()
     {
-        StartCoroutine(trig(duration + delay));
-        playerM = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementController>();
     }
     private bool col;
     private void OnTriggerEnter(Collider collision)
@@ -37,11 +29,5 @@ public class EnemySword : MonoBehaviour {
             Destroy(this.gameObject);
         }
         */
-    }
-
-    private IEnumerator trig(float n)
-    {
-        yield return new WaitForSeconds(n);
-        gameObject.SetActive(false);
     }
 }

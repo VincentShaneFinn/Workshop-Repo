@@ -53,9 +53,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Enemies\AI\ActionManager.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\ArcAngles.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\GroupDirector.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyActions\KnightEnemyActions.cs" />
      <Compile Include="Assets\Scripts\Enemies\Enemyhp.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyMovementController.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemySword.cs" />

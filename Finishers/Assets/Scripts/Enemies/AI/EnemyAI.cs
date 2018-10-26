@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyBehaviorStatus { Sleeping, PrimaryAttacker, ArcRunner, SurroundPlayer, Busy, Waiting, Staggered, BeingFinished, Dying }
-//Staggered will currently be used for when the enemy is interupted, it will let the director know that it failed to do its task,
-//this way the director can recalculate if necessary
+public enum EnemyActions { None, NormalAttack, Special1 }
 
 public class EnemyAI : MonoBehaviour {
-    public GameObject EnemySword;
     public float keepPlayerDistance;
     public float sidespeed;
     public float attackrange = 1;
-    private EnemyMovementController GetEnemyMovementCtrl;
+    public KnightEnemyActions KnightActions;
+    public EnemyMovementController GetEnemyMovementCtrl;
     private GroupDirector director;
+    private EnemyActions myAction;
     //private EnemyBehaviorStatus UpdatedStatus = EnemyBehaviorStatus.Sleeping; //this is updated by the director using enemygroup
     public EnemyBehaviorStatus CurrentStatus = EnemyBehaviorStatus.Sleeping; //this is what the current status is, and stuff should be done if UpdatedStatus changes
     private Transform playerT;
@@ -24,6 +23,7 @@ public class EnemyAI : MonoBehaviour {
         GetEnemyMovementCtrl = GetComponent<EnemyMovementController>();
         director = GetComponentInParent<GroupDirector>();
         playerT = GameObject.FindGameObjectWithTag("Player").transform;
+        myAction = EnemyActions.None;
     }
 	
 	// Update is called once per frame
@@ -36,15 +36,18 @@ public class EnemyAI : MonoBehaviour {
             GetEnemyMovementCtrl.SetTarget(playerT);
         }
 
-        if (checkplayer(attackrange))
+        //obviosuly if your currently doing something, or shouldnt be able to do something, you can't attack
+        if (checkplayer(attackrange) && !director.IsBusy(CurrentStatus))
         {
-            //sprintattack
-            StartCoroutine("AttackState");
+            KnightActions.StartCoroutine("PerformNormalAttack");
         }
     }
 
     public EnemyBehaviorStatus GetCurrentStatus() { return CurrentStatus; }
     public void ChangeStatus(EnemyBehaviorStatus s) { CurrentStatus = s; }
+
+    //crucial to returning action so a dead guy doesn't hold on to it forever, may want a check in the director
+    public void ChangeAction(EnemyActions act){ myAction = act; }
 
     public EnemyMovementController GetEnemyMovementController(){ return GetEnemyMovementCtrl; }
 
@@ -59,24 +62,7 @@ public class EnemyAI : MonoBehaviour {
                 GetEnemyMovementCtrl.ResumeMovement();
                 break;
             case EnemyBehaviorStatus.ArcRunner:
-                if (ArcAngle == 360)
-                {
-                    ArcAngle = director.TakeAngle();
-                }
-
-                Vector3 midpoint = (transform.position + playerT.transform.position) / 2f;
-                float x = midpoint.x + (transform.position.x - midpoint.x) * Mathf.Cos(ArcAngle) - (transform.position.z - midpoint.z) * Mathf.Sin(ArcAngle);
-                float z = midpoint.z + (transform.position.x - midpoint.x) * Mathf.Sin(ArcAngle) + (transform.position.z - midpoint.z) * Mathf.Cos(ArcAngle);
-                //float x = playerT.position.x + (transform.position.x - playerT.position.x) * Mathf.Cos(ArcAngle) - (transform.position.z - playerT.position.z) * Mathf.Sin(ArcAngle);
-                //float z = playerT.position.z + (transform.position.x - playerT.position.x) * Mathf.Sin(ArcAngle) + (transform.position.z - playerT.position.z) * Mathf.Cos(ArcAngle);
-
-                //do angle side angle calculation from the distance to player
-
-                //test changing cube positions, or we should add ray trace lines
-                ArcTarget = new Vector3(x, transform.position.y, z);
-                Debug.DrawLine(transform.position, ArcTarget);
-                GetEnemyMovementCtrl.SetDestination(ArcTarget);
-                GetEnemyMovementCtrl.ResumeMovement();
+                TravelAlongArc();
                 break;
             case EnemyBehaviorStatus.SurroundPlayer:
                 KeepDistance();
@@ -140,6 +126,28 @@ public class EnemyAI : MonoBehaviour {
         }
     }
 
+    public void TravelAlongArc()
+    {
+        if (ArcAngle == 360)
+        {
+            ArcAngle = director.TakeAngle();
+        }
+
+        Vector3 midpoint = (transform.position + playerT.transform.position) / 2f;
+        float x = midpoint.x + (transform.position.x - midpoint.x) * Mathf.Cos(ArcAngle) - (transform.position.z - midpoint.z) * Mathf.Sin(ArcAngle);
+        float z = midpoint.z + (transform.position.x - midpoint.x) * Mathf.Sin(ArcAngle) + (transform.position.z - midpoint.z) * Mathf.Cos(ArcAngle);
+        //float x = playerT.position.x + (transform.position.x - playerT.position.x) * Mathf.Cos(ArcAngle) - (transform.position.z - playerT.position.z) * Mathf.Sin(ArcAngle);
+        //float z = playerT.position.z + (transform.position.x - playerT.position.x) * Mathf.Sin(ArcAngle) + (transform.position.z - playerT.position.z) * Mathf.Cos(ArcAngle);
+
+        //do angle side angle calculation from the distance to player
+
+        //test changing cube positions, or we should add ray trace lines
+        ArcTarget = new Vector3(x, transform.position.y, z);
+        Debug.DrawLine(transform.position, ArcTarget);
+        GetEnemyMovementCtrl.SetDestination(ArcTarget);
+        GetEnemyMovementCtrl.ResumeMovement();
+    }
+
     //returns true if within a distance to the player
     private bool checkplayer(float radius) {
         Collider[] c = Physics.OverlapSphere(transform.position, radius);
@@ -163,6 +171,18 @@ public class EnemyAI : MonoBehaviour {
             director.ReturnAngle(ArcAngle);
             ArcAngle = 360;
         }
+        if(myAction != EnemyActions.None)
+            switch (myAction)
+            {
+                case EnemyActions.NormalAttack:
+                    director.NormalAttackCompleted();
+                    break;
+                case EnemyActions.Special1:
+                    break;
+                default:
+                    break;
+            }
+
         Destroy(gameObject);
     }
 
@@ -170,18 +190,9 @@ public class EnemyAI : MonoBehaviour {
         CurrentStatus = EnemyBehaviorStatus.Waiting;
     }
 
-    IEnumerator AttackState()
+    public GroupDirector GetDirector()
     {
-        GetEnemyMovementCtrl.StopMovement();
-        CurrentStatus = EnemyBehaviorStatus.Busy;
-        //set animation
-        //attack()
-        EnemySword.SetActive(true);
-
-
-        yield return new WaitForSeconds(2f);//animation time/attack time
-        CurrentStatus = EnemyBehaviorStatus.Waiting;
-
+        return director;
     }
 
     //IEnumerator GuardState() {

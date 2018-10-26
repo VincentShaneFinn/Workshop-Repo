@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>60</y>
+      <w>260</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>ActionManager
+--
+The idea is this
+that it has a max number of attack actions
+as well as a max number of each attack
+type, (normal, special1, etc). return
+false if TryAnAttack() is called and the 
+max attacks are already taken, return
+true and increase the current attack type.
+then let the director tell it when to add 
+that attack back
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>60</y>
+      <w>220</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>Director
+--
+Used by the KnightEnemyAct
+to access ActionManager, and 
+take and return actions. It may 
+need to do its own check or
+dynamically reset the actions
+in case somehow actions don't 
+get returned by the EnemyAI</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>60</y>
+      <w>200</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>KnightEnemyActions
+--
+this has the coroutines to
+perform actions, so we could
+have a WolfEnemyActions
+that would do different stuff
+but follow a similar principle
+
+It asks the director if it can
+perform an action using like
+TryNormalAction, and also
+tells the director when it has 
+completed the attack. If also
+sets a variable so that on
+death, the enemy can send 
+return the attack to the director</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>60</y>
+      <w>200</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>EnemyAI
+--
+in Update, it checks to see
+that the enemy could perform
+an action, than will try to call
+that enemy type's normal action
+coroutine for example</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>60</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>830</x>
+      <y>60</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>60</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+</diagram>

@@ -69,4 +69,5 @@ MonoBehaviour:
   - {fileID: 0}
   MaxPrimaryAttackers: 1
   MaxArcRunners: 2
-  SendOrderTime: 0
+  ReturnActionDelay: 0.5
+  SendOrderTime: 1

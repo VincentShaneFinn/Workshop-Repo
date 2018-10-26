@@ -1,7 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
+public enum EnemyBehaviorStatus { Sleeping, PrimaryAttacker, ArcRunner, SurroundPlayer, Busy, Waiting, Staggered, BeingFinished, Dying }
+//Staggered will currently be used for when the enemy is interupted, it will let the director know that it failed to do its task,
+//this way the director can recalculate if necessary
+//WE MAY WANT TO CHANGE THIS TO A CLASS SO SOMETHING LIKE AMBUSY CAN BE IN ONE A SMART PLACE
 
 public class GroupDirector : MonoBehaviour{
 
@@ -17,12 +23,15 @@ public class GroupDirector : MonoBehaviour{
     private int currentArcRunners;
 
     private ArcAngles myArcAngles;
+    private ActionManager myActionManager;
+    public float ReturnActionDelay = 2f;
 
     public void Start()
     {
         Enemies = new List<EnemyAI>(GetComponentsInChildren<EnemyAI>());
         playerUpdater = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerUpdater>();
         myArcAngles = new ArcAngles();
+        myActionManager = new ActionManager();
     }
 
     public float SendOrderTime=0;
@@ -76,8 +85,16 @@ public class GroupDirector : MonoBehaviour{
             SendOrderCounter -= Time.deltaTime;
         }
     }
-    //public GroupDirector() { Enemies = new List<EnemyAI>(); }
 
+    //Check if a status is busy or not
+    public bool IsBusy(EnemyBehaviorStatus status)
+    {
+        if (status != EnemyBehaviorStatus.PrimaryAttacker && status != EnemyBehaviorStatus.ArcRunner && status != EnemyBehaviorStatus.SurroundPlayer && status != EnemyBehaviorStatus.Waiting)
+            return true;
+        return false;
+    }
+
+    //Access list of enemies
     public void AddEnemy(EnemyAI e)
     {
         Enemies.Add(e);
@@ -92,9 +109,26 @@ public class GroupDirector : MonoBehaviour{
         return Enemies.Count;
     }
 
+    //Access ArcAngles
     public float TakeAngle() { return myArcAngles.TakeAngle(); }
     public void ReturnAngle(float returnAngle) { myArcAngles.ReturnAngle(returnAngle); }
 
+    //Access ActionManager
+    public bool TryNormalAttack() {
+        //print("BeforeTaking" + myActionManager.CurrentNormalAttacks);
+        return myActionManager.TryNormalAttack();
+    }
+    public void NormalAttackCompleted() {
+        StartCoroutine(ExecuteAfterTime(ReturnActionDelay, () => myActionManager.NormalAttackCompleted()));
+    }
+
+    //Used to delay Returning attacks to ActionManager
+    IEnumerator ExecuteAfterTime(float time, Action task)
+    {
+        yield return new WaitForSeconds(time);
+        task();
+        //print("After Returning" + myActionManager.CurrentNormalAttacks);
+    }
 
     public void WakeUpEnemies()
     {
