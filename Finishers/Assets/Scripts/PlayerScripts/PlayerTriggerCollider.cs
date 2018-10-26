@@ -13,6 +13,7 @@ public class PlayerTriggerCollider : MonoBehaviour {
         if (col.gameObject.tag == "EnemySword")
         {
             StartCoroutine(player.KnockbackPlayer(col.transform.parent.gameObject));
+            healthC.PlayerHit(col.gameObject.GetComponent<EnemySword>().damage);
         }
     }
 }

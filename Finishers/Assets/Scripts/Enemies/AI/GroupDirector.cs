@@ -46,6 +46,7 @@ public class GroupDirector : MonoBehaviour{
         {
             OpenExits();
             playerUpdater.ExitCombatState();
+            gameObject.SetActive(false);
         }
 
         if (SendOrderCounter < 0)
@@ -114,12 +115,24 @@ public class GroupDirector : MonoBehaviour{
     public void ReturnAngle(float returnAngle) { myArcAngles.ReturnAngle(returnAngle); }
 
     //Access ActionManager
+    //Normal take and return
     public bool TryNormalAttack() {
         //print("BeforeTaking" + myActionManager.CurrentNormalAttacks);
         return myActionManager.TryNormalAttack();
     }
     public void NormalAttackCompleted() {
         StartCoroutine(ExecuteAfterTime(ReturnActionDelay, () => myActionManager.NormalAttackCompleted()));
+    }
+
+    //Special1 take and return
+    public bool TrySpecial1Attack()
+    {
+        //print("BeforeTaking" + myActionManager.CurrentNormalAttacks);
+        return myActionManager.TrySpecial1Attack();
+    }
+    public void Special1AttackCompleted()
+    {
+        StartCoroutine(ExecuteAfterTime(ReturnActionDelay, () => myActionManager.Special1AttackCompleted()));
     }
 
     //Used to delay Returning attacks to ActionManager

@@ -386,10 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25de2d5c49d3e9e43b282439481cc078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.5
-  delay: 0
   damage: 10
-  eff: 0
 --- !u!114 &114569005166041670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -403,7 +400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keepPlayerDistance: 9
   sidespeed: 3
-  attackrange: 1
+  attackrange: 1.5
   KnightActions: {fileID: 114197278047392216}
   GetEnemyMovementCtrl: {fileID: 114872146328366510}
   CurrentStatus: 0

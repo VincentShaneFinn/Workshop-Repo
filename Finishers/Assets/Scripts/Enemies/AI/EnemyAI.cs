@@ -178,6 +178,7 @@ public class EnemyAI : MonoBehaviour {
                     director.NormalAttackCompleted();
                     break;
                 case EnemyActions.Special1:
+                    director.Special1AttackCompleted();
                     break;
                 default:
                     break;
