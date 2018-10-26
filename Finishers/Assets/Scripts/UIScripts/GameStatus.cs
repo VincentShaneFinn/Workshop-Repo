@@ -13,5 +13,6 @@ public class GameStatus : MonoBehaviour {
         GamePaused = false;
         FinisherModeActive = false;
         InCombat = false;
+        Time.timeScale = 1;
     }
 }

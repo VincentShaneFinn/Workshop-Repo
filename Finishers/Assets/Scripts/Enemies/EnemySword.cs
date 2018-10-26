@@ -11,6 +11,7 @@ public class EnemySword : MonoBehaviour {
     public float eff=0;
     private PlayerMovementController playerM;
     private bool isAttacking;
+
     //Use this for initialization
     public void OnEnable()
     {

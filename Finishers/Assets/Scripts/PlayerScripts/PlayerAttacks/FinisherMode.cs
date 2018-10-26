@@ -133,6 +133,7 @@ public class FinisherMode : MonoBehaviour {
         currentTarget.transform.position = EnemyFinisherPlacement.position;
         currentTarget.transform.parent = EnemyFinisherPlacement;
         currentTarget.GetComponent<EnemyMovementController>().StopMovement();
+        currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.BeingFinished);
 
         //moves camera
         cam.MoveToFinisherModeLocation();
@@ -147,7 +148,6 @@ public class FinisherMode : MonoBehaviour {
         FinisherCount = FinisherTime;
         GameStatus.FinisherModeActive = true;
         Time.timeScale = slowMoModifier;
-        print(Player.transform.rotation.y);
         //yield return null;
     }
 

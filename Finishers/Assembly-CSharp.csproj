@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Enemies\AI\ArcAngles.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\GroupDirector.cs" />
      <Compile Include="Assets\Scripts\Enemies\Enemyhp.cs" />

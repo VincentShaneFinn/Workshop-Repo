@@ -5,6 +5,8 @@ using UnityEngine.AI;
 public class EnemyMovementController : MonoBehaviour {
 
     private Transform Target;
+    public bool UseDestination = false;
+    private Vector3 Destination;
     public NavMeshAgent agent;
     private float savedSpeed;
     private float savedAcc;
@@ -23,13 +25,23 @@ public class EnemyMovementController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        agent.SetDestination(Target.position);
+        if (UseDestination)
+            agent.SetDestination(Destination);
+        else
+            agent.SetDestination(Target.position);
     }
 
     public void SetTarget(Transform NewTarget)
     {
         Target = NewTarget;
+        UseDestination = false;
     }
+    public void SetDestination(Vector3 pos)
+    {
+        Destination = pos;
+        UseDestination = true;
+    }
+
     public Transform GetTarget() { return Target; }
 
     public void PauseMovement()
@@ -42,6 +54,11 @@ public class EnemyMovementController : MonoBehaviour {
         {
             pauseCount = 0;
         }
+    }
+
+    public float GetRemainingDistance()
+    {
+        return agent.remainingDistance;
     }
 
     public void StopMovement()
@@ -64,21 +81,22 @@ public class EnemyMovementController : MonoBehaviour {
     {
         if (isStaggered)
             yield break;
-        StopMovement();
+        GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
         while(pauseCount < pauseTime)
         {
             yield return null;
             pauseCount += Time.deltaTime;
         }
-        ResumeMovement();
+        GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
     }
 
     public IEnumerator KnockbackEnemy()
     {
+        GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
         isStaggered = true;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        float time = .15f;
-        float speed = 20; // keep greater than 6
+        float time = .2f;//.15f;
+        float speed = 10; // keep greater than 6
         Vector3 dir = (transform.position - player.transform.position).normalized;
 
         float count = 0;
@@ -91,6 +109,8 @@ public class EnemyMovementController : MonoBehaviour {
 
         }
         isStaggered = false;
+
+        GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
     }
 
     void OnTriggerEnter(Collider col)

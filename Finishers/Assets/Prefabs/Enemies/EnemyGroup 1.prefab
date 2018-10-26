@@ -67,5 +67,6 @@ MonoBehaviour:
   Exits:
   - {fileID: 0}
   - {fileID: 0}
-  playerUpdater: {fileID: 0}
-  attackrate: 10
+  MaxPrimaryAttackers: 1
+  MaxArcRunners: 2
+  SendOrderTime: 0

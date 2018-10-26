@@ -2,7 +2,7 @@ WindowsStandalone
 PlayerPath?
 D:/GITHUB/Workshop-Repo/Finishers/GameBuild/Finishers.exe
 SceneListBegin?
-Assets/Scenes/Week4-5/Week4StartHere.unity
+Assets/Scenes/Week5-6/Week5StartHere.unity
 SceneListEnd?
 bf7f61351ff9c0f90e2cf9fa0edc2b7e Assembly-CSharp.dll:.PlayerMovementController
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
@@ -119,7 +119,7 @@ da21fc3f8056b1f91c3dd09c7bf4f90a UnityEngine.Networking.dll:UnityEngine.Networki
 fc061f3ae8a876c0687e86378d4a447c UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 7ca56e063bd071986fff4f513cc4f477 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 bf7f61351ff9c0f90e2cf9fa0edc2b7e Assembly-CSharp.dll:.PlayerMovementControllerRigidbody
-3f4bfe61f9cd3fa477ed2ce8582a211a Assembly-CSharp.dll:.EnemyAI
+5c82dc33b72f22acbbe0fadd3d73f0ad Assembly-CSharp.dll:.EnemyAI
 b058c24786d094dd195afd3cbdae662f Assembly-CSharp.dll:.CameraMovementController
 4c05a597943267d98f47f8b149035bfc Assembly-CSharp.dll:.PlayerUpdater
 4631cfe703571e63ea33fe0bf340d512 Assembly-CSharp.dll:.ThrowPart
@@ -134,7 +134,7 @@ dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 96f3ea9f23b6f08e60710ebb4af49174 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 239708595d7f3d322119321248af7ee3 Assembly-CSharp.dll:.RunicBeamBlast
 d100b59d3fdfe9213a24f9193b71a486 Assembly-CSharp.dll:.PlayerSwordHit
-6738a41b8cd3698aa2421782e2e8fb9f Assembly-CSharp.dll:.GroupDirector
+02f226a10bfe9b1f2cb211f1750d1b85 Assembly-CSharp.dll:.GroupDirector
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ThrowLimb
 14dc141be7269dbadd0087d96d152b15 Assembly-CSharp.dll:.Enemyhp
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
@@ -142,7 +142,7 @@ e29334d60dd21f346bb559e13bd3d454 Assembly-CSharp.dll:.ChangeCameraPerpective
 e6f12981bcbf247534a54d8e04aee4a3 Assembly-CSharp.dll:UnityEngine.AI.NavMeshModifier
 486cd95c82d8305219c352c06b776e1f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 eeb471df27da22a09575970f53cba89a Assembly-CSharp.dll:UnityEngine.AI.NavMeshModifierVolume
-3e58f5deb91e1a5489974ca0d33219f8 Assembly-CSharp.dll:.EnemyMovementController
+7bd9ae4064a27d8a880b35e1423442e6 Assembly-CSharp.dll:.EnemyMovementController
 eaf0bcdb10d442a4029d615f41d09957 Unity.TextMeshPro.dll:TMPro.TextContainer
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ControlMethodDetector
 201273fb4f889724fb090164b7d6c657 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
