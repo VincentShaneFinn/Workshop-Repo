@@ -15,6 +15,7 @@ public class EnemyAI : MonoBehaviour {
     //private EnemyBehaviorStatus UpdatedStatus = EnemyBehaviorStatus.Sleeping; //this is updated by the director using enemygroup
     public EnemyBehaviorStatus CurrentStatus = EnemyBehaviorStatus.Sleeping; //this is what the current status is, and stuff should be done if UpdatedStatus changes
     private Transform playerT;
+    public float Special1RangeTEMP = 5;
 
     private float ArcAngle = 360; //use 360 as a sub for null
     private Vector3 ArcTarget;
@@ -39,7 +40,15 @@ public class EnemyAI : MonoBehaviour {
         //obviosuly if your currently doing something, or shouldnt be able to do something, you can't attack
         if (checkplayer(attackrange) && !director.IsBusy(CurrentStatus))
         {
-            KnightActions.StartCoroutine("PerformNormalAttack");
+            //If two many attacks recently, continue doing what they were doing
+            if (director.TryNormalAttack())
+                KnightActions.StartCoroutine("PerformNormalAttack");
+        }
+        //This will need to go to KnightEnemyActions and check which attack it should attempt, rather than using range
+        else if (checkplayer(Special1RangeTEMP) && Vector3.Distance(transform.position, playerT.position) > 4 && !director.IsBusy(CurrentStatus)) // we will need an alternative way to check if doing special 1 is right that is specific to the enemy
+        {
+            if (director.TrySpecial1Attack())
+                KnightActions.StartCoroutine("PerformSpecial1Attack");
         }
     }
 
@@ -71,7 +80,6 @@ public class EnemyAI : MonoBehaviour {
                 GetEnemyMovementCtrl.StopMovement();
                 break;
             case EnemyBehaviorStatus.Busy:
-                GetEnemyMovementCtrl.StopMovement();
                 break;
             case EnemyBehaviorStatus.Sleeping:
                 GetEnemyMovementCtrl.StopMovement();

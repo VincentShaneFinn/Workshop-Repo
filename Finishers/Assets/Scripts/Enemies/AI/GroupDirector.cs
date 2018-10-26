@@ -24,7 +24,11 @@ public class GroupDirector : MonoBehaviour{
 
     private ArcAngles myArcAngles;
     private ActionManager myActionManager;
-    public float ReturnActionDelay = 2f;
+    public float ReturnNormalAttackDelay = 1f;
+    public float ReturnSpecial1AttackDelay = 5f;
+    public int MaxAttackActions = 2;
+    public int MaxNormalAttacks = 2;
+    public int MaxSpecial1Attacks = 1;
 
     public void Start()
     {
@@ -32,6 +36,9 @@ public class GroupDirector : MonoBehaviour{
         playerUpdater = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerUpdater>();
         myArcAngles = new ArcAngles();
         myActionManager = new ActionManager();
+        myActionManager.MaxAttackActions = MaxAttackActions;
+        myActionManager.MaxNormalAttacks = MaxNormalAttacks;
+        myActionManager.MaxSpecial1Attacks = MaxSpecial1Attacks;
     }
 
     public float SendOrderTime=0;
@@ -121,7 +128,7 @@ public class GroupDirector : MonoBehaviour{
         return myActionManager.TryNormalAttack();
     }
     public void NormalAttackCompleted() {
-        StartCoroutine(ExecuteAfterTime(ReturnActionDelay, () => myActionManager.NormalAttackCompleted()));
+        StartCoroutine(ExecuteAfterTime(ReturnNormalAttackDelay, () => myActionManager.NormalAttackCompleted()));
     }
 
     //Special1 take and return
@@ -132,7 +139,7 @@ public class GroupDirector : MonoBehaviour{
     }
     public void Special1AttackCompleted()
     {
-        StartCoroutine(ExecuteAfterTime(ReturnActionDelay, () => myActionManager.Special1AttackCompleted()));
+        StartCoroutine(ExecuteAfterTime(ReturnSpecial1AttackDelay, () => myActionManager.Special1AttackCompleted()));
     }
 
     //Used to delay Returning attacks to ActionManager
@@ -176,14 +183,17 @@ public class GroupDirector : MonoBehaviour{
     }
     void OnTriggerEnter(Collider col)
     {
-        WakeUpEnemies();
+        if (col.gameObject.tag == "Player")
+        {
+            WakeUpEnemies();
 
 
-        //enter combat
-        CloseExits();
-        playerUpdater.EnterCombatState();
+            //enter combat
+            CloseExits();
+            playerUpdater.EnterCombatState();
 
-        gameObject.GetComponent<BoxCollider>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
     }
 
     void CloseExits()
