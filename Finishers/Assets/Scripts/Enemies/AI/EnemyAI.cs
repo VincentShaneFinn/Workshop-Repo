@@ -43,6 +43,8 @@ public class EnemyAI : MonoBehaviour {
             //If two many attacks recently, continue doing what they were doing
             if (director.TryNormalAttack())
                 KnightActions.StartCoroutine("PerformNormalAttack");
+            else
+                KeepDistance();
         }
         //This will need to go to KnightEnemyActions and check which attack it should attempt, rather than using range
         else if (checkplayer(Special1RangeTEMP) && Vector3.Distance(transform.position, playerT.position) > 4 && !director.IsBusy(CurrentStatus)) // we will need an alternative way to check if doing special 1 is right that is specific to the enemy
@@ -78,6 +80,8 @@ public class EnemyAI : MonoBehaviour {
                 break;
             case EnemyBehaviorStatus.Waiting:
                 GetEnemyMovementCtrl.StopMovement();
+                break;
+            case EnemyBehaviorStatus.Attacking:
                 break;
             case EnemyBehaviorStatus.Busy:
                 break;
