@@ -91,7 +91,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 442}
   m_MaxSize: {x: 22012, y: 10021}
   vertical: 0
-  controlID: 53
+  controlID: 32
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 54
+  controlID: 33
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -316,7 +316,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 6473eeffe4f7ffffe4fbffff00000000280d0000
+    m_ExpandedIDs: daf1ffffe4fbffff00000000600d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -411,20 +411,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Materials/Particles/Ice Attack
+    - Assets/Materials/Particles/Essence Blood
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Materials/Particles/Ice Attack
+  - Assets/Materials/Particles/Essence Blood
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\hunte\Documents\GitHub\Workshop-Repo\Finishers
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 222f0000
-    m_LastClickedID: 12066
-    m_ExpandedIDs: 0000000098090000bc090000f00900000e0a0000500a0000840a0000900a0000d80a0000060b0000100b0000260b0000d40b0000f80b0000000c00000c0c0000440c0000480c0000540c0000ea2d0000ec2d0000ee2d0000f02d0000f22d0000
+    m_SelectedIDs: 482e0000
+    m_LastClickedID: 11848
+    m_ExpandedIDs: 0000000098090000bc090000f2090000120a0000580a00008e0a00009a0a0000e80a0000160b0000200b0000360b0000e60b00000a0c0000120c00001e0c0000560c00005a0c0000660c0000222e0000242e0000262e0000282e00002a2e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -452,7 +452,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000098090000bc090000f00900000e0a0000500a0000840a0000900a0000d80a0000060b0000100b0000260b0000d40b0000f80b0000000c0000440c0000480c0000540c0000ea2d0000ec2d0000ee2d0000f02d0000f22d0000
+    m_ExpandedIDs: 0000000098090000bc090000f2090000120a0000580a00008e0a00009a0a0000e80a0000160b0000200b0000360b0000e60b00000a0c0000120c00001e0c0000560c00005a0c0000660c0000222e0000242e0000262e0000282e00002a2e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -612,14 +612,14 @@ MonoBehaviour:
     height: 700
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 2620.1105159713898
+  lastFramingTime: 1825.8676084125827
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -9.894825, y: -0.26186085, z: 1.0902476}
+    m_Target: {x: -8.631052, y: -0.2527703, z: -14.20059}
     speed: 2
-    m_Value: {x: -9.894825, y: -0.26186085, z: 1.0902476}
+    m_Value: {x: -8.631052, y: -0.2527703, z: -14.20059}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -647,13 +647,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.16722137, y: 0.5183626, z: -0.10416824, w: -0.832157}
+    m_Target: {x: -0.13265245, y: 0.691331, z: -0.13138975, w: -0.6979982}
     speed: 2
-    m_Value: {x: -0.16722144, y: 0.5183628, z: -0.104168296, w: -0.83215743}
+    m_Value: {x: -0.13265245, y: 0.691331, z: -0.13138975, w: -0.6979982}
   m_Size:
-    m_Target: 11.243627
+    m_Target: 2.3624864
     speed: 2
-    m_Value: 11.243627
+    m_Value: 2.3624864
   m_Ortho:
     m_Target: 0
     speed: 2
