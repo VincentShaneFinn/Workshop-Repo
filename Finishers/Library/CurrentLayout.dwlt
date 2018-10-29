@@ -91,7 +91,11 @@ MonoBehaviour:
   m_MinSize: {x: 911, y: 321}
   m_MaxSize: {x: 22008, y: 10021}
   vertical: 0
+<<<<<<< HEAD
   controlID: 84
+=======
+  controlID: 32
+>>>>>>> origin/Hunter
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,7 +139,11 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 321}
   m_MaxSize: {x: 4002, y: 8021}
   vertical: 1
+<<<<<<< HEAD
   controlID: 63
+=======
+  controlID: 33
+>>>>>>> origin/Hunter
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -316,7 +324,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 4640faff1041faff6a42faff2260fdff02e0fdffb2e0fdfffee1fdff3af5ffffd4f9ffff56faffff00000000926f000092700000c4700000d8700000bc7100001873000072750000
+=======
+    m_ExpandedIDs: daf1ffffe4fbffff00000000600d0000
+>>>>>>> origin/Hunter
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -411,20 +423,34 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
+<<<<<<< HEAD
     - Assets/Prefabs/Enemies
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
   - Assets/Prefabs/Enemies
+=======
+    - Assets/Materials/Particles/Essence Blood
+  m_ViewMode: 1
+  m_StartGridSize: 64
+  m_LastFolders:
+  - Assets/Materials/Particles/Essence Blood
+>>>>>>> origin/Hunter
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\GITHUB\Workshop-Repo\Finishers
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: 9a2d0000
     m_LastClickedID: 11674
     m_ExpandedIDs: 00000000b62a0000da2a0000142b00002e2b0000722b0000a42b0000b22b00009c2c0000ca2c0000d62c0000ec2c00009a2d0000be2d0000ce2d0000de2d0000162e00001a2e0000302e0000823300008433000000ca9a3b
+=======
+    m_SelectedIDs: 482e0000
+    m_LastClickedID: 11848
+    m_ExpandedIDs: 0000000098090000bc090000f2090000120a0000580a00008e0a00009a0a0000e80a0000160b0000200b0000360b0000e60b00000a0c0000120c00001e0c0000560c00005a0c0000660c0000222e0000242e0000262e0000282e00002a2e0000
+>>>>>>> origin/Hunter
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -452,7 +478,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000b62a0000da2a0000142b00002e2b0000722b0000a42b0000b22b00009c2c0000ca2c0000d62c0000ec2c00009a2d0000be2d0000ce2d0000de2d0000162e00001a2e0000302e00008233000084330000
+=======
+    m_ExpandedIDs: 0000000098090000bc090000f2090000120a0000580a00008e0a00009a0a0000e80a0000160b0000200b0000360b0000e60b00000a0c0000120c00001e0c0000560c00005a0c0000660c0000222e0000242e0000262e0000282e00002a2e0000
+>>>>>>> origin/Hunter
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -612,14 +642,24 @@ MonoBehaviour:
     height: 465
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
+<<<<<<< HEAD
   lastFramingTime: 3774.721289011473
+=======
+  lastFramingTime: 1825.8676084125827
+>>>>>>> origin/Hunter
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
     m_Target: {x: 0, y: 4.1, z: -20.516}
     speed: 2
     m_Value: {x: 0, y: 4.1, z: -20.516}
+=======
+    m_Target: {x: -8.631052, y: -0.2527703, z: -14.20059}
+    speed: 2
+    m_Value: {x: -8.631052, y: -0.2527703, z: -14.20059}
+>>>>>>> origin/Hunter
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -647,6 +687,7 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
+<<<<<<< HEAD
     m_Target: {x: 0.1293788, y: 0.8430222, z: -0.23359531, w: 0.46691328}
     speed: 2
     m_Value: {x: 0.12937878, y: 0.8430221, z: -0.23359528, w: 0.46691322}
@@ -654,6 +695,15 @@ MonoBehaviour:
     m_Target: 4.1101556
     speed: 2
     m_Value: 4.1101556
+=======
+    m_Target: {x: -0.13265245, y: 0.691331, z: -0.13138975, w: -0.6979982}
+    speed: 2
+    m_Value: {x: -0.13265245, y: 0.691331, z: -0.13138975, w: -0.6979982}
+  m_Size:
+    m_Target: 2.3624864
+    speed: 2
+    m_Value: 2.3624864
+>>>>>>> origin/Hunter
   m_Ortho:
     m_Target: 0
     speed: 2
