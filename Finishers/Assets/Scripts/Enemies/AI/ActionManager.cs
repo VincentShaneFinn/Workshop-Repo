@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class ActionManager {
 
-    public int MaxAttackActions = 2;// compare to the sum of all tracked attack actions
+    public int MaxAttackActions = 3;// compare to the sum of all tracked attack actions
     public int MaxNormalAttacks = 2;
     public int CurrentNormalAttacks = 0;
-    public int MaxSpecial1Attacks = 1;
+    public int MaxSpecial1Attacks = 2;
     public int CurrentSpecial1Attacks = 0;
 
     public ActionManager() { }

@@ -1141,26 +1141,6 @@ Prefab:
       propertyPath: ReturnActionDelay
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
-        type: 2}
-      propertyPath: MaxSpecial1Attacks
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
-        type: 2}
-      propertyPath: ReturnSpecial1AttackDelay
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
-        type: 2}
-      propertyPath: MaxNormalAttacks
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
-        type: 2}
-      propertyPath: MaxAttackActions
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5, type: 2}
   m_IsPrefabAsset: 0
@@ -6883,7 +6863,7 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
+    - target: {fileID: 1322362313959738, guid: bfef4bb9e2b91fd4dbc4e941dd147616, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -12315,7 +12295,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4779020410548396, guid: bfef4bb9e2b91fd4dbc4e941dd147616, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1318788245151266, guid: bfef4bb9e2b91fd4dbc4e941dd147616, type: 2}
       propertyPath: m_Name
@@ -12369,7 +12349,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4779020410548396, guid: bfef4bb9e2b91fd4dbc4e941dd147616, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1318788245151266, guid: bfef4bb9e2b91fd4dbc4e941dd147616, type: 2}
       propertyPath: m_Name
@@ -22757,7 +22737,7 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
+    - target: {fileID: 1322362313959738, guid: bfef4bb9e2b91fd4dbc4e941dd147616, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -23047,7 +23027,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4779020410548396, guid: bfef4bb9e2b91fd4dbc4e941dd147616, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1318788245151266, guid: bfef4bb9e2b91fd4dbc4e941dd147616, type: 2}
       propertyPath: m_Name
@@ -23061,7 +23041,7 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
+    - target: {fileID: 1322362313959738, guid: bfef4bb9e2b91fd4dbc4e941dd147616, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -43076,11 +43056,6 @@ Prefab:
         type: 2}
       propertyPath: MaxArcRunners
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
-        type: 2}
-      propertyPath: ReturnActionDelay
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5, type: 2}

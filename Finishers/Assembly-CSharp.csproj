@@ -77,9 +77,9 @@
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\RunicBeamBlast.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerHealthController.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovementController.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovementControllerCC.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerTriggerCollider.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerUpdater.cs" />
-     <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerCC.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerRigidbody.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ControlMethodDetector.cs" />
      <Compile Include="Assets\Scripts\UIScripts\GameStatus.cs" />

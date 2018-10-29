@@ -13,6 +13,8 @@ public class EnemyMovementController : MonoBehaviour {
     private float pauseTime = 1;
     private float pauseCount;
 
+    private bool isStaggered = false; //tempStatus for now
+
     void Start()
     {
         savedSpeed = agent.speed;
@@ -23,13 +25,10 @@ public class EnemyMovementController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (agent.isActiveAndEnabled)
-        {
-            if (UseDestination)
-                agent.SetDestination(Destination);
-            else
-                agent.SetDestination(Target.position);
-        }
+        if (UseDestination)
+            agent.SetDestination(Destination);
+        else
+            agent.SetDestination(Target.position);
     }
 
     public void SetTarget(Transform NewTarget)
@@ -80,7 +79,7 @@ public class EnemyMovementController : MonoBehaviour {
 
     IEnumerator PauseEnemy()
     {
-        if (GetComponent<EnemyAI>().CurrentStatus == EnemyBehaviorStatus.Staggered)
+        if (isStaggered)
             yield break;
         GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
         while(pauseCount < pauseTime)
@@ -91,71 +90,28 @@ public class EnemyMovementController : MonoBehaviour {
         GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
     }
 
-    public void DisableNavAgent()
-    {
-        StopMovement();
-        agent.enabled = false;
-    }
-
-    public void EnableNavAgent()
-    {
-        agent.enabled = true;
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z); //MARK WILL NOT WORK IN BASEMENTS
-        ResumeMovement();
-    }
-
     public IEnumerator KnockbackEnemy()
     {
-        if (agent.isActiveAndEnabled)
+        GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
+        isStaggered = true;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        float time = .2f;//.15f;
+        float speed = 10; // keep greater than 6
+        Vector3 dir = (transform.position - player.transform.position).normalized;
+
+        float count = 0;
+        while (count <= time)
         {
-            GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            float time = .2f;//.15f;
-            float speed = 10; // keep greater than 6
-            Vector3 dir = (transform.position - player.transform.position).normalized;
+            yield return null;
+            count += Time.deltaTime;
+            float currentKnockbackSpeed = speed - savedSpeed;
+            gameObject.transform.position += (dir * (savedSpeed + currentKnockbackSpeed * (1 - count / time)) * Time.deltaTime);
 
-            float count = 0;
-            while (count <= time)
-            {
-                yield return null;
-                count += Time.deltaTime;
-                float currentKnockbackSpeed = speed - savedSpeed;
-                gameObject.transform.position += (dir * (savedSpeed + currentKnockbackSpeed * (1 - count / time)) * Time.deltaTime);
-
-            }
-
-            GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
         }
+        isStaggered = false;
+
+        GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
     }
-
-    //public IEnumerator LeapToPlayer()
-    ////public IEnumerator KnockbackEnemy()
-    //{
-    //    GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
-    //    GameObject player = GameObject.FindGameObjectWithTag("Player");
-    //    float time = .15f;//.15f;
-    //    float speed = 10; // keep greater than 6
-    //    Vector3 dir = (transform.position - player.transform.position).normalized;
-    //    Vector3 savedPoint = player.transform.position;
-    //    Vector3 heightPoint = (transform.position + player.transform.position) / 2f;
-    //    heightPoint.y += 3;
-
-    //    float count = 0;
-    //    while (count <= time)
-    //    {
-    //        yield return null;
-    //        count += Time.deltaTime;
-    //        float currentKnockbackSpeed = speed - savedSpeed;
-    //        gameObject.transform.position += (dir * (savedSpeed + currentKnockbackSpeed * (1 - count / time)) * Time.deltaTime);
-
-    //        Vector3 m1 = Vector3.Lerp(transform.position, savedPoint, count);
-    //        Vector3 m2 = Vector3.Lerp(savedPoint, heightPoint, count);
-    //        transform.position = Vector3.Lerp(m1, m2, count);
-
-    //    }
-
-    //    GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
-    //}
 
     void OnTriggerEnter(Collider col)
     {
