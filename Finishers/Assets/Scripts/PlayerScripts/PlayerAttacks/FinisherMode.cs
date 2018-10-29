@@ -29,6 +29,7 @@ public class FinisherMode : MonoBehaviour {
     public GameObject TopHalf;
     public GameObject BottomHalf;
     public GameObject SlicedLimb;
+    public Transform SlicedLimbFirePoint;
 
     //Controls Slider UI
     public Slider finisherSlider;
@@ -165,7 +166,7 @@ public class FinisherMode : MonoBehaviour {
             case FinisherModes.Siphoning:
                 GameObject part1 = Instantiate(TopHalf, new Vector3(currentTarget.transform.position.x, 1f, currentTarget.transform.position.z), currentTarget.transform.rotation);
                 GameObject part2 = Instantiate(BottomHalf, new Vector3(currentTarget.transform.position.x, 0f, currentTarget.transform.position.z), currentTarget.transform.rotation);
-                try { SlicedLimb.SetActive(true); } catch { }
+                try { Instantiate(SlicedLimb, SlicedLimbFirePoint); } catch { }
                 print("Commit Siphoning Finisher");
                 break;
             case FinisherModes.PressurePoints:

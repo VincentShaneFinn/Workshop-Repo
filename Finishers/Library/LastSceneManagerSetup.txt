@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Week5-6/Week5StartHere.unity
+- path: Assets/Scenes/Week5-6/FirstPlayable.unity
   isLoaded: 1
   isActive: 1
