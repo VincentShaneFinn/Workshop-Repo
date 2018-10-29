@@ -22,7 +22,7 @@ public class KnightEnemyActions : MonoBehaviour {
     IEnumerator PerformNormalAttack()
     {
         MovementCtrl.StopMovement();
-        AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
+        AI.ChangeStatus(EnemyBehaviorStatus.Busy);
         AI.ChangeAction(EnemyActions.NormalAttack);
         //set animation
         //attack()
@@ -49,7 +49,7 @@ public class KnightEnemyActions : MonoBehaviour {
     IEnumerator PerformSpecial1Attack()
     {
         MovementCtrl.StopMovement();
-        AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
+        AI.ChangeStatus(EnemyBehaviorStatus.Busy);
         AI.ChangeAction(EnemyActions.Special1);
         //set animation
         //attack()
@@ -68,6 +68,7 @@ public class KnightEnemyActions : MonoBehaviour {
             yield return null;
             grounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
             tempAnimationCount += Time.deltaTime;
+            print(grounded);
         }
 
         HeavySword.SetActive(false);//tempAniamtionFake
