@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealthController : MonoBehaviour {
+public class PlayerHealthController : MonoBehaviour
+{
 
     //For debugging purposes
     public bool canDie = true;
 
     public int MaxHealth = 100;
-    private Slider healthSlider;
-    private Text gameOverText;
+    public Slider healthSlider;
+    public Text gameOverText;
     public PlayerUpdater pUpdater;
 
     void Start()
     {
-        healthSlider = GameObject.Find("/Canvas/Sliders/Health Slider").GetComponent<Slider>();
-        gameOverText = GameObject.Find("/Canvas/Game Over").GetComponent<Text>();
-
         healthSlider.value = MaxHealth;
         gameOverText.text = "";
     }

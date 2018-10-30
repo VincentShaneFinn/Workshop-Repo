@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
-public enum FinisherModes { Runic, Siphoning, PressurePoints}
+public enum FinisherModes { Runic, Siphoning, PressurePoints }
 
-public class FinisherMode : MonoBehaviour {
+public class FinisherMode : MonoBehaviour
+{
 
     public GameObject Player;
 
@@ -38,7 +40,7 @@ public class FinisherMode : MonoBehaviour {
     //slow mo
     public float slowMoModifier;
 
-    private CameraMovementController cam;
+    public CameraMovementController cam;
 
     void Start()
     {
@@ -48,27 +50,40 @@ public class FinisherMode : MonoBehaviour {
         inFinisherMode = false;
         PerformingFinisher = false;
         ExecutingFinisher = false;
-        cam = GameObject.FindGameObjectWithTag("CameraTarget").GetComponent<CameraMovementController>();
-        finisherSlider = GameObject.Find("/Canvas/Sliders/Finisher Slider").GetComponent<Slider>();
+
+        currentFSI = Instantiate(FinisherStartIndicator);
+        currentFSI.SetActive(false);
+        currentFRCI.SetActive(false);
+        currentFLCI.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
 
-        if (!inFinisherMode) { 
+        if (!inFinisherMode)
+        {
             if (FinisherModeCooldownCount >= FinisherModeCooldownTime)
             {
-                if (Input.GetButtonDown("FinishMode") && !GameStatus.GamePaused && finisherSlider.value == 100)
+                if (finisherSlider.value >= 100)
                 {
                     currentTarget = GetClosestEnemy();
-                    if (currentTarget != null)
+                    if (Input.GetButtonDown("FinishMode") && !GameStatus.GamePaused)
                     {
-                        finisherSlider.value = 0;
-                        StartCoroutine(EnterFinisherMode());
-                    }
-                    else
-                    {
-                        print("No nearby enemy");
+                        if (currentTarget != null)
+                        {
+                            finisherSlider.value = 0;
+
+                            currentFSI.SetActive(false);
+                            currentFRCI.SetActive(true);
+                            currentFLCI.SetActive(true);
+
+                            StartCoroutine(EnterFinisherMode());
+                        }
+                        else
+                        {
+                            print("No nearby enemy");
+                        }
                     }
                 }
             }
@@ -78,11 +93,13 @@ public class FinisherMode : MonoBehaviour {
             }
 
             //Increase UI slider for Finisher && temp cheat
-            if (Input.GetKeyDown(KeyCode.G)) {
+            if (Input.GetKeyDown(KeyCode.G))
+            {
                 IncreaseFinisherMeter();
             }
         }
-        else{
+        else
+        {
             if (PerformingFinisher && !ExecutingFinisher)
             {
                 if (Input.GetButtonDown("PrimaryAttack") && !GameStatus.GamePaused)
@@ -120,7 +137,7 @@ public class FinisherMode : MonoBehaviour {
     {
         finisherSlider.value += buildupVal;
     }
-    
+
     IEnumerator EnterFinisherMode()
     {
         print(Player.transform.rotation.y);
@@ -157,6 +174,9 @@ public class FinisherMode : MonoBehaviour {
         PerformingFinisher = false;
         ExecutingFinisher = true;
 
+        currentFRCI.SetActive(false);
+        currentFLCI.SetActive(false);
+
         switch (CurrentFinisherMode)
         {
             case FinisherModes.Runic:
@@ -186,6 +206,10 @@ public class FinisherMode : MonoBehaviour {
         PerformingFinisher = false;
         currentTarget.GetComponent<EnemyMovementController>().ResumeMovement();
         currentTarget.transform.parent = null;
+
+        currentFLCI.SetActive(false);
+        currentFRCI.SetActive(false);
+
         StartCoroutine(LeavingFinisherMode());
     }
 
@@ -205,16 +229,25 @@ public class FinisherMode : MonoBehaviour {
         GameStatus.FinisherModeActive = false;
     }
 
-
+    public GameObject FinisherStartIndicator;
+    private GameObject currentFSI;
+    public GameObject currentFRCI;
+    public GameObject currentFLCI;
     public GameObject GetClosestEnemy()
     {
         GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         foreach (GameObject Enemy in Enemies)
         {
-            if (Vector3.Distance(Enemy.transform.position, transform.position) < 5)
+            if (Vector3.Distance(Enemy.transform.position, transform.position) < 5 && Enemy.GetComponent<NavMeshAgent>().isActiveAndEnabled)
             {
+                currentFSI.SetActive(true);
+                currentFSI.transform.position = Enemy.transform.position;
                 return Enemy;
+            }
+            else
+            {
+                currentFSI.SetActive(false);
             }
         }
         return null;

@@ -61,13 +61,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1107490273387774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 010594f5df0e2e84189db6d6a1d9febb, type: 3}
+  m_Script: {fileID: 11500000, guid: 4408137244a8e8449b6e1fcda5b973ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Exits:
-  - {fileID: 0}
-  - {fileID: 0}
+  Exits: []
   MaxPrimaryAttackers: 1
   MaxArcRunners: 2
-  ReturnActionDelay: 0.5
+  ReturnNormalAttackDelay: 1
+  ReturnSpecial1AttackDelay: 5
+  MaxAttackActions: 2
+  MaxNormalAttacks: 2
+  MaxSpecial1Attacks: 1
   SendOrderTime: 1

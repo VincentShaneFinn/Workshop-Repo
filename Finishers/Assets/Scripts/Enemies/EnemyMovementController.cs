@@ -10,10 +10,8 @@ public class EnemyMovementController : MonoBehaviour {
     public NavMeshAgent agent;
     private float savedSpeed;
     private float savedAcc;
-    private float pauseTime = 1;
+    private float pauseTime = .3f;
     private float pauseCount;
-
-    private bool isStaggered = false; //tempStatus for now
 
     void Start()
     {
@@ -25,10 +23,13 @@ public class EnemyMovementController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (UseDestination)
-            agent.SetDestination(Destination);
-        else
-            agent.SetDestination(Target.position);
+        if (agent.isActiveAndEnabled)
+        {
+            if (UseDestination)
+                agent.SetDestination(Destination);
+            else
+                agent.SetDestination(Target.position);
+        }
     }
 
     public void SetTarget(Transform NewTarget)
@@ -79,7 +80,7 @@ public class EnemyMovementController : MonoBehaviour {
 
     IEnumerator PauseEnemy()
     {
-        if (isStaggered)
+        if (GetComponent<EnemyAI>().CurrentStatus == EnemyBehaviorStatus.Staggered)
             yield break;
         GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
         while(pauseCount < pauseTime)
@@ -90,27 +91,42 @@ public class EnemyMovementController : MonoBehaviour {
         GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
     }
 
+    public void DisableNavAgent()
+    {
+        StopMovement();
+        agent.enabled = false;
+    }
+
+    public void EnableNavAgent()
+    {
+        agent.enabled = true;
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z); //MARK WILL NOT WORK IN BASEMENTS
+        ResumeMovement();
+    }
+
     public IEnumerator KnockbackEnemy()
     {
-        GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
-        isStaggered = true;
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        float time = .2f;//.15f;
-        float speed = 10; // keep greater than 6
-        Vector3 dir = (transform.position - player.transform.position).normalized;
-
-        float count = 0;
-        while (count <= time)
+        if (agent.isActiveAndEnabled)
         {
-            yield return null;
-            count += Time.deltaTime;
-            float currentKnockbackSpeed = speed - savedSpeed;
-            gameObject.transform.position += (dir * (savedSpeed + currentKnockbackSpeed * (1 - count / time)) * Time.deltaTime);
+            GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            float time = .2f;//.15f;
+            float speed = 10; // keep greater than 6
+            Vector3 dir = (transform.position - player.transform.position).normalized;
+            dir.y = 0;
 
+            float count = 0;
+            while (count <= time)
+            {
+                yield return null;
+                count += Time.deltaTime;
+                float currentKnockbackSpeed = speed - savedSpeed;
+                gameObject.transform.position += (dir * (savedSpeed + currentKnockbackSpeed * (1 - count / time)) * Time.deltaTime);
+
+            }
+
+            GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
         }
-        isStaggered = false;
-
-        GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
     }
 
     void OnTriggerEnter(Collider col)

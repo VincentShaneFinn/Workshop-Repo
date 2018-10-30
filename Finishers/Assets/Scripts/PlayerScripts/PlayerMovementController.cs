@@ -73,11 +73,11 @@ public class PlayerMovementController : MonoBehaviour
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        //controller = GetComponent<CharacterController>();
         myTransform = transform;
         speed = walkSpeed;
-        rayDistance = controller.height * .5f + controller.radius;
-        slideLimit = controller.slopeLimit - .1f;
+        //rayDistance = controller.height * .5f + controller.radius;
+        //slideLimit = controller.slopeLimit - .1f;
         jumpTimer = antiBunnyHopFactor;
         dashTimer = dashFactor + dashCooldown;
         CanMove = true;
@@ -101,22 +101,22 @@ public class PlayerMovementController : MonoBehaviour
         float inputModifyFactor = (inputX != 0.0f && inputY != 0.0f && limitDiagonalSpeed) ? .7071f : 1.0f;
         if (grounded)
         {
-            bool sliding = false;
-            // See if surface immediately below should be slid down. We use this normally rather than a ControllerColliderHit point,
-            // because that interferes with step climbing amongst other annoyances
-            if (Physics.Raycast(myTransform.position, -Vector3.up, out hit, rayDistance))
-            {
-                if (Vector3.Angle(hit.normal, Vector3.up) > slideLimit)
-                    sliding = true;
-            }
-            // However, just raycasting straight down from the center can fail when on steep slopes
-            // So if the above raycast didn't catch anything, raycast down from the stored ControllerColliderHit point instead
-            else
-            {
-                Physics.Raycast(contactPoint + Vector3.up, -Vector3.up, out hit);
-                if (Vector3.Angle(hit.normal, Vector3.up) > slideLimit)
-                    sliding = true;
-            }
+            //bool sliding = false;
+            //// See if surface immediately below should be slid down. We use this normally rather than a ControllerColliderHit point,
+            //// because that interferes with step climbing amongst other annoyances
+            //if (Physics.Raycast(myTransform.position, -Vector3.up, out hit, rayDistance))
+            //{
+            //    if (Vector3.Angle(hit.normal, Vector3.up) > slideLimit)
+            //        sliding = true;
+            //}
+            //// However, just raycasting straight down from the center can fail when on steep slopes
+            //// So if the above raycast didn't catch anything, raycast down from the stored ControllerColliderHit point instead
+            //else
+            //{
+            //    Physics.Raycast(contactPoint + Vector3.up, -Vector3.up, out hit);
+            //    if (Vector3.Angle(hit.normal, Vector3.up) > slideLimit)
+            //        sliding = true;
+            //}
 
             // If we were falling, and we fell a vertical distance greater than the threshold, run a falling damage routine
             if (falling)
@@ -281,6 +281,7 @@ public class PlayerMovementController : MonoBehaviour
         float speed = 20; // keep greater than 6
         other.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
         Vector3 dir = (transform.position - other.transform.position).normalized;
+        dir.y = 0;
 
         float count = 0;
         PreventTuring();
