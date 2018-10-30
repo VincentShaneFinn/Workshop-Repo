@@ -255,8 +255,8 @@ MonoBehaviour:
     y: 486
     width: 865
     height: 461
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -314,9 +314,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: cec0fdffc4c1fdff14c3fdff28e8ffff2ae8ffff4ee8ffff86e8ffffd8e8ffffdae8ffffe4fbffff00000000d20d0000580f0000880f000060100000
+    m_SelectedIDs: 44350000
+    m_LastClickedID: 13636
+    m_ExpandedIDs: dabcffffeadfffff0000000044350000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -411,20 +411,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Player
+    - Assets/Prefabs/ParticlePrefabs 1
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/Player
+  - Assets/Prefabs/ParticlePrefabs 1
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Finnx\Downloads\Workshop-Repo-ab0be17d5b50a2420525457e90aad40d0227eedc\Finishers
+  m_LastProjectPath: D:\GITHUB\Workshop-Repo\Finishers
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 920b0000
-    m_LastClickedID: 2962
-    m_ExpandedIDs: 000000009a090000c2090000f6090000140a00005a0a00008e0a00009c0a0000920b0000c20b0000ce0b0000e40b0000940c0000b80c0000c80c0000d80c0000120d0000160d0000220d0000a8320000aa32000000ca9a3b
+    m_SelectedIDs: 8e360000
+    m_LastClickedID: 13966
+    m_ExpandedIDs: 000000000e2f0000322f0000642f00007c2f0000ba2f0000e42f0000f02f0000d4300000023100000e31000024310000be310000de310000e4310000f43100002a3200002e3200003a3200000e3600001036000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -452,7 +452,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009a090000c2090000f6090000140a00005a0a00008e0a00009c0a0000920b0000c20b0000ce0b0000e40b0000940c0000b80c0000c80c0000d80c0000120d0000160d0000220d0000a8320000aa320000
+    m_ExpandedIDs: 000000000e2f0000322f0000642f00007c2f0000ba2f0000e42f0000f02f0000d4300000023100000e31000024310000be310000de310000e4310000f43100002a3200002e3200003a3200000e36000010360000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -612,14 +612,14 @@ MonoBehaviour:
     height: 465
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 657.2975667405346
+  lastFramingTime: 187.42982771705888
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.8943462, y: 9.640396, z: 31.246542}
+    m_Target: {x: 0, y: 0, z: 0}
     speed: 2
-    m_Value: {x: -2.8943462, y: 9.640396, z: 31.246542}
+    m_Value: {x: 0, y: 0, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -651,9 +651,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.2973815, y: 0.5854276, z: -0.24394155, w: 0.71367455}
   m_Size:
-    m_Target: 98.05694
+    m_Target: 853.67413
     speed: 2
-    m_Value: 98.05694
+    m_Value: 853.67413
   m_Ortho:
     m_Target: 0
     speed: 2
