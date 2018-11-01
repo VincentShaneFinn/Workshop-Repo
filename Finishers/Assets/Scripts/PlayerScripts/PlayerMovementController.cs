@@ -246,6 +246,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             desiredVelocity = new Vector3(moveDirection.x, myRigidbody.velocity.y, moveDirection.z);
             myRigidbody.velocity = desiredVelocity;
+            //myRigidbody.AddForce(desiredVelocity, ForceMode.Force);
         }
         myRigidbody.AddForce(new Vector3(0, -gravity * myRigidbody.mass, 0));
         
