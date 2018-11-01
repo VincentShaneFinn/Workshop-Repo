@@ -124,8 +124,8 @@ public class FinisherMode : MonoBehaviour {
     IEnumerator EnterFinisherMode()
     {
         print(Player.transform.rotation.y);
-        Player.GetComponent<PlayerMovementController>().PreventMoving();
-        Player.GetComponent<PlayerMovementController>().PreventTuring();
+       // Player.GetComponent<PlayerMovementController>().PreventMoving();
+        //Player.GetComponent<PlayerMovementController>().PreventTuring();
         inFinisherMode = true;
         print("Begin Finisher");
         swordController.PreventAttacking();
@@ -191,8 +191,8 @@ public class FinisherMode : MonoBehaviour {
 
     IEnumerator LeavingFinisherMode()
     {
-        Player.GetComponent<PlayerMovementController>().AllowMoving();
-        Player.GetComponent<PlayerMovementController>().AllowTurning();
+       // Player.GetComponent<PlayerMovementController>().AllowMoving();
+        //Player.GetComponent<PlayerMovementController>().AllowTurning();
         inFinisherMode = false;
         ExecutingFinisher = false;
         CurrentFinisherMode = FinisherModes.Runic;

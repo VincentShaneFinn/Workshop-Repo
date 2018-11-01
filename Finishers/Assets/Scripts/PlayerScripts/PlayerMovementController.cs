@@ -62,6 +62,7 @@ public class PlayerMovementController : MonoBehaviour
     public bool CanTurn;
 
     public Transform forwardObject;
+    public Transform rotationwrapper;
     public GameObject PlayerModel;
 
     private Vector3 dashDirection;
@@ -80,8 +81,8 @@ public class PlayerMovementController : MonoBehaviour
         slideLimit = controller.slopeLimit - .1f;
         jumpTimer = antiBunnyHopFactor;
         dashTimer = dashFactor + dashCooldown;
-        CanMove = true;
-        CanTurn = true;
+        //CanMove = true;
+        //CanTurn = true;
     }
 
     void Update()
@@ -149,6 +150,7 @@ public class PlayerMovementController : MonoBehaviour
 
             // Jump! But only if the jump button has been released and player has been grounded for a given number of frames
             // temp switch for dash testing
+            /*
             if (!GameStatus.InCombat)
             {
                 if (!Input.GetButtonDown("Jump"))
@@ -161,7 +163,8 @@ public class PlayerMovementController : MonoBehaviour
                     jumpTimer = 0;
                 }
             }
-
+            */
+            
             if (GameStatus.InCombat)
             {
                 if (!Input.GetButtonDown("Jump"))
@@ -201,7 +204,7 @@ public class PlayerMovementController : MonoBehaviour
                 falling = true;
                 fallStartLevel = myTransform.position.y;
             }
-
+            
             // If air control is allowed, check movement but don't touch the y component
             if (airControl && playerControl && !dashing)
             {
@@ -217,12 +220,13 @@ public class PlayerMovementController : MonoBehaviour
 
         if (CanTurn)
         {
+            
             Vector3 movement = new Vector3((moveDirection).x, 0.0f, (moveDirection).z);
             if (movement != Vector3.zero)
             {
                 //print((float)(Time.deltaTime + (1.0 - Time.timeScale)));
                 //this doesnt get run if the timeScale is 0
-                PlayerModel.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * 20);
+                rotationwrapper.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * 20);
             }
         }
     }
@@ -234,12 +238,14 @@ public class PlayerMovementController : MonoBehaviour
     public CapsuleCollider myCollider;
     void FixedUpdate()
     {
+       
         if (CanMove)
         {
             desiredVelocity = new Vector3(moveDirection.x, myRigidbody.velocity.y, moveDirection.z);
             myRigidbody.velocity = desiredVelocity;
         }
         myRigidbody.AddForce(new Vector3(0, -gravity * myRigidbody.mass, 0));
+        
     }
 
     // If falling damage occured, this is the place to do something about it. You can make the player
@@ -270,9 +276,10 @@ public class PlayerMovementController : MonoBehaviour
     private float KnockbackTimer;
     private float KnockbackCount;
     public PlayerUpdater pUpdater;
-
+    
     public IEnumerator KnockbackPlayer(GameObject other)
     {
+        
         if (pUpdater.PoiseCount < pUpdater.PoiseTime)
             yield break;
         else
@@ -295,6 +302,6 @@ public class PlayerMovementController : MonoBehaviour
 
         AllowTurning();
         AllowMoving();
-
     }
+    
 }
