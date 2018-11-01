@@ -12,7 +12,7 @@ public class ArcAngles {
 
     public void MakeAnglesList()
     {
-        angles = new List<float>{-40f, -35f, -30f, -25f, -20f, -15f, -10f, -5f, 0f, 5f, 10f, 15f, 20f, 25f, 30f, 35f, 40f };
+        angles = new List<float>{-30f, -25f, -20f, -15f, -10f, -5f, 0f, 5f, 10f, 15f, 20f, 25f, 30f };
         ShuffleList();
     }
 

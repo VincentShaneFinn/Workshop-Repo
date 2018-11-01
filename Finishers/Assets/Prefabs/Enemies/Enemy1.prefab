@@ -363,11 +363,8 @@ MonoBehaviour:
   AI: {fileID: 114569005166041670}
   Sword: {fileID: 1678486615945646}
   HeavySword: {fileID: 1976237148866420}
-  Ground:
-    serializedVersion: 2
-    m_Bits: 3072
-  _groundChecker: {fileID: 0}
-  GroundDistance: 0.05
+  firingAngle: 45
+  gravity: 9.8
 --- !u!114 &114238431573660498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -423,6 +420,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UseDestination: 0
   agent: {fileID: 195625195363770640}
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!136 &136966347267934706
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -151,7 +151,7 @@ public class PlayerMovementController : MonoBehaviour
             //}
 
             // Jump! But only if the jump button has been released and player has been grounded for a given number of frames
-            /*
+
             if (!GameStatus.InCombat)
             {
                 if (!Input.GetButtonDown("Jump"))
@@ -164,8 +164,8 @@ public class PlayerMovementController : MonoBehaviour
                     jumpTimer = 0;
                 }
             }
-            */
-            
+
+
             if (GameStatus.InCombat)
             {
                 if (dashed == false)
@@ -228,10 +228,16 @@ public class PlayerMovementController : MonoBehaviour
                 //print((float)(Time.deltaTime + (1.0 - Time.timeScale)));
                 //this doesnt get run if the timeScale is 0
                 rotationwrapper.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * rotationSpeed);
+                //rotationwrapper.transform.rotation = Quaternion.LookRotation(movement);
             }
         }
 
         dashed = false;
+    }
+
+    public bool isDashing()
+    {
+        return dashing;
     }
 
     private Vector3 desiredVelocity;
@@ -246,7 +252,6 @@ public class PlayerMovementController : MonoBehaviour
         {
             desiredVelocity = new Vector3(moveDirection.x, myRigidbody.velocity.y, moveDirection.z);
             myRigidbody.velocity = desiredVelocity;
-            //myRigidbody.AddForce(desiredVelocity, ForceMode.Force);
         }
         myRigidbody.AddForce(new Vector3(0, -gravity * myRigidbody.mass, 0));
         
@@ -279,17 +284,18 @@ public class PlayerMovementController : MonoBehaviour
 
     public IEnumerator StepForward(float time)
     {
+        myRigidbody.velocity = new Vector3(0,myRigidbody.velocity.y, 0);
         float count = 0;
-        rotationSpeed = 5f;
-
+        float stepSpeed = 3;
         while (count < time)
         {
-            Vector3 dir = PlayerModel.transform.TransformDirection(new Vector3(0, myRigidbody.velocity.y, walkSpeed));
-            myRigidbody.velocity = dir;
+            Vector3 dir = PlayerModel.transform.TransformDirection(new Vector3(0, myRigidbody.velocity.y, stepSpeed));
+            myRigidbody.MovePosition(myRigidbody.position + dir * (stepSpeed * (1 - count / time)) * Time.deltaTime);
+            //myRigidbody.velocity = dir;
             yield return null;
             count += Time.deltaTime;
         }
-        rotationSpeed = 20;
+        //AllowTurning();
     }
 
     private float KnockbackTimer;
@@ -305,7 +311,7 @@ public class PlayerMovementController : MonoBehaviour
             pUpdater.PoiseCount = 0;
         float time = .15f;
         float speed = 20; // keep greater than 6
-        other.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
+        //other.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
         Vector3 dir = (transform.position - other.transform.position).normalized;
         dir.y = 0;
 

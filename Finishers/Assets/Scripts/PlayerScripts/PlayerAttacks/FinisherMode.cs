@@ -236,6 +236,8 @@ public class FinisherMode : MonoBehaviour
     public GameObject GetClosestEnemy()
     {
         GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if(Enemies.Length <= 0)
+            currentFSI.SetActive(false);
 
         foreach (GameObject Enemy in Enemies)
         {

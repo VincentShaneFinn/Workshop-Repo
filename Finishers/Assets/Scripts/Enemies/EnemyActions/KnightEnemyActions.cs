@@ -73,6 +73,8 @@ public class KnightEnemyActions : MonoBehaviour {
 
         float elapse_time = 0;
 
+        GetComponent<CapsuleCollider>().isTrigger = true;
+
         while (elapse_time < flightDuration)
         {
             transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
@@ -82,6 +84,7 @@ public class KnightEnemyActions : MonoBehaviour {
             yield return null;
         }
 
+        GetComponent<CapsuleCollider>().isTrigger = false;
         HeavySword.SetActive(false);//tempAniamtionFake
         GetComponent<EnemyMovementController>().EnableNavAgent();
         AI.GetDirector().Special1AttackCompleted();

@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour {
     private EnemyActions myAction;
     //private EnemyBehaviorStatus UpdatedStatus = EnemyBehaviorStatus.Sleeping; //this is updated by the director using enemygroup
     public EnemyBehaviorStatus CurrentStatus = EnemyBehaviorStatus.Sleeping; //this is what the current status is, and stuff should be done if UpdatedStatus changes
+    public EnemyBehaviorStatus PreviousStatus;
 
     private Transform playerT;
     public float Special1RangeTEMP = 5;
@@ -39,7 +40,7 @@ public class EnemyAI : MonoBehaviour {
         }
 
         //obviosuly if your currently doing something, or shouldnt be able to do something, you can't attack
-        if (checkplayer(attackrange) && !director.IsBusy(CurrentStatus))
+        if (checkplayer(attackrange) && !director.IsBusy(CurrentStatus) && myAction == EnemyActions.None)
         {
             //If two many attacks recently, continue doing what they were doing
             if (director.TryNormalAttack())
@@ -48,7 +49,7 @@ public class EnemyAI : MonoBehaviour {
                 KeepDistance();
         }
         //This will need to go to KnightEnemyActions and check which attack it should attempt, rather than using range
-        else if (checkplayer(Special1RangeTEMP) && Vector3.Distance(transform.position, playerT.position) > 4 && !director.IsBusy(CurrentStatus)) // we will need an alternative way to check if doing special 1 is right that is specific to the enemy
+        else if (checkplayer(Special1RangeTEMP) && Vector3.Distance(transform.position, playerT.position) > 4 && !director.IsBusy(CurrentStatus) && myAction == EnemyActions.None) // we will need an alternative way to check if doing special 1 is right that is specific to the enemy
         {
             if (director.TrySpecial1Attack())
                 KnightActions.StartCoroutine("PerformSpecial1Attack");
@@ -56,7 +57,7 @@ public class EnemyAI : MonoBehaviour {
     }
 
     public EnemyBehaviorStatus GetCurrentStatus() { return CurrentStatus; }
-    public void ChangeStatus(EnemyBehaviorStatus s) { CurrentStatus = s; }
+    public void ChangeStatus(EnemyBehaviorStatus s) { PreviousStatus = CurrentStatus;  CurrentStatus = s; }
 
     //crucial to returning action so a dead guy doesn't hold on to it forever, may want a check in the director
     public void ChangeAction(EnemyActions act){ myAction = act; }
@@ -67,13 +68,13 @@ public class EnemyAI : MonoBehaviour {
     //and once that is complete, start up whatever the next status is.
     public void UpdateEnemyBehaviorStatus()
     {
-       // CurrentStatus = UpdatedStatus;
         switch (CurrentStatus)
         {
             case EnemyBehaviorStatus.PrimaryAttacker:
                 GetEnemyMovementCtrl.ResumeMovement();
                 break;
             case EnemyBehaviorStatus.ArcRunner:
+                GetEnemyMovementCtrl.ResumeMovement();
                 TravelAlongArc();
                 break;
             case EnemyBehaviorStatus.SurroundPlayer:

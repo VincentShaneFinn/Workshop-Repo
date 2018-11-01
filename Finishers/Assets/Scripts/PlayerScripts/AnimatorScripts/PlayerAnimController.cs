@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerActions {idle,slashL,slashR,jump }
+public enum PlayerActions {idle,slashL,slashR,jump,dodge }
 public class PlayerAnimController : MonoBehaviour {
     public PlayerMovementController pmc=null;
 
@@ -10,6 +10,12 @@ public class PlayerAnimController : MonoBehaviour {
     public Transform model = null;
     public Animator anim = null;
     public PlayerActions next = PlayerActions.idle;
+
+    public float ActionCooldownTime = .1f;
+    private float ActionCooldownCount;
+    private bool LastPrimaryAttackWasSlashL = false;
+    private float attackTime;
+    private float attackCount;
 
     // Use this for initialization
     void Start () {
@@ -27,17 +33,55 @@ public class PlayerAnimController : MonoBehaviour {
             pmc = GetComponent<PlayerMovementController>();
         }
 
+        //Get animation clip lengths that we need
+        AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips)
+        {
+            switch (clip.name)
+            {
+                case "SlashL":
+                    attackTime = clip.length;
+                    break;
+                //case "Damage":
+                //    damageTime = clip.length;
+                //    break;
+                //case "Dead":
+                //    deathTime = clip.length;
+                //    break;
+                //case "Idle":
+                //    idleTime = clip.length;
+                //    break;
+            }
+        }
+        attackCount = attackTime;
+
+        ActionCooldownCount = ActionCooldownTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
+        if (GameStatus.FinisherModeActive) // separate player input style while in finisher mode
+        {
+
+            return;
+        }
+
         if (!GameStatus.GamePaused)
         {
 
+            //Make sure player cant attack while dodgeing
             if (Input.GetButtonDown("PrimaryAttack"))
             {
-                next = PlayerActions.slashL;
+                if (!pmc.isDashing())
+                {
+                    //Alternate Primary Attack directions
+                    if (!LastPrimaryAttackWasSlashL)
+                        next = PlayerActions.slashL;
+                    else
+                        next = PlayerActions.slashR;
+                }
 
             }
             //Temporary for siphoning attack
@@ -47,10 +91,13 @@ public class PlayerAnimController : MonoBehaviour {
             }
             if (Input.GetButtonDown("Jump"))
             {
-                next = PlayerActions.jump;
+                if (GameStatus.InCombat)
+                    next = PlayerActions.dodge;
+               // else if (state.IsName("idle")) // we dont want jumping to be part of the input que
+                    //anim.Play("Jump");
+
             }
         }
-        AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
         if (state.IsName("idle")||state.IsName("Jump"))
         {
             pmc.AllowTurning();
@@ -61,29 +108,46 @@ public class PlayerAnimController : MonoBehaviour {
         //need to make room for some animation to cancel halfway through an animation
         if (state.IsName("idle"))
         {
+
+            if (ActionCooldownCount < ActionCooldownTime)
+            {
+                ActionCooldownCount += Time.deltaTime;
+                return;
+            }
+
             switch (next)
             {
-                case PlayerActions.jump:
-                    if(!GameStatus.InCombat)
-                        anim.Play("Jump");
-                    else
-                        pmc.dashed = true; // if not in combat que up the dodge, this needs to be able to cut off an animation halfway
+                case PlayerActions.dodge:
+                    pmc.dashed = true; // if not in combat que up the dodge, this needs to be able to cut off an animation halfway
                     break;
                 case PlayerActions.slashL:
                     anim.Play("SlashL");
                     pmc.PreventMoving();
-                    //pmc.PreventTuring();
-                    StartCoroutine(pmc.StepForward(.4f)); //MARK: Find a way to get the actual animation time
+                    pmc.PreventTuring();
+                    StartCoroutine(pmc.StepForward(attackTime)); //MARK: Find a way to get the actual animation time
+                    LastPrimaryAttackWasSlashL = true;
+                    attackCount = attackTime;
                     break;
                 case PlayerActions.slashR:
                     anim.Play("SlashR");
                     pmc.PreventMoving();
-                    //pmc.PreventTuring();
-                    StartCoroutine(pmc.StepForward(.4f));
+                    pmc.PreventTuring();
+                    StartCoroutine(pmc.StepForward(attackTime));
+                    LastPrimaryAttackWasSlashL = false;
+                    attackCount = attackTime;
                     break;
             }
+            if (next != PlayerActions.idle)
+                ActionCooldownCount = 0;
             next = PlayerActions.idle;
         }
+        else if (next == PlayerActions.dodge && attackCount < attackTime / 2)
+        {
+            anim.Play("idle"); //will be dodge in the future
+            pmc.dashed = true;
+            next = PlayerActions.idle;
+        }
+        attackCount -= Time.deltaTime;
 
     }
 }

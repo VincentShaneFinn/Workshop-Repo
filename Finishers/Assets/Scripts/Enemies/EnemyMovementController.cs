@@ -8,10 +8,12 @@ public class EnemyMovementController : MonoBehaviour {
     public bool UseDestination = false;
     private Vector3 Destination;
     public NavMeshAgent agent;
-    public float savedSpeed;
-    public float savedAcc;
+    private float savedSpeed;
+    private float savedAcc;
     private float pauseTime = .3f;
     private float pauseCount;
+
+    public LayerMask collisionLayer;
 
     void Start()
     {
@@ -23,7 +25,7 @@ public class EnemyMovementController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (agent.isActiveAndEnabled)
+        if (agent.isActiveAndEnabled && agent.isOnNavMesh)
         {
             if (UseDestination)
                 agent.SetDestination(Destination);
@@ -59,23 +61,51 @@ public class EnemyMovementController : MonoBehaviour {
 
     public float GetRemainingDistance()
     {
-        return agent.remainingDistance;
+        if (agent.isOnNavMesh)
+            return agent.remainingDistance;
+        return Mathf.Infinity;
     }
 
     public void StopMovement()
     {
-        agent.isStopped = true;
+        RaycastHit hit;
+
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, collisionLayer))
+        {
+            transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
+        }
+        else if (Physics.Raycast(transform.position, Vector3.up, out hit, 3, collisionLayer))
+        {
+            transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
+        }
+
+        if(agent.isOnNavMesh)
+            agent.isStopped = true;
+
         agent.speed = 0;
         agent.acceleration = 100;
 
 
-        pauseCount = 0;
+        //pauseCount = 0;
     }
 
     public void ResumeMovement()
     {
-        print(savedSpeed);
-        agent.isStopped = false;
+        RaycastHit hit;
+
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 20, collisionLayer))
+        {
+            transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
+        }
+        else if (Physics.Raycast(transform.position, Vector3.up, out hit, 3, collisionLayer))
+        {
+            transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
+        }
+
+        if (agent.isOnNavMesh)
+            agent.isStopped = false;
         agent.speed = savedSpeed;
         agent.acceleration = savedAcc;
     }
@@ -85,6 +115,7 @@ public class EnemyMovementController : MonoBehaviour {
         if (GetComponent<EnemyAI>().CurrentStatus == EnemyBehaviorStatus.Staggered)
             yield break;
         GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
+
         while(pauseCount < pauseTime)
         {
             yield return null;
@@ -112,22 +143,29 @@ public class EnemyMovementController : MonoBehaviour {
         {
             GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            float time = .2f;//.15f;
-            float speed = 10; // keep greater than 6
+            float time = .4f;//.15f;
+            float speed = 7; // keep greater than 6
             Vector3 dir = (transform.position - player.transform.position).normalized;
             dir.y = 0;
 
             float count = 0;
-            while (count <= time)
+            while (count < time)
             {
-                yield return null;
-                count += Time.deltaTime;
                 float currentKnockbackSpeed = speed - savedSpeed;
                 gameObject.transform.position += (dir * (savedSpeed + currentKnockbackSpeed * (1 - count / time)) * Time.deltaTime);
+                yield return null;
+                count += Time.deltaTime;
 
             }
 
-            GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
+            count = .2f;
+            while(count < time)
+            {
+                yield return null;
+                count += Time.deltaTime;
+            }
+
+            GetComponent<EnemyAI>().ChangeStatus(GetComponent<EnemyAI>().PreviousStatus); //return to what it was originally doing
         }
     }
 
