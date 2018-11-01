@@ -140,8 +140,7 @@ public class FinisherMode : MonoBehaviour
 
     IEnumerator EnterFinisherMode()
     {
-        print(Player.transform.rotation.y);
-       // Player.GetComponent<PlayerMovementController>().PreventMoving();
+        //Player.GetComponent<PlayerMovementController>().PreventMoving();
         //Player.GetComponent<PlayerMovementController>().PreventTuring();
         inFinisherMode = true;
         print("Begin Finisher");
@@ -204,6 +203,7 @@ public class FinisherMode : MonoBehaviour
     public void FailFinisherMode()
     {
         PerformingFinisher = false;
+        currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker); //MARK: this needs to put them back to doing whatever they previously were
         currentTarget.GetComponent<EnemyMovementController>().ResumeMovement();
         currentTarget.transform.parent = null;
 

@@ -8,8 +8,8 @@ public class EnemyMovementController : MonoBehaviour {
     public bool UseDestination = false;
     private Vector3 Destination;
     public NavMeshAgent agent;
-    private float savedSpeed;
-    private float savedAcc;
+    public float savedSpeed;
+    public float savedAcc;
     private float pauseTime = .3f;
     private float pauseCount;
 
@@ -68,11 +68,13 @@ public class EnemyMovementController : MonoBehaviour {
         agent.speed = 0;
         agent.acceleration = 100;
 
+
         pauseCount = 0;
     }
 
     public void ResumeMovement()
     {
+        print(savedSpeed);
         agent.isStopped = false;
         agent.speed = savedSpeed;
         agent.acceleration = savedAcc;

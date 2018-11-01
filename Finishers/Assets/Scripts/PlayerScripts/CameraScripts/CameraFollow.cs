@@ -80,6 +80,7 @@ public class CameraFollow : MonoBehaviour {
 
         if (Time.timeScale != 1) //if game paused
         {
+            //used for aiming
             PlayerModel.transform.rotation = localRotationJustY;
         }
     }

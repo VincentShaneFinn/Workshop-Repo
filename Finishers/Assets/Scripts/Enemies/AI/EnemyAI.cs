@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour {
     private EnemyActions myAction;
     //private EnemyBehaviorStatus UpdatedStatus = EnemyBehaviorStatus.Sleeping; //this is updated by the director using enemygroup
     public EnemyBehaviorStatus CurrentStatus = EnemyBehaviorStatus.Sleeping; //this is what the current status is, and stuff should be done if UpdatedStatus changes
+
     private Transform playerT;
     public float Special1RangeTEMP = 5;
 

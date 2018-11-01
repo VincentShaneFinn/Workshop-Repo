@@ -9,6 +9,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public float walkSpeed = 6.0f;
     public float runSpeed = 11.0f;
+    public float rotationSpeed = 20;
 
     // If true, diagonal speed (when strafing + moving forward or back) can't exceed normal move speed; otherwise it's about 1.4 times faster
     public bool limitDiagonalSpeed = true;
@@ -42,6 +43,7 @@ public class PlayerMovementController : MonoBehaviour
     public float dashFactor = 1;
     public float dashCooldown = 1;
     public float dashSpeed = 10;
+    public bool dashed = false;
 
     private Vector3 moveDirection = Vector3.zero;
     private bool grounded = false;
@@ -149,7 +151,6 @@ public class PlayerMovementController : MonoBehaviour
             //}
 
             // Jump! But only if the jump button has been released and player has been grounded for a given number of frames
-            // temp switch for dash testing
             /*
             if (!GameStatus.InCombat)
             {
@@ -167,7 +168,7 @@ public class PlayerMovementController : MonoBehaviour
             
             if (GameStatus.InCombat)
             {
-                if (!Input.GetButtonDown("Jump"))
+                if (dashed == false)
                 {
                     dashTimer += Time.deltaTime;
                     if (dashTimer >= dashFactor)
@@ -226,9 +227,11 @@ public class PlayerMovementController : MonoBehaviour
             {
                 //print((float)(Time.deltaTime + (1.0 - Time.timeScale)));
                 //this doesnt get run if the timeScale is 0
-                rotationwrapper.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * 20);
+                rotationwrapper.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * rotationSpeed);
             }
         }
+
+        dashed = false;
     }
 
     private Vector3 desiredVelocity;
@@ -271,6 +274,21 @@ public class PlayerMovementController : MonoBehaviour
     public void AllowTurning()
     {
         CanTurn = true;
+    }
+
+    public IEnumerator StepForward(float time)
+    {
+        float count = 0;
+        rotationSpeed = 5f;
+
+        while (count < time)
+        {
+            Vector3 dir = PlayerModel.transform.TransformDirection(new Vector3(0, myRigidbody.velocity.y, walkSpeed));
+            myRigidbody.velocity = dir;
+            yield return null;
+            count += Time.deltaTime;
+        }
+        rotationSpeed = 20;
     }
 
     private float KnockbackTimer;

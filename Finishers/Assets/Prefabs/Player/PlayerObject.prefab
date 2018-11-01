@@ -264,7 +264,6 @@ GameObject:
   - component: {fileID: 4902036229805724}
   - component: {fileID: 33656753243714948}
   - component: {fileID: 23479274790583788}
-  - component: {fileID: 143582148611305870}
   - component: {fileID: 114363513047065126}
   - component: {fileID: 114926911975128694}
   - component: {fileID: 114330378678090536}
@@ -1685,7 +1684,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d3abf89ac7f27eb47be3b3432d376399, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2108,6 +2107,7 @@ MonoBehaviour:
   dashFactor: 0.5
   dashCooldown: 1
   dashSpeed: 20
+  dashed: 0
   CanMove: 0
   CanTurn: 0
   forwardObject: {fileID: 4444295383849642}
@@ -2637,7 +2637,7 @@ MonoBehaviour:
   clampAngle: 30
   inputSensitivity: 150
   CameraObj: {fileID: 0}
-  PlayerModel: {fileID: 1822067308346662}
+  PlayerModel: {fileID: 1073443939247092}
   camDistanceXToPlayer: 0
   camDistanceYToPlayer: 0
   camDistanceZToPlayer: 0
@@ -2659,23 +2659,6 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &143582148611305870
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1318400930793898}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.01
-  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &212593557351162912
 SpriteRenderer:
