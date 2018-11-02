@@ -32,18 +32,15 @@ public class ControlMethodDetector : MonoBehaviour {
 
         if (Xbox_One_Controller == 1)
         {
-            print("Xbox");
             GameStatus.CurrentControlType = ControlType.Xbox;
         }
         else if (PS4_Controller == 1)
         {
-            print("PS4");
             GameStatus.CurrentControlType = ControlType.PS4;
         }
         else
         {
-            GameStatus.CurrentControlType = ControlType.PC;
-            print("Mouse and Keyboard");
+            GameStatus.CurrentControlType = ControlType.PC; 
         }
     }
 }

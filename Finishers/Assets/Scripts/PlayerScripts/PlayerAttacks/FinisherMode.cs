@@ -37,6 +37,9 @@ public class FinisherMode : MonoBehaviour
     public Slider finisherSlider;
     public int buildupVal = 20;
 
+    //Animation Controller
+    public Animator anim;
+
     //slow mo
     public float slowMoModifier;
 
@@ -53,8 +56,7 @@ public class FinisherMode : MonoBehaviour
         ExecutingFinisher = false;
 
         FinisherIcon.SetActive(false);
-        currentFRCI.SetActive(false);
-        currentFLCI.SetActive(false);
+        InFinisherIcons.SetActive(false);
     }
 
     // Update is called once per frame
@@ -75,8 +77,7 @@ public class FinisherMode : MonoBehaviour
                             finisherSlider.value = 0;
 
                             FinisherIcon.SetActive(false);
-                            currentFRCI.SetActive(true);
-                            currentFLCI.SetActive(true);
+                            InFinisherIcons.SetActive(true);
 
                             StartCoroutine(EnterFinisherMode());
                         }
@@ -100,10 +101,18 @@ public class FinisherMode : MonoBehaviour
         }
         else
         {
-            currentTarget.transform.position = EnemyFinisherPlacement.position;
-            currentTarget.transform.rotation = EnemyFinisherPlacement.rotation;
+            if (currentTarget != null)
+            {
+                currentTarget.transform.position = EnemyFinisherPlacement.position;
+                currentTarget.transform.rotation = EnemyFinisherPlacement.rotation;
+            }
             if (PerformingFinisher && !ExecutingFinisher)
             {
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    print("! pressed");
+                }
+
                 if (Input.GetButtonDown("PrimaryAttack") && !GameStatus.GamePaused)
                 {
                     CurrentFinisherMode = FinisherModes.Runic;
@@ -176,8 +185,7 @@ public class FinisherMode : MonoBehaviour
         PerformingFinisher = false;
         ExecutingFinisher = true;
 
-        currentFRCI.SetActive(false);
-        currentFLCI.SetActive(false);
+        InFinisherIcons.SetActive(false);
 
         switch (CurrentFinisherMode)
         {
@@ -212,8 +220,7 @@ public class FinisherMode : MonoBehaviour
         currentTarget.GetComponent<EnemyMovementController>().ResumeMovement();
         currentTarget.transform.parent = null;
 
-        currentFLCI.SetActive(false);
-        currentFRCI.SetActive(false);
+        InFinisherIcons.SetActive(false);
 
         StartCoroutine(LeavingFinisherMode());
     }
@@ -232,11 +239,11 @@ public class FinisherMode : MonoBehaviour
         FinisherModeCooldownCount = 0;
         Time.timeScale = 1;
         GameStatus.FinisherModeActive = false;
+        anim.Play("idle");
     }
 
     public GameObject FinisherIcon;
-    public GameObject currentFRCI;
-    public GameObject currentFLCI;
+    public GameObject InFinisherIcons;
     public GameObject GetClosestEnemy()
     {
         GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");

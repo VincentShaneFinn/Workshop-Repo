@@ -43,15 +43,8 @@ public class PlayerAnimController : MonoBehaviour {
                 case "SlashL":
                     attackTime = clip.length;
                     break;
-                //case "Damage":
-                //    damageTime = clip.length;
-                //    break;
-                //case "Dead":
-                //    deathTime = clip.length;
-                //    break;
-                //case "Idle":
-                //    idleTime = clip.length;
-                //    break;
+                default:
+                    break;
             }
         }
         attackCount = attackTime;
@@ -90,7 +83,7 @@ public class PlayerAnimController : MonoBehaviour {
             {
                 next = PlayerActions.slashR;
             }
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump")) //dodge is handled in player movement controller, jumping with animation cant actually jump on a platform
             {
                 if (GameStatus.InCombat)
                     next = PlayerActions.dodge;
@@ -127,6 +120,7 @@ public class PlayerAnimController : MonoBehaviour {
                     break;
                 case PlayerActions.finish:
                     MyFinisherMode.TryFinisher = true;
+                    anim.Play("FinisherRunicIdleStance");
                     break;
                 case PlayerActions.slashL:
                     anim.Play("SlashL");
@@ -159,7 +153,7 @@ public class PlayerAnimController : MonoBehaviour {
                     next = PlayerActions.idle;
                     break;
                 case PlayerActions.finish:
-                    anim.Play("idle"); //start finisher animation
+                    anim.Play("FinisherRunicIdleStance"); //start finisher animation
                     MyFinisherMode.TryFinisher = true;
                     break;
             }

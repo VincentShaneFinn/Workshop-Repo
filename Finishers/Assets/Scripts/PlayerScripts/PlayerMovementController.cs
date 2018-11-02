@@ -254,7 +254,6 @@ public class PlayerMovementController : MonoBehaviour
             myRigidbody.velocity = desiredVelocity;
         }
         myRigidbody.AddForce(new Vector3(0, -gravity * myRigidbody.mass, 0));
-        
     }
 
     // If falling damage occured, this is the place to do something about it. You can make the player
