@@ -13,7 +13,6 @@ public class ControlMethodDetector : MonoBehaviour {
         Xbox_One_Controller = 0;
         for (int x = 0; x < names.Length; x++)
         {
-            print(names[x].Length);
             if (names[x].Length == 19)
             {
                 print("PS4 CONTROLLER IS CONNECTED");
@@ -34,13 +33,16 @@ public class ControlMethodDetector : MonoBehaviour {
         if (Xbox_One_Controller == 1)
         {
             print("Xbox");
+            GameStatus.CurrentControlType = ControlType.Xbox;
         }
         else if (PS4_Controller == 1)
         {
             print("PS4");
+            GameStatus.CurrentControlType = ControlType.PS4;
         }
         else
         {
+            GameStatus.CurrentControlType = ControlType.PC;
             print("Mouse and Keyboard");
         }
     }

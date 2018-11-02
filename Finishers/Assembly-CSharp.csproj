@@ -85,6 +85,7 @@
      <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerCC.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerRigidbody.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ControlMethodDetector.cs" />
+     <Compile Include="Assets\Scripts\UIScripts\FinisherAlertIcon.cs" />
      <Compile Include="Assets\Scripts\UIScripts\GameStatus.cs" />
      <Compile Include="Assets\Scripts\UIScripts\UIManager.cs" />
      <Compile Include="Assets\ThrowLimb.cs" />

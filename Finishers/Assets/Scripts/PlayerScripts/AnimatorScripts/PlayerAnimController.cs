@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerActions {idle,slashL,slashR,jump,dodge }
+public enum PlayerActions {idle,slashL,slashR,jump,dodge,finish }
 public class PlayerAnimController : MonoBehaviour {
     public PlayerMovementController pmc=null;
 
@@ -10,6 +10,7 @@ public class PlayerAnimController : MonoBehaviour {
     public Transform model = null;
     public Animator anim = null;
     public PlayerActions next = PlayerActions.idle;
+    public FinisherMode MyFinisherMode;
 
     public float ActionCooldownTime = .1f;
     private float ActionCooldownCount;
@@ -62,9 +63,9 @@ public class PlayerAnimController : MonoBehaviour {
     void Update()
     {
         AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
+
         if (GameStatus.FinisherModeActive) // separate player input style while in finisher mode
         {
-
             return;
         }
 
@@ -93,9 +94,13 @@ public class PlayerAnimController : MonoBehaviour {
             {
                 if (GameStatus.InCombat)
                     next = PlayerActions.dodge;
-               // else if (state.IsName("idle")) // we dont want jumping to be part of the input que
-                    //anim.Play("Jump");
+                // else if (state.IsName("idle")) // we dont want jumping to be part of the input que
+                //anim.Play("Jump");
 
+            }
+            if (Input.GetButtonDown("FinishMode"))
+            {
+                next = PlayerActions.finish;
             }
         }
         if (state.IsName("idle")||state.IsName("Jump"))
@@ -120,6 +125,9 @@ public class PlayerAnimController : MonoBehaviour {
                 case PlayerActions.dodge:
                     pmc.dashed = true; // if not in combat que up the dodge, this needs to be able to cut off an animation halfway
                     break;
+                case PlayerActions.finish:
+                    MyFinisherMode.TryFinisher = true;
+                    break;
                 case PlayerActions.slashL:
                     anim.Play("SlashL");
                     pmc.PreventMoving();
@@ -141,11 +149,20 @@ public class PlayerAnimController : MonoBehaviour {
                 ActionCooldownCount = 0;
             next = PlayerActions.idle;
         }
-        else if (next == PlayerActions.dodge && attackCount < attackTime / 2)
+        else if (attackCount < attackTime / 2) //put stuff here that should be able to cut attack off halfway
         {
-            anim.Play("idle"); //will be dodge in the future
-            pmc.dashed = true;
-            next = PlayerActions.idle;
+            switch (next)
+            {
+                case PlayerActions.dodge:
+                    anim.Play("idle"); //will be dodge in the future
+                    pmc.dashed = true;
+                    next = PlayerActions.idle;
+                    break;
+                case PlayerActions.finish:
+                    anim.Play("idle"); //start finisher animation
+                    MyFinisherMode.TryFinisher = true;
+                    break;
+            }
         }
         attackCount -= Time.deltaTime;
 
