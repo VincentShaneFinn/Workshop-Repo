@@ -40,7 +40,7 @@ public class CameraFollow : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (!GameStatus.GamePaused)
+        if (!GameStatus.GamePaused && !GameStatus.FinisherModeActive)
         {
             // We setup the rotation of the sticks here
             mouseX = Input.GetAxis("Mouse X");

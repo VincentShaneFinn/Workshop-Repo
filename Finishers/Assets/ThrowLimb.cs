@@ -29,8 +29,11 @@ public class ThrowLimb : MonoBehaviour {
     {
         if (col.gameObject.tag == "Enemy")
         {
-            col.gameObject.GetComponent<EnemyAI>().KillEnemy();
-            Destroy(gameObject);
+            if (col.gameObject.GetComponent<EnemyAI>().CurrentStatus != EnemyBehaviorStatus.Sleeping)
+            {
+                col.gameObject.GetComponent<EnemyAI>().KillEnemy();
+                Destroy(gameObject);
+            }
         }
     }
 }

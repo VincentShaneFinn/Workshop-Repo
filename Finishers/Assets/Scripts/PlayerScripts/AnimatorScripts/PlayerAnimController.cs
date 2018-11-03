@@ -120,7 +120,6 @@ public class PlayerAnimController : MonoBehaviour {
                     break;
                 case PlayerActions.finish:
                     MyFinisherMode.TryFinisher = true;
-                    anim.Play("FinisherRunicIdleStance");
                     break;
                 case PlayerActions.slashL:
                     anim.Play("SlashL");
@@ -153,7 +152,6 @@ public class PlayerAnimController : MonoBehaviour {
                     next = PlayerActions.idle;
                     break;
                 case PlayerActions.finish:
-                    anim.Play("FinisherRunicIdleStance"); //start finisher animation
                     MyFinisherMode.TryFinisher = true;
                     break;
             }

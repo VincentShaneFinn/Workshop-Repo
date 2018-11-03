@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 
 public enum FinisherModes { Runic, Siphoning, PressurePoints }
+public enum Direction { up, right, down, left }
 
 public class FinisherMode : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class FinisherMode : MonoBehaviour
     //Controls Slider UI
     public Slider finisherSlider;
     public int buildupVal = 20;
+    public GameObject RunicRinisherGuides;
+    public GameObject PrimaryAttackPopUp;
 
     //Animation Controller
     public Animator anim;
@@ -44,7 +47,10 @@ public class FinisherMode : MonoBehaviour
     public float slowMoModifier;
 
     public CameraMovementController cam;
+    public Transform CameraBase;
+    public Transform PlayerRotWrapper;
     public bool TryFinisher = false;
+    private List<Direction> finisherSequence;
 
     void Start()
     {
@@ -57,12 +63,13 @@ public class FinisherMode : MonoBehaviour
 
         FinisherIcon.SetActive(false);
         InFinisherIcons.SetActive(false);
+        PrimaryAttackPopUp.SetActive(false);
+        finisherSequence = new List<Direction>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (!inFinisherMode)
         {
             if (FinisherModeCooldownCount >= FinisherModeCooldownTime)
@@ -75,9 +82,6 @@ public class FinisherMode : MonoBehaviour
                         if (currentTarget != null)
                         {
                             finisherSlider.value = 0;
-
-                            FinisherIcon.SetActive(false);
-                            InFinisherIcons.SetActive(true);
 
                             StartCoroutine(EnterFinisherMode());
                         }
@@ -101,41 +105,69 @@ public class FinisherMode : MonoBehaviour
         }
         else
         {
+            CameraBase.rotation = PlayerRotWrapper.rotation;
             if (currentTarget != null)
             {
                 currentTarget.transform.position = EnemyFinisherPlacement.position;
                 currentTarget.transform.rotation = EnemyFinisherPlacement.rotation;
             }
-            if (PerformingFinisher && !ExecutingFinisher)
+            if (PerformingFinisher && !ExecutingFinisher && !GameStatus.GamePaused)
             {
-                if (Input.GetKeyDown(KeyCode.Alpha1))
+                if (Input.GetButtonDown("UpButton"))
                 {
-                    print("! pressed");
+                    anim.Play("RunicUpCarve");
+                    finisherSequence.Add(Direction.up);
+                }
+                if (Input.GetButtonDown("RightButton"))
+                {
+                    anim.Play("RunicRightCarve");
+                    finisherSequence.Add(Direction.right);
+                }
+                if (Input.GetButtonDown("DownButton"))
+                {
+                    anim.Play("RunicDownCarve");
+                    finisherSequence.Add(Direction.down);
+                }
+                if (Input.GetButtonDown("LeftButton"))
+                {
+                    anim.Play("RunicLeftCarve");
+                    finisherSequence.Add(Direction.left);
                 }
 
-                if (Input.GetButtonDown("PrimaryAttack") && !GameStatus.GamePaused)
+                if(finisherSequence.Count >= 3)
                 {
-                    CurrentFinisherMode = FinisherModes.Runic;
-                    StartCoroutine(ExecuteFinisher());
+                    PrimaryAttackPopUp.SetActive(true);
                 }
-                else if (Input.GetButtonDown("SecondaryAttack") && !GameStatus.GamePaused)
+
+                //inside the primary attack check, see if they did a correct sequence, and succeed or fail
+                if (Input.GetButtonDown("PrimaryAttack"))
                 {
-                    CurrentFinisherMode = FinisherModes.Siphoning;
-                    print("Commit Siphoning Finisher");
-                    StartCoroutine(ExecuteFinisher());
+                    if (finisherSequence.Count >= 3 && finisherSequence[0] == Direction.down && finisherSequence[1] == Direction.left && finisherSequence[2] == Direction.up)
+                    {
+                        CurrentFinisherMode = FinisherModes.Runic;
+                        StartCoroutine(ExecuteFinisher());
+                    }
+                    else if (finisherSequence.Count >= 3 && finisherSequence[0] == Direction.down && finisherSequence[1] == Direction.right && finisherSequence[2] == Direction.up)
+                    {
+                        CurrentFinisherMode = FinisherModes.Siphoning;
+                        print("Commit Siphoning Finisher");
+                        StartCoroutine(ExecuteFinisher());
+                    }
+                    else
+                        FailFinisherMode();
                 }
-                else if (Input.GetButtonDown("SpecialAttack") && !GameStatus.GamePaused)
-                {
-                    CurrentFinisherMode = FinisherModes.PressurePoints;
-                    print("Commit Pressure Points Finisher");
-                    StartCoroutine(ExecuteFinisher());
-                }
+                //else if (Input.GetButtonDown("SpecialAttack"))
+                //{
+                //    CurrentFinisherMode = FinisherModes.PressurePoints;
+                //    print("Commit Pressure Points Finisher");
+                //    StartCoroutine(ExecuteFinisher());
+                //}
 
                 if (FinisherCount <= 0)
                 {
                     FailFinisherMode();
                 }
-                else if (!GameStatus.GamePaused)
+                else
                 {
                     FinisherCount -= Time.unscaledDeltaTime;
                 }
@@ -164,19 +196,30 @@ public class FinisherMode : MonoBehaviour
         currentTarget.GetComponent<EnemyMovementController>().StopMovement();
         currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.BeingFinished);
 
+        anim.Play("FinisherRunicIdleStance");
+
         //moves camera
-        cam.MoveToFinisherModeLocation();
+        cam.MoveToFinisherModeLocation(); //Mark make sure camera takes as long as the animation
 
         while (cam.GetIsMoving())
         {
+            CameraBase.rotation = Quaternion.Slerp(CameraBase.rotation, PlayerRotWrapper.rotation, .5f);
             yield return null;
         }
         //waits till the camera and or animation is done
+        print(PlayerRotWrapper.rotation);
+        CameraBase.rotation = PlayerRotWrapper.rotation;
+        print(CameraBase.rotation);
 
         PerformingFinisher = true;
         FinisherCount = FinisherTime;
         GameStatus.FinisherModeActive = true;
         Time.timeScale = slowMoModifier;
+
+        FinisherIcon.SetActive(false);
+        InFinisherIcons.SetActive(true);
+        RunicRinisherGuides.SetActive(true);
+        finisherSequence = new List<Direction>();
         //yield return null;
     }
 
@@ -185,7 +228,10 @@ public class FinisherMode : MonoBehaviour
         PerformingFinisher = false;
         ExecutingFinisher = true;
 
+        PrimaryAttackPopUp.SetActive(false);
+        RunicRinisherGuides.SetActive(false);
         InFinisherIcons.SetActive(false);
+        anim.Play("idle");
 
         switch (CurrentFinisherMode)
         {
@@ -199,6 +245,7 @@ public class FinisherMode : MonoBehaviour
                 GameObject part1 = Instantiate(TopHalf, new Vector3(currentTarget.transform.position.x, 1f, currentTarget.transform.position.z), currentTarget.transform.rotation);
                 GameObject part2 = Instantiate(BottomHalf, new Vector3(currentTarget.transform.position.x, 0f, currentTarget.transform.position.z), currentTarget.transform.rotation);
                 try { Instantiate(SlicedLimb, SlicedLimbFirePoint); } catch { }
+                anim.Play("SlashL");
                 print("Commit Siphoning Finisher");
                 break;
             case FinisherModes.PressurePoints:
@@ -220,7 +267,10 @@ public class FinisherMode : MonoBehaviour
         currentTarget.GetComponent<EnemyMovementController>().ResumeMovement();
         currentTarget.transform.parent = null;
 
+        PrimaryAttackPopUp.SetActive(false);
+        RunicRinisherGuides.SetActive(false);
         InFinisherIcons.SetActive(false);
+        anim.Play("idle");
 
         StartCoroutine(LeavingFinisherMode());
     }
@@ -235,11 +285,13 @@ public class FinisherMode : MonoBehaviour
         currentTarget = null;
         yield return null;
         swordController.ResumeAttacking();
-        cam.MoveToCombatLocation();
+        if (GameStatus.InCombat)
+            cam.MoveToCombatLocation();
+        else
+            cam.MoveToOOCLocation();
         FinisherModeCooldownCount = 0;
         Time.timeScale = 1;
         GameStatus.FinisherModeActive = false;
-        anim.Play("idle");
     }
 
     public GameObject FinisherIcon;

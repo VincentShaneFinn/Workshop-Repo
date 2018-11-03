@@ -16,7 +16,6 @@ public class FinisherAlertIcon : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-        print(GameStatus.CurrentControlType + "TEst");
 		if(GameStatus.CurrentControlType == ControlType.PC)
         {
             PCIcon.SetActive(true);

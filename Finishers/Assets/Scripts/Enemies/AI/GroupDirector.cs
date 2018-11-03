@@ -189,7 +189,6 @@ public class GroupDirector : MonoBehaviour{
     {
         foreach(EnemyAI enemy in Enemies)
         {
-            //enemy.GetEnemyMovementCtrl().StopMovement();
             enemy.ChangeStatus(EnemyBehaviorStatus.Waiting);
         }
     }
