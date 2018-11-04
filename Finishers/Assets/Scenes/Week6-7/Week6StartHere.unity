@@ -5523,27 +5523,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4249645708223300, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4386746851954790, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4403802056116990, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4525839267143618, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4063822928579454, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4799636196231734, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1822067308346662, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
       propertyPath: m_IsActive
@@ -5552,6 +5552,16 @@ Prefab:
     - target: {fileID: 224859855556704746, guid: a6c78e17a78d821409c027d46cb0b7c3,
         type: 2}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363513047065126, guid: a6c78e17a78d821409c027d46cb0b7c3,
+        type: 2}
+      propertyPath: CharAnim
+      value: 
+      objectReference: {fileID: 1980631400}
+    - target: {fileID: 95181696500470906, guid: a6c78e17a78d821409c027d46cb0b7c3,
+        type: 2}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6985,6 +6995,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfef4bb9e2b91fd4dbc4e941dd147616, type: 2}
   m_IsPrefabAsset: 0
+--- !u!95 &1980631400 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 7f636c539abd74941a18d4d98bda71bd,
+    type: 3}
+  m_PrefabInternal: {fileID: 749402367}
 --- !u!1 &1980901504
 GameObject:
   m_ObjectHideFlags: 0

@@ -87,8 +87,8 @@ public class PlayerAnimController : MonoBehaviour {
             {
                 if (GameStatus.InCombat)
                     next = PlayerActions.dodge;
-                // else if (state.IsName("idle")) // we dont want jumping to be part of the input que
-                //anim.Play("Jump");
+                //else if (state.IsName("idle")) // we dont want jumping to be part of the input que
+                //    anim.Play("Jump");
 
             }
             if (Input.GetButtonDown("FinishMode"))

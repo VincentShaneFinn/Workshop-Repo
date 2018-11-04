@@ -96,8 +96,8 @@ public class PlayerMovementController : MonoBehaviour
         if (toggleRun && grounded && Input.GetButtonDown("Run"))
             speed = (speed == walkSpeed ? runSpeed : walkSpeed);
 
-        float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
+        float inputX = Input.GetAxisRaw("Horizontal");
+        float inputY = Input.GetAxisRaw("Vertical");
         float inputXRaw = Input.GetAxisRaw("Horizontal");
         float inputYRaw = Input.GetAxisRaw("Vertical");
         // If both horizontal and vertical are used simultaneously, limit speed (if allowed), so the total doesn't exceed normal move speed
@@ -246,9 +246,9 @@ public class PlayerMovementController : MonoBehaviour
     public float steepSlopeAngle = 45;
     public float slopeThreshold = .2f;
     public CapsuleCollider myCollider;
+    public Animator CharAnim;
     void FixedUpdate()
     {
-       
         if (CanMove)
         {
             if(grounded && myRigidbody.velocity.y > 0)
@@ -258,6 +258,17 @@ public class PlayerMovementController : MonoBehaviour
             myRigidbody.velocity = desiredVelocity;
         }
         myRigidbody.AddForce(new Vector3(0, -gravity * myRigidbody.mass, 0));
+
+        if (CanMove && (moveDirection.x != 0 || moveDirection.z != 0))
+        {
+            AnimatorStateInfo state = CharAnim.GetCurrentAnimatorStateInfo(0);
+            moveDirection.y = 0;
+            float animSpeed = moveDirection.magnitude;
+            animSpeed = animSpeed / walkSpeed;
+            CharAnim.SetFloat("Running", animSpeed);
+        }
+        else
+            CharAnim.SetFloat("Running", 0);
     }
 
     // If falling damage occured, this is the place to do something about it. You can make the player
