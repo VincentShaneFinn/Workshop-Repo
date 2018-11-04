@@ -2878,7 +2878,7 @@ MonoBehaviour:
   rotationSpeed: 40
   limitDiagonalSpeed: 1
   toggleRun: 0
-  jumpHeight: 8
+  jumpHeight: 6
   gravity: 20
   fallingDamageThreshold: 10
   slideWhenOverSlopeLimit: 1

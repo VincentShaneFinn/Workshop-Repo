@@ -196,6 +196,7 @@ public class PlayerMovementController : MonoBehaviour
                     //_body.AddForce(dashVelocity, ForceMode.VelocityChange);
                 }
             }
+
         }
         else
         {
@@ -250,7 +251,10 @@ public class PlayerMovementController : MonoBehaviour
        
         if (CanMove)
         {
-            desiredVelocity = new Vector3(moveDirection.x, myRigidbody.velocity.y, moveDirection.z);
+            if(grounded && myRigidbody.velocity.y > 0)
+                desiredVelocity = new Vector3(moveDirection.x,0, moveDirection.z);
+            else
+                desiredVelocity = new Vector3(moveDirection.x, myRigidbody.velocity.y, moveDirection.z);
             myRigidbody.velocity = desiredVelocity;
         }
         myRigidbody.AddForce(new Vector3(0, -gravity * myRigidbody.mass, 0));
@@ -288,7 +292,7 @@ public class PlayerMovementController : MonoBehaviour
         float stepSpeed = 3;
         while (count < time)
         {
-            Vector3 dir = PlayerModel.transform.TransformDirection(new Vector3(0, myRigidbody.velocity.y, stepSpeed));
+            Vector3 dir = PlayerModel.transform.TransformDirection(new Vector3(0, 0, stepSpeed));
             myRigidbody.MovePosition(myRigidbody.position + dir * (stepSpeed * (1 - count / time)) * Time.deltaTime);
             //myRigidbody.velocity = dir;
             yield return null;
