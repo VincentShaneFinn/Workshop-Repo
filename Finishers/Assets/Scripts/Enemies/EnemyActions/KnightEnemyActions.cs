@@ -35,6 +35,10 @@ public class KnightEnemyActions : MonoBehaviour {
         {
             yield return null;
             tempAnimationCount += Time.deltaTime;
+            if(AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
+            {
+                break;
+            }
         }
 
         Sword.SetActive(false);//tempAniamtionFake

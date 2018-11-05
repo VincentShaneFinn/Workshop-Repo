@@ -266,7 +266,7 @@ public class PlayerMovementControllerCC : MonoBehaviour
             pUpdater.PoiseCount = 0;
         float time = .15f;
         float speed = 20; // keep greater than 6
-        other.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
+        //other.gameObject.GetComponent<EnemyMovementController>().PauseMovement();
         Vector3 dir = (transform.position - other.transform.position).normalized;
 
         float count = 0;

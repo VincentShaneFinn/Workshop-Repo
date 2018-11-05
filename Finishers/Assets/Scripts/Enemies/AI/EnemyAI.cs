@@ -28,9 +28,24 @@ public class EnemyAI : MonoBehaviour {
         playerT = GameObject.FindGameObjectWithTag("Player").transform;
         myAction = EnemyActions.None;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private float StaggeredCheckTime = .7f;
+    private float StaggeredCheckCount = 0;
+
+    // Update is called once per frame
+    void Update () {
+        //MARK: TEMPORARY FIX FOR ENEMIES REMAINING STAGGERED
+        if(CurrentStatus == EnemyBehaviorStatus.Staggered)
+        {
+            StaggeredCheckCount += Time.deltaTime;
+            if (StaggeredCheckCount >= StaggeredCheckTime)
+                ChangeStatus(EnemyBehaviorStatus.Waiting);
+        }
+        else
+        {
+            StaggeredCheckCount = 0;
+        }
+
         UpdateEnemyBehaviorStatus();
         if(ArcAngle != 360 && CurrentStatus != EnemyBehaviorStatus.ArcRunner)
         {

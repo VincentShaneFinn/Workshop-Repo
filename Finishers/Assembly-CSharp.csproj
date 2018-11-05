@@ -79,6 +79,7 @@
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\PlayerSwordAttack.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\PlayerSwordHit.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\RunicBeamBlast.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\RunicInputHelper.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerHealthController.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovementController.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerTriggerCollider.cs" />
@@ -87,7 +88,6 @@
      <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerRigidbody.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ChangeButtonIcon.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ControlMethodDetector.cs" />
-     <Compile Include="Assets\Scripts\UIScripts\FinisherAlertIcon.cs" />
      <Compile Include="Assets\Scripts\UIScripts\GameStatus.cs" />
      <Compile Include="Assets\Scripts\UIScripts\UIManager.cs" />
      <Compile Include="Assets\ThrowLimb.cs" />

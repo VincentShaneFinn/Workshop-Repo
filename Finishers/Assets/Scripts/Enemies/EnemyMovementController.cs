@@ -12,6 +12,7 @@ public class EnemyMovementController : MonoBehaviour {
     private float savedAcc;
     private float pauseTime = .3f;
     private float pauseCount;
+    private bool AlreadyStaggered = false;
 
     public LayerMask collisionLayer;
 
@@ -47,17 +48,17 @@ public class EnemyMovementController : MonoBehaviour {
 
     public Transform GetTarget() { return Target; }
 
-    public void PauseMovement()
-    {
-        if (pauseCount >= pauseTime)
-        {
-            StartCoroutine(PauseEnemy());
-        }
-        else
-        {
-            pauseCount = 0;
-        }
-    }
+    //public void PauseMovement()
+    //{
+    //    if (pauseCount >= pauseTime)
+    //    {
+    //        StartCoroutine(PauseEnemy());
+    //    }
+    //    else
+    //    {
+    //        pauseCount = 0;
+    //    }
+    //}
 
     public float GetRemainingDistance()
     {
@@ -110,19 +111,17 @@ public class EnemyMovementController : MonoBehaviour {
         agent.acceleration = savedAcc;
     }
 
-    IEnumerator PauseEnemy()
-    {
-        if (GetComponent<EnemyAI>().CurrentStatus == EnemyBehaviorStatus.Staggered)
-            yield break;
-        GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
+    //IEnumerator PauseEnemy()
+    //{
+    //    GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
 
-        while(pauseCount < pauseTime)
-        {
-            yield return null;
-            pauseCount += Time.deltaTime;
-        }
-        GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
-    }
+    //    while(pauseCount < pauseTime)
+    //    {
+    //        yield return null;
+    //        pauseCount += Time.deltaTime;
+    //    }
+    //    GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Waiting);
+    //}
 
     public void DisableNavAgent()
     {
@@ -137,6 +136,11 @@ public class EnemyMovementController : MonoBehaviour {
         ResumeMovement();
     }
 
+    public void HelpKnockback()
+    {
+        StartCoroutine(KnockbackEnemy());
+    }
+
     public IEnumerator KnockbackEnemy()
     {
         if (agent.isActiveAndEnabled)
@@ -147,7 +151,6 @@ public class EnemyMovementController : MonoBehaviour {
             float speed = 7; // keep greater than 6
             Vector3 dir = (transform.position - player.transform.position).normalized;
             dir.y = 0;
-
             float count = 0;
             while (count < time)
             {
@@ -157,16 +160,23 @@ public class EnemyMovementController : MonoBehaviour {
                 count += Time.deltaTime;
 
             }
-
-            count = .2f;
-            while(count < time)
+            float pcount = .2f;//pause for a second
+            while (pcount < time)
             {
                 yield return null;
-                count += Time.deltaTime;
+                pcount += Time.deltaTime;
             }
 
-            GetComponent<EnemyAI>().ChangeStatus(GetComponent<EnemyAI>().PreviousStatus); //return to what it was originally doing
+            if (GetComponent<EnemyAI>().PreviousStatus != EnemyBehaviorStatus.Staggered)
+            {
+                GetComponent<EnemyAI>().ChangeStatus(GetComponent<EnemyAI>().PreviousStatus); //return to what it was originally doing
+            }
+            else
+            {
+                GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.SurroundPlayer);
+            }
         }
+
     }
 
     void OnTriggerEnter(Collider col)

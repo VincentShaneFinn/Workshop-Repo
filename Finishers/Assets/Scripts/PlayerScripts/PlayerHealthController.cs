@@ -41,4 +41,14 @@ public class PlayerHealthController : MonoBehaviour
             gameOverText.text = "Game Over";
         }
     }
+
+    public void PlayerHealed(int health)
+    {
+        MaxHealth += health;
+        if (MaxHealth > 100)
+        {
+            MaxHealth = 100;
+        }
+        healthSlider.value = MaxHealth;
+    }
 }
