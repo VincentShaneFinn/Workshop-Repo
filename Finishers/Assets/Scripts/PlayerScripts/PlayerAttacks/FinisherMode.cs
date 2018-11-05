@@ -61,7 +61,8 @@ public class FinisherMode : MonoBehaviour
         PerformingFinisher = false;
         ExecutingFinisher = false;
 
-        FinisherIcon.SetActive(false);
+        FinisherIcon.gameObject.SetActive(true);
+        FinisherIcon.SetActivated(false);
         InFinisherIcons.SetActive(false);
         PrimaryAttackPopUp.SetActive(false);
         finisherSequence = new List<Direction>();
@@ -207,7 +208,6 @@ public class FinisherMode : MonoBehaviour
             yield return null;
         }
         //waits till the camera and or animation is done
-        print(PlayerRotWrapper.rotation);
         CameraBase.rotation = PlayerRotWrapper.rotation;
         print(CameraBase.rotation);
 
@@ -216,7 +216,7 @@ public class FinisherMode : MonoBehaviour
         GameStatus.FinisherModeActive = true;
         Time.timeScale = slowMoModifier;
 
-        FinisherIcon.SetActive(false);
+        FinisherIcon.SetActivated(false);
         InFinisherIcons.SetActive(true);
         RunicRinisherGuides.SetActive(true);
         finisherSequence = new List<Direction>();
@@ -294,25 +294,25 @@ public class FinisherMode : MonoBehaviour
         GameStatus.FinisherModeActive = false;
     }
 
-    public GameObject FinisherIcon;
+    public ChangeButtonIcon FinisherIcon;
     public GameObject InFinisherIcons;
     public GameObject GetClosestEnemy()
     {
         GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if(Enemies.Length <= 0)
-            FinisherIcon.SetActive(false);
+            FinisherIcon.SetActivated(false);
 
         foreach (GameObject Enemy in Enemies)
         {
             if (Vector3.Distance(Enemy.transform.position, transform.position) < 5 && Enemy.GetComponent<NavMeshAgent>().isActiveAndEnabled)
             {
-                FinisherIcon.SetActive(true);
+                FinisherIcon.SetActivated(true);
                 FinisherIcon.transform.position = Enemy.transform.position;
                 return Enemy;
             }
             else
             {
-                FinisherIcon.SetActive(false);
+                FinisherIcon.SetActivated(false);
             }
         }
         return null;
