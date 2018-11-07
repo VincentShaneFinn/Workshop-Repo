@@ -113,6 +113,60 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &170582047
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400164, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400164, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400164, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400164, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400164, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400164, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400164, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400164, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 87acd2642855643448169776c29658a9, type: 2}
+    - target: {fileID: 9500000, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f998cb1772888624c8ea7ba329c1f929, type: 2}
+    - target: {fileID: 100164, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+      propertyPath: m_Name
+      value: Sample_character (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4634ebd161179674fa702a3508b3af25, type: 3}
+  m_IsPrefabAsset: 0
 --- !u!1001 &728159020
 Prefab:
   m_ObjectHideFlags: 0
