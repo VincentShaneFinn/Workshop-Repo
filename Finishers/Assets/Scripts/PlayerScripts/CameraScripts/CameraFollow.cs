@@ -76,7 +76,8 @@ public class CameraFollow : MonoBehaviour {
 
         //move towards the game object that is the target
         float step = CameraMoveSpeed * Time.unscaledDeltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+        //transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+        transform.position = target.position;
 
         if (Time.timeScale != 1) //if game paused
         {

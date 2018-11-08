@@ -13,6 +13,7 @@ public class PlayerHealthController : MonoBehaviour
     public Slider healthSlider;
     public Text gameOverText;
     public PlayerUpdater pUpdater;
+    public GameStatus gm;
 
     void Start()
     {
@@ -39,6 +40,9 @@ public class PlayerHealthController : MonoBehaviour
         if (MaxHealth <= 0 && canDie == true)
         {
             gameOverText.text = "Game Over";
+            gm.PlayerDied();
+            //gm.LoadGame();
+          
         }
     }
 

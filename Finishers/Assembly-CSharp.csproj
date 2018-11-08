@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Checkpoint.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\ActionManager.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\ArcAngles.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\EnemyAI.cs" />
@@ -86,6 +87,7 @@
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerUpdater.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerCC.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerRigidbody.cs" />
+     <Compile Include="Assets\Scripts\Save.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ChangeButtonIcon.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ControlMethodDetector.cs" />
      <Compile Include="Assets\Scripts\UIScripts\GameStatus.cs" />
