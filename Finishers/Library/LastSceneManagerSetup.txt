@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Week4-5/RuinsGreybox_ver1.unity
+- path: Assets/Scenes/Week 7/Desert_Terrain_Build.unity
   isLoaded: 1
   isActive: 1
