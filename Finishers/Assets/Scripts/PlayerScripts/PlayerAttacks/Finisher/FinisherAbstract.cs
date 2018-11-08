@@ -21,10 +21,10 @@ public abstract class FinisherAbstract : MonoBehaviour {
         return true;
     }
     public bool startfinisher(FinisherMode fm,List<Direction> input) {
-        bool r = check(input);
-        if (r) {
+        bool goodCombo = check(input);
+        if (goodCombo) {
             startfinisher(fm);
         }
-        return r;
+        return goodCombo;
     }
 }
