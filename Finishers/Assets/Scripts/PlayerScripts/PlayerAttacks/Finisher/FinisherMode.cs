@@ -26,7 +26,7 @@ public class FinisherMode : MonoBehaviour
     public PlayerSwordAttack swordController;
     public Transform EnemyFinisherPlacement;
 
-    private GameObject currentTarget;
+    [HideInInspector]public GameObject currentTarget;
 
     public GameObject BlastBeam;
     public GameObject TopHalf;
@@ -158,6 +158,9 @@ public class FinisherMode : MonoBehaviour
                     {
                         FailFinisherMode();
                     }
+                    else {
+                        StartCoroutine(ExecuteFinisher());
+                    }
                 }
                 //if (Input.GetButtonDown("UpButton"))
                 //{
@@ -250,7 +253,7 @@ public class FinisherMode : MonoBehaviour
         finisherSlider.value += buildupVal;
     }
 
-    IEnumerator EnterFinisherMode()
+    public IEnumerator EnterFinisherMode()
     {
         //Player.GetComponent<PlayerMovementController>().PreventMoving();
         //Player.GetComponent<PlayerMovementController>().PreventTuring();
