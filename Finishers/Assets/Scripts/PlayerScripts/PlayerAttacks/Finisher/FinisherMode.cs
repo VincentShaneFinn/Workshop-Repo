@@ -150,21 +150,14 @@ public class FinisherMode : MonoBehaviour
                 {
                     bool goodCombo = false;
                     foreach(FinisherAbstract f in finishmoves) {
-<<<<<<< HEAD
                         bool i=f.startfinisher(this,que);
                         if (i) {
-                            failed = true;
+                            goodCombo = true;
                         }
                     }
 
-                    if (!failed)
-=======
-                        goodCombo = f.startfinisher(this,que);
-                        if (goodCombo)
-                            break;
-                    }
+
                     if (!goodCombo)
->>>>>>> 263afc92e2f82b0118f1814be0790b78b1ac3b08
                     {
                         FailFinisherMode();
                     }
