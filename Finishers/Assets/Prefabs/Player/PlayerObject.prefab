@@ -6310,9 +6310,6 @@ MonoBehaviour:
   CameraBase: {fileID: 4573923700228796}
   PlayerRotWrapper: {fileID: 4803805274782844}
   TryFinisher: 0
-  finishmoves:
-  - {fileID: 114024492631371884}
-  - {fileID: 114780394354480126}
   FinisherIcon: {fileID: 114131698407563678}
   InFinisherIcons: {fileID: 1148953510261644}
 --- !u!114 &114927974741508274

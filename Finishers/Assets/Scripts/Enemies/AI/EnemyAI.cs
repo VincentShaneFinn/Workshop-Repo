@@ -57,11 +57,18 @@ public class EnemyAI : MonoBehaviour {
         //obviosuly if your currently doing something, or shouldnt be able to do something, you can't attack
         if (checkplayer(attackrange) && !director.IsBusy(CurrentStatus) && myAction == EnemyActions.None)
         {
-            //If two many attacks recently, continue doing what they were doing
-            if (director.TryNormalAttack())
-                KnightActions.StartCoroutine("PerformNormalAttack");
-            else
-                KeepDistance();
+            //check if the player is in front of you
+            var heading = playerT.position - transform.position;
+            float dot = Vector3.Dot(heading, transform.forward);
+            print(dot);
+            if (dot > .5) // must be 30 degrees in front
+            {
+                //If two many attacks recently, continue doing what they were doing
+                if (director.TryNormalAttack())
+                    KnightActions.StartCoroutine("PerformNormalAttack");
+                else
+                    KeepDistance();
+            }
         }
         //This will need to go to KnightEnemyActions and check which attack it should attempt, rather than using range
         else if (checkplayer(Special1RangeTEMP) && Vector3.Distance(transform.position, playerT.position) > 4 && !director.IsBusy(CurrentStatus) && myAction == EnemyActions.None) // we will need an alternative way to check if doing special 1 is right that is specific to the enemy
@@ -173,7 +180,10 @@ public class EnemyAI : MonoBehaviour {
         //test changing cube positions, or we should add ray trace lines
         ArcTarget = new Vector3(x, transform.position.y, z);
         Debug.DrawLine(transform.position, ArcTarget);
-        GetEnemyMovementCtrl.SetDestination(ArcTarget);
+        if (GetEnemyMovementCtrl.GetRemainingDistance() < 3)
+            GetEnemyMovementCtrl.SetDestination(playerT.position);
+        else
+            GetEnemyMovementCtrl.SetDestination(ArcTarget);
         GetEnemyMovementCtrl.ResumeMovement();
     }
 

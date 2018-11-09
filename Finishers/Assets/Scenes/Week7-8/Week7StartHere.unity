@@ -4219,11 +4219,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114926911975128694, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: finishmoves.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4798909868311102, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4286,51 +4281,9 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224859855556704746, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114926911975128694, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: finishmoves.Array.data[0]
-      value: 
-      objectReference: {fileID: 1106039403}
-    - target: {fileID: 114926911975128694, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: finishmoves.Array.data[1]
-      value: 
-      objectReference: {fileID: 1106039405}
-    - target: {fileID: 114363513047065126, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: limitDiagonalSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 23479274790583788, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114975721992020822, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: CameraMoveSpeed
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
   m_IsPrefabAsset: 0
---- !u!114 &1106039403 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114024492631371884, guid: a6c78e17a78d821409c027d46cb0b7c3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1106039401}
-  m_Script: {fileID: 11500000, guid: 608d802a66c66da409351e07d9b2646b, type: 3}
---- !u!114 &1106039405 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114780394354480126, guid: a6c78e17a78d821409c027d46cb0b7c3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1106039401}
-  m_Script: {fileID: 11500000, guid: 99cb30e6586495b4d9b17de786f1881b, type: 3}
 --- !u!1 &1107553853
 GameObject:
   m_ObjectHideFlags: 0
