@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour {
 
     private Transform playerT;
     public float Special1RangeTEMP = 5;
+    public Animator anim;
 
     private float ArcAngle = 360; //use 360 as a sub for null
     private Vector3 ArcTarget;
@@ -34,8 +35,29 @@ public class EnemyAI : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        //Animation Stuff
+        if (anim != null)
+        {
+            anim.SetFloat("EnemyMoving", GetEnemyMovementCtrl.agent.speed);
+            //Fetch the current Animation clip information for the base layer
+            var m_CurrentClipInfo = anim.GetCurrentAnimatorClipInfo(0);
+            //Access the current length of the clip
+            //var m_CurrentClipLength = m_CurrentClipInfo[0].clip.length;
+            //Access the Animation clip name
+            var m_ClipName = m_CurrentClipInfo[0].clip.name;
+            switch (m_ClipName)
+            {
+                case "Idle":
+                    anim.transform.localEulerAngles = new Vector3(0, 55, 0);
+                    break;
+                case "Run":
+                    anim.transform.localEulerAngles = new Vector3(0, -30, 0);
+                    break;
+            }
+        }
+
         //MARK: TEMPORARY FIX FOR ENEMIES REMAINING STAGGERED
-        if(CurrentStatus == EnemyBehaviorStatus.Staggered)
+        if (CurrentStatus == EnemyBehaviorStatus.Staggered)
         {
             StaggeredCheckCount += Time.deltaTime;
             if (StaggeredCheckCount >= StaggeredCheckTime)
@@ -227,6 +249,21 @@ public class EnemyAI : MonoBehaviour {
     }
 
     public void wakeup() {
+        if (anim == null)
+            CurrentStatus = EnemyBehaviorStatus.Waiting;
+        else
+            StartCoroutine(WakeUpAnimate());
+    }
+
+    IEnumerator WakeUpAnimate()
+    {
+        anim.applyRootMotion = true;
+        anim.SetFloat("SleepModifier", 1);
+        yield return new WaitForSeconds(3.8f);
+        anim.applyRootMotion = false;
+        anim.transform.localPosition = new Vector3(0, -1, 0);
+        print(Quaternion.identity);
+        anim.transform.localEulerAngles = new Vector3(0, 55, 0);
         CurrentStatus = EnemyBehaviorStatus.Waiting;
     }
 
