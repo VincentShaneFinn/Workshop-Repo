@@ -26,7 +26,7 @@ public class FinisherMode : MonoBehaviour
     public PlayerSwordAttack swordController;
     public Transform EnemyFinisherPlacement;
 
-    private GameObject currentTarget;
+    [HideInInspector]public GameObject currentTarget;
 
     public GameObject BlastBeam;
     public GameObject TopHalf;
@@ -50,7 +50,14 @@ public class FinisherMode : MonoBehaviour
     public Transform CameraBase;
     public Transform PlayerRotWrapper;
     public bool TryFinisher = false;
-    private RunicInputHelper RunicSequence;
+    //private RunicInputHelper RunicSequence;
+
+    private List<Direction> RunicQue;
+    private List<FinisherAbstract> FinisherMoves = new List<FinisherAbstract>();
+    public void AddFinisherMove(FinisherAbstract finisher)
+    {
+        FinisherMoves.Add(finisher);
+    }
 
     void Start()
     {
@@ -65,9 +72,8 @@ public class FinisherMode : MonoBehaviour
         FinisherIcon.SetActivated(false);
         InFinisherIcons.SetActive(false);
         PrimaryAttackPopUp.SetActive(false);
-        RunicSequence = new RunicInputHelper();
-
-        print(transform.position);
+        //RunicSequence = new RunicInputHelper();
+        RunicQue = new List<Direction>();
     }
 
     // Update is called once per frame
@@ -119,68 +125,113 @@ public class FinisherMode : MonoBehaviour
                 if (Input.GetButtonDown("UpButton"))
                 {
                     anim.Play("RunicUpCarve");
-                    if (!RunicSequence.AddInput(Direction.up))
-                    {
-                        FailFinisherMode();
-                        return;
-                    }
-                    
+                    RunicQue.Add(Direction.up);
+
                 }
                 if (Input.GetButtonDown("RightButton"))
                 {
                     anim.Play("RunicRightCarve");
-                    if (!RunicSequence.AddInput(Direction.right))
-                    {
-                        FailFinisherMode();
-                        return;
-                    }
+                    RunicQue.Add(Direction.right);
                 }
                 if (Input.GetButtonDown("DownButton"))
                 {
                     anim.Play("RunicDownCarve");
-                    if (!RunicSequence.AddInput(Direction.down))
-                    {
-                        FailFinisherMode();
-                        return;
-                    }
+                    RunicQue.Add(Direction.down);
                 }
                 if (Input.GetButtonDown("LeftButton"))
                 {
                     anim.Play("RunicLeftCarve");
-                    if (!RunicSequence.AddInput(Direction.left))
-                    {
-                        FailFinisherMode();
-                        return;
-                    }
+                    RunicQue.Add(Direction.left);
                 }
 
-                if(RunicSequence.GetCount() == 3)
+                if (RunicQue.Count >= 3)
                 {
                     PrimaryAttackPopUp.SetActive(true);
-                }
-                if(RunicSequence.GetCount() > 3)
-                {
-                    FailFinisherMode();
-                    return;
                 }
 
                 //inside the primary attack check, see if they did a correct sequence, and succeed or fail
                 if (Input.GetButtonDown("PrimaryAttack"))
                 {
-                    if (RunicSequence.SuccessfulCombo(RunicSequence.FireCombo))
-                    {
-                        CurrentFinisherMode = FinisherModes.Runic;
-                        StartCoroutine(ExecuteFinisher());
+                    bool goodCombo = false;
+                    foreach(FinisherAbstract f in FinisherMoves) {
+                        goodCombo = f.startfinisher(this, RunicQue);
+                        if (goodCombo)
+                            break;
                     }
-                    else if (RunicSequence.SuccessfulCombo(RunicSequence.IceCombo))
+                    if (!goodCombo)
                     {
-                        CurrentFinisherMode = FinisherModes.Siphoning;
-                        print("Commit Siphoning Finisher");
-                        StartCoroutine(ExecuteFinisher());
-                    }
-                    else
                         FailFinisherMode();
+                    }
+                    else {
+                        StartCoroutine(ExecuteFinisher());
+                    }
                 }
+                
+                //if (Input.GetButtonDown("UpButton"))
+                //{
+                //    anim.Play("RunicUpCarve");
+                //    if (!RunicSequence.AddInput(Direction.up))
+                //    {
+                //        FailFinisherMode();
+                //        return;
+                //    }
+
+                //}
+                //if (Input.GetButtonDown("RightButton"))
+                //{
+                //    anim.Play("RunicRightCarve");
+                //    if (!RunicSequence.AddInput(Direction.right))
+                //    {
+                //        FailFinisherMode();
+                //        return;
+                //    }
+                //}
+                //if (Input.GetButtonDown("DownButton"))
+                //{
+                //    anim.Play("RunicDownCarve");
+                //    if (!RunicSequence.AddInput(Direction.down))
+                //    {
+                //        FailFinisherMode();
+                //        return;
+                //    }
+                //}
+                //if (Input.GetButtonDown("LeftButton"))
+                //{
+                //    anim.Play("RunicLeftCarve");
+                //    if (!RunicSequence.AddInput(Direction.left))
+                //    {
+                //        FailFinisherMode();
+                //        return;
+                //    }
+                //}
+
+                //if(RunicSequence.GetCount() == 3)
+                //{
+                //    PrimaryAttackPopUp.SetActive(true);
+                //}
+                //if(RunicSequence.GetCount() > 3)
+                //{
+                //    FailFinisherMode();
+                //    return;
+                //}
+
+                ////inside the primary attack check, see if they did a correct sequence, and succeed or fail
+                //if (Input.GetButtonDown("PrimaryAttack"))
+                //{
+                //    if (RunicSequence.SuccessfulCombo(RunicSequence.FireCombo))
+                //    {
+                //        CurrentFinisherMode = FinisherModes.Runic;
+                //        StartCoroutine(ExecuteFinisher());
+                //    }
+                //    else if (RunicSequence.SuccessfulCombo(RunicSequence.IceCombo))
+                //    {
+                //        CurrentFinisherMode = FinisherModes.Siphoning;
+                //        print("Commit Siphoning Finisher");
+                //        StartCoroutine(ExecuteFinisher());
+                //    }
+                //    else
+                //        FailFinisherMode();
+                //}
                 //else if (Input.GetButtonDown("SpecialAttack"))
                 //{
                 //    CurrentFinisherMode = FinisherModes.PressurePoints;
@@ -207,7 +258,7 @@ public class FinisherMode : MonoBehaviour
         finisherSlider.value += buildupVal;
     }
 
-    IEnumerator EnterFinisherMode()
+    public IEnumerator EnterFinisherMode()
     {
         //Player.GetComponent<PlayerMovementController>().PreventMoving();
         //Player.GetComponent<PlayerMovementController>().PreventTuring();
@@ -233,7 +284,6 @@ public class FinisherMode : MonoBehaviour
         }
         //waits till the camera and or animation is done
         CameraBase.rotation = PlayerRotWrapper.rotation;
-        print(CameraBase.rotation);
 
         PerformingFinisher = true;
         FinisherCount = FinisherTime;
@@ -244,7 +294,8 @@ public class FinisherMode : MonoBehaviour
         InFinisherIcons.SetActive(true);
         RunicRinisherGuides.SetActive(true);
 
-        RunicSequence.RestartQue();
+        //RunicSequence.RestartQue();
+        RunicQue.Clear();
         //yield return null;
     }
 
@@ -256,10 +307,10 @@ public class FinisherMode : MonoBehaviour
         PrimaryAttackPopUp.SetActive(false);
         RunicRinisherGuides.SetActive(false);
         InFinisherIcons.SetActive(false);
-        anim.Play("idle");
 
         switch (CurrentFinisherMode)
         {
+            /*
             case FinisherModes.Runic:
                 Vector3 rot = EnemyFinisherPlacement.rotation.eulerAngles;
                 rot = new Vector3(rot.x, rot.y + 180, rot.z);
@@ -280,6 +331,7 @@ public class FinisherMode : MonoBehaviour
                 break;
             default:
                 break;
+                */
         }
         currentTarget.GetComponent<EnemyAI>().KillEnemy();
 

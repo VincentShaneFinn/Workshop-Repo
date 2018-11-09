@@ -308,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 1793182956784890}
   DestroyTime: 1.5
+  pmc: {fileID: 0}
 --- !u!198 &198109853883249172
 ParticleSystem:
   m_ObjectHideFlags: 1

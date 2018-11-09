@@ -75,8 +75,11 @@
      <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\CameraMovementController.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\ChangeCameraPerpective.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\FinisherAbstract.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\FinisherMode.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFire.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\Siphoncut.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\FinisherAreaController.cs" />
-     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\FinisherMode.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\PlayerSwordAttack.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\PlayerSwordHit.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\RunicBeamBlast.cs" />
