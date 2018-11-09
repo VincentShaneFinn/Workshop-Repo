@@ -35,7 +35,7 @@ public class EnemyAI : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        //Animation Stuff
+        //Animation Section Start
         if (anim != null)
         {
             anim.SetFloat("EnemyMoving", GetEnemyMovementCtrl.agent.speed);
@@ -44,17 +44,21 @@ public class EnemyAI : MonoBehaviour {
             //Access the current length of the clip
             //var m_CurrentClipLength = m_CurrentClipInfo[0].clip.length;
             //Access the Animation clip name
-            var m_ClipName = m_CurrentClipInfo[0].clip.name;
-            switch (m_ClipName)
+            if (m_CurrentClipInfo.Length > 0)
             {
-                case "Idle":
-                    anim.transform.localEulerAngles = new Vector3(0, 55, 0);
-                    break;
-                case "Run":
-                    anim.transform.localEulerAngles = new Vector3(0, -30, 0);
-                    break;
+                var m_ClipName = m_CurrentClipInfo[0].clip.name;
+                switch (m_ClipName)
+                {
+                    case "Idle":
+                        anim.transform.localEulerAngles = new Vector3(0, 55, 0);
+                        break;
+                    case "Run":
+                        anim.transform.localEulerAngles = new Vector3(0, -30, 0);
+                        break;
+                }
             }
         }
+        //Animation Section End
 
         //MARK: TEMPORARY FIX FOR ENEMIES REMAINING STAGGERED
         if (CurrentStatus == EnemyBehaviorStatus.Staggered)
@@ -82,7 +86,6 @@ public class EnemyAI : MonoBehaviour {
             //check if the player is in front of you
             var heading = playerT.position - transform.position;
             float dot = Vector3.Dot(heading, transform.forward);
-            print(dot);
             if (dot > .5) // must be 30 degrees in front
             {
                 //If two many attacks recently, continue doing what they were doing
@@ -112,6 +115,7 @@ public class EnemyAI : MonoBehaviour {
     //and once that is complete, start up whatever the next status is.
     public void UpdateEnemyBehaviorStatus()
     {
+        anim.SetBool("TempSurround", false);
         switch (CurrentStatus)
         {
             case EnemyBehaviorStatus.PrimaryAttacker:
@@ -177,6 +181,7 @@ public class EnemyAI : MonoBehaviour {
             {
                 transform.Translate(Vector3.left * dx / x * Time.deltaTime * sidespeed);
             }
+            anim.SetBool("TempSurround", true);
         }
         else
         {
@@ -257,14 +262,17 @@ public class EnemyAI : MonoBehaviour {
 
     IEnumerator WakeUpAnimate()
     {
+        //Animation Section Start
         anim.applyRootMotion = true;
         anim.SetFloat("SleepModifier", 1);
-        yield return new WaitForSeconds(3.8f);
+        yield return new WaitForSeconds(3.4f);
         anim.applyRootMotion = false;
+        anim.Play("Idle");
         anim.transform.localPosition = new Vector3(0, -1, 0);
         print(Quaternion.identity);
         anim.transform.localEulerAngles = new Vector3(0, 55, 0);
         CurrentStatus = EnemyBehaviorStatus.Waiting;
+        //Animation Section End
     }
 
     public GroupDirector GetDirector()

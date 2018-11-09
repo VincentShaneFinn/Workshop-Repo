@@ -28,7 +28,7 @@ public class PlayerHealthController : MonoBehaviour
 
     public void PlayerHit(int damage)
     {
-        if (pUpdater.ImmuneCount < pUpdater.ImmuneTime)
+        if (pUpdater.ImmuneCount < pUpdater.ImmuneTime || GetComponent<PlayerMovementController>().isDashing())
             return;
         else
             pUpdater.ImmuneCount = 0;

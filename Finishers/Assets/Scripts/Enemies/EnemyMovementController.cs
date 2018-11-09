@@ -145,6 +145,7 @@ public class EnemyMovementController : MonoBehaviour {
     {
         if (agent.isActiveAndEnabled)
         {
+            GetComponent<EnemyAI>().anim.Play("Hit4");
             GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             float time = .4f;//.15f;
