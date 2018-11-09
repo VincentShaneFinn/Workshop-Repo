@@ -152,8 +152,12 @@ public class FinisherMode : MonoBehaviour
                 {
                     bool failed = false;
                     foreach(FinisherAbstract f in finishmoves) {
-                        failed=f.startfinisher(this,que);
+                        bool i=f.startfinisher(this,que);
+                        if (i) {
+                            failed = true;
+                        }
                     }
+
                     if (!failed)
                     {
                         FailFinisherMode();
