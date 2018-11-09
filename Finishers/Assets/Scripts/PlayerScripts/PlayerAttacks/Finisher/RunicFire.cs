@@ -18,6 +18,7 @@ public class RunicFire : FinisherAbstract {
         rot = new Vector3(rot.x, rot.y + 180, rot.z);
         GameObject beam = Instantiate(beamobject, f.EnemyFinisherPlacement.position, Quaternion.Euler(rot));
         beam.transform.parent = f.PlayerRotWrapper;
+        f.anim.Play("idle");
         print("Commit Runit Finisher");
     }
 }

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Week6-7/Week6StartHere.unity
+- path: Assets/Scenes/Week6-7/Week6DecoupledFinishers.unity
   isLoaded: 1
   isActive: 1

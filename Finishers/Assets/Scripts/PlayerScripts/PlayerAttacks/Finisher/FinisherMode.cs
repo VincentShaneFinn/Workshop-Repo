@@ -70,8 +70,6 @@ public class FinisherMode : MonoBehaviour
         PrimaryAttackPopUp.SetActive(false);
         //RunicSequence = new RunicInputHelper();
         que = new List<Direction>();
-
-        print(transform.position);
     }
 
     // Update is called once per frame
@@ -150,8 +148,9 @@ public class FinisherMode : MonoBehaviour
                 //inside the primary attack check, see if they did a correct sequence, and succeed or fail
                 if (Input.GetButtonDown("PrimaryAttack"))
                 {
-                    bool failed = false;
+                    bool goodCombo = false;
                     foreach(FinisherAbstract f in finishmoves) {
+<<<<<<< HEAD
                         bool i=f.startfinisher(this,que);
                         if (i) {
                             failed = true;
@@ -159,6 +158,13 @@ public class FinisherMode : MonoBehaviour
                     }
 
                     if (!failed)
+=======
+                        goodCombo = f.startfinisher(this,que);
+                        if (goodCombo)
+                            break;
+                    }
+                    if (!goodCombo)
+>>>>>>> 263afc92e2f82b0118f1814be0790b78b1ac3b08
                     {
                         FailFinisherMode();
                     }
@@ -166,6 +172,7 @@ public class FinisherMode : MonoBehaviour
                         StartCoroutine(ExecuteFinisher());
                     }
                 }
+                
                 //if (Input.GetButtonDown("UpButton"))
                 //{
                 //    anim.Play("RunicUpCarve");
@@ -283,7 +290,6 @@ public class FinisherMode : MonoBehaviour
         }
         //waits till the camera and or animation is done
         CameraBase.rotation = PlayerRotWrapper.rotation;
-        print(CameraBase.rotation);
 
         PerformingFinisher = true;
         FinisherCount = FinisherTime;
@@ -307,7 +313,6 @@ public class FinisherMode : MonoBehaviour
         PrimaryAttackPopUp.SetActive(false);
         RunicRinisherGuides.SetActive(false);
         InFinisherIcons.SetActive(false);
-        anim.Play("idle");
 
         switch (CurrentFinisherMode)
         {
