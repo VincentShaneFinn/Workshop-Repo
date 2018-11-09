@@ -59,10 +59,6 @@ public class CameraFollow : MonoBehaviour {
             transform.rotation = localRotation;
             forwardContainer.transform.rotation = localRotationJustY;
         }
-    }
-
-    void LateUpdate()
-    {
         if (!GameStatus.GamePaused)
         {
             CameraUpdater();

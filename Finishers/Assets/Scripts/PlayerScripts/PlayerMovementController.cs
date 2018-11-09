@@ -98,10 +98,9 @@ public class PlayerMovementController : MonoBehaviour
 
         float inputX = Input.GetAxisRaw("Horizontal");
         float inputY = Input.GetAxisRaw("Vertical");
-        float inputXRaw = Input.GetAxisRaw("Horizontal");
-        float inputYRaw = Input.GetAxisRaw("Vertical");
         // If both horizontal and vertical are used simultaneously, limit speed (if allowed), so the total doesn't exceed normal move speed
-        float inputModifyFactor = (inputX != 0.0f && inputY != 0.0f && limitDiagonalSpeed) ? .7071f : 1.0f;
+        float inputModifyFactor = 1;
+        inputModifyFactor = (Mathf.Abs(inputX) == 1 && Mathf.Abs(inputY) == 1 && limitDiagonalSpeed) ? .7071f : 1.0f;
         if (grounded)
         {
             //bool sliding = false;
@@ -188,7 +187,7 @@ public class PlayerMovementController : MonoBehaviour
                     dashTimer = 0;
                     dashing = true;
                     if (moveDirection.x != 0 || moveDirection.z != 0)
-                        dashDirection = forwardObject.TransformDirection(new Vector3(inputXRaw * inputModifyFactor, 0, inputYRaw * inputModifyFactor));
+                        dashDirection = forwardObject.TransformDirection(new Vector3(inputX * inputModifyFactor, 0, inputY * inputModifyFactor).normalized);
                     else
                         dashDirection = forwardObject.TransformDirection(new Vector3(0, 0, -1));
 
@@ -232,7 +231,6 @@ public class PlayerMovementController : MonoBehaviour
                 //rotationwrapper.transform.rotation = Quaternion.LookRotation(movement);
             }
         }
-
         dashed = false;
     }
 
@@ -251,7 +249,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (CanMove)
         {
-            if(grounded && myRigidbody.velocity.y > 0)
+            if (grounded && myRigidbody.velocity.y > 0)
                 desiredVelocity = new Vector3(moveDirection.x,0, moveDirection.z);
             else
                 desiredVelocity = new Vector3(moveDirection.x, myRigidbody.velocity.y, moveDirection.z);

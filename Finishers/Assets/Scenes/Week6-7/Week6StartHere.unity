@@ -2357,7 +2357,7 @@ MeshCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 605403465}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c10e855ce6b680b40a38ded3ac0a11db, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -4301,6 +4301,21 @@ Prefab:
       propertyPath: finishmoves.Array.data[1]
       value: 
       objectReference: {fileID: 1106039405}
+    - target: {fileID: 114363513047065126, guid: a6c78e17a78d821409c027d46cb0b7c3,
+        type: 2}
+      propertyPath: limitDiagonalSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23479274790583788, guid: a6c78e17a78d821409c027d46cb0b7c3,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975721992020822, guid: a6c78e17a78d821409c027d46cb0b7c3,
+        type: 2}
+      propertyPath: CameraMoveSpeed
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
   m_IsPrefabAsset: 0
