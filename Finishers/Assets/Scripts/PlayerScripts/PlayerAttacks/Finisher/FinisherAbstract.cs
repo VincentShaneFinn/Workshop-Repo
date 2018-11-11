@@ -20,6 +20,27 @@ public abstract class FinisherAbstract : MonoBehaviour {
         }
         return true;
     }
+
+    public bool checkSoFar(List<Direction> inputs)
+    {
+        if (inputs.Count > keylist.Count)
+            return false;
+        bool goodCombo = true;
+        for (int i = 0; i < inputs.Count; i++)
+        {
+            if (inputs[i] == keylist[i])
+            {
+                goodCombo = true;
+            }
+            else
+            {
+                goodCombo = false;
+                break;
+            }
+        }
+        return goodCombo;
+    }
+
     public bool startfinisher(FinisherMode fm,List<Direction> input) {
         bool goodCombo = check(input);
         if (goodCombo) {

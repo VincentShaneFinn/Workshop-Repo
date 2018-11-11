@@ -17,7 +17,10 @@ public class Enemyhp : MonoBehaviour {
 	}
     void checkhp() {
         if (currenthp<=0) {
-            GetComponent<EnemyAI>().KillEnemy();
+            if (gameObject.tag != "TargetDummy")
+                GetComponent<EnemyAI>().KillEnemy();
+            else
+                Destroy(gameObject);
         }
     }
     public void damage() {

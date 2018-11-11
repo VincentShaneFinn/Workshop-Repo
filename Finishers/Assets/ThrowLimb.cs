@@ -35,5 +35,10 @@ public class ThrowLimb : MonoBehaviour {
                 Destroy(gameObject);
             }
         }
+        else if (col.gameObject.tag == "TargetDummy")
+        {
+            Destroy(col.gameObject);
+            Destroy(gameObject);
+        }
     }
 }

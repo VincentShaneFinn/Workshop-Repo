@@ -9,6 +9,7 @@ TagManager:
   - PlayerModel
   - CameraTarget
   - Platform
+  - TargetDummy
   layers:
   - Default
   - TransparentFX

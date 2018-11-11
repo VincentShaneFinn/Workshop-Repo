@@ -17,6 +17,15 @@ public class PlayerSwordHit : MonoBehaviour {
                 e.damage();
             }
         }
+        else if (col.gameObject.tag.Equals("TargetDummy"))
+        {
+            finisherObject.IncreaseFinisherMeter();
+            Enemyhp e = null;
+            if ((e = col.GetComponent<Enemyhp>()) != null)
+            {
+                e.damage();
+            }
+        }
 
     }
 }

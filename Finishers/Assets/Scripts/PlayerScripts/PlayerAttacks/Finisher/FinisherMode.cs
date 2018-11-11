@@ -109,7 +109,7 @@ public class FinisherMode : MonoBehaviour
             //Increase UI slider for Finisher && temp cheat
             if (Input.GetKeyDown(KeyCode.G))
             {
-                IncreaseFinisherMeter();
+                IncreaseFinisherMeter(100);
             }
         }
         else
@@ -142,6 +142,19 @@ public class FinisherMode : MonoBehaviour
                 {
                     anim.Play("RunicLeftCarve");
                     RunicQue.Add(Direction.left);
+                }
+
+                bool goodSoFar = false;
+                foreach(FinisherAbstract RCombo in FinisherMoves)
+                {
+                    goodSoFar = RCombo.checkSoFar(RunicQue);
+                    if (goodSoFar)
+                        break;
+                }
+                if (!goodSoFar)
+                {
+                    FailFinisherMode();
+                    return;
                 }
 
                 if (RunicQue.Count >= 3)
@@ -257,11 +270,13 @@ public class FinisherMode : MonoBehaviour
     {
         finisherSlider.value += buildupVal;
     }
+    public void IncreaseFinisherMeter(int val)
+    {
+        finisherSlider.value += val;
+    }
 
     public IEnumerator EnterFinisherMode()
     {
-        //Player.GetComponent<PlayerMovementController>().PreventMoving();
-        //Player.GetComponent<PlayerMovementController>().PreventTuring();
         inFinisherMode = true;
         print("Begin Finisher");
         swordController.PreventAttacking();
@@ -269,10 +284,17 @@ public class FinisherMode : MonoBehaviour
         //move enemy into place and lock controls.
         currentTarget.transform.position = EnemyFinisherPlacement.position;
         currentTarget.transform.parent = EnemyFinisherPlacement;
-        currentTarget.GetComponent<EnemyMovementController>().StopMovement();
-        currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.BeingFinished);
+
+        if (currentTarget.tag != "TargetDummy")
+        {
+            currentTarget.GetComponent<EnemyMovementController>().StopMovement();
+            currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.BeingFinished);
+        }
 
         anim.Play("FinisherRunicIdleStance");
+        yield return null;
+        Player.GetComponent<PlayerMovementController>().PreventMoving();
+        Player.GetComponent<PlayerMovementController>().PreventTuring();
 
         //moves camera
         cam.MoveToFinisherModeLocation(); //Mark make sure camera takes as long as the animation
@@ -308,32 +330,31 @@ public class FinisherMode : MonoBehaviour
         RunicRinisherGuides.SetActive(false);
         InFinisherIcons.SetActive(false);
 
-        switch (CurrentFinisherMode)
-        {
-            /*
-            case FinisherModes.Runic:
-                Vector3 rot = EnemyFinisherPlacement.rotation.eulerAngles;
-                rot = new Vector3(rot.x, rot.y + 180, rot.z);
-                GameObject beam = Instantiate(BlastBeam, EnemyFinisherPlacement.position, Quaternion.Euler(rot));
-                beam.transform.parent = PlayerRotWrapper;
-                print("Commit Runit Finisher");
-                break;
-            case FinisherModes.Siphoning:
-                GameObject part1 = Instantiate(TopHalf, new Vector3(currentTarget.transform.position.x, 1f, currentTarget.transform.position.z), currentTarget.transform.rotation);
-                GameObject part2 = Instantiate(BottomHalf, new Vector3(currentTarget.transform.position.x, 0f, currentTarget.transform.position.z), currentTarget.transform.rotation);
-                try { Instantiate(SlicedLimb, SlicedLimbFirePoint); } catch { }
-                GetComponent<PlayerHealthController>().PlayerHealed(20);
-                anim.Play("SlashL");
-                print("Commit Siphoning Finisher");
-                break;
-            case FinisherModes.PressurePoints:
-                print("Commit PressurePoints Finisher");
-                break;
-            default:
-                break;
-                */
-        }
-        currentTarget.GetComponent<EnemyAI>().KillEnemy();
+        //switch (CurrentFinisherMode)
+        //{
+            
+        //    case FinisherModes.Runic:
+        //        Vector3 rot = EnemyFinisherPlacement.rotation.eulerAngles;
+        //        rot = new Vector3(rot.x, rot.y + 180, rot.z);
+        //        GameObject beam = Instantiate(BlastBeam, EnemyFinisherPlacement.position, Quaternion.Euler(rot));
+        //        beam.transform.parent = PlayerRotWrapper;
+        //        print("Commit Runit Finisher");
+        //        break;
+        //    case FinisherModes.Siphoning:
+        //        GameObject part1 = Instantiate(TopHalf, new Vector3(currentTarget.transform.position.x, 1f, currentTarget.transform.position.z), currentTarget.transform.rotation);
+        //        GameObject part2 = Instantiate(BottomHalf, new Vector3(currentTarget.transform.position.x, 0f, currentTarget.transform.position.z), currentTarget.transform.rotation);
+        //        try { Instantiate(SlicedLimb, SlicedLimbFirePoint); } catch { }
+        //        GetComponent<PlayerHealthController>().PlayerHealed(20);
+        //        anim.Play("SlashL");
+        //        print("Commit Siphoning Finisher");
+        //        break;
+        //    case FinisherModes.PressurePoints:
+        //        print("Commit PressurePoints Finisher");
+        //        break;
+        //    default:
+        //        break;
+                
+        //}
 
         yield return null; // do stuff to perform the finisher
         StartCoroutine(LeavingFinisherMode());
@@ -342,9 +363,6 @@ public class FinisherMode : MonoBehaviour
     public void FailFinisherMode()
     {
         PerformingFinisher = false;
-        currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker); //MARK: this needs to put them back to doing whatever they previously were
-        currentTarget.GetComponent<EnemyMovementController>().ResumeMovement();
-        currentTarget.transform.parent = null;
 
         PrimaryAttackPopUp.SetActive(false);
         RunicRinisherGuides.SetActive(false);
@@ -356,8 +374,14 @@ public class FinisherMode : MonoBehaviour
 
     IEnumerator LeavingFinisherMode()
     {
-       // Player.GetComponent<PlayerMovementController>().AllowMoving();
-        //Player.GetComponent<PlayerMovementController>().AllowTurning();
+        Player.GetComponent<PlayerMovementController>().AllowMoving();
+        Player.GetComponent<PlayerMovementController>().AllowTurning();
+
+        if (currentTarget.tag != "TargetDummy")
+            currentTarget.GetComponent<EnemyAI>().KillEnemy();
+        else
+            Destroy(currentTarget);
+
         inFinisherMode = false;
         ExecutingFinisher = false;
         CurrentFinisherMode = FinisherModes.Runic;
@@ -394,6 +418,21 @@ public class FinisherMode : MonoBehaviour
                 FinisherIcon.SetActivated(false);
             }
         }
+        GameObject[] TargetDummies = GameObject.FindGameObjectsWithTag("TargetDummy");
+        foreach (GameObject dummy in TargetDummies)
+        {
+            if (Vector3.Distance(dummy.transform.position, transform.position) < 5)
+            {
+                FinisherIcon.SetActivated(true);
+                FinisherIcon.transform.position = dummy.transform.position;
+                return dummy;
+            }
+            else
+            {
+                FinisherIcon.SetActivated(false);
+            }
+        }
+
         return null;
     }
 

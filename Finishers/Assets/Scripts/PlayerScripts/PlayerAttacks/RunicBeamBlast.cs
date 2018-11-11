@@ -35,5 +35,9 @@ public class RunicBeamBlast : MonoBehaviour {
             col.gameObject.GetComponent<EnemyMovementController>().HelpKnockback();
             col.gameObject.GetComponent<Enemyhp>().damage(1);
         }
+        else if (col.gameObject.tag == "TargetDummy")
+        {
+            col.gameObject.GetComponent<Enemyhp>().damage(1);
+        }
     }
 }
