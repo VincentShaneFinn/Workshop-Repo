@@ -28,9 +28,9 @@ public class KnightEnemyActions : MonoBehaviour {
         //Sword.SetActive(true); //tempAniamtionFake
 
         //Animation Section
-        AI.anim.applyRootMotion = true;
+        //AI.anim.applyRootMotion = true;
         AI.anim.Play("BranchAttack_swing1");
-        AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
+        //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
 
         float tempAnimationTime = 2.9f;
         float tempAnimationCount = 0;
@@ -48,9 +48,9 @@ public class KnightEnemyActions : MonoBehaviour {
 
         //Sword.SetActive(false);//tempAniamtionFake
         //Animation Section
-        AI.anim.applyRootMotion = false;
-        transform.position = AI.anim.transform.position;
-        AI.anim.transform.localPosition = new Vector3(0, -1, 0);
+        //AI.anim.applyRootMotion = false;
+        //transform.position = AI.anim.transform.position;
+        //AI.anim.transform.localPosition = new Vector3(0, -1, 0);
         AI.GetDirector().NormalAttackCompleted();
         AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
         AI.ChangeAction(EnemyActions.None);
@@ -65,9 +65,9 @@ public class KnightEnemyActions : MonoBehaviour {
         //set animation
         //attack()
         //Animation
-        AI.anim.applyRootMotion = true;
+        //AI.anim.applyRootMotion = true;
         AI.anim.Play("JumpAttack"); 
-        AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
+        //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
 
         GetComponent<EnemyMovementController>().DisableNavAgent();
 
@@ -103,9 +103,9 @@ public class KnightEnemyActions : MonoBehaviour {
         GetComponent<CapsuleCollider>().isTrigger = false;
         //HeavySword.SetActive(false);//tempAniamtionFake
         //Animation Section
-        AI.anim.applyRootMotion = false;
-        transform.position = AI.anim.transform.position;
-        AI.anim.transform.localPosition = new Vector3(0, -1, 0);
+        //AI.anim.applyRootMotion = false;
+        //transform.position = AI.anim.transform.position;
+        //AI.anim.transform.localPosition = new Vector3(0, -1, 0);
 
         GetComponent<EnemyMovementController>().EnableNavAgent();
         AI.GetDirector().Special1AttackCompleted();
