@@ -86,11 +86,11 @@ public class PlayerAnimController : MonoBehaviour {
                 }
 
             }
-            //Temporary for siphoning attack
-            if (Input.GetButtonDown("SecondaryAttack"))
-            {
-                next = PlayerActions.slashR;
-            }
+            //When we get heavy attack, more work to be done
+            //if (Input.GetButtonDown("SecondaryAttack"))
+            //{
+            //    next = PlayerActions.slashR;
+            //}
             if (Input.GetButtonDown("Dodge")) //dodge is handled in player movement controller, jumping with animation cant actually jump on a platform
             {
                 next = PlayerActions.dodge;

@@ -9,12 +9,12 @@ public class AOERunicAttack : MonoBehaviour {
         if (col.gameObject.tag == "Enemy")
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>().IncreaseFinisherMeter();
-            col.gameObject.GetComponent<Enemyhp>().damage(3);
+            col.gameObject.GetComponent<Enemyhp>().damage(3,true);
         }
         else if (col.gameObject.tag == "TargetDummy")
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>().IncreaseFinisherMeter();
-            col.gameObject.GetComponent<Enemyhp>().damage(3);
+            col.gameObject.GetComponent<Enemyhp>().damage(3,true);
         }
     }
 }

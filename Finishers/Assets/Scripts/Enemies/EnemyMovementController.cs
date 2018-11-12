@@ -67,6 +67,15 @@ public class EnemyMovementController : MonoBehaviour {
         return Mathf.Infinity;
     }
 
+    public void SetSpeed(float newSpeed)
+    {
+        agent.speed = newSpeed;
+    }
+    public void RestoreSpeed()
+    {
+        agent.speed = savedSpeed;
+    }
+
     public void StopMovement()
     {
         RaycastHit hit;

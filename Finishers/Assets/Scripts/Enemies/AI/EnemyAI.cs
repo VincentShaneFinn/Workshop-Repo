@@ -39,24 +39,6 @@ public class EnemyAI : MonoBehaviour {
         if (anim != null)
         {
             anim.SetFloat("EnemyMoving", GetEnemyMovementCtrl.agent.speed);
-            //Fetch the current Animation clip information for the base layer
-            var m_CurrentClipInfo = anim.GetCurrentAnimatorClipInfo(0);
-            //Access the current length of the clip
-            //var m_CurrentClipLength = m_CurrentClipInfo[0].clip.length;
-            //Access the Animation clip name
-            if (m_CurrentClipInfo.Length > 0)
-            {
-                var m_ClipName = m_CurrentClipInfo[0].clip.name;
-                switch (m_ClipName)
-                {
-                    case "Idle":
-                        anim.transform.localEulerAngles = new Vector3(0, 55, 0);
-                        break;
-                    case "Run":
-                        anim.transform.localEulerAngles = new Vector3(0, -30, 0);
-                        break;
-                }
-            }
         }
         //Animation Section End
 
@@ -263,13 +245,13 @@ public class EnemyAI : MonoBehaviour {
     IEnumerator WakeUpAnimate()
     {
         //Animation Section Start
-        anim.applyRootMotion = true;
+        //anim.applyRootMotion = true;
         anim.SetFloat("SleepModifier", 1);
         yield return new WaitForSeconds(3.4f);
-        anim.applyRootMotion = false;
+        //anim.applyRootMotion = false;
         anim.Play("Idle");
-        anim.transform.localPosition = new Vector3(0, -1, 0);
-        anim.transform.localEulerAngles = new Vector3(0, 55, 0);
+        //anim.transform.localPosition = new Vector3(0, -1, 0);
+        //anim.transform.localEulerAngles = new Vector3(0, 55, 0);
         CurrentStatus = EnemyBehaviorStatus.Waiting;
         //Animation Section End
     }
