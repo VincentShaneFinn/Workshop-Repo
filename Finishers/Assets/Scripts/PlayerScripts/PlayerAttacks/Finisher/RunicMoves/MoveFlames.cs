@@ -15,7 +15,7 @@ public class MoveFlames : MonoBehaviour {
     void Update()
     {
         AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
-        if (state.Equals("Finished"))
+        if (state.IsName("Finished"))
         {
             Destroy(parent);
         }

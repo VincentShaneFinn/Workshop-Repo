@@ -18,7 +18,7 @@ public class RunicFlamethrower : FinisherAbstract {
         rot = new Vector3(rot.x, rot.y + 180, rot.z);
         GameObject FlameThrower = Instantiate(FlameObject, f.EnemyFinisherPlacement.position, Quaternion.Euler(rot));
         FlameThrower.transform.parent = f.EnemyFinisherPlacement;
-        f.anim.Play("Flamethrower");
+        f.CharAnim.Play("Flamethrower");
         print("Commit Runit Finisher");
     }
 }

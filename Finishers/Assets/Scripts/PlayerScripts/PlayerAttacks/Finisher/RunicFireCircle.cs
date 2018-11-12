@@ -12,7 +12,7 @@ public class RunicFireCircle : FinisherAbstract {
     public override void startfinisher(FinisherMode f) {
         Transform PlayerGround = GetComponent<PlayerMovementController>().GroundChecker;
         Instantiate(FlameCircle, PlayerGround.position, PlayerGround.rotation);
-        f.anim.Play("idle");
+        f.CharAnim.Play("Idle");
         print("Commit Runit Finisher");
     }
 }

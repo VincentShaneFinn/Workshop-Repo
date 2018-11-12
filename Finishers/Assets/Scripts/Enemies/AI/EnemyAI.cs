@@ -269,7 +269,6 @@ public class EnemyAI : MonoBehaviour {
         anim.applyRootMotion = false;
         anim.Play("Idle");
         anim.transform.localPosition = new Vector3(0, -1, 0);
-        print(Quaternion.identity);
         anim.transform.localEulerAngles = new Vector3(0, 55, 0);
         CurrentStatus = EnemyBehaviorStatus.Waiting;
         //Animation Section End

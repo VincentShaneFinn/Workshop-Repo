@@ -41,7 +41,8 @@ public class FinisherMode : MonoBehaviour
     public GameObject PrimaryAttackPopUp;
 
     //Animation Controller
-    public Animator anim;
+    public Animator UIanim;
+    public Animator CharAnim;
 
     //slow mo
     public float slowMoModifier;
@@ -124,23 +125,23 @@ public class FinisherMode : MonoBehaviour
             {
                 if (Input.GetButtonDown("UpButton"))
                 {
-                    anim.Play("RunicUpCarve");
+                    UIanim.Play("RunicUpCarve");
                     RunicQue.Add(Direction.up);
 
                 }
                 if (Input.GetButtonDown("RightButton"))
                 {
-                    anim.Play("RunicRightCarve");
+                    UIanim.Play("RunicRightCarve");
                     RunicQue.Add(Direction.right);
                 }
                 if (Input.GetButtonDown("DownButton"))
                 {
-                    anim.Play("RunicDownCarve");
+                    UIanim.Play("RunicDownCarve");
                     RunicQue.Add(Direction.down);
                 }
                 if (Input.GetButtonDown("LeftButton"))
                 {
-                    anim.Play("RunicLeftCarve");
+                    UIanim.Play("RunicLeftCarve");
                     RunicQue.Add(Direction.left);
                 }
 
@@ -162,7 +163,7 @@ public class FinisherMode : MonoBehaviour
                 }
 
                 //inside the primary attack check, see if they did a correct sequence, and succeed or fail
-                if (Input.GetButtonDown("PrimaryAttack"))
+                if (Input.GetButtonDown("Execute"))
                 {
                     bool goodCombo = false;
                     foreach(FinisherAbstract f in FinisherMoves) {
@@ -290,7 +291,9 @@ public class FinisherMode : MonoBehaviour
             currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.BeingFinished);
         }
 
-        anim.Play("FinisherRunicIdleStance");
+        UIanim.Play("FinisherRunicIdleStance");
+        CharAnim.Play("FinisherStart");
+
         yield return null;
         Player.GetComponent<PlayerMovementController>().PreventMoving();
         Player.GetComponent<PlayerMovementController>().PreventTuring();
@@ -366,7 +369,7 @@ public class FinisherMode : MonoBehaviour
         PrimaryAttackPopUp.SetActive(false);
         RunicRinisherGuides.SetActive(false);
         InFinisherIcons.SetActive(false);
-        anim.Play("idle");
+        CharAnim.Play("Idle");
 
         StartCoroutine(LeavingFinisherMode());
     }
@@ -374,7 +377,8 @@ public class FinisherMode : MonoBehaviour
     IEnumerator LeavingFinisherMode()
     {
         Player.GetComponent<PlayerMovementController>().AllowMoving(); //MARK: barely noticable bug where if you move and do flamethrower finisher, you may move for 1 frame
-        Player.GetComponent<PlayerMovementController>().AllowTurning(); 
+        Player.GetComponent<PlayerMovementController>().AllowTurning();
+        UIanim.Play("idle");
 
         if (currentTarget.tag != "TargetDummy")
             currentTarget.GetComponent<EnemyAI>().KillEnemy();

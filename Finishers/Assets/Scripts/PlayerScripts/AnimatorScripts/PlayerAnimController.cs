@@ -9,14 +9,17 @@ public class PlayerAnimController : MonoBehaviour {
     public Rigidbody rig = null;
     public Transform model = null;
     public Animator anim = null;
+    public Animator CharAnim = null;
     public PlayerActions next = PlayerActions.idle;
     public FinisherMode MyFinisherMode;
 
     public float ActionCooldownTime = .1f;
     private float ActionCooldownCount;
     private bool LastPrimaryAttackWasSlashL = false;
-    private float attackTime;
-    private float attackCount;
+    private float attack1Time;
+    private float attack1Count;
+    private float attack2Time;
+    private float attack2Count;
 
     // Use this for initialization
     void Start () {
@@ -35,19 +38,23 @@ public class PlayerAnimController : MonoBehaviour {
         }
 
         //Get animation clip lengths that we need
-        AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+        AnimationClip[] clips = CharAnim.runtimeAnimatorController.animationClips;
         foreach (AnimationClip clip in clips)
         {
             switch (clip.name)
             {
-                case "SlashL":
-                    attackTime = clip.length;
+                case "Attack 1":
+                    attack1Time = clip.length / .75f; // clips are playing at .75 speed
+                    break;
+                case "Attack 2":
+                    attack2Time = clip.length / .75f;// clips are playing at .75 speed
                     break;
                 default:
                     break;
             }
         }
-        attackCount = attackTime;
+        attack1Count = attack1Time;
+        attack2Count = attack2Time;
 
         ActionCooldownCount = ActionCooldownTime;
     }
@@ -56,8 +63,7 @@ public class PlayerAnimController : MonoBehaviour {
     void Update()
     {
         AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
-
-        print(GameStatus.FinisherModeActive);
+        AnimatorStateInfo CharState = CharAnim.GetCurrentAnimatorStateInfo(0);
 
         if (GameStatus.FinisherModeActive) // separate player input style while in finisher mode
         {
@@ -85,29 +91,22 @@ public class PlayerAnimController : MonoBehaviour {
             {
                 next = PlayerActions.slashR;
             }
-            if (Input.GetButtonDown("Jump")) //dodge is handled in player movement controller, jumping with animation cant actually jump on a platform
+            if (Input.GetButtonDown("Dodge")) //dodge is handled in player movement controller, jumping with animation cant actually jump on a platform
             {
-                if (GameStatus.InCombat)
-                    next = PlayerActions.dodge;
-                //else if (state.IsName("idle")) // we dont want jumping to be part of the input que
-                //    anim.Play("Jump");
-
+                next = PlayerActions.dodge;
             }
             if (Input.GetButtonDown("FinishMode"))
             {
                 next = PlayerActions.finish;
             }
         }
-        if (state.IsName("idle")||state.IsName("Jump"))
-        {
-            pmc.AllowTurning();
-            pmc.AllowMoving();
-        }
 
         //this is the "Que" that gathers the next action and makes it happen the next time the player is idle
         //need to make room for some animation to cancel halfway through an animation
-        if (state.IsName("idle"))
+        if (CharState.IsName("Idle") || CharState.IsName("Run"))
         {
+            pmc.AllowTurning();
+            pmc.AllowMoving();
 
             if (ActionCooldownCount < ActionCooldownTime)
             {
@@ -124,33 +123,38 @@ public class PlayerAnimController : MonoBehaviour {
                     MyFinisherMode.TryFinisher = true;
                     break;
                 case PlayerActions.slashL:
-                    anim.Play("SlashL");
+                    //anim.Play("SlashL");
+                    CharAnim.Play("Attack 1");
                     pmc.PreventMoving();
                     pmc.PreventTuring();
-                    StartCoroutine(pmc.StepForward(attackTime)); //MARK: Find a way to get the actual animation time
+                    StartCoroutine(pmc.StepForward(attack1Time)); //MARK: Find a way to get the actual animation time
                     LastPrimaryAttackWasSlashL = true;
-                    attackCount = attackTime;
+                    attack1Count = attack1Time;
                     break;
                 case PlayerActions.slashR:
-                    anim.Play("SlashR");
+                    //anim.Play("SlashR");
+                    CharAnim.Play("Attack 2");
                     pmc.PreventMoving();
                     pmc.PreventTuring();
-                    StartCoroutine(pmc.StepForward(attackTime));
+                    StartCoroutine(pmc.StepForward(attack2Time));
                     LastPrimaryAttackWasSlashL = false;
-                    attackCount = attackTime;
+                    attack2Count = attack2Time;
                     break;
             }
             if (next != PlayerActions.idle)
                 ActionCooldownCount = 0;
             next = PlayerActions.idle;
         }
-        else if (attackCount < attackTime / 2) //put stuff here that should be able to cut attack off halfway
+        else if ((CharState.IsName("Attack 1") && attack1Count < attack1Time / 2) || (CharState.IsName("Attack 2") && attack2Count < attack2Time / 2)) //put stuff here that should be able to cut attack off halfway
         {
             switch (next)
             {
                 case PlayerActions.dodge:
-                    anim.Play("idle"); //will be dodge in the future
-                    pmc.dashed = true;
+                    if (pmc.dashTimer >= pmc.dashFactor + pmc.dashCooldown)
+                    {
+                        CharAnim.Play("Idle"); //will be dodge in the future
+                        pmc.dashed = true;
+                    }
                     next = PlayerActions.idle;
                     break;
                 case PlayerActions.finish:
@@ -158,7 +162,8 @@ public class PlayerAnimController : MonoBehaviour {
                     break;
             }
         }
-        attackCount -= Time.deltaTime;
+        attack1Count -= Time.deltaTime;
+        attack2Count -= Time.deltaTime;
 
     }
 }

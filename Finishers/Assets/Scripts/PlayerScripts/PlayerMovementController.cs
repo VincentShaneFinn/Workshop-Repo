@@ -59,7 +59,7 @@ public class PlayerMovementController : MonoBehaviour
     private bool playerControl = false;
     private bool dashing = false;
     private float jumpTimer;
-    private float dashTimer;
+    public float dashTimer;
     public bool CanMove;
     public bool CanTurn;
 
@@ -165,35 +165,32 @@ public class PlayerMovementController : MonoBehaviour
             }
 
 
-            if (GameStatus.InCombat)
+            if (dashed == false)
             {
-                if (dashed == false)
+                dashTimer += Time.deltaTime;
+                if (dashTimer >= dashFactor)
                 {
-                    dashTimer += Time.deltaTime;
-                    if (dashTimer >= dashFactor)
-                    {
-                        dashing = false;
-                    }
-                    else
-                    {
-                        //0 to dash factor and start at dashSpeed and reduce to normal speed
-                        float currentDashSpeed = dashSpeed - walkSpeed;
-                        moveDirection = dashDirection * (walkSpeed + currentDashSpeed * (1 - dashTimer / dashFactor));
-                    }
+                    dashing = false;
                 }
-                else if (dashTimer >= dashFactor + dashCooldown && CanMove)
+                else
                 {
-                    //do stuff to dodge
-                    dashTimer = 0;
-                    dashing = true;
-                    if (moveDirection.x != 0 || moveDirection.z != 0)
-                        dashDirection = forwardObject.TransformDirection(new Vector3(inputX * inputModifyFactor, 0, inputY * inputModifyFactor).normalized);
-                    else
-                        dashDirection = forwardObject.TransformDirection(new Vector3(0, 0, -1));
+                    //0 to dash factor and start at dashSpeed and reduce to normal speed
+                    float currentDashSpeed = dashSpeed - walkSpeed;
+                    moveDirection = dashDirection * (walkSpeed + currentDashSpeed * (1 - dashTimer / dashFactor));
+                }
+            }
+            else if (dashTimer >= dashFactor + dashCooldown)
+            {
+                //do stuff to dodge
+                dashTimer = 0;
+                dashing = true;
+                if (moveDirection.x != 0 || moveDirection.z != 0)
+                    dashDirection = forwardObject.TransformDirection(new Vector3(inputX * inputModifyFactor, 0, inputY * inputModifyFactor).normalized);
+                else
+                    dashDirection = forwardObject.TransformDirection(new Vector3(0, 0, -1));
 
 
-                    //_body.AddForce(dashVelocity, ForceMode.VelocityChange);
-                }
+                //_body.AddForce(dashVelocity, ForceMode.VelocityChange);
             }
 
         }
@@ -300,7 +297,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         myRigidbody.velocity = new Vector3(0,myRigidbody.velocity.y, 0);
         float count = 0;
-        float stepSpeed = 3;
+        float stepSpeed = 2;
         while (count < time)
         {
             Vector3 dir = PlayerModel.transform.TransformDirection(new Vector3(0, 0, stepSpeed));

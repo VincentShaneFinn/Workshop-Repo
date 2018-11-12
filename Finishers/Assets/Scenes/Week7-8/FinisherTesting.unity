@@ -633,17 +633,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 224557517806030522, guid: a6c78e17a78d821409c027d46cb0b7c3,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 224818690060064096, guid: a6c78e17a78d821409c027d46cb0b7c3,
         type: 2}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224818690060064096, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224557517806030522, guid: a6c78e17a78d821409c027d46cb0b7c3,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0

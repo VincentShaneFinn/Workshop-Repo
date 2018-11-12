@@ -34,7 +34,7 @@ public class CameraMovementController : MonoBehaviour {
         //transform.position = CombatCameraLocation.position;
 
         currentTargetLocation = FinisherModeCameraLocation;
-        currentSpeed = .2f;
+        currentSpeed = .45f;
         CallCoroutineHelper();
     }
 

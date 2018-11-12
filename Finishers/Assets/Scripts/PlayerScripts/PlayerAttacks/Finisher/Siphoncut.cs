@@ -22,6 +22,6 @@ public class Siphoncut : FinisherAbstract {
         GameObject part2 = Instantiate(BottomHalf, new Vector3(f.currentTarget.transform.position.x, 0f, f.currentTarget.transform.position.z), f.currentTarget.transform.rotation);
         try { Instantiate(SlicedLimb, SlicedLimbFirePoint); } catch { }
         GetComponent<PlayerHealthController>().PlayerHealed(20);
-        f.anim.Play("SlashL");
+        f.CharAnim.Play("Attack 1");
     }
 }
