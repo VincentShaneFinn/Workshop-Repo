@@ -75,7 +75,7 @@ public class CameraFollow : MonoBehaviour {
         //transform.position = Vector3.MoveTowards(transform.position, target.position, step);
         transform.position = target.position;
 
-        if (Time.timeScale != 1) //if game paused
+        if (Time.timeScale != 1 && !GameStatus.FinisherModeActive) //if game paused
         {
             //used for aiming
             PlayerModel.transform.rotation = localRotationJustY;

@@ -91,7 +91,7 @@ public class FinisherMode : MonoBehaviour
                     {
                         if (currentTarget != null)
                         {
-                            finisherSlider.value = 0;
+                            finisherSlider.value = 50;
 
                             StartCoroutine(EnterFinisherMode());
                         }
@@ -121,13 +121,13 @@ public class FinisherMode : MonoBehaviour
                 currentTarget.transform.position = EnemyFinisherPlacement.position;
                 currentTarget.transform.rotation = EnemyFinisherPlacement.rotation;
             }
-            if (PerformingFinisher && !ExecutingFinisher && !GameStatus.GamePaused)
+            if (PerformingFinisher && !ExecutingFinisher && !GameStatus.GamePaused) //MARK: Unsure of how we will do the full finisher carves
             {
                 if (Input.GetButtonDown("UpButton"))
                 {
                     UIanim.Play("RunicUpCarve");
+                    CharAnim.Play("Carve 1");
                     RunicQue.Add(Direction.up);
-
                 }
                 if (Input.GetButtonDown("RightButton"))
                 {
@@ -137,6 +137,7 @@ public class FinisherMode : MonoBehaviour
                 if (Input.GetButtonDown("DownButton"))
                 {
                     UIanim.Play("RunicDownCarve");
+                    CharAnim.Play("Carve 2");
                     RunicQue.Add(Direction.down);
                 }
                 if (Input.GetButtonDown("LeftButton"))
@@ -166,8 +167,11 @@ public class FinisherMode : MonoBehaviour
                 if (Input.GetButtonDown("Execute"))
                 {
                     bool goodCombo = false;
-                    foreach(FinisherAbstract f in FinisherMoves) {
-                        goodCombo = f.startfinisher(this, RunicQue);
+                    FinisherAbstract FinisherToPerform = null;
+                    foreach (FinisherAbstract f in FinisherMoves) {
+                        //goodCombo = f.startfinisher(this, RunicQue);
+                        goodCombo = f.check(RunicQue);
+                        FinisherToPerform = f;
                         if (goodCombo)
                             break;
                     }
@@ -176,7 +180,7 @@ public class FinisherMode : MonoBehaviour
                         FailFinisherMode();
                     }
                     else {
-                        StartCoroutine(ExecuteFinisher());
+                        StartCoroutine(ExecuteFinisher(FinisherToPerform));
                     }
                 }
                 
@@ -277,11 +281,22 @@ public class FinisherMode : MonoBehaviour
 
     public IEnumerator EnterFinisherMode()
     {
+        GameStatus.FinisherModeActive = true;
+        Player.GetComponent<PlayerMovementController>().PreventMoving();
+        Player.GetComponent<PlayerMovementController>().PreventTuring();
         inFinisherMode = true;
         print("Begin Finisher");
         swordController.PreventAttacking();
 
         //move enemy into place and lock controls.
+
+        PlayerRotWrapper.LookAt(new Vector3(currentTarget.transform.position.x,
+                                PlayerRotWrapper.transform.position.y,
+                                currentTarget.transform.position.z));
+        //CameraBase.LookAt(new Vector3(currentTarget.transform.position.x,
+        //                CameraBase.position.y,
+        //                currentTarget.transform.position.z));
+
         currentTarget.transform.position = EnemyFinisherPlacement.position;
         currentTarget.transform.parent = EnemyFinisherPlacement;
 
@@ -295,8 +310,6 @@ public class FinisherMode : MonoBehaviour
         CharAnim.Play("FinisherStart");
 
         yield return null;
-        Player.GetComponent<PlayerMovementController>().PreventMoving();
-        Player.GetComponent<PlayerMovementController>().PreventTuring();
 
         //moves camera
         cam.MoveToFinisherModeLocation(); //Mark make sure camera takes as long as the animation
@@ -311,7 +324,6 @@ public class FinisherMode : MonoBehaviour
 
         PerformingFinisher = true;
         FinisherCount = FinisherTime;
-        GameStatus.FinisherModeActive = true;
         Time.timeScale = slowMoModifier;
 
         FinisherIcon.SetActivated(false);
@@ -323,7 +335,7 @@ public class FinisherMode : MonoBehaviour
         //yield return null;
     }
 
-    IEnumerator ExecuteFinisher()
+    IEnumerator ExecuteFinisher(FinisherAbstract FinisherToPerform)
     {
         PerformingFinisher = false;
         ExecutingFinisher = true;
@@ -334,7 +346,7 @@ public class FinisherMode : MonoBehaviour
 
         //switch (CurrentFinisherMode)
         //{
-            
+
         //    case FinisherModes.Runic:
         //        Vector3 rot = EnemyFinisherPlacement.rotation.eulerAngles;
         //        rot = new Vector3(rot.x, rot.y + 180, rot.z);
@@ -355,8 +367,12 @@ public class FinisherMode : MonoBehaviour
         //        break;
         //    default:
         //        break;
-                
+
         //}
+        finisherSlider.value = 0;
+        CharAnim.Play("FinisherExecution");
+        yield return new WaitForSecondsRealtime(1f);
+        FinisherToPerform.startfinisher(this);
 
         yield return null; // do stuff to perform the finisher
         StartCoroutine(LeavingFinisherMode());
@@ -412,9 +428,19 @@ public class FinisherMode : MonoBehaviour
         {
             if (Vector3.Distance(Enemy.transform.position, transform.position) < 5 && Enemy.GetComponent<NavMeshAgent>().isActiveAndEnabled)
             {
-                FinisherIcon.SetActivated(true);
-                FinisherIcon.transform.position = Enemy.transform.position;
-                return Enemy;
+                //check if the player is in front of you
+                var heading = Enemy.transform.position - PlayerRotWrapper.position;
+                float dot = Vector3.Dot(heading, PlayerRotWrapper.forward);
+                if (dot > .5) // must be 30 degrees in front
+                {
+                    FinisherIcon.SetActivated(true);
+                    FinisherIcon.transform.position = Enemy.transform.position;
+                    return Enemy;
+                }
+                else
+                {
+                    FinisherIcon.SetActivated(false);
+                }
             }
             else
             {
@@ -426,9 +452,19 @@ public class FinisherMode : MonoBehaviour
         {
             if (Vector3.Distance(dummy.transform.position, transform.position) < 5)
             {
-                FinisherIcon.SetActivated(true);
-                FinisherIcon.transform.position = dummy.transform.position;
-                return dummy;
+                //check if the player is in front of you
+                var heading = dummy.transform.position - PlayerRotWrapper.position;
+                float dot = Vector3.Dot(heading, PlayerRotWrapper.forward);
+                if (dot > .5) // must be 30 degrees in front
+                {
+                    FinisherIcon.SetActivated(true);
+                    FinisherIcon.transform.position = dummy.transform.position;
+                    return dummy;
+                }
+                else
+                {
+                    FinisherIcon.SetActivated(false);
+                }
             }
             else
             {

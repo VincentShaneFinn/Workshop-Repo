@@ -216,7 +216,7 @@ public class PlayerMovementController : MonoBehaviour
 
         // Move the controller, and set grounded true or false depending on whether we're standing on something
 
-        if (CanTurn)
+        if (CanTurn && !GameStatus.FinisherModeActive)
         {
             
             Vector3 movement = new Vector3((moveDirection).x, 0.0f, (moveDirection).z);
