@@ -141,7 +141,7 @@ public class EnemyMovementController : MonoBehaviour {
         StartCoroutine(KnockbackEnemy());
     }
 
-    public IEnumerator KnockbackEnemy()
+    private IEnumerator KnockbackEnemy()
     {
         if (agent.isActiveAndEnabled)
         {

@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Checkpoint.cs" />
+     <Compile Include="Assets\Scripts\DestroyInNSeconds.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\ActionManager.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\ArcAngles.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\EnemyAI.cs" />
@@ -77,7 +78,10 @@
      <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\ChangeCameraPerpective.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\FinisherAbstract.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\FinisherMode.cs" />
-     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFire.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFireCircle.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFlamethrower.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicMoves\MoveFlames.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicMoves\WieldingFlamethrower.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\Siphoncut.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\PlayerSwordAttack.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\PlayerSwordHit.cs" />

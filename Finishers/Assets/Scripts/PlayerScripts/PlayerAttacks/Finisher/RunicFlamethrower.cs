@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunicFire : FinisherAbstract {
+public class RunicFlamethrower : FinisherAbstract {
     // Use this for initialization
-    public GameObject beamobject;
+    public GameObject FlameObject;
 	void Start () {
         GetComponent<FinisherMode>().AddFinisherMove(this);
 	}
@@ -16,9 +16,9 @@ public class RunicFire : FinisherAbstract {
     public override void startfinisher(FinisherMode f) {
         Vector3 rot = f.EnemyFinisherPlacement.rotation.eulerAngles;
         rot = new Vector3(rot.x, rot.y + 180, rot.z);
-        GameObject beam = Instantiate(beamobject, f.EnemyFinisherPlacement.position, Quaternion.Euler(rot));
-        beam.transform.parent = f.PlayerRotWrapper;
-        f.anim.Play("idle");
+        GameObject FlameThrower = Instantiate(FlameObject, f.EnemyFinisherPlacement.position, Quaternion.Euler(rot));
+        FlameThrower.transform.parent = f.EnemyFinisherPlacement;
+        f.anim.Play("Flamethrower");
         print("Commit Runit Finisher");
     }
 }

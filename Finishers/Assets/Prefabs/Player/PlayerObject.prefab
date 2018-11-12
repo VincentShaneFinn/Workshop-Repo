@@ -787,6 +787,7 @@ GameObject:
   - component: {fileID: 114474777532543370}
   - component: {fileID: 114024492631371884}
   - component: {fileID: 114780394354480126}
+  - component: {fileID: 114536531798212640}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -5205,7 +5206,7 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 3072
-  _groundChecker: {fileID: 4613511271492774}
+  GroundChecker: {fileID: 4613511271492774}
   GroundDistance: 0.2
   slopeRayHeight: 0
   steepSlopeAngle: 45
@@ -5562,6 +5563,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finisherObject: {fileID: 114926911975128694}
+--- !u!114 &114536531798212640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1318400930793898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 108b9b73f22bc9f4f827dfe6fb707957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keylist: 03000000000000000100000002000000
+  FlameCircle: {fileID: 1716495854395504, guid: 15ef83e4ac99d6143a61d561b90ae10b,
+    type: 2}
 --- !u!114 &114541798205127884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6039,7 +6054,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keylist: 030000000000000002000000
-  beamobject: {fileID: 1793182956784890, guid: 4d88dc98b146f3e45864d609736670c6, type: 2}
+  FlameObject: {fileID: 1193293017908652, guid: 4305b330f4bb67c4585a91b02a17aa01,
+    type: 2}
 --- !u!114 &114780942907943888
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -71,7 +71,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public Rigidbody myRigidbody;
     public LayerMask Ground;
-    public Transform _groundChecker;
+    public Transform GroundChecker;
     public float GroundDistance = 0.2f;
 
     void Start()
@@ -89,7 +89,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
-        grounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
+        grounded = Physics.CheckSphere(GroundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
 
         // If the run button is set to toggle, then switch between walk/run speed. (We use Update for this...
         // FixedUpdate is a poor place to use GetButtonDown, since it doesn't necessarily run every frame and can miss the event)
@@ -157,7 +157,7 @@ public class PlayerMovementController : MonoBehaviour
                 {
                     jumpTimer += Time.deltaTime;
                 }
-                else if (jumpTimer >= antiBunnyHopFactor)
+                else if (jumpTimer >= antiBunnyHopFactor && CanMove)
                 {
                     myRigidbody.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
                     jumpTimer = 0;
@@ -181,7 +181,7 @@ public class PlayerMovementController : MonoBehaviour
                         moveDirection = dashDirection * (walkSpeed + currentDashSpeed * (1 - dashTimer / dashFactor));
                     }
                 }
-                else if (dashTimer >= dashFactor + dashCooldown)
+                else if (dashTimer >= dashFactor + dashCooldown && CanMove)
                 {
                     //do stuff to dodge
                     dashTimer = 0;
@@ -255,6 +255,8 @@ public class PlayerMovementController : MonoBehaviour
                 desiredVelocity = new Vector3(moveDirection.x, myRigidbody.velocity.y, moveDirection.z);
             myRigidbody.velocity = desiredVelocity;
         }
+        else
+            myRigidbody.velocity = new Vector3(0, myRigidbody.velocity.y, 0);
         myRigidbody.AddForce(new Vector3(0, -gravity * myRigidbody.mass, 0));
 
         if (CanMove && (moveDirection.x != 0 || moveDirection.z != 0))
@@ -266,7 +268,7 @@ public class PlayerMovementController : MonoBehaviour
             CharAnim.SetFloat("Running", animSpeed);
         }
         else
-            CharAnim.SetFloat("Running", 0);
+            CharAnim.SetFloat("Running", 0); 
     }
 
     // If falling damage occured, this is the place to do something about it. You can make the player

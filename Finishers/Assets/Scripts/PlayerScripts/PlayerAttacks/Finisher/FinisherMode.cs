@@ -149,17 +149,16 @@ public class FinisherMode : MonoBehaviour
                 {
                     goodSoFar = RCombo.checkSoFar(RunicQue);
                     if (goodSoFar)
+                    {
+                        if (RCombo.check(RunicQue))
+                            PrimaryAttackPopUp.SetActive(true);
                         break;
+                    }
                 }
                 if (!goodSoFar)
                 {
                     FailFinisherMode();
                     return;
-                }
-
-                if (RunicQue.Count >= 3)
-                {
-                    PrimaryAttackPopUp.SetActive(true);
                 }
 
                 //inside the primary attack check, see if they did a correct sequence, and succeed or fail
@@ -374,8 +373,8 @@ public class FinisherMode : MonoBehaviour
 
     IEnumerator LeavingFinisherMode()
     {
-        Player.GetComponent<PlayerMovementController>().AllowMoving();
-        Player.GetComponent<PlayerMovementController>().AllowTurning();
+        Player.GetComponent<PlayerMovementController>().AllowMoving(); //MARK: barely noticable bug where if you move and do flamethrower finisher, you may move for 1 frame
+        Player.GetComponent<PlayerMovementController>().AllowTurning(); 
 
         if (currentTarget.tag != "TargetDummy")
             currentTarget.GetComponent<EnemyAI>().KillEnemy();

@@ -57,6 +57,8 @@ public class PlayerAnimController : MonoBehaviour {
     {
         AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
 
+        print(GameStatus.FinisherModeActive);
+
         if (GameStatus.FinisherModeActive) // separate player input style while in finisher mode
         {
             return;
