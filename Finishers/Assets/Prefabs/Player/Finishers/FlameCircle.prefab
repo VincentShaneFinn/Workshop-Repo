@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 54479980966921176}
   - component: {fileID: 136611790113544714}
   - component: {fileID: 114645847420314872}
+  - component: {fileID: 114321815853677190}
   m_Layer: 0
   m_Name: FlameCircle
   m_TagString: Untagged
@@ -669,6 +670,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &114321815853677190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1716495854395504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688fe456c56c0da4096b459e0212aeb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114645847420314872
 MonoBehaviour:
   m_ObjectHideFlags: 1

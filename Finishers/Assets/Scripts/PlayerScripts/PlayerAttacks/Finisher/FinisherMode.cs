@@ -36,6 +36,7 @@ public class FinisherMode : MonoBehaviour
 
     //Controls Slider UI
     public Slider finisherSlider;
+    public Slider GodModeSlider;
     public int buildupVal = 20;
     public GameObject RunicRinisherGuides;
     public GameObject PrimaryAttackPopUp;
@@ -111,6 +112,10 @@ public class FinisherMode : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.G))
             {
                 IncreaseFinisherMeter(100);
+            }
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                IncreaseGodModeMeter(100);
             }
         }
         else
@@ -278,6 +283,15 @@ public class FinisherMode : MonoBehaviour
     {
         finisherSlider.value += val;
     }
+    public void IncreaseGodModeMeter()
+    {
+        print("test");
+        GodModeSlider.value += 40;
+    }
+    public void IncreaseGodModeMeter(int val)
+    {
+        GodModeSlider.value += val;
+    }
 
     public IEnumerator EnterFinisherMode()
     {
@@ -375,6 +389,8 @@ public class FinisherMode : MonoBehaviour
         FinisherToPerform.startfinisher(this);
 
         yield return null; // do stuff to perform the finisher
+
+        IncreaseGodModeMeter();
         StartCoroutine(LeavingFinisherMode());
     }
 

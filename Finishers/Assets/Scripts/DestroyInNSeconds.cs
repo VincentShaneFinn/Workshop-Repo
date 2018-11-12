@@ -21,17 +21,4 @@ public class DestroyInNSeconds : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-
-    void OnTriggerEnter(Collider col)
-    {
-        if(col.gameObject.tag == "Enemy")
-        {
-            col.gameObject.GetComponent<Enemyhp>().damage(3);
-        }
-        else if (col.gameObject.tag == "TargetDummy")
-        {
-            col.gameObject.GetComponent<Enemyhp>().damage(3);
-        }
-    }
-
 }
