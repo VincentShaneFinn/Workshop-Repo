@@ -10,6 +10,7 @@ public class PlayerSwordHit : MonoBehaviour {
     public SkinnedMeshRenderer swordEdge;
     public Material[] OriginalSwordMaterials;
     public Material[] FireMats;
+    private bool isFinisher = false;
 
     void Start()
     {
@@ -23,10 +24,12 @@ public class PlayerSwordHit : MonoBehaviour {
     public void RestoreSwordDamage()
     {
         currentSwordDamage = swordDamage;
+        isFinisher = false;
     }
     public void SetFireSkin()
     {
         swordEdge.materials = FireMats;
+        isFinisher = true;
     }
     public void RestoreSwordSkin()
     {
@@ -41,7 +44,7 @@ public class PlayerSwordHit : MonoBehaviour {
             Enemyhp e = null;
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {
-                e.damage(currentSwordDamage);
+                e.damage(currentSwordDamage,isFinisher);
             }
         }
         else if (col.gameObject.tag.Equals("TargetDummy"))
@@ -50,7 +53,7 @@ public class PlayerSwordHit : MonoBehaviour {
             Enemyhp e = null;
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {
-                e.damage(currentSwordDamage);
+                e.damage(currentSwordDamage,isFinisher);
             }
         }
 

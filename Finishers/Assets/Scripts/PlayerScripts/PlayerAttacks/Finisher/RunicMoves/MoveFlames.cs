@@ -26,14 +26,14 @@ public class MoveFlames : MonoBehaviour {
         Enemyhp ehp = col.gameObject.GetComponent<Enemyhp>();
         if(col.gameObject.tag == "Enemy")
         {
-            ehp.damage(1);
+            ehp.damage(1,true);
             GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>().IncreaseFinisherMeter();
             col.gameObject.GetComponent<EnemyMovementController>().HelpKnockback();
         }
         else if(col.gameObject.tag == "TargetDummy")
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>().IncreaseFinisherMeter();
-            ehp.damage(1);
+            ehp.damage(1,true);
         }
     }
 }

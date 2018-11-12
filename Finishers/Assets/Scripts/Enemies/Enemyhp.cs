@@ -10,11 +10,7 @@ public class Enemyhp : MonoBehaviour {
 	void Start () {
         currenthp = hp;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
     void checkhp() {
         print("ow");
         if (currenthp<=0) {
@@ -24,12 +20,18 @@ public class Enemyhp : MonoBehaviour {
                 Destroy(gameObject);
         }
     }
-    public void damage() {
+    public void damage(bool finisher) {
         currenthp--;
-        checkhp();
+        if (finisher) // must be kileld by a finisher
+        {
+            checkhp();
+        }
     }
-    public void damage(int d) {
+    public void damage(int d, bool finisher) {
         currenthp -= d;
-        checkhp();
+        if (finisher)
+        {
+            checkhp();
+        }
     }
 }

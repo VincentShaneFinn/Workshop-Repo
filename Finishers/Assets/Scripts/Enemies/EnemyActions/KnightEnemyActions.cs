@@ -20,7 +20,8 @@ public class KnightEnemyActions : MonoBehaviour {
 
     IEnumerator PerformNormalAttack()
     {
-        MovementCtrl.StopMovement();
+        //MovementCtrl.StopMovement();
+        MovementCtrl.SetSpeed(1f);
         AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
         AI.ChangeAction(EnemyActions.NormalAttack);
         //set animation
@@ -29,10 +30,10 @@ public class KnightEnemyActions : MonoBehaviour {
 
         //Animation Section
         //AI.anim.applyRootMotion = true;
-        AI.anim.Play("BranchAttack_swing1");
+        AI.anim.Play("RunningAttack");
         //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
 
-        float tempAnimationTime = 2.9f;
+        float tempAnimationTime = 1f;
         float tempAnimationCount = 0;
 
         //we need to end prematurely if the enemy is staggered
@@ -54,6 +55,8 @@ public class KnightEnemyActions : MonoBehaviour {
         AI.GetDirector().NormalAttackCompleted();
         AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
         AI.ChangeAction(EnemyActions.None);
+        MovementCtrl.RestoreSpeed();
+        AI.anim.Play("Idle");
     }
 
     //Leap Attack for a knight
@@ -111,5 +114,6 @@ public class KnightEnemyActions : MonoBehaviour {
         AI.GetDirector().Special1AttackCompleted();
         AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
         AI.ChangeAction(EnemyActions.None);
+        AI.anim.Play("Idle");
     }
 }

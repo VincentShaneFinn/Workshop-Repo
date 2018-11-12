@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 212838414478641624}
   - component: {fileID: 95694755197643376}
   m_Layer: 0
-  m_Name: ShiftKey
+  m_Name: RightClick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -232,7 +232,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: d30c667eecdaf1e4bb637d222b0f4c36, type: 3}
+  m_Sprite: {fileID: 21300002, guid: ba2cf017624d8794095ad7266d4ac99e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
