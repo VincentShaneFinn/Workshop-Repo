@@ -394,6 +394,7 @@ public class FinisherMode : MonoBehaviour
         StartCoroutine(LeavingFinisherMode());
     }
 
+    private bool didFail;
     public void FailFinisherMode()
     {
         PerformingFinisher = false;
@@ -401,13 +402,20 @@ public class FinisherMode : MonoBehaviour
         PrimaryAttackPopUp.SetActive(false);
         RunicRinisherGuides.SetActive(false);
         InFinisherIcons.SetActive(false);
-        CharAnim.Play("Idle");
+        didFail = true;
 
         StartCoroutine(LeavingFinisherMode());
     }
 
     IEnumerator LeavingFinisherMode()
     {
+        if (didFail)
+        {
+            CharAnim.Play("FinisherExecution");
+            yield return new WaitForSecondsRealtime(1f);
+            didFail = false;
+            CharAnim.Play("Idle");
+        }
         Player.GetComponent<PlayerMovementController>().AllowMoving(); //MARK: barely noticable bug where if you move and do flamethrower finisher, you may move for 1 frame
         Player.GetComponent<PlayerMovementController>().AllowTurning();
         UIanim.Play("idle");
