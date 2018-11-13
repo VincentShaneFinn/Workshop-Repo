@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Week 7/Desert_Terrain_Build.unity
+- path: Assets/Scenes/Week 7/Desert_Terrain_Build_v01.unity
   isLoaded: 1
   isActive: 1
