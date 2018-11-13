@@ -403,7 +403,6 @@ public class FinisherMode : MonoBehaviour
         RunicRinisherGuides.SetActive(false);
         InFinisherIcons.SetActive(false);
         didFail = true;
-        IncreaseFinisherMeter(20);
 
         StartCoroutine(LeavingFinisherMode());
     }

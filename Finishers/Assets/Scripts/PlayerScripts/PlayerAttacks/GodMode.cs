@@ -37,7 +37,7 @@ public class GodMode : MonoBehaviour {
         if (GodModeCount < GodModeTimer)
         {
             sword.SetFireSkin();
-            sword.SetSwordDamage(2);
+            sword.SetSwordDamage(1);
         }
         else
         {
