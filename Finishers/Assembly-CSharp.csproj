@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\Enemies\EnemyActions\KnightEnemyActions.cs" />
      <Compile Include="Assets\Scripts\Enemies\Enemyhp.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyMovementController.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyStaggerController.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemySword.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemySwordRange.cs" />
      <Compile Include="Assets\Scripts\LookAtTarget.cs" />

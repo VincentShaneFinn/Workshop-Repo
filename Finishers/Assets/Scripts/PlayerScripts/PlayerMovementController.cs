@@ -130,7 +130,7 @@ public class PlayerMovementController : MonoBehaviour
 
             // If running isn't on a toggle, then use the appropriate speed depending on whether the run button is down
             if (!toggleRun)
-                speed = Input.GetButton("Run") ? runSpeed : walkSpeed;
+                speed = Input.GetButton("Run") && !GameStatus.InCombat ? runSpeed : walkSpeed;
 
             //// If sliding (and it's allowed), or if we're on an object tagged "Slide", get a vector pointing down the slope we're on
             //if ((sliding && slideWhenOverSlopeLimit) || (slideOnTaggedObjects && hit.collider.tag == "Slide"))

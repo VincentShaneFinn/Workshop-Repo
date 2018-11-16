@@ -214,12 +214,4 @@ public class EnemyMovementController : MonoBehaviour {
         }
 
     }
-
-    void OnTriggerEnter(Collider col)
-    {
-        if(col.gameObject.name == "PlayerSwordTrigger")
-        {
-            StartCoroutine(KnockbackEnemy());
-        }
-    }
 }
