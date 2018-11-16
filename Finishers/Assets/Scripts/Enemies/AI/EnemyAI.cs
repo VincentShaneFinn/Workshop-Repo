@@ -158,12 +158,13 @@ public class EnemyAI : MonoBehaviour {
             {
                 //guard
                 //StartCoroutine("GuardState");
+                anim.SetBool("TempSurround", false);
             }
             else
             {
                 transform.Translate(Vector3.left * dx / x * Time.deltaTime * sidespeed);
+                anim.SetBool("TempSurround", true);
             }
-            anim.SetBool("TempSurround", true);
         }
         else
         {
