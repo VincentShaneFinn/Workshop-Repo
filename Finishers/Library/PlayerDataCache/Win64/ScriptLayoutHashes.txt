@@ -106,6 +106,7 @@ c7dd12c15208b0447e101f80038706df UnityEngine.Timeline.dll:UnityEngine.Timeline.A
 0ddb2c46096a1e59e0dce07886ce4769 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 0ddb2c46096a1e59e0dce07886ce4769 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 64f3a13c1277a7f1324321d93d0ec13b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
+340fd287f9e237dbfdc6672b0e00247e Assembly-CSharp.dll:.EnemyStaggerController
 cdb568351eaf1622ca40d04445557916 Assembly-CSharp.dll:.RunicFireCircle
 66b3109aa5921cf800bec17926c6adba Unity.TextMeshPro.dll:TMPro.TMP_SubMeshUI
 201273fb4f889724fb090164b7d6c657 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -144,7 +145,7 @@ f8b98e4ed22318dd93e25d82822ae266 Assembly-CSharp.dll:.RunicBeamBlast
 7eb1d60478d55b388802b4436dc22066 Assembly-CSharp.dll:.PlayerSwordHit
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ThrowLimb
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.AOERunicAttack
-14dc141be7269dbadd0087d96d152b15 Assembly-CSharp.dll:.Enemyhp
+5e91bd678f289e0a6b1007747cd393c7 Assembly-CSharp.dll:.Enemyhp
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 394ad5be633b77bd1b0bb71dff5d3563 Assembly-CSharp.dll:.RunicFlamethrower
 e29334d60dd21f346bb559e13bd3d454 Assembly-CSharp.dll:.ChangeCameraPerpective
