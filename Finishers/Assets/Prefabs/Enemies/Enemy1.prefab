@@ -3498,6 +3498,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4a61637773b5540b921437d0c03a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetListTime: 3
+  resetListCount: 3
+  poiseActive: 0
+  staggerCount: 0
+  staggerLimit: 3
 --- !u!114 &114175225409633878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3510,6 +3515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 5
+  BloodTrail: {fileID: 1663683648419342, guid: bc56bd78c72f6fe4f96a569ce15715bb, type: 2}
 --- !u!114 &114197278047392216
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemyhp : MonoBehaviour {
     private int currenthp;
     public int hp =1;
+    public GameObject BloodTrail;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +27,9 @@ public class Enemyhp : MonoBehaviour {
         {
             checkhp();
         }
+        var randomRotation = Quaternion.Euler(transform.rotation.x, Random.Range(0, 360), transform.rotation.z);
+        GameObject blood = Instantiate(BloodTrail, transform.position, randomRotation);
+        Destroy(blood, 1);
     }
     public void damage(int d, bool finisher) {
         currenthp -= d;
@@ -33,5 +37,8 @@ public class Enemyhp : MonoBehaviour {
         {
             checkhp();
         }
+        var randomRotation = Quaternion.Euler(transform.rotation.x, Random.Range(0, 360), transform.rotation.z);
+        GameObject blood = Instantiate(BloodTrail, transform.position, randomRotation);
+        Destroy(blood, 1);
     }
 }

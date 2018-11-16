@@ -18,8 +18,8 @@ public class Siphoncut : FinisherAbstract {
 	}
     public override void startfinisher(FinisherMode f)
     {
-        GameObject part1 = Instantiate(TopHalf, new Vector3(f.currentTarget.transform.position.x, 1f, f.currentTarget.transform.position.z), f.currentTarget.transform.rotation);
-        GameObject part2 = Instantiate(BottomHalf, new Vector3(f.currentTarget.transform.position.x, 0f, f.currentTarget.transform.position.z), f.currentTarget.transform.rotation);
+        GameObject part1 = Instantiate(TopHalf, new Vector3(f.currentTarget.transform.position.x, 1.5f, f.currentTarget.transform.position.z), f.currentTarget.transform.rotation);
+        GameObject part2 = Instantiate(BottomHalf, new Vector3(f.currentTarget.transform.position.x, 0.5f, f.currentTarget.transform.position.z), f.currentTarget.transform.rotation);
         try { Instantiate(SlicedLimb, SlicedLimbFirePoint); } catch { }
         GetComponent<PlayerHealthController>().PlayerHealed(20);
         f.CharAnim.Play("Attack 1");
