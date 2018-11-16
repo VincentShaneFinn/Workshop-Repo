@@ -8926,7 +8926,7 @@ Prefab:
     - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
         type: 2}
       propertyPath: MaxAttackActions
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1107490273387774, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5, type: 2}
       propertyPath: m_IsActive
@@ -39935,7 +39935,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4798909868311102, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -40
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4798909868311102, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
       propertyPath: m_LocalRotation.x

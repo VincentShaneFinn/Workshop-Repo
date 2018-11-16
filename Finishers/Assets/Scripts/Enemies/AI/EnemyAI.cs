@@ -23,7 +23,7 @@ public class EnemyAI : MonoBehaviour {
     private float ArcAngle = 360; //use 360 as a sub for null
     private Vector3 ArcTarget;
     // Use this for initialization
-    void Start () {
+    void Start() {
         GetEnemyMovementCtrl = GetComponent<EnemyMovementController>();
         director = GetComponentInParent<GroupDirector>();
         playerT = GameObject.FindGameObjectWithTag("Player").transform;
@@ -32,6 +32,7 @@ public class EnemyAI : MonoBehaviour {
 
     private float StaggeredCheckTime = .7f;
     private float StaggeredCheckCount = 0;
+    public void ResetStaggeredCheck() { StaggeredCheckCount = 0; }
 
     // Update is called once per frame
     void Update () {
@@ -47,7 +48,10 @@ public class EnemyAI : MonoBehaviour {
         {
             StaggeredCheckCount += Time.deltaTime;
             if (StaggeredCheckCount >= StaggeredCheckTime)
+            {
                 ChangeStatus(EnemyBehaviorStatus.Waiting);
+                anim.Play("Idle");
+            }
         }
         else
         {

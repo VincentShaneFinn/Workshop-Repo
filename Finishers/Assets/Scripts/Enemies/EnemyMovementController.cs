@@ -178,6 +178,8 @@ public class EnemyMovementController : MonoBehaviour {
     {
         if (agent.isActiveAndEnabled)
         {
+            GetComponent<EnemyAI>().ResetStaggeredCheck();
+
             GetComponent<EnemyAI>().anim.Play("Hit4");
             GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -200,15 +202,15 @@ public class EnemyMovementController : MonoBehaviour {
                 yield return null;
                 pcount += Time.deltaTime;
             }
-
-            if (GetComponent<EnemyAI>().PreviousStatus != EnemyBehaviorStatus.Staggered)
-            {
-                GetComponent<EnemyAI>().ChangeStatus(GetComponent<EnemyAI>().PreviousStatus); //return to what it was originally doing
-            }
-            else
-            {
-                GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.SurroundPlayer);
-            }
+            //this stuff doesn't work great just use an outside timer to restore status to waiting
+            //if (GetComponent<EnemyAI>().PreviousStatus != EnemyBehaviorStatus.Staggered)
+            //{
+            //    GetComponent<EnemyAI>().ChangeStatus(GetComponent<EnemyAI>().PreviousStatus); //return to what it was originally doing
+            //}
+            //else
+            //{
+            //    GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.SurroundPlayer);
+            //}
         }
 
     }

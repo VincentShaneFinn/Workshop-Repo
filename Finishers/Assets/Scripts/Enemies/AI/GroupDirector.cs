@@ -179,7 +179,8 @@ public class GroupDirector : MonoBehaviour{
     {
         foreach (EnemyAI enemy in Enemies)
         {
-            enemy.gameObject.GetComponent<EnemyAI>().wakeup();
+            if (enemy != null)
+                enemy.gameObject.GetComponent<EnemyAI>().wakeup();
         }
     }
 
@@ -193,7 +194,8 @@ public class GroupDirector : MonoBehaviour{
     {
         foreach(EnemyAI enemy in Enemies)
         {
-            enemy.ChangeStatus(EnemyBehaviorStatus.Waiting);
+            if (enemy != null)
+                enemy.ChangeStatus(EnemyBehaviorStatus.Waiting);
         }
     }
 
@@ -201,8 +203,9 @@ public class GroupDirector : MonoBehaviour{
     {
         foreach (EnemyAI enemy in Enemies)
         {
-            //enemy.GetEnemyMovementCtrl().ResumeMovement();
-            enemy.ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker);
+            if (enemy != null)
+                //enemy.GetEnemyMovementCtrl().ResumeMovement();
+                enemy.ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker);
         }
     }
     void OnTriggerEnter(Collider col)
