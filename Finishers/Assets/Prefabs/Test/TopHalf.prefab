@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 54117600342678092}
   - component: {fileID: 114328423383087896}
   - component: {fileID: 65406106496765854}
+  - component: {fileID: 114988632233785136}
   m_Layer: 0
   m_Name: TopHalf
   m_TagString: EditorOnly
@@ -126,3 +127,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: {x: 200, y: 200, z: 200}
   torqueValue: 1000
+--- !u!114 &114988632233785136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1786564139995998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3171df0708140541bd4d74326dc1073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroyTime: 5

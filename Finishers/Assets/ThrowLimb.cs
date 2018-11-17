@@ -22,39 +22,40 @@ public class ThrowLimb : MonoBehaviour {
         {
             transform.Translate(Vector3.forward * Time.deltaTime * 20);
         }
-        if (Input.GetButton("SpecialAttack"))
+	}
+
+    public void ButtonHeld()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit,Mathf.Infinity))
+            if (hit.collider.gameObject.tag == "Enemy" || hit.collider.gameObject.tag == "TargetDummy")
             {
-                if (hit.collider.gameObject.tag == "Enemy" || hit.collider.gameObject.tag == "TargetDummy")
-                {
-                    if (line != null)
-                        Destroy(line);
-                    line = DrawLine(transform.position, hit.point, Color.red);
-                }
-                else
-                {
-                    if (line != null)
-                        Destroy(line);
-                    line = DrawLine(transform.position, hit.point, Color.white);
-                }
+                if (line != null)
+                    Destroy(line);
+                line = DrawLine(transform.position, hit.point, Color.red);
             }
             else
             {
                 if (line != null)
                     Destroy(line);
-                line = DrawLine(transform.position, transform.position + transform.forward * 20, Color.white);
+                line = DrawLine(transform.position, hit.point, Color.white);
             }
-
         }
-        if (Input.GetButtonUp("SpecialAttack"))
+        else
         {
-            firedPressed = true;
-            transform.parent = null;
-            Destroy(line);
+            if (line != null)
+                Destroy(line);
+            line = DrawLine(transform.position, transform.position + transform.forward * 20, Color.white);
         }
-	}
+    }
+
+    public void ButtonReleased()
+    {
+        firedPressed = true;
+        transform.parent = null;
+        Destroy(line);
+    }
 
     GameObject DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0f)
     {
@@ -70,7 +71,7 @@ public class ThrowLimb : MonoBehaviour {
         return myLine;
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Enemy")
         {
@@ -97,7 +98,8 @@ public class ThrowLimb : MonoBehaviour {
         }
         else if (obstacleLayers.Contains(col.gameObject.layer))
         {
-            Destroy(gameObject);
+            if(firedPressed)
+                Destroy(gameObject);
         }
     }
 }
