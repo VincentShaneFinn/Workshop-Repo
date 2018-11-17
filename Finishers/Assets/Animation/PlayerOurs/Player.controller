@@ -154,7 +154,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: FinisherRunicIdleStance
-  m_Speed: 100
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -179,7 +179,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: RunicLeftCarve
-  m_Speed: 100
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101401483184787640}
@@ -205,7 +205,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: RunicDownCarve
-  m_Speed: 100
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101431477405053982}
@@ -231,7 +231,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: RunicRightCarve
-  m_Speed: 100
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101118983414338368}
@@ -283,7 +283,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: RunicUpCarve
-  m_Speed: 100
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101643844148284196}

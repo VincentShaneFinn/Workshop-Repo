@@ -65,41 +65,50 @@ public class PlayerAnimController : MonoBehaviour {
         AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
         AnimatorStateInfo CharState = CharAnim.GetCurrentAnimatorStateInfo(0);
 
+        if (GameStatus.GamePaused)
+        {
+            anim.updateMode = AnimatorUpdateMode.Normal;
+            CharAnim.updateMode = AnimatorUpdateMode.Normal;
+            return;
+        }
+        else
+        {
+            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+            CharAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
+
         if (GameStatus.FinisherModeActive) // separate player input style while in finisher mode
         {
             return;
         }
 
-        if (!GameStatus.GamePaused)
+        //Make sure player cant attack while dodgeing
+        if (Input.GetButtonDown("PrimaryAttack"))
         {
+            if (!pmc.isDashing())
+            {
+                //Alternate Primary Attack directions
+                if (!LastPrimaryAttackWasSlashL)
+                    next = PlayerActions.slashL;
+                else
+                    next = PlayerActions.slashR;
+            }
 
-            //Make sure player cant attack while dodgeing
-            if (Input.GetButtonDown("PrimaryAttack"))
-            {
-                if (!pmc.isDashing())
-                {
-                    //Alternate Primary Attack directions
-                    if (!LastPrimaryAttackWasSlashL)
-                        next = PlayerActions.slashL;
-                    else
-                        next = PlayerActions.slashR;
-                }
-
-            }
-            //When we get heavy attack, more work to be done
-            //if (Input.GetButtonDown("SecondaryAttack"))
-            //{
-            //    next = PlayerActions.slashR;
-            //}
-            if (Input.GetButtonDown("Dodge")) //dodge is handled in player movement controller, jumping with animation cant actually jump on a platform
-            {
-                next = PlayerActions.dodge;
-            }
-            if (Input.GetButtonDown("FinishMode"))
-            {
-                next = PlayerActions.finish;
-            }
         }
+        //When we get heavy attack, more work to be done
+        //if (Input.GetButtonDown("SecondaryAttack"))
+        //{
+        //    next = PlayerActions.slashR;
+        //}
+        if (Input.GetButtonDown("Dodge")) //dodge is handled in player movement controller, jumping with animation cant actually jump on a platform
+        {
+            next = PlayerActions.dodge;
+        }
+        if (Input.GetButtonDown("FinishMode"))
+        {
+            next = PlayerActions.finish;
+        }
+        
 
         //this is the "Que" that gathers the next action and makes it happen the next time the player is idle
         //need to make room for some animation to cancel halfway through an animation
