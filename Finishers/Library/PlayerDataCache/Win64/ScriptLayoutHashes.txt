@@ -142,6 +142,7 @@ e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSyste
 dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 96f3ea9f23b6f08e60710ebb4af49174 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 f8b98e4ed22318dd93e25d82822ae266 Assembly-CSharp.dll:.RunicBeamBlast
+381b8e7c7f737c881df1c5eace998b9d Assembly-CSharp.dll:.PlayerFootStepController
 7eb1d60478d55b388802b4436dc22066 Assembly-CSharp.dll:.PlayerSwordHit
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ThrowLimb
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.AOERunicAttack
@@ -156,6 +157,7 @@ f8046c066d6603e7182a89bac32ab5b9 Assembly-CSharp.dll:.LookAtTarget
 1fcff479659fedffa7205051e762d121 Assembly-CSharp.dll:.EnemyMovementController
 eaf0bcdb10d442a4029d615f41d09957 Unity.TextMeshPro.dll:TMPro.TextContainer
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ControlMethodDetector
+33d9ab9b1a602765e11d0123b29000a7 Assembly-CSharp.dll:.MusicController
 201273fb4f889724fb090164b7d6c657 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 486cd95c82d8305219c352c06b776e1f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 0f27c39183b9eb95eba0a228bea28273 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -203,6 +205,7 @@ e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 2f9af06a78208a67db480e9bfed4a076 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 e0ddd58be32e857de1349baf9883c3d4 Assembly-CSharp.dll:.UIManager
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
+53ec2772a5a9442af51a1da8546d3d2c Assembly-CSharp.dll:.PlayerSwordSoundController
 d5e6ecff5a6a9b0db9cff4d6bbdbd682 Assembly-CSharp.dll:.PlayerSwordAttack
 a83e9a16689cdf416d041345efa20a7e Assembly-CSharp.dll:.MoveFlames
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh

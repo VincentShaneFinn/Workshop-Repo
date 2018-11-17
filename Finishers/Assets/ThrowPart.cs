@@ -16,7 +16,6 @@ public class ThrowPart : MonoBehaviour {
             GetComponent<Rigidbody>().AddForce(Rforces, ForceMode.Acceleration);
             GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1)) * torqueValue);
             first = false;
-            print(transform.position.y);
         }
     }
 }

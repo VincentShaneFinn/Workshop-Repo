@@ -97,6 +97,9 @@
      <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerCC.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerRigidbody.cs" />
      <Compile Include="Assets\Scripts\Save.cs" />
+     <Compile Include="Assets\Scripts\SoundScripts\MusicController.cs" />
+     <Compile Include="Assets\Scripts\SoundScripts\PlayerFootStepController.cs" />
+     <Compile Include="Assets\Scripts\SoundScripts\PlayerSwordSoundController.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ChangeButtonIcon.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ControlMethodDetector.cs" />
      <Compile Include="Assets\Scripts\UIScripts\GameStatus.cs" />
