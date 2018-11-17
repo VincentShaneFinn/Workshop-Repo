@@ -42,6 +42,10 @@ public class GroupDirector : MonoBehaviour{
         myActionManager.MaxAttackActions = MaxAttackActions;
         myActionManager.MaxNormalAttacks = MaxNormalAttacks;
         myActionManager.MaxSpecial1Attacks = MaxSpecial1Attacks;
+        foreach(GameObject door in Exits)
+        {
+            door.SetActive(false);
+        }
     }
     public void Update()
     {
@@ -115,7 +119,7 @@ public class GroupDirector : MonoBehaviour{
         }
     }
 
-    //Check if a status is busy or not
+    //Check if a status is busy or not, this check if the given status is something that should not be interupted
     public bool IsBusy(EnemyBehaviorStatus status)
     {
         if (status != EnemyBehaviorStatus.PrimaryAttacker && status != EnemyBehaviorStatus.ArcRunner && status != EnemyBehaviorStatus.SurroundPlayer && status != EnemyBehaviorStatus.Waiting)
@@ -175,7 +179,8 @@ public class GroupDirector : MonoBehaviour{
     {
         foreach (EnemyAI enemy in Enemies)
         {
-            enemy.gameObject.GetComponent<EnemyAI>().wakeup();
+            if (enemy != null)
+                enemy.gameObject.GetComponent<EnemyAI>().wakeup();
         }
     }
 
@@ -189,7 +194,8 @@ public class GroupDirector : MonoBehaviour{
     {
         foreach(EnemyAI enemy in Enemies)
         {
-            enemy.ChangeStatus(EnemyBehaviorStatus.Waiting);
+            if (enemy != null)
+                enemy.ChangeStatus(EnemyBehaviorStatus.Waiting);
         }
     }
 
@@ -197,8 +203,9 @@ public class GroupDirector : MonoBehaviour{
     {
         foreach (EnemyAI enemy in Enemies)
         {
-            //enemy.GetEnemyMovementCtrl().ResumeMovement();
-            enemy.ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker);
+            if (enemy != null)
+                //enemy.GetEnemyMovementCtrl().ResumeMovement();
+                enemy.ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker);
         }
     }
     void OnTriggerEnter(Collider col)

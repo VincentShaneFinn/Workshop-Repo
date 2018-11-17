@@ -30,22 +30,62 @@ public class KnightEnemyActions : MonoBehaviour {
 
         //Animation Section
         //AI.anim.applyRootMotion = true;
-        AI.anim.Play("RunningAttack");
-        //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
 
-        float tempAnimationTime = 1f;
-        float tempAnimationCount = 0;
+        //Attack animatin is currently .1 meters higher than normal
+        //AI.anim.transform.position = new Vector3(AI.anim.transform.position.x, AI.anim.transform.position.y - .15f, AI.anim.transform.position.z);
+        int attackIndex = Random.Range(0, 2);
+        attackIndex = 0;//MARK: UNTIL WE FIX THE ATTACK ANIMATIONS
+        bool interupped = false;
 
-        //we need to end prematurely if the enemy is staggered
-        while(tempAnimationCount < tempAnimationTime && AI.CurrentStatus != EnemyBehaviorStatus.Staggered)
+        if (attackIndex == 0)
         {
-            yield return null;
-            tempAnimationCount += Time.deltaTime;
-            if(AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
+
+            AI.anim.Play("RunningAttack");
+            //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
+
+            float tempAnimationTime = 2f;
+            float tempAnimationCount = 0;
+
+            //we need to end prematurely if the enemy is staggered
+            while (tempAnimationCount < tempAnimationTime)
             {
-                break;
+                yield return null;
+                tempAnimationCount += Time.deltaTime;
+                if (AI.CurrentStatus == EnemyBehaviorStatus.Staggered && AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
+                {
+                    interupped = true;
+                    break;
+                }
+                if (tempAnimationCount > 1.1f)
+                {
+                    MovementCtrl.SetSpeed(0);
+                }
             }
         }
+        //else
+        //{
+        //    AI.anim.Play("BranchAttack_swing1");
+        //    //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
+
+        //    float tempAnimationTime = 2f;
+        //    float tempAnimationCount = 0;
+
+        //    //we need to end prematurely if the enemy is staggered
+        //    while (tempAnimationCount < tempAnimationTime)
+        //    {
+        //        yield return null;
+        //        tempAnimationCount += Time.deltaTime;
+        //        if (AI.CurrentStatus == EnemyBehaviorStatus.Staggered && AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
+        //        {
+        //            interupped = true;
+        //            break;
+        //        }
+        //        if (tempAnimationCount > 1.1f)
+        //        {
+        //            MovementCtrl.SetSpeed(0);
+        //        }
+        //    }
+        //}
 
         //Sword.SetActive(false);//tempAniamtionFake
         //Animation Section
@@ -53,23 +93,30 @@ public class KnightEnemyActions : MonoBehaviour {
         //transform.position = AI.anim.transform.position;
         //AI.anim.transform.localPosition = new Vector3(0, -1, 0);
         AI.GetDirector().NormalAttackCompleted();
-        AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+        if (!interupped)
+        {
+            AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+            AI.anim.Play("Idle");
+        }
         AI.ChangeAction(EnemyActions.None);
         MovementCtrl.RestoreSpeed();
-        AI.anim.Play("Idle");
+        //MovementCtrl.ResumeMovement();
     }
 
     //Leap Attack for a knight
     IEnumerator PerformSpecial1Attack()
     {
         MovementCtrl.StopMovement();
+        MovementCtrl.SetLockToGround(false);
         AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
         AI.ChangeAction(EnemyActions.Special1);
         //set animation
         //attack()
         //Animation
         //AI.anim.applyRootMotion = true;
-        AI.anim.Play("JumpAttack"); 
+
+        AI.anim.Play("JumpAttack");
+
         //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
 
         GetComponent<EnemyMovementController>().DisableNavAgent();
@@ -115,5 +162,6 @@ public class KnightEnemyActions : MonoBehaviour {
         AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
         AI.ChangeAction(EnemyActions.None);
         AI.anim.Play("Idle");
+        MovementCtrl.SetLockToGround(true);
     }
 }

@@ -261,7 +261,7 @@ public class FinisherMode : MonoBehaviour
                 //    StartCoroutine(ExecuteFinisher());
                 //}
 
-                if (FinisherCount <= 0)
+                if (FinisherCount <= 0 && !ExecutingFinisher)
                 {
                     FailFinisherMode();
                 }
@@ -285,7 +285,6 @@ public class FinisherMode : MonoBehaviour
     }
     public void IncreaseGodModeMeter()
     {
-        print("test");
         GodModeSlider.value += 40;
     }
     public void IncreaseGodModeMeter(int val)

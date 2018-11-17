@@ -72,4 +72,4 @@ MonoBehaviour:
   MaxAttackActions: 2
   MaxNormalAttacks: 2
   MaxSpecial1Attacks: 1
-  SendOrderTime: 1
+  SendOrderTime: 0
