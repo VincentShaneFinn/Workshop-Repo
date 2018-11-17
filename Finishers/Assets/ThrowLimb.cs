@@ -77,13 +77,10 @@ public class ThrowLimb : MonoBehaviour {
         {
             if (firedPressed)
             {
-                if (col.gameObject.GetComponent<EnemyAI>().CurrentStatus != EnemyBehaviorStatus.Sleeping)
-                {
-                    col.gameObject.GetComponent<EnemyAI>().KillEnemy();
-                    CurrentlyKilledCount++;
-                    if(CurrentlyKilledCount >= KillLimit)
-                        Destroy(gameObject);
-                }
+                col.gameObject.GetComponent<EnemyAI>().KillEnemy();
+                CurrentlyKilledCount++;
+                if(CurrentlyKilledCount >= KillLimit)
+                    Destroy(gameObject);
             }
         }
         else if (col.gameObject.tag == "TargetDummy")

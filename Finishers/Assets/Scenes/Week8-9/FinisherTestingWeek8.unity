@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -469,34 +469,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4419104051015456, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
     type: 2}
   m_PrefabInternal: {fileID: 473692532}
---- !u!1 &208753788
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 208753789}
-  m_Layer: 9
-  m_Name: RotateSwords
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &208753789
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 208753788}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 507411305}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &253441629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,31 +977,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300032, guid: d0e8599ced634184499b110bedab6ded, type: 3}
---- !u!1 &507411304 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1184319411456460, guid: a6c78e17a78d821409c027d46cb0b7c3,
-    type: 2}
-  m_PrefabInternal: {fileID: 860729181}
---- !u!4 &507411305 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4799636196231734, guid: a6c78e17a78d821409c027d46cb0b7c3,
-    type: 2}
-  m_PrefabInternal: {fileID: 860729181}
---- !u!114 &507411306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 507411304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8510be854cd3d964da6dd79832e75e47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ThrowableSword: {fileID: 1556134404968722, guid: deac485d74609cc4dbe92f9060f3dc5b,
-    type: 2}
-  swordLimit: 4
-  RotatingRing: {fileID: 208753789}
 --- !u!1001 &510711754
 Prefab:
   m_ObjectHideFlags: 0
@@ -1501,11 +1448,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114034528800546196, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: Groups.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4798909868311102, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1538,22 +1480,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 224818690060064096, guid: a6c78e17a78d821409c027d46cb0b7c3,
+    - target: {fileID: 224779473157490378, guid: a6c78e17a78d821409c027d46cb0b7c3,
         type: 2}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224818690060064096, guid: a6c78e17a78d821409c027d46cb0b7c3,
+    - target: {fileID: 224779473157490378, guid: a6c78e17a78d821409c027d46cb0b7c3,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224779473157490378, guid: a6c78e17a78d821409c027d46cb0b7c3,
+    - target: {fileID: 224818690060064096, guid: a6c78e17a78d821409c027d46cb0b7c3,
         type: 2}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224779473157490378, guid: a6c78e17a78d821409c027d46cb0b7c3,
+    - target: {fileID: 224818690060064096, guid: a6c78e17a78d821409c027d46cb0b7c3,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1563,21 +1505,6 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114926911975128694, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: slowMoModifier
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 95181696500470906, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: m_UpdateMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114024492631371884, guid: a6c78e17a78d821409c027d46cb0b7c3,
-        type: 2}
-      propertyPath: shc
-      value: 
-      objectReference: {fileID: 507411306}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6c78e17a78d821409c027d46cb0b7c3, type: 2}
   m_IsPrefabAsset: 0
