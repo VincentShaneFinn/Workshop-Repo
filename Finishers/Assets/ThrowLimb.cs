@@ -67,13 +67,14 @@ public class ThrowLimb : MonoBehaviour {
         Destroy(line);
     }
 
+    public Material LineMat;
     GameObject DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0f)
     {
         GameObject myLine = new GameObject();
         myLine.transform.position = start;
         myLine.AddComponent<LineRenderer>();
         LineRenderer lr = myLine.GetComponent<LineRenderer>();
-        lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
+        lr.material = LineMat;
         lr.SetColors(color, color);
         lr.SetWidth(0.05f, 0.05f);
         lr.SetPosition(0, start);

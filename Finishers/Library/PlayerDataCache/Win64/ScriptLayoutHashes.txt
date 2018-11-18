@@ -2,7 +2,7 @@ WindowsStandalone
 PlayerPath?
 D:/GITHUB/Workshop-Repo/Finishers/GameBuild/Finishers.exe
 SceneListBegin?
-Assets/Scenes/Week7-8/Week7StartHere.unity
+Assets/Scenes/Week8-9/Week8StartHere.unity
 SceneListEnd?
 7de1f1a55aa89e99d5f483eb28ee85eb Assembly-CSharp.dll:.PlayerMovementController
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
@@ -144,7 +144,7 @@ dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 381b8e7c7f737c881df1c5eace998b9d Assembly-CSharp.dll:.PlayerFootStepController
 f9664172a126d37e885783a25b549450 Assembly-CSharp.dll:.PlayerSwordHit
 4c260a07b6991b840ac9d1cbd832901b Assembly-CSharp.dll:.SiphonHolsterController
-5bc18fa45998c22e30098a2f2df87980 Assembly-CSharp.dll:.ThrowLimb
+4fa4040e6f350edc75cc78e17a510fcd Assembly-CSharp.dll:.ThrowLimb
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.AOERunicAttack
 08c5addf9134c7eacfa16a26370d893c Assembly-CSharp.dll:.Enemyhp
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
@@ -172,7 +172,7 @@ da21fc3f8056b1f91c3dd09c7bf4f90a UnityEngine.Networking.dll:UnityEngine.Networki
 529a95e9e8e7686c4816e08fbb37183f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 fc061f3ae8a876c0687e86378d4a447c UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 7ca56e063bd071986fff4f513cc4f477 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-bf57008b2e223706c73a635333643557 Assembly-CSharp.dll:.GodMode
+b8cceb6d4bfe708b97a60b2a00a7170c Assembly-CSharp.dll:.GodMode
 72a8523b432c0a5317826b7a9e0a0e79 Unity.TextMeshPro.dll:TMPro.PackageResourceImporterWindow
 ab4e3d5d919ba3c6ca506c39dd011370 Assembly-CSharp.dll:.Siphoncut
 e53cc67d84060d628c7f03fc725766d8 Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
@@ -184,6 +184,7 @@ e033f131358cea5a0eabf9561e781deb UnityEngine.TestRunner.dll:UnityEngine.TestTool
 70f7dc248db3379548a88e8d4fa049f8 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
+3b45170f6b5a6e419f8782c83e9fd455 Assembly-CSharp.dll:.RunicFireSword
 1a90b221dc803408fbafa883c12bcab4 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
 70f7dc248db3379548a88e8d4fa049f8 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
@@ -196,7 +197,7 @@ dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 0ade5b0c6db695332e146cefa72484c0 Assembly-CSharp.dll:.EnemySword
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-41f0eabd0e8aac037f3497bad763a6e2 Assembly-CSharp.dll:.FinisherMode
+972b0d4cea297983e6176be5b3e3b74e Assembly-CSharp.dll:.FinisherMode
 3d83123ff25efea22d6d62ce29fee55a Assembly-CSharp.dll:.PlayerAnimController
 1f1a5c58d7eae7e9cd2f94ea7e282645 Assembly-CSharp.dll:UnityEngine.AI.NavMeshLink
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.GodModeText
@@ -210,6 +211,6 @@ d5e6ecff5a6a9b0db9cff4d6bbdbd682 Assembly-CSharp.dll:.PlayerSwordAttack
 a83e9a16689cdf416d041345efa20a7e Assembly-CSharp.dll:.MoveFlames
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 f1be46a363df415f7ec35f96181304d8 Assembly-CSharp.dll:.PlayerHealthController
+780f30bb3357538f4708cc90b5e4ac19 Assembly-CSharp.dll:.PlayerDamageValues
 65968b3b1a8d8901b00426211237013c Assembly-CSharp.dll:.ChangeButtonIcon
 a4c44f2a3b558493faeba199b4fb4be2 Assembly-CSharp.dll:.PlayerMovementControllerCC
-780f30bb3357538f4708cc90b5e4ac19 Assembly-CSharp.dll:.PlayerDamageValues

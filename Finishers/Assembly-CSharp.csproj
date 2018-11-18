@@ -80,6 +80,7 @@
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\FinisherAbstract.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\FinisherMode.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFireCircle.cs" />
+     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFireSword.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFlamethrower.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicMoves\AOERunicAttack.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicMoves\MoveFlames.cs" />

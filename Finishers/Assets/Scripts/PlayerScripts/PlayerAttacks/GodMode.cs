@@ -10,48 +10,11 @@ public class GodMode : MonoBehaviour {
     public GameObject GodModeText;
     public float GodModeTimer;
     private float GodModeCount;
-    public PlayerSwordHit sword;
-    public GameObject Flames;
-    private GameObject currentflame;
 
 	// Use this for initialization
 	void Start () {
         GodModeCount = GodModeTimer;
 	}
-
-    //// Update is called once per frame
-    //void Update () {
-    //       if (!GameStatus.GamePaused && !GameStatus.FinisherModeActive)
-    //       {
-    //           if (GodModeSlider.value >= 100)
-    //           {
-    //               GodModeText.SetActive(true);
-    //               if (Input.GetButtonDown("GodMode"))
-    //               {
-    //                   GetComponent<FinisherMode>().IncreaseFinisherMeter(100);
-    //                   GodModeCount = 0;
-    //                   GodModeSlider.value = 0;
-    //                   GodModeText.SetActive(false);
-    //                   currentflame = Instantiate(Flames, sword.gameObject.transform.position, sword.gameObject.transform.rotation);
-    //                   currentflame.transform.parent = sword.swordEdge.transform;
-    //                   Destroy(currentflame, .2f);
-    //               }
-    //           }
-
-    //           if (GodModeCount < GodModeTimer)
-    //           {
-    //               sword.SetFireSkin();
-    //               sword.SetSwordDamage(PlayerDamageValues.Instance.GodModeDamage);
-    //           }
-    //           else
-    //           {
-    //               sword.RestoreSwordDamage();
-    //               sword.RestoreSwordSkin();
-    //           }
-
-    //           GodModeCount += Time.deltaTime;
-    //       }
-    //}
 
     private bool GodModePressed = false;
     public float GodModeDistance = 10;
@@ -59,6 +22,10 @@ public class GodMode : MonoBehaviour {
     public CameraMovementController cmc;
     public CameraFollow cf;
     public Animator CharAnim;
+    public GameObject UpIcon;
+    public GameObject RightIcon;
+    public GameObject DownIcon;
+    public GameObject LeftIcon;
 
     // Update is called once per frame
     void Update()
@@ -78,9 +45,7 @@ public class GodMode : MonoBehaviour {
             {
                 GodModeCount = 0;
                 GodModePressed = false;
-                GodModeSlider.value = 0;
                 GodModeText.SetActive(false);
-                GetComponent<FinisherMode>().IncreaseFinisherMeter(100);
                 StartCoroutine(PerformGodMode());
             }
         }
@@ -89,61 +54,79 @@ public class GodMode : MonoBehaviour {
     IEnumerator PerformGodMode()
     {
         GetComponent<FinisherMode>().CanFinish = false;
-        List<GameObject> Enemies = GetEnemies(5);
         bool timeRanOut = false;
         bool firstEnemy = true;
-        pmc.PreventMoving();
-        pmc.PreventTuring();
-        GameStatus.FinisherModeActive = true;
-        CharAnim.Play("FinisherStart");
-
-        //Go throug the nearby enemies
-        foreach(GameObject Enemy in Enemies)
+        int kills = 0;
+        List<GameObject> Enemies = GetEnemies();
+        GameObject closestEnemy = null;
+        //Enemies = BuildPathOfFoes(Enemies);
+        if (Enemies.Count > 0)
         {
-            if (firstEnemy)
+            pmc.PreventMoving();
+            pmc.PreventTuring();
+            GameStatus.FinisherModeActive = true;
+            CharAnim.Play("Carve 1");
+            closestEnemy = FindClosestEnemy(Enemies);
+
+            //Go throug the nearby enemies
+            while (kills < 5)
             {
-                //MARK: play an animation?? also make invulnerable
-
-                //moves camera
-                cmc.MoveToFinisherModeLocation(); //Mark make sure camera takes as long as the animation
-
-                while (cmc.GetIsMoving())
-                {
-                    yield return null;
-                }
-                Time.timeScale = 0;
-                firstEnemy = false;
-                GetComponent<PlayerMovementController>().Aiming = false;
-            }
-
-            if (Enemy != null)
-            {
-                //Go To enemy
-                //Prompt for button press
-                //if failed break out
-                //Perform Quick Finisher
-                transform.position = Enemy.transform.position + Enemy.transform.forward * 1.5f;
-                Vector3 targetPostition = new Vector3(Enemy.transform.position.x,
-                this.transform.position.y,
-                Enemy.transform.position.z);
-                PlayerRotWrapper.transform.LookAt(targetPostition);
-                cf.transform.LookAt(targetPostition); //MARK: this is technically a bug, but the dynamic camera looks kinda good
-                while (!Input.GetKeyDown(KeyCode.Tab))
-                {
-                    if (GodModeCount >= GodModeTimer)// break out if they are taking too long
-                    {
-                        timeRanOut = true;
-                        break;
-                    }
-                    GodModeCount += Time.unscaledDeltaTime;
-                    yield return null;
-                }
                 if (timeRanOut)
                     break;
-                CharAnim.Play("FinisherExecution");
-                yield return new WaitForSecondsRealtime(1f);
-                CharAnim.Play("Idle");
-                Destroy(Enemy);
+                if (firstEnemy)
+                {
+                    //MARK: play an animation?? also make invulnerable
+
+                    //moves camera
+                    cmc.MoveToFinisherModeLocation(); //Mark make sure camera takes as long as the animation
+
+                    while (cmc.GetIsMoving())
+                    {
+                        yield return null;
+                    }
+                    Time.timeScale = 0;
+                    firstEnemy = false;
+                    GetComponent<PlayerMovementController>().Aiming = false;
+                }
+
+                if (closestEnemy != null)
+                {
+                    CharAnim.Play("Idle");
+                    //Go To enemy
+                    //Prompt for button press
+                    //if failed break out
+                    //Perform Quick Finisher
+                    StartCoroutine(MoveToEnemy(closestEnemy, .15f));
+                    yield return new WaitForSecondsRealtime(.3f);
+
+                    ChoseInput();
+
+                    while (!CheckUserInput()) //returns true if the right button is pressed, so stop the while loop
+                    {
+                        if (GodModeCount >= GodModeTimer)// break out if they are taking too long
+                        {
+                            timeRanOut = true;
+                            break;
+                        }
+                        GodModeCount += Time.unscaledDeltaTime;
+                        yield return null;
+                    }
+                    HideInputs();
+                    CharAnim.Play("FinisherExecution");
+                    yield return new WaitForSecondsRealtime(1f);
+
+                    GodModeSlider.value -= 34;
+                    Destroy(closestEnemy);
+                    GetComponent<FinisherMode>().IncreaseFinisherMeter(20);
+                    kills++;
+                    if (timeRanOut)
+                        break;
+                    yield return null;
+                    Enemies = GetEnemies();
+                    if (Enemies.Count <= 0)
+                        break;
+                    closestEnemy = FindClosestEnemy(Enemies);
+                }
             }
         }
 
@@ -157,9 +140,114 @@ public class GodMode : MonoBehaviour {
         yield return null;
     }
 
+    int InputIndex = 0;
+    public void ChoseInput()
+    {
+        InputIndex = Random.Range(0, 4);
+        switch (InputIndex)
+        {
+            case 0:
+                UpIcon.SetActive(true);
+                RightIcon.SetActive(false);
+                DownIcon.SetActive(false);
+                LeftIcon.SetActive(false);
+                break;
+            case 1:
+                UpIcon.SetActive(false);
+                RightIcon.SetActive(true);
+                DownIcon.SetActive(false);
+                LeftIcon.SetActive(false);
+                break;
+            case 2:
+                UpIcon.SetActive(false);
+                RightIcon.SetActive(false);
+                DownIcon.SetActive(true);
+                LeftIcon.SetActive(false);
+                break;
+            case 3:
+                UpIcon.SetActive(false);
+                RightIcon.SetActive(false);
+                DownIcon.SetActive(false);
+                LeftIcon.SetActive(true);
+                break;
+        }
+    }
+    public bool CheckUserInput()
+    {
+        if (Input.GetButtonDown("UpButton"))
+        {
+            if (InputIndex != 0)
+            {
+                GodModeCount = GodModeTimer;
+                return false;
+            }
+            return true;
+        }
+        if (Input.GetButtonDown("RightButton"))
+        {
+            if (InputIndex != 1)
+            {
+                GodModeCount = GodModeTimer;
+                return false;
+            }
+            return true;
+        }
+        if (Input.GetButtonDown("DownButton"))
+        {
+            if (InputIndex != 2)
+            {
+                GodModeCount = GodModeTimer;
+                return false;
+            }
+            return true;
+        }
+        if (Input.GetButtonDown("LeftButton"))
+        {
+            if (InputIndex != 3)
+            {
+                GodModeCount = GodModeTimer;
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+    public void HideInputs()
+    {
+        UpIcon.SetActive(false);
+        RightIcon.SetActive(false);
+        DownIcon.SetActive(false);
+        LeftIcon.SetActive(false);
+    }
+
+    public IEnumerator MoveToEnemy(GameObject enemy, float timeToMove)
+    {
+        var currentPos = transform.position;
+        var t = 0f;
+        while (t < 1)
+        {
+            t += Time.unscaledDeltaTime / timeToMove;
+            var heading = transform.position - enemy.transform.position;
+            var distance = heading.magnitude;
+            var direction = heading / distance; // This is now the normalized direction.
+
+            transform.position = Vector3.Lerp(currentPos, enemy.transform.position +  direction * 1.5f, t);//change direction to enemy.transform.forward to place in front of enemies
+            Vector3 currentTargetPostition = new Vector3(enemy.transform.position.x, this.transform.position.y, enemy.transform.position.z);
+            //PlayerRotWrapper.transform.LookAt(currentTargetPostition);
+            //cf.transform.LookAt(currentTargetPostition); //MARK: this is technically a bug, but the dynamic camera looks kinda good
+            Quaternion rot = Quaternion.LookRotation(currentTargetPostition - transform.position);
+            PlayerRotWrapper.transform.rotation = Quaternion.Slerp(PlayerRotWrapper.transform.rotation, rot, t);
+            cf.transform.rotation = Quaternion.Slerp(cf.transform.rotation, rot, t);
+            yield return null;
+        }
+
+        Vector3 targetPostition = new Vector3(enemy.transform.position.x, this.transform.position.y, enemy.transform.position.z);
+        PlayerRotWrapper.transform.LookAt(targetPostition);
+    }
+
     public Transform PlayerRotWrapper;
 
-    public List<GameObject> GetEnemies(int n)
+    public List<GameObject> GetEnemies()
     {
         List<GameObject> enemies = new List<GameObject>();
 
@@ -170,8 +258,6 @@ public class GodMode : MonoBehaviour {
             if (Vector3.Distance(Enemy.transform.position, transform.position) < GodModeDistance && Enemy.GetComponent<NavMeshAgent>().isActiveAndEnabled)
             {
                 enemies.Add(Enemy);
-                if (enemies.Count >= n)
-                    return enemies;
             }
         }
         GameObject[] TargetDummies = GameObject.FindGameObjectsWithTag("TargetDummy");
@@ -180,10 +266,21 @@ public class GodMode : MonoBehaviour {
             if (Vector3.Distance(dummy.transform.position, transform.position) < GodModeDistance)
             {
                 enemies.Add(dummy);
-                if (enemies.Count >= n)
-                    return enemies;
             }
         }
         return enemies;
     }
+
+    public GameObject FindClosestEnemy(List<GameObject> enemies)
+    {
+        GameObject closest = enemies[0];
+        foreach (GameObject enemy in enemies) {
+            if (Vector3.Distance(enemy.transform.position, transform.position) < Vector3.Distance(closest.transform.position, transform.position))
+            {
+                closest = enemy;
+            }   
+        }
+        return closest;
+    }
+
 }

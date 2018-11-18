@@ -8748,6 +8748,7 @@ MonoBehaviour:
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 3072
+  LineMat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!137 &137021985178966824
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
