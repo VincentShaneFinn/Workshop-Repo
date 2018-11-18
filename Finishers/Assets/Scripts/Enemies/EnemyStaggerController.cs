@@ -49,6 +49,10 @@ public class EnemyStaggerController : MonoBehaviour {
                 staggerCount++;
                 resetListCount = 0;
             }
+            else if(GetComponent<EnemyAI>().GetCurrentStatus() != EnemyBehaviorStatus.Attacking)
+            {
+                GetComponent<KnightEnemyActions>().PerformUnblockableAttack();
+            }
         }
     }
 }

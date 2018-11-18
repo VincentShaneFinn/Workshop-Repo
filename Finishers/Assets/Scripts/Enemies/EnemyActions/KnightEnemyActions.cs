@@ -51,7 +51,7 @@ public class KnightEnemyActions : MonoBehaviour {
             {
                 yield return null;
                 tempAnimationCount += Time.deltaTime;
-                if (AI.CurrentStatus == EnemyBehaviorStatus.Staggered && AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
+                if (AI.CurrentStatus == EnemyBehaviorStatus.Staggered || AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
                 {
                     interupped = true;
                     break;
@@ -164,5 +164,50 @@ public class KnightEnemyActions : MonoBehaviour {
         AI.ChangeAction(EnemyActions.None);
         AI.anim.Play("Idle");
         MovementCtrl.SetLockToGround(true);
+    }
+
+    public void PerformUnblockableAttack()
+    {
+        StartCoroutine(UnblockableAttack());
+    }
+
+    IEnumerator UnblockableAttack()
+    {
+        MovementCtrl.SetSpeed(1f);
+        AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
+        AI.ChangeAction(EnemyActions.NormalAttack);
+        sword.damage = PlayerDamageValues.Instance.NormalAttackDamage;
+
+        bool interupped = false;
+
+        AI.anim.Play("RunningAttack");
+        //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
+
+        float tempAnimationTime = 2f;
+        float tempAnimationCount = 0;
+
+        //we need to end prematurely if the enemy is staggered
+        while (tempAnimationCount < tempAnimationTime)
+        {
+            yield return null;
+            tempAnimationCount += Time.deltaTime;
+            if (AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
+            {
+                interupped = true;
+                break;
+            }
+            if (tempAnimationCount > 1.1f)
+            {
+                MovementCtrl.SetSpeed(0);
+            }
+        }
+
+        if (!interupped)
+        {
+            AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+            AI.anim.Play("Idle");
+        }
+        AI.ChangeAction(EnemyActions.None);
+        MovementCtrl.RestoreSpeed();
     }
 }
