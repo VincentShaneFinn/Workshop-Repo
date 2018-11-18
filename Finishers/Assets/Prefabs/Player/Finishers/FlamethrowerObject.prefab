@@ -53,5 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovingFlame: {fileID: 1945781286512542, guid: f09cd2cc86bc378458e8eac283e15c01,
     type: 2}
-  DestroyTime: 1
-  FlameSpawnRate: 0.2
+  DestroyTime: 1.5
+  FlameSpawnRate: 0.25

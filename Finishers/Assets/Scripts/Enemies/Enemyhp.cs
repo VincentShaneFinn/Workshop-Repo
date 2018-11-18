@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemyhp : MonoBehaviour {
-    private int currenthp;
-    public int hp =1;
+    private float currenthp;
+    public float hp = 100;
     public GameObject BloodTrail;
 
 	// Use this for initialization
@@ -21,22 +21,12 @@ public class Enemyhp : MonoBehaviour {
                 Destroy(gameObject);
         }
     }
-    public void damage(bool finisher) {
-        currenthp--;
-        if (finisher) // must be kileld by a finisher
-        {
-            checkhp();
-        }
-        var randomRotation = Quaternion.Euler(transform.rotation.x, Random.Range(0, 360), transform.rotation.z);
-        GameObject blood = Instantiate(BloodTrail, transform.position, randomRotation);
-        Destroy(blood, 1);
-    }
-    public void damage(int d, bool finisher) {
+
+    public void damage(float d) {
         currenthp -= d;
-        if (finisher)
-        {
-            checkhp();
-        }
+
+        checkhp();
+
         var randomRotation = Quaternion.Euler(transform.rotation.x, Random.Range(0, 360), transform.rotation.z);
         GameObject blood = Instantiate(BloodTrail, transform.position, randomRotation);
         Destroy(blood, 1);

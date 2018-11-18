@@ -7,26 +7,29 @@ public class CameraMovementController : MonoBehaviour {
     public Transform CombatCameraLocation;
     public Transform OOCCameraLocation;
     public Transform FinisherModeCameraLocation;
+    public Transform AimingCameraLocation;
+
+    public PlayerMovementController PMC;
 
     private Transform currentTargetLocation;
     private float currentSpeed;
 
-    public void MoveToCombatLocation()
-    {
-        //transform.position = CombatCameraLocation.position;
-
-        currentTargetLocation = CombatCameraLocation;
-        currentSpeed = .4f;
-        CallCoroutineHelper();
-    }
-
-    public void MoveToOOCLocation()
+    public void SwitchCombatLocation()
     {
         //transform.position = OOCCameraLocation.position;
-
-        currentTargetLocation = OOCCameraLocation;
-        currentSpeed = .4f;
-        CallCoroutineHelper();
+        if (currentTargetLocation != AimingCameraLocation)
+        {
+            if (GameStatus.InCombat)
+            {
+                currentTargetLocation = CombatCameraLocation;
+            }
+            else
+            {
+                currentTargetLocation = OOCCameraLocation;
+            }
+            currentSpeed = .4f;
+            CallCoroutineHelper();
+        }
     }
 
     public void MoveToFinisherModeLocation()
@@ -35,6 +38,25 @@ public class CameraMovementController : MonoBehaviour {
 
         currentTargetLocation = FinisherModeCameraLocation;
         currentSpeed = .45f;
+        CallCoroutineHelper();
+    }
+
+    //We will need to test these next two
+    public void MoveToAimingLocation()
+    {
+        PMC.Aiming = true;
+        currentTargetLocation = AimingCameraLocation;
+        currentSpeed = .1f;
+        CallCoroutineHelper();
+    }
+    public void ReturnFromAimingLocation()
+    {
+        PMC.Aiming = false;
+        if (GameStatus.InCombat)
+            currentTargetLocation = CombatCameraLocation;
+        else
+            currentTargetLocation = OOCCameraLocation;
+        currentSpeed = .1f;
         CallCoroutineHelper();
     }
 

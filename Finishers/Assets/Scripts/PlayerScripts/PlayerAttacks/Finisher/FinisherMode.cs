@@ -52,6 +52,7 @@ public class FinisherMode : MonoBehaviour
     public Transform CameraBase;
     public Transform PlayerRotWrapper;
     public bool TryFinisher = false;
+    public bool CanFinish = true;
     //private RunicInputHelper RunicSequence;
 
     private List<Direction> RunicQue;
@@ -83,7 +84,7 @@ public class FinisherMode : MonoBehaviour
     {
         if (!inFinisherMode)
         {
-            if (FinisherModeCooldownCount >= FinisherModeCooldownTime)
+            if (FinisherModeCooldownCount >= FinisherModeCooldownTime && CanFinish)
             {
                 if (finisherSlider.value >= 100)
                 {
@@ -106,6 +107,7 @@ public class FinisherMode : MonoBehaviour
             else
             {
                 FinisherModeCooldownCount += Time.deltaTime;
+                FinisherIcon.SetActivated(false);
             }
 
             //Increase UI slider for Finisher && temp cheat
@@ -128,6 +130,11 @@ public class FinisherMode : MonoBehaviour
             }
             if (PerformingFinisher && !ExecutingFinisher && !GameStatus.GamePaused) //MARK: Unsure of how we will do the full finisher carves
             {
+                if (Input.GetButtonDown("QuickFinish"))
+                {
+                    FailFinisherMode();
+                    return;
+                }
                 if (Input.GetButtonDown("UpButton"))
                 {
                     UIanim.Play("RunicUpCarve");
@@ -188,78 +195,6 @@ public class FinisherMode : MonoBehaviour
                         StartCoroutine(ExecuteFinisher(FinisherToPerform));
                     }
                 }
-                
-                //if (Input.GetButtonDown("UpButton"))
-                //{
-                //    anim.Play("RunicUpCarve");
-                //    if (!RunicSequence.AddInput(Direction.up))
-                //    {
-                //        FailFinisherMode();
-                //        return;
-                //    }
-
-                //}
-                //if (Input.GetButtonDown("RightButton"))
-                //{
-                //    anim.Play("RunicRightCarve");
-                //    if (!RunicSequence.AddInput(Direction.right))
-                //    {
-                //        FailFinisherMode();
-                //        return;
-                //    }
-                //}
-                //if (Input.GetButtonDown("DownButton"))
-                //{
-                //    anim.Play("RunicDownCarve");
-                //    if (!RunicSequence.AddInput(Direction.down))
-                //    {
-                //        FailFinisherMode();
-                //        return;
-                //    }
-                //}
-                //if (Input.GetButtonDown("LeftButton"))
-                //{
-                //    anim.Play("RunicLeftCarve");
-                //    if (!RunicSequence.AddInput(Direction.left))
-                //    {
-                //        FailFinisherMode();
-                //        return;
-                //    }
-                //}
-
-                //if(RunicSequence.GetCount() == 3)
-                //{
-                //    PrimaryAttackPopUp.SetActive(true);
-                //}
-                //if(RunicSequence.GetCount() > 3)
-                //{
-                //    FailFinisherMode();
-                //    return;
-                //}
-
-                ////inside the primary attack check, see if they did a correct sequence, and succeed or fail
-                //if (Input.GetButtonDown("PrimaryAttack"))
-                //{
-                //    if (RunicSequence.SuccessfulCombo(RunicSequence.FireCombo))
-                //    {
-                //        CurrentFinisherMode = FinisherModes.Runic;
-                //        StartCoroutine(ExecuteFinisher());
-                //    }
-                //    else if (RunicSequence.SuccessfulCombo(RunicSequence.IceCombo))
-                //    {
-                //        CurrentFinisherMode = FinisherModes.Siphoning;
-                //        print("Commit Siphoning Finisher");
-                //        StartCoroutine(ExecuteFinisher());
-                //    }
-                //    else
-                //        FailFinisherMode();
-                //}
-                //else if (Input.GetButtonDown("SpecialAttack"))
-                //{
-                //    CurrentFinisherMode = FinisherModes.PressurePoints;
-                //    print("Commit Pressure Points Finisher");
-                //    StartCoroutine(ExecuteFinisher());
-                //}
 
                 if (FinisherCount <= 0 && !ExecutingFinisher)
                 {
@@ -275,19 +210,11 @@ public class FinisherMode : MonoBehaviour
         TryFinisher = false;
     }
 
-    public void IncreaseFinisherMeter()
-    {
-        finisherSlider.value += buildupVal;
-    }
-    public void IncreaseFinisherMeter(int val)
+    public void IncreaseFinisherMeter(float val)
     {
         finisherSlider.value += val;
     }
-    public void IncreaseGodModeMeter()
-    {
-        GodModeSlider.value += 40;
-    }
-    public void IncreaseGodModeMeter(int val)
+    public void IncreaseGodModeMeter(float val)
     {
         GodModeSlider.value += val;
     }
@@ -334,6 +261,7 @@ public class FinisherMode : MonoBehaviour
         }
         //waits till the camera and or animation is done
         CameraBase.rotation = PlayerRotWrapper.rotation;
+        GetComponent<PlayerMovementController>().Aiming = false;
 
         PerformingFinisher = true;
         FinisherCount = FinisherTime;
@@ -357,31 +285,6 @@ public class FinisherMode : MonoBehaviour
         RunicRinisherGuides.SetActive(false);
         InFinisherIcons.SetActive(false);
 
-        //switch (CurrentFinisherMode)
-        //{
-
-        //    case FinisherModes.Runic:
-        //        Vector3 rot = EnemyFinisherPlacement.rotation.eulerAngles;
-        //        rot = new Vector3(rot.x, rot.y + 180, rot.z);
-        //        GameObject beam = Instantiate(BlastBeam, EnemyFinisherPlacement.position, Quaternion.Euler(rot));
-        //        beam.transform.parent = PlayerRotWrapper;
-        //        print("Commit Runit Finisher");
-        //        break;
-        //    case FinisherModes.Siphoning:
-        //        GameObject part1 = Instantiate(TopHalf, new Vector3(currentTarget.transform.position.x, 1f, currentTarget.transform.position.z), currentTarget.transform.rotation);
-        //        GameObject part2 = Instantiate(BottomHalf, new Vector3(currentTarget.transform.position.x, 0f, currentTarget.transform.position.z), currentTarget.transform.rotation);
-        //        try { Instantiate(SlicedLimb, SlicedLimbFirePoint); } catch { }
-        //        GetComponent<PlayerHealthController>().PlayerHealed(20);
-        //        anim.Play("SlashL");
-        //        print("Commit Siphoning Finisher");
-        //        break;
-        //    case FinisherModes.PressurePoints:
-        //        print("Commit PressurePoints Finisher");
-        //        break;
-        //    default:
-        //        break;
-
-        //}
         finisherSlider.value = 0;
         CharAnim.Play("FinisherExecution");
         yield return new WaitForSecondsRealtime(1f);
@@ -389,7 +292,7 @@ public class FinisherMode : MonoBehaviour
 
         yield return null; // do stuff to perform the finisher
 
-        IncreaseGodModeMeter();
+        IncreaseGodModeMeter(PlayerDamageValues.Instance.ExecuteFinisherGMFill);
         StartCoroutine(LeavingFinisherMode());
     }
 
@@ -432,9 +335,9 @@ public class FinisherMode : MonoBehaviour
         yield return null;
         swordController.ResumeAttacking();
         if (GameStatus.InCombat)
-            cam.MoveToCombatLocation();
+            cam.SwitchCombatLocation();
         else
-            cam.MoveToOOCLocation();
+            cam.SwitchCombatLocation();
         FinisherModeCooldownCount = 0;
         Time.timeScale = 1;
         GameStatus.FinisherModeActive = false;

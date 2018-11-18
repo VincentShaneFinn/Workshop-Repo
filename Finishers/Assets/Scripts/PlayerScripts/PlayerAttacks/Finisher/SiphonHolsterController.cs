@@ -9,6 +9,9 @@ public class SiphonHolsterController : MonoBehaviour {
     public GameObject ThrowableSword;
     public int swordLimit = 4;
     public Transform RotatingRing;
+    public CameraMovementController CMC;
+    private bool buttonPressed = false;
+    private bool cancelAction = false;
 
     // Use this for initialization
     void Start()
@@ -20,13 +23,36 @@ public class SiphonHolsterController : MonoBehaviour {
 	void Update () {
         if (!GameStatus.GamePaused)
         {
+            if(buttonPressed && GameStatus.FinisherModeActive)
+            {
+                cancelAction = true;
+                CurrentSword.GetComponent<ThrowLimb>().DestroyLine();
+                return;
+            }
+            if(CurrentSword == null)
+            {
+                return;
+            }
+            if (Input.GetButtonDown("SpecialAttack"))
+            {
+                CMC.MoveToAimingLocation();
+                buttonPressed = true;
+            }
             if (Input.GetButton("SpecialAttack"))
             {
-                if (CurrentSword != null)
+                if (CurrentSword != null && buttonPressed)
                     CurrentSword.GetComponent<ThrowLimb>().ButtonHeld();
             }
             if (Input.GetButtonUp("SpecialAttack"))
             {
+                buttonPressed = false;
+                if (cancelAction)
+                {
+                    CurrentSword.GetComponent<ThrowLimb>().DestroyLine();
+                    cancelAction = false;
+                    return;
+                }
+                CMC.ReturnFromAimingLocation();
                 if (CurrentSword != null)
                     CurrentSword.GetComponent<ThrowLimb>().ButtonReleased();
                 if (Swords.Count > 0)

@@ -35,6 +35,7 @@ public class CameraFollow : MonoBehaviour {
         rotX = rot.x;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        SavedSens = inputSensitivity;
     }
 
     // Update is called once per frame
@@ -80,5 +81,15 @@ public class CameraFollow : MonoBehaviour {
             //used for aiming
             PlayerModel.transform.rotation = localRotationJustY;
         }
+    }
+
+    public void SetSensitivity(float val)
+    {
+        inputSensitivity = val;
+    }
+    private float SavedSens;
+    public void RestoreSensitivity()
+    {
+        inputSensitivity = SavedSens;
     }
 }

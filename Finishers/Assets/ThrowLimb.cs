@@ -7,20 +7,25 @@ public class ThrowLimb : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         firedPressed = false;
+        FinMode = GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>();
 	}
 
     //VERY QUICK THROW TOGETHER STUFF
     private bool firedPressed;
     public int KillLimit = 3;
+    public List<GameObject> DeadBodies;
     private int CurrentlyKilledCount = 0;
     public LayerMask obstacleLayers;
     private GameObject line;
+    private FinisherMode FinMode;
+    private bool HitWall = false;
 	
 	// Update is called once per frame
 	void Update () {
         if (firedPressed)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * 20);
+            if(!HitWall)
+                transform.Translate(Vector3.forward * Time.deltaTime * 20);
         }
 	}
 
@@ -57,6 +62,11 @@ public class ThrowLimb : MonoBehaviour {
         Destroy(line);
     }
 
+    public void DestroyLine()
+    {
+        Destroy(line);
+    }
+
     GameObject DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0f)
     {
         GameObject myLine = new GameObject();
@@ -79,8 +89,11 @@ public class ThrowLimb : MonoBehaviour {
             {
                 col.gameObject.GetComponent<EnemyAI>().KillEnemy();
                 CurrentlyKilledCount++;
+                FinMode.IncreaseFinisherMeter(PlayerDamageValues.Instance.SiphoningFinMeterFill);
                 if(CurrentlyKilledCount >= KillLimit)
                     Destroy(gameObject);
+                else
+                    DeadBodies[CurrentlyKilledCount - 1].SetActive(true);
             }
         }
         else if (col.gameObject.tag == "TargetDummy")
@@ -89,14 +102,17 @@ public class ThrowLimb : MonoBehaviour {
             {
                 Destroy(col.gameObject);
                 CurrentlyKilledCount++;
+                FinMode.IncreaseFinisherMeter(PlayerDamageValues.Instance.SiphoningFinMeterFill);
                 if (CurrentlyKilledCount >= KillLimit)
                     Destroy(gameObject);
+                else
+                    DeadBodies[CurrentlyKilledCount - 1].SetActive(true);
             }
         }
         else if (obstacleLayers.Contains(col.gameObject.layer))
         {
-            if(firedPressed)
-                Destroy(gameObject);
+            if (firedPressed)
+                HitWall = true;
         }
     }
 }

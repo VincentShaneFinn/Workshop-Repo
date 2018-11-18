@@ -6,8 +6,7 @@ public class KnightEnemyActions : MonoBehaviour {
 
     public EnemyMovementController MovementCtrl;
     public EnemyAI AI;
-    public GameObject Sword;
-    public GameObject HeavySword;
+    public EnemySword sword;
     private Transform playerT;
 
     public float firingAngle = 45.0f;
@@ -24,6 +23,7 @@ public class KnightEnemyActions : MonoBehaviour {
         MovementCtrl.SetSpeed(1f);
         AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
         AI.ChangeAction(EnemyActions.NormalAttack);
+        sword.damage = PlayerDamageValues.Instance.NormalAttackDamage;
         //set animation
         //attack()
         //Sword.SetActive(true); //tempAniamtionFake
@@ -110,6 +110,7 @@ public class KnightEnemyActions : MonoBehaviour {
         MovementCtrl.SetLockToGround(false);
         AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
         AI.ChangeAction(EnemyActions.Special1);
+        sword.damage = PlayerDamageValues.Instance.JumpAttackDamage;
         //set animation
         //attack()
         //Animation

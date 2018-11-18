@@ -3514,7 +3514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4f9a76e58044f419a04e871f372737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 100
   BloodTrail: {fileID: 1663683648419342, guid: bc56bd78c72f6fe4f96a569ce15715bb, type: 2}
 --- !u!114 &114197278047392216
 MonoBehaviour:
@@ -3529,8 +3529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementCtrl: {fileID: 114872146328366510}
   AI: {fileID: 114569005166041670}
-  Sword: {fileID: 1678486615945646}
-  HeavySword: {fileID: 1976237148866420}
+  sword: {fileID: 114343715357250196}
   firingAngle: 45
   gravity: 9.8
 --- !u!114 &114238431573660498

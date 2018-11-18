@@ -73,6 +73,8 @@ public class PlayerMovementController : MonoBehaviour
     public LayerMask Ground;
     public Transform GroundChecker;
     public float GroundDistance = 0.2f;
+    public Transform CameraBase;
+    public bool Aiming = false;
 
     void Start()
     {
@@ -220,12 +222,19 @@ public class PlayerMovementController : MonoBehaviour
         {
             
             Vector3 movement = new Vector3((moveDirection).x, 0.0f, (moveDirection).z);
-            if (movement != Vector3.zero)
-            {
-                //print((float)(Time.deltaTime + (1.0 - Time.timeScale)));
-                //this doesnt get run if the timeScale is 0
-                rotationwrapper.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * rotationSpeed);
-                //rotationwrapper.transform.rotation = Quaternion.LookRotation(movement);
+            if (!Aiming) {
+                if (movement != Vector3.zero)
+                {
+                    //print((float)(Time.deltaTime + (1.0 - Time.timeScale)));
+                    //this doesnt get run if the timeScale is 0
+                    rotationwrapper.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * rotationSpeed);
+                    //rotationwrapper.transform.rotation = Quaternion.LookRotation(movement);
+                }
+            }
+            else {
+                float y = CameraBase.transform.eulerAngles.y;
+                rotationwrapper.transform.eulerAngles = new Vector3(0, y, 0);
+                //rotationwrapper.transform.rotation = CameraBaseRotJustY;
             }
         }
         dashed = false;
@@ -264,7 +273,7 @@ public class PlayerMovementController : MonoBehaviour
             myRigidbody.velocity = new Vector3(0, myRigidbody.velocity.y, 0);
         myRigidbody.AddForce(new Vector3(0, -gravity * myRigidbody.mass, 0));
 
-            if (CanMove && (moveDirection.x != 0 || moveDirection.z != 0))
+        if (CanMove && (moveDirection.x != 0 || moveDirection.z != 0) && speed >= 6) //MARK: temporary until get flamethrower animations
         {
             AnimatorStateInfo state = CharAnim.GetCurrentAnimatorStateInfo(0);
             moveDirection.y = 0;

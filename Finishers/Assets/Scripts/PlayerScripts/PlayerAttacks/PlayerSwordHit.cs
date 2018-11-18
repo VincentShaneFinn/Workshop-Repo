@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerSwordHit : MonoBehaviour {
 
     public FinisherMode finisherObject;
-    public int swordDamage = 1;
-    private int currentSwordDamage;
+    public float swordDamage = 1;
+    private float currentSwordDamage;
     public SkinnedMeshRenderer swordEdge;
     public Material[] OriginalSwordMaterials;
     public Material[] FireMats;
@@ -14,10 +14,11 @@ public class PlayerSwordHit : MonoBehaviour {
 
     void Start()
     {
+        swordDamage = PlayerDamageValues.Instance.LightAttackDamage;
         currentSwordDamage = swordDamage;
     }
 
-    public void SetSwordDamage(int d)
+    public void SetSwordDamage(float d)
     {
         currentSwordDamage = d;
     }
@@ -40,20 +41,20 @@ public class PlayerSwordHit : MonoBehaviour {
     {
         if (col.gameObject.tag.Equals("Enemy"))
         {
-            finisherObject.IncreaseFinisherMeter();
+            finisherObject.IncreaseFinisherMeter(PlayerDamageValues.Instance.NormalAttackFinMeterFill);
             Enemyhp e = null;
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {
-                e.damage(currentSwordDamage,isFinisher);
+                e.damage(currentSwordDamage);
             }
         }
         else if (col.gameObject.tag.Equals("TargetDummy"))
         {
-            finisherObject.IncreaseFinisherMeter();
+            finisherObject.IncreaseFinisherMeter(PlayerDamageValues.Instance.NormalAttackFinMeterFill);
             Enemyhp e = null;
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {
-                e.damage(currentSwordDamage,isFinisher);
+                e.damage(currentSwordDamage);
             }
         }
 

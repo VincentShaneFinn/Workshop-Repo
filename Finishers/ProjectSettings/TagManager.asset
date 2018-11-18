@@ -10,6 +10,7 @@ TagManager:
   - CameraTarget
   - Platform
   - TargetDummy
+  - CameraBase
   layers:
   - Default
   - TransparentFX

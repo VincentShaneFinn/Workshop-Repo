@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class EnemySword : MonoBehaviour {
     
-    public int damage;
+    public float damage;
 
 }

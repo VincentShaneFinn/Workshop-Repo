@@ -35,7 +35,6 @@ public class MusicController : MonoBehaviour {
 
     IEnumerator SwitchToInCombat()
     {
-        print("test");
         float delay = TransitionDelay;
         while(delay > 0)
         {

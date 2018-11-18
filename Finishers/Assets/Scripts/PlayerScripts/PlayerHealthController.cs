@@ -9,7 +9,7 @@ public class PlayerHealthController : MonoBehaviour
     //For debugging purposes
     public bool canDie = true;
 
-    public int MaxHealth = 100;
+    public float MaxHealth = 100;
     public Slider healthSlider;
     public Text gameOverText;
     public PlayerUpdater pUpdater;
@@ -21,12 +21,7 @@ public class PlayerHealthController : MonoBehaviour
         gameOverText.text = "";
     }
 
-    public void PlayerHit()
-    {
-        PlayerHit(10);
-    }
-
-    public void PlayerHit(int damage)
+    public void PlayerHit(float damage)
     {
         if (pUpdater.ImmuneCount < pUpdater.ImmuneTime || GetComponent<PlayerMovementController>().isDashing())
             return;
@@ -46,7 +41,7 @@ public class PlayerHealthController : MonoBehaviour
         }
     }
 
-    public void PlayerHealed(int health)
+    public void PlayerHealed(float health)
     {
         MaxHealth += health;
         if (MaxHealth > 100)

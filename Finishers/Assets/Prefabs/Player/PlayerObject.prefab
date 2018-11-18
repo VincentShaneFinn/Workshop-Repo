@@ -949,6 +949,7 @@ GameObject:
   - component: {fileID: 114953610546138714}
   - component: {fileID: 82495865140356746}
   - component: {fileID: 82508627991493166}
+  - component: {fileID: 114568831542312672}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2555,7 +2556,7 @@ GameObject:
   - component: {fileID: 114975721992020822}
   m_Layer: 9
   m_Name: CameraBase
-  m_TagString: Untagged
+  m_TagString: CameraBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2868,6 +2869,21 @@ GameObject:
   - component: {fileID: 4235795306394630}
   m_Layer: 0
   m_Name: Rune_Knife:Blade_Tip_grp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1875157996477884
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4627515647506156}
+  m_Layer: 9
+  m_Name: AimingCameraLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4327,7 +4343,6 @@ Transform:
   - {fileID: 4403802056116990}
   - {fileID: 4633354684836134}
   - {fileID: 4525839267143618}
-  - {fileID: 4799636196231734}
   m_Father: {fileID: 4803805274782844}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4361,6 +4376,8 @@ Transform:
   - {fileID: 4376020294066378}
   - {fileID: 4582674104324840}
   - {fileID: 4822362801620948}
+  - {fileID: 4799636196231734}
+  - {fileID: 4627515647506156}
   m_Father: {fileID: 4798909868311102}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4415,6 +4432,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4902036229805724}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4627515647506156
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1875157996477884}
+  m_LocalRotation: {x: -0.078246646, y: 0.009527177, z: -0.00074823835, w: -0.9968883}
+  m_LocalPosition: {x: 0.45073706, y: 0.47185826, z: -0.84784293}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4573923700228796}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4633354684836134
 Transform:
@@ -4705,12 +4735,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1184319411456460}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.73, y: 0.05, z: 0.37}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.73, y: 0.049999952, z: 0.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311543984517428}
-  m_Father: {fileID: 4565902665042956}
+  m_Father: {fileID: 4573923700228796}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4803805274782844
@@ -7217,6 +7247,8 @@ MonoBehaviour:
     m_Bits: 3072
   GroundChecker: {fileID: 4613511271492774}
   GroundDistance: 0.2
+  CameraBase: {fileID: 4573923700228796}
+  Aiming: 0
   slopeRayHeight: 0
   steepSlopeAngle: 45
   slopeThreshold: 0.2
@@ -7337,6 +7369,7 @@ MonoBehaviour:
     type: 2}
   swordLimit: 4
   RotatingRing: {fileID: 4311543984517428}
+  CMC: {fileID: 114607505007585050}
 --- !u!114 &114431262230162088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7853,6 +7886,29 @@ MonoBehaviour:
 
 
 '
+--- !u!114 &114568831542312672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1312097584393534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8965703f7d1b19643a83fa5665284fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LightAttackDamage: 10
+  FlamethrowerWaveDamage: 10
+  FlameAOEDamage: 40
+  GodModeDamage: 15
+  NormalAttackFinMeterFill: 10
+  SiphoningFinMeterFill: 20
+  FlameThrowFinMeterFill: 5
+  FlameAOEFinMeterFill: 5
+  ExecuteFinisherGMFill: 34
+  SiphoningGainHealth: 25
+  NormalAttackDamage: 10
+  JumpAttackDamage: 20
 --- !u!114 &114572162144903832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7947,6 +8003,8 @@ MonoBehaviour:
   CombatCameraLocation: {fileID: 4376020294066378}
   OOCCameraLocation: {fileID: 4582674104324840}
   FinisherModeCameraLocation: {fileID: 4822362801620948}
+  AimingCameraLocation: {fileID: 4627515647506156}
+  PMC: {fileID: 114363513047065126}
 --- !u!114 &114607554312808772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8671,6 +8729,12 @@ MonoBehaviour:
   GodModeTimer: 10
   sword: {fileID: 114536651454404626}
   Flames: {fileID: 1204369448039206, guid: 822b9b6c49816a34595234dc5b0cfa99, type: 2}
+  GodModeDistance: 10
+  pmc: {fileID: 114363513047065126}
+  cmc: {fileID: 114607505007585050}
+  cf: {fileID: 114975721992020822}
+  CharAnim: {fileID: 95570804407526094}
+  PlayerRotWrapper: {fileID: 4803805274782844}
 --- !u!114 &114926911975128694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8705,6 +8769,7 @@ MonoBehaviour:
   CameraBase: {fileID: 4573923700228796}
   PlayerRotWrapper: {fileID: 4803805274782844}
   TryFinisher: 0
+  CanFinish: 1
   FinisherIcon: {fileID: 114131698407563678}
   InFinisherIcons: {fileID: 1148953510261644}
 --- !u!114 &114927974741508274
