@@ -88,26 +88,26 @@ public class ThrowLimb : MonoBehaviour {
         {
             if (firedPressed)
             {
-                col.gameObject.GetComponent<EnemyAI>().KillEnemy();
-                CurrentlyKilledCount++;
-                FinMode.IncreaseFinisherMeter(PlayerDamageValues.Instance.SiphoningFinMeterFill);
-                if(CurrentlyKilledCount >= KillLimit)
-                    Destroy(gameObject);
-                else
+                if (CurrentlyKilledCount < KillLimit)
+                {
+                    col.gameObject.GetComponent<EnemyAI>().KillEnemy();
+                    CurrentlyKilledCount++;
+                    FinMode.IncreaseFinisherMeter(PlayerDamageValues.Instance.SiphoningFinMeterFill);
                     DeadBodies[CurrentlyKilledCount - 1].SetActive(true);
+                }
             }
         }
         else if (col.gameObject.tag == "TargetDummy")
         {
             if (firedPressed)
             {
-                Destroy(col.gameObject);
-                CurrentlyKilledCount++;
-                FinMode.IncreaseFinisherMeter(PlayerDamageValues.Instance.SiphoningFinMeterFill);
-                if (CurrentlyKilledCount >= KillLimit)
-                    Destroy(gameObject);
-                else
+                if (CurrentlyKilledCount < KillLimit)
+                {
+                    Destroy(col.gameObject);
+                    CurrentlyKilledCount++;
+                    FinMode.IncreaseFinisherMeter(PlayerDamageValues.Instance.SiphoningFinMeterFill);
                     DeadBodies[CurrentlyKilledCount - 1].SetActive(true);
+                }
             }
         }
         else if (obstacleLayers.Contains(col.gameObject.layer))
