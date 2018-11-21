@@ -249,15 +249,13 @@ public class EnemyAI : MonoBehaviour {
 
     IEnumerator WakeUpAnimate()
     {
-        //Animation Section Start
-        //anim.applyRootMotion = true;
         anim.SetFloat("SleepModifier", 1);
         yield return new WaitForSeconds(3.4f);
-        //anim.applyRootMotion = false;
-        anim.Play("Idle");
-        //anim.transform.localPosition = new Vector3(0, -1, 0);
-        //anim.transform.localEulerAngles = new Vector3(0, 55, 0);
-        CurrentStatus = EnemyBehaviorStatus.Waiting;
+        if (!director.IsInterupted(CurrentStatus))
+        {
+            anim.Play("Idle");
+            CurrentStatus = EnemyBehaviorStatus.Waiting;
+        }
         //Animation Section End
     }
 

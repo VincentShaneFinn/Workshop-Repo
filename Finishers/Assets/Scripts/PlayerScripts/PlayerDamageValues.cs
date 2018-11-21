@@ -5,9 +5,22 @@ using UnityEngine;
 public class PlayerDamageValues : Singleton<PlayerDamageValues>
 {
     
+    //Player Attacks
     public float LightAttackDamage;
+
+    //Runic Finisher Values
+
+    //Flame Finisher
     public float FlamethrowerWaveDamage;
     public float FlameAOEDamage;
+
+    //Frost Finisher
+    public int FrostAOEFreezeCount;
+    public float FrostAOEDamage;
+    public float FrostAOEExplodeDamge;
+    public float FrostTimeToMelt;
+
+    //GodMode
     public float GodModeDamage;
 
     //finisher bar fill values

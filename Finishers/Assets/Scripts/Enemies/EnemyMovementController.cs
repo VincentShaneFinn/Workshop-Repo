@@ -164,7 +164,6 @@ public class EnemyMovementController : MonoBehaviour {
     public void EnableNavAgent()
     {
         agent.enabled = true;
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z); //MARK WILL NOT WORK IN BASEMENTS
         ResumeMovement();
     }
 

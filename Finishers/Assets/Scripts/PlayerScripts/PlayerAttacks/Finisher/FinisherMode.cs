@@ -351,6 +351,8 @@ public class FinisherMode : MonoBehaviour
         if(Enemies.Length <= 0)
             FinisherIcon.SetActivated(false);
 
+        GameObject thisCurrentTarget = null;
+        float lowestDistance = Mathf.Infinity;
         foreach (GameObject Enemy in Enemies)
         {
             if (Vector3.Distance(Enemy.transform.position, transform.position) < 5 && Enemy.GetComponent<NavMeshAgent>().isActiveAndEnabled)
@@ -360,20 +362,17 @@ public class FinisherMode : MonoBehaviour
                 float dot = Vector3.Dot(heading, PlayerRotWrapper.forward);
                 if (dot > .5) // must be 30 degrees in front
                 {
-                    FinisherIcon.SetActivated(true);
-                    FinisherIcon.transform.position = Enemy.transform.position;
-                    return Enemy;
+                    if (heading.magnitude < lowestDistance)
+                    {
+                        FinisherIcon.SetActivated(true);
+                        FinisherIcon.transform.position = Enemy.transform.position;
+                        thisCurrentTarget = Enemy;
+                        lowestDistance = heading.magnitude;
+                    }
                 }
-                else
-                {
-                    FinisherIcon.SetActivated(false);
-                }
-            }
-            else
-            {
-                FinisherIcon.SetActivated(false);
             }
         }
+
         GameObject[] TargetDummies = GameObject.FindGameObjectsWithTag("TargetDummy");
         foreach (GameObject dummy in TargetDummies)
         {
@@ -384,21 +383,20 @@ public class FinisherMode : MonoBehaviour
                 float dot = Vector3.Dot(heading, PlayerRotWrapper.forward);
                 if (dot > .5) // must be 30 degrees in front
                 {
-                    FinisherIcon.SetActivated(true);
-                    FinisherIcon.transform.position = dummy.transform.position;
-                    return dummy;
+                    if (heading.magnitude < lowestDistance)
+                    {
+                        FinisherIcon.SetActivated(true);
+                        FinisherIcon.transform.position = dummy.transform.position;
+                        thisCurrentTarget = dummy;
+                        lowestDistance = heading.magnitude;
+                    }
                 }
-                else
-                {
-                    FinisherIcon.SetActivated(false);
-                }
-            }
-            else
-            {
-                FinisherIcon.SetActivated(false);
             }
         }
+        if(thisCurrentTarget != null)
+            return thisCurrentTarget;
 
+        FinisherIcon.SetActivated(false);
         return null;
     }
 

@@ -24,9 +24,6 @@ public class KnightEnemyActions : MonoBehaviour {
         AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
         AI.ChangeAction(EnemyActions.NormalAttack);
         sword.damage = PlayerDamageValues.Instance.NormalAttackDamage;
-        //set animation
-        //attack()
-        //Sword.SetActive(true); //tempAniamtionFake
 
         //Animation Section
         //AI.anim.applyRootMotion = true;
@@ -51,7 +48,7 @@ public class KnightEnemyActions : MonoBehaviour {
             {
                 yield return null;
                 tempAnimationCount += Time.deltaTime;
-                if (AI.CurrentStatus == EnemyBehaviorStatus.Staggered || AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
+                if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
                 {
                     interupped = true;
                     break;
@@ -142,28 +139,37 @@ public class KnightEnemyActions : MonoBehaviour {
 
         GetComponent<CapsuleCollider>().isTrigger = true;
 
+        bool interupted = false;
+
         while (elapse_time < flightDuration)
         {
             transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
 
             elapse_time += Time.deltaTime;
 
+            if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
+            {
+                interupted = true;
+                break;
+            }
+
             yield return null;
         }
 
         GetComponent<CapsuleCollider>().isTrigger = false;
-        //HeavySword.SetActive(false);//tempAniamtionFake
-        //Animation Section
-        //AI.anim.applyRootMotion = false;
-        //transform.position = AI.anim.transform.position;
-        //AI.anim.transform.localPosition = new Vector3(0, -1, 0);
 
         GetComponent<EnemyMovementController>().EnableNavAgent();
         AI.GetDirector().Special1AttackCompleted();
-        AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+
         AI.ChangeAction(EnemyActions.None);
-        AI.anim.Play("Idle");
+
         MovementCtrl.SetLockToGround(true);
+
+        if (!interupted)
+        {
+            AI.anim.Play("Idle");
+            AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+        }
     }
 
     public void PerformUnblockableAttack()
@@ -191,7 +197,7 @@ public class KnightEnemyActions : MonoBehaviour {
         {
             yield return null;
             tempAnimationCount += Time.deltaTime;
-            if (AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
+            if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
             {
                 interupped = true;
                 break;

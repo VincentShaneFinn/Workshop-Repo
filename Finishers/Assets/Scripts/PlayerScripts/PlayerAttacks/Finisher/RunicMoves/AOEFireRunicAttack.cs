@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AOERunicAttack : MonoBehaviour {
+public class AOEFireRunicAttack : MonoBehaviour {
 
     private float damage;
 
