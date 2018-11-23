@@ -5,12 +5,12 @@ using System.Linq;
 using UnityEngine;
 
 //BUSY is used as a generic for the enemy doing something else and should be skipped by director assigning roles
-public enum EnemyBehaviorStatus { Sleeping, PrimaryAttacker, ArcRunner, SurroundPlayer, Attacking, Busy, Waiting, Staggered, BeingFinished, Dying }
+public enum EnemyBehaviorStatus { Sleeping, PrimaryAttacker, ArcRunner, SurroundPlayer, Attacking, Busy, Waiting, Staggered, BeingFinished, Frozen, Dying }
 //Staggered will currently be used for when the enemy is interupted, it will let the director know that it failed to do its task,
 //this way the director can recalculate if necessary
 //WE MAY WANT TO CHANGE THIS TO A CLASS SO SOMETHING LIKE AMBUSY CAN BE IN ONE A SMART PLACE
 
-public class GroupDirector : MonoBehaviour{
+public class GroupDirector : MonoBehaviour {
 
     public List<GameObject> Exits;
     private PlayerUpdater playerUpdater;
@@ -27,9 +27,11 @@ public class GroupDirector : MonoBehaviour{
     private ActionManager myActionManager;
     public float ReturnNormalAttackDelay = 1f;
     public float ReturnSpecial1AttackDelay = 5f;
+    public float ReturnProjectileAttackDelay = 2.5f;
     public int MaxAttackActions = 2;
     public int MaxNormalAttacks = 2;
     public int MaxSpecial1Attacks = 1;
+    public int MaxProjectileAttacks = 2;
     public float SendOrderTime = 1;
     private float SendOrderCounter = 0;
     private bool CombatStarted = false;
@@ -42,7 +44,8 @@ public class GroupDirector : MonoBehaviour{
         myActionManager.MaxAttackActions = MaxAttackActions;
         myActionManager.MaxNormalAttacks = MaxNormalAttacks;
         myActionManager.MaxSpecial1Attacks = MaxSpecial1Attacks;
-        foreach(GameObject door in Exits)
+        myActionManager.MaxProjectileAttacks = MaxSpecial1Attacks;
+        foreach (GameObject door in Exits)
         {
             door.SetActive(false);
         }
@@ -67,10 +70,10 @@ public class GroupDirector : MonoBehaviour{
                 //SortEnemies by remainingdistance To player
                 Enemies.Sort(delegate (EnemyAI a, EnemyAI b)
                 {
-                //using remaining distance doesn't work correctly when using arc angles
-                return Vector3.Distance(a.GetEnemyMovementController().transform.position, playerUpdater.transform.position)
-                    .CompareTo(
-                      Vector3.Distance(b.GetEnemyMovementController().transform.position, playerUpdater.transform.position));
+                    //using remaining distance doesn't work correctly when using arc angles
+                    return Vector3.Distance(a.GetEnemyMovementController().transform.position, playerUpdater.transform.position)
+                        .CompareTo(
+                          Vector3.Distance(b.GetEnemyMovementController().transform.position, playerUpdater.transform.position));
                 });
 
                 //Temporary? check if an enemy is in an attack state, and add to primary and arc runner counts since we dont need anyone else, could do the same for staggered
@@ -93,7 +96,7 @@ public class GroupDirector : MonoBehaviour{
                 //Hand out roles, give closest enemies primary attacker, followed by arc runners, then surrounders
                 foreach (EnemyAI enemy in Enemies)
                 {
-                    if (enemy.GetCurrentStatus() == EnemyBehaviorStatus.PrimaryAttacker || enemy.GetCurrentStatus() == EnemyBehaviorStatus.ArcRunner || enemy.GetCurrentStatus() == EnemyBehaviorStatus.SurroundPlayer || enemy.GetCurrentStatus() == EnemyBehaviorStatus.Waiting)
+                    if (!IsBusy(enemy.GetCurrentStatus()))
                     {
                         if (currentPrimaryAttackers < MaxPrimaryAttackers) // start by giving out primary attackers
                         {
@@ -123,6 +126,14 @@ public class GroupDirector : MonoBehaviour{
     public bool IsBusy(EnemyBehaviorStatus status)
     {
         if (status != EnemyBehaviorStatus.PrimaryAttacker && status != EnemyBehaviorStatus.ArcRunner && status != EnemyBehaviorStatus.SurroundPlayer && status != EnemyBehaviorStatus.Waiting)
+            return true;
+        return false;
+    }
+
+    //check if the status is something that interupts other actions
+    public bool IsInterupted(EnemyBehaviorStatus status)
+    {
+        if (status == EnemyBehaviorStatus.BeingFinished || status == EnemyBehaviorStatus.Dying || status == EnemyBehaviorStatus.Frozen || status == EnemyBehaviorStatus.Staggered)
             return true;
         return false;
     }
@@ -165,6 +176,16 @@ public class GroupDirector : MonoBehaviour{
     public void Special1AttackCompleted()
     {
         StartCoroutine(ExecuteAfterTime(ReturnSpecial1AttackDelay, () => myActionManager.Special1AttackCompleted()));
+    }
+
+    //Prohjectile take and return
+    public bool TryProjectileAttack()
+    {
+        return myActionManager.TryProjectileAttack();
+    }
+    public void ProjectileAttackCompleted()
+    {
+        StartCoroutine(ExecuteAfterTime(ReturnProjectileAttackDelay, () => myActionManager.ProjectileAttackCompleted()));
     }
 
     //Used to delay Returning attacks to ActionManager

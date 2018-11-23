@@ -43,6 +43,7 @@ public class EnemyStaggerController : MonoBehaviour {
     {
         if (col.gameObject.name == "PlayerSwordTrigger")
         {
+            GetComponent<EnemySoundController>().PlayEnemyHit();
             if (!poiseActive)
             {
                 enemyMovement.HelpKnockback();

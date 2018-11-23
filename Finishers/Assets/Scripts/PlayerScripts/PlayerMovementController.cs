@@ -258,7 +258,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             if (grounded && myRigidbody.velocity.y > 0) //measure to prevent up velocity if moving on a slope, but dont do this if just jumped
             {
-                if (jumpTimer > .1f)
+                if (jumpTimer > .2f)
                 {
                     desiredVelocity = new Vector3(moveDirection.x, 0, moveDirection.z);
                 }

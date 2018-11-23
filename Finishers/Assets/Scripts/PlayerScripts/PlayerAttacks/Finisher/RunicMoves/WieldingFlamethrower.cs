@@ -22,6 +22,7 @@ public class WieldingFlamethrower : MonoBehaviour {
         pmc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementController>();
         CF = GameObject.FindGameObjectWithTag("CameraBase").GetComponent<CameraFollow>();
         CMC = GameObject.FindGameObjectWithTag("CameraTarget").GetComponent<CameraMovementController>();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSoundController>().PlayFlamethrower();
     }
 
     // Update is called once per frame

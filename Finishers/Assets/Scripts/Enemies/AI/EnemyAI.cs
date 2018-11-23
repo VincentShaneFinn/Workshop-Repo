@@ -67,27 +67,42 @@ public class EnemyAI : MonoBehaviour {
         }
 
         //obviosuly if your currently doing something, or shouldnt be able to do something, you can't attack
-        if (checkplayer(attackrange) && !director.IsBusy(CurrentStatus) && myAction == EnemyActions.None)
-        {
-            //check if the player is in front of you
-            var heading = playerT.position - transform.position;
-            float dot = Vector3.Dot(heading, transform.forward);
-            if (dot > .5) // must be 30 degrees in front
+        if (!director.IsBusy(CurrentStatus) && myAction == EnemyActions.None) {
+            if (checkplayer(attackrange))
             {
-                //If two many attacks recently, continue doing what they were doing
-                if (director.TryNormalAttack())
-                    KnightActions.StartCoroutine("PerformNormalAttack");
-                else
-                    KeepDistance();
+                //check if the player is in front of you
+                var heading = playerT.position - transform.position;
+                float dot = Vector3.Dot(heading, transform.forward);
+                if (dot > .5) // must be 30 degrees in front
+                {
+                    //If two many attacks recently, continue doing what they were doing
+                    if (director.TryNormalAttack())
+                        KnightActions.StartCoroutine("PerformNormalAttack");
+                    else
+                        KeepDistance();
+                }
+            }
+            //This will need to go to KnightEnemyActions and check which attack it should attempt, rather than using range
+            else if (checkplayer(Special1RangeTEMP) && Vector3.Distance(transform.position, playerT.position) > Special1RangeTEMP - 1) // we will need an alternative way to check if doing special 1 is right that is specific to the enemy
+            {
+                if (director.TrySpecial1Attack())
+                    KnightActions.StartCoroutine("PerformSpecial1Attack");
+            }
+            else if (CurrentStatus == EnemyBehaviorStatus.SurroundPlayer)
+            {
+            }
+            if (director.TryProjectileAttack())
+            {
+                if (canThrow > 1)
+                {
+                    KnightActions.ThrowProjectile();
+                    canThrow = 0;
+                }
             }
         }
-        //This will need to go to KnightEnemyActions and check which attack it should attempt, rather than using range
-        else if (checkplayer(Special1RangeTEMP) && Vector3.Distance(transform.position, playerT.position) > 4 && !director.IsBusy(CurrentStatus) && myAction == EnemyActions.None) // we will need an alternative way to check if doing special 1 is right that is specific to the enemy
-        {
-            if (director.TrySpecial1Attack())
-                KnightActions.StartCoroutine("PerformSpecial1Attack");
-        }
+        canThrow += Time.deltaTime;
     }
+    private float canThrow = 1f;
 
     public EnemyBehaviorStatus GetCurrentStatus() { return CurrentStatus; }
     public void ChangeStatus(EnemyBehaviorStatus s) { PreviousStatus = CurrentStatus;  CurrentStatus = s; }
@@ -249,15 +264,13 @@ public class EnemyAI : MonoBehaviour {
 
     IEnumerator WakeUpAnimate()
     {
-        //Animation Section Start
-        //anim.applyRootMotion = true;
         anim.SetFloat("SleepModifier", 1);
         yield return new WaitForSeconds(3.4f);
-        //anim.applyRootMotion = false;
-        anim.Play("Idle");
-        //anim.transform.localPosition = new Vector3(0, -1, 0);
-        //anim.transform.localEulerAngles = new Vector3(0, 55, 0);
-        CurrentStatus = EnemyBehaviorStatus.Waiting;
+        if (!director.IsInterupted(CurrentStatus))
+        {
+            anim.Play("Idle");
+            CurrentStatus = EnemyBehaviorStatus.Waiting;
+        }
         //Animation Section End
     }
 

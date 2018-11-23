@@ -23,5 +23,6 @@ public class Siphoncut : FinisherAbstract {
         shc.AddSword();
         GetComponent<PlayerHealthController>().PlayerHealed(20);
         f.CharAnim.Play("Attack 1");
+        GetComponent<PlayerSoundController>().PlaySiphonCut();
     }
 }

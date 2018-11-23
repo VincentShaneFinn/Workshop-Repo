@@ -24,9 +24,6 @@ public class KnightEnemyActions : MonoBehaviour {
         AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
         AI.ChangeAction(EnemyActions.NormalAttack);
         sword.damage = PlayerDamageValues.Instance.NormalAttackDamage;
-        //set animation
-        //attack()
-        //Sword.SetActive(true); //tempAniamtionFake
 
         //Animation Section
         //AI.anim.applyRootMotion = true;
@@ -34,7 +31,7 @@ public class KnightEnemyActions : MonoBehaviour {
         //Attack animatin is currently .1 meters higher than normal
         //AI.anim.transform.position = new Vector3(AI.anim.transform.position.x, AI.anim.transform.position.y - .15f, AI.anim.transform.position.z);
         int attackIndex = Random.Range(0, 2);
-        attackIndex = 0;//MARK: UNTIL WE FIX THE ATTACK ANIMATIONS
+        //attackIndex = 1;//MARK: UNTIL WE FIX THE ATTACK ANIMATIONS
         bool interupped = false;
 
         if (attackIndex == 0)
@@ -51,7 +48,7 @@ public class KnightEnemyActions : MonoBehaviour {
             {
                 yield return null;
                 tempAnimationCount += Time.deltaTime;
-                if (AI.CurrentStatus == EnemyBehaviorStatus.Staggered || AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
+                if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
                 {
                     interupped = true;
                     break;
@@ -62,30 +59,38 @@ public class KnightEnemyActions : MonoBehaviour {
                 }
             }
         }
-        //else
-        //{
-        //    AI.anim.Play("BranchAttack_swing1");
-        //    //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
+        else
+        {
+            MovementCtrl.SetSpeed(0);
+            Quaternion savedRot = AI.anim.transform.localRotation;
+            AI.anim.transform.localRotation = Quaternion.Euler(new Vector3(0, 170, 0));
+            AI.anim.Play("BranchAttack_swing1");
+            //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
 
-        //    float tempAnimationTime = 2f;
-        //    float tempAnimationCount = 0;
+            float tempAnimationTime = 1.6f;
+            float tempAnimationCount = 0;
 
-        //    //we need to end prematurely if the enemy is staggered
-        //    while (tempAnimationCount < tempAnimationTime)
-        //    {
-        //        yield return null;
-        //        tempAnimationCount += Time.deltaTime;
-        //        if (AI.CurrentStatus == EnemyBehaviorStatus.Staggered && AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
-        //        {
-        //            interupped = true;
-        //            break;
-        //        }
-        //        if (tempAnimationCount > 1.1f)
-        //        {
-        //            MovementCtrl.SetSpeed(0);
-        //        }
-        //    }
-        //}
+            //we need to end prematurely if the enemy is staggered
+            while (tempAnimationCount < tempAnimationTime)
+            {
+                yield return null;
+                tempAnimationCount += Time.deltaTime;
+                if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
+                {
+                    interupped = true;
+                    break;
+                }
+                if (tempAnimationCount > 1.1f)
+                {
+                    MovementCtrl.SetSpeed(0);
+                }
+                else
+                {
+                    AI.transform.LookAt(playerT.position);
+                }
+            }
+            AI.anim.transform.localRotation = savedRot;
+        }
 
         //Sword.SetActive(false);//tempAniamtionFake
         //Animation Section
@@ -142,28 +147,39 @@ public class KnightEnemyActions : MonoBehaviour {
 
         GetComponent<CapsuleCollider>().isTrigger = true;
 
+        bool interupted = false;
+
         while (elapse_time < flightDuration)
         {
             transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
 
             elapse_time += Time.deltaTime;
 
+            if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
+            {
+                interupted = true;
+                break;
+            }
+
             yield return null;
         }
 
+        yield return new WaitForSeconds(.2f);
+
         GetComponent<CapsuleCollider>().isTrigger = false;
-        //HeavySword.SetActive(false);//tempAniamtionFake
-        //Animation Section
-        //AI.anim.applyRootMotion = false;
-        //transform.position = AI.anim.transform.position;
-        //AI.anim.transform.localPosition = new Vector3(0, -1, 0);
 
         GetComponent<EnemyMovementController>().EnableNavAgent();
         AI.GetDirector().Special1AttackCompleted();
-        AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+
         AI.ChangeAction(EnemyActions.None);
-        AI.anim.Play("Idle");
+
         MovementCtrl.SetLockToGround(true);
+
+        if (!interupted)
+        {
+            AI.anim.Play("Idle");
+            AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+        }
     }
 
     public void PerformUnblockableAttack()
@@ -173,14 +189,15 @@ public class KnightEnemyActions : MonoBehaviour {
 
     IEnumerator UnblockableAttack()
     {
-        MovementCtrl.SetSpeed(1f);
         AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
         AI.ChangeAction(EnemyActions.NormalAttack);
         sword.damage = PlayerDamageValues.Instance.NormalAttackDamage;
 
         bool interupped = false;
 
-        AI.anim.Play("RunningAttack");
+        Quaternion savedRot = AI.anim.transform.localRotation;
+        AI.anim.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        AI.anim.Play("StabAttack");
         //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
 
         float tempAnimationTime = 2f;
@@ -191,16 +208,15 @@ public class KnightEnemyActions : MonoBehaviour {
         {
             yield return null;
             tempAnimationCount += Time.deltaTime;
-            if (AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
+            if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
             {
                 interupped = true;
                 break;
             }
-            if (tempAnimationCount > 1.1f)
-            {
-                MovementCtrl.SetSpeed(0);
-            }
+            if(tempAnimationCount < .3f)
+                AI.transform.LookAt(playerT);
         }
+        AI.anim.transform.localRotation = savedRot;
 
         if (!interupped)
         {
@@ -208,6 +224,17 @@ public class KnightEnemyActions : MonoBehaviour {
             AI.anim.Play("Idle");
         }
         AI.ChangeAction(EnemyActions.None);
+        GetComponent<EnemyStaggerController>().poiseActive = false;
+        GetComponent<EnemyStaggerController>().staggerCount = 0;
         MovementCtrl.RestoreSpeed();
+    }
+
+    public GameObject FireBall;
+    public GameObject IceBall;
+
+    public void ThrowProjectile()
+    {
+        Instantiate(FireBall, transform.position, transform.rotation);
+        AI.GetDirector().ProjectileAttackCompleted();
     }
 }

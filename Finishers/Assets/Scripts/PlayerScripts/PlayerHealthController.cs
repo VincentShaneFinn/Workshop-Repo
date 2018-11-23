@@ -32,6 +32,8 @@ public class PlayerHealthController : MonoBehaviour
 
         healthSlider.value = MaxHealth;
 
+        GetComponent<PlayerSoundController>().PlayHitSound();
+
         if (MaxHealth <= 0 && canDie == true)
         {
             gameOverText.text = "Game Over";

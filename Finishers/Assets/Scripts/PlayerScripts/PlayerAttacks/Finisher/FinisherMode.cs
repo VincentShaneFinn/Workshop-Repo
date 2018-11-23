@@ -28,7 +28,6 @@ public class FinisherMode : MonoBehaviour
 
     [HideInInspector]public GameObject currentTarget;
 
-    public GameObject BlastBeam;
     public GameObject TopHalf;
     public GameObject BottomHalf;
     public GameObject SlicedLimb;
@@ -54,6 +53,8 @@ public class FinisherMode : MonoBehaviour
     public bool TryFinisher = false;
     public bool CanFinish = true;
     //private RunicInputHelper RunicSequence;
+
+    public PlayerSoundController psc;
 
     private List<Direction> RunicQue;
     private List<FinisherAbstract> FinisherMoves = new List<FinisherAbstract>();
@@ -140,22 +141,26 @@ public class FinisherMode : MonoBehaviour
                     UIanim.Play("RunicUpCarve");
                     CharAnim.Play("Carve 1");
                     RunicQue.Add(Direction.up);
+                    psc.PlayRunicStab(Direction.up);
                 }
                 if (Input.GetButtonDown("RightButton"))
                 {
                     UIanim.Play("RunicRightCarve");
                     RunicQue.Add(Direction.right);
+                    psc.PlayRunicStab(Direction.right);
                 }
                 if (Input.GetButtonDown("DownButton"))
                 {
                     UIanim.Play("RunicDownCarve");
                     CharAnim.Play("Carve 2");
                     RunicQue.Add(Direction.down);
+                    psc.PlayRunicStab(Direction.down);
                 }
                 if (Input.GetButtonDown("LeftButton"))
                 {
                     UIanim.Play("RunicLeftCarve");
                     RunicQue.Add(Direction.left);
+                    psc.PlayRunicStab(Direction.left);
                 }
 
                 bool goodSoFar = false;
@@ -351,6 +356,8 @@ public class FinisherMode : MonoBehaviour
         if(Enemies.Length <= 0)
             FinisherIcon.SetActivated(false);
 
+        GameObject thisCurrentTarget = null;
+        float lowestDistance = Mathf.Infinity;
         foreach (GameObject Enemy in Enemies)
         {
             if (Vector3.Distance(Enemy.transform.position, transform.position) < 5 && Enemy.GetComponent<NavMeshAgent>().isActiveAndEnabled)
@@ -360,20 +367,17 @@ public class FinisherMode : MonoBehaviour
                 float dot = Vector3.Dot(heading, PlayerRotWrapper.forward);
                 if (dot > .5) // must be 30 degrees in front
                 {
-                    FinisherIcon.SetActivated(true);
-                    FinisherIcon.transform.position = Enemy.transform.position;
-                    return Enemy;
+                    if (heading.magnitude < lowestDistance)
+                    {
+                        FinisherIcon.SetActivated(true);
+                        FinisherIcon.transform.position = Enemy.transform.position;
+                        thisCurrentTarget = Enemy;
+                        lowestDistance = heading.magnitude;
+                    }
                 }
-                else
-                {
-                    FinisherIcon.SetActivated(false);
-                }
-            }
-            else
-            {
-                FinisherIcon.SetActivated(false);
             }
         }
+
         GameObject[] TargetDummies = GameObject.FindGameObjectsWithTag("TargetDummy");
         foreach (GameObject dummy in TargetDummies)
         {
@@ -384,21 +388,20 @@ public class FinisherMode : MonoBehaviour
                 float dot = Vector3.Dot(heading, PlayerRotWrapper.forward);
                 if (dot > .5) // must be 30 degrees in front
                 {
-                    FinisherIcon.SetActivated(true);
-                    FinisherIcon.transform.position = dummy.transform.position;
-                    return dummy;
+                    if (heading.magnitude < lowestDistance)
+                    {
+                        FinisherIcon.SetActivated(true);
+                        FinisherIcon.transform.position = dummy.transform.position;
+                        thisCurrentTarget = dummy;
+                        lowestDistance = heading.magnitude;
+                    }
                 }
-                else
-                {
-                    FinisherIcon.SetActivated(false);
-                }
-            }
-            else
-            {
-                FinisherIcon.SetActivated(false);
             }
         }
+        if(thisCurrentTarget != null)
+            return thisCurrentTarget;
 
+        FinisherIcon.SetActivated(false);
         return null;
     }
 
