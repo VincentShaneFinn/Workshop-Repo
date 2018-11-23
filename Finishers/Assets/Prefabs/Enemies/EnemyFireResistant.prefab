@@ -3781,6 +3781,7 @@ MonoBehaviour:
   PreviousStatus: 0
   Special1RangeTEMP: 5
   anim: {fileID: 95299401794474168}
+  CanThrow: 0
 --- !u!114 &114872146328366510
 MonoBehaviour:
   m_ObjectHideFlags: 1

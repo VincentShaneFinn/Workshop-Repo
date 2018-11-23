@@ -232,9 +232,11 @@ public class KnightEnemyActions : MonoBehaviour {
     public GameObject FireBall;
     public GameObject IceBall;
 
-    public void ThrowProjectile()
+    public IEnumerator ThrowProjectile()
     {
         Instantiate(FireBall, transform.position, transform.rotation);
         AI.GetDirector().ProjectileAttackCompleted();
+        yield return new WaitForSeconds(.5f);
+        AI.CanThrow = true;
     }
 }

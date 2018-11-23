@@ -31,7 +31,7 @@ public class GroupDirector : MonoBehaviour {
     public int MaxAttackActions = 2;
     public int MaxNormalAttacks = 2;
     public int MaxSpecial1Attacks = 1;
-    public int MaxProjectileAttacks = 2;
+    public int MaxProjectileAttacks = 1;
     public float SendOrderTime = 1;
     private float SendOrderCounter = 0;
     private bool CombatStarted = false;
@@ -44,7 +44,7 @@ public class GroupDirector : MonoBehaviour {
         myActionManager.MaxAttackActions = MaxAttackActions;
         myActionManager.MaxNormalAttacks = MaxNormalAttacks;
         myActionManager.MaxSpecial1Attacks = MaxSpecial1Attacks;
-        myActionManager.MaxProjectileAttacks = MaxSpecial1Attacks;
+        myActionManager.MaxProjectileAttacks = MaxProjectileAttacks;
         foreach (GameObject door in Exits)
         {
             door.SetActive(false);
