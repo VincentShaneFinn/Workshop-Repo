@@ -24,7 +24,7 @@ public class AOEFrostRunicAttack : MonoBehaviour {
             if (freezeCount <= freezeLimit)
                 col.gameObject.GetComponent<EnemyConditionManager>().ChangeCondition(EnemyConditions.Frozen);
             else
-                col.gameObject.GetComponent<Enemyhp>().damage(damage);
+                col.gameObject.GetComponent<Enemyhp>().damage(damage, AttackType.Frost);
         }
         else if (col.gameObject.tag == "TargetDummy")
         {
@@ -33,7 +33,7 @@ public class AOEFrostRunicAttack : MonoBehaviour {
             if (freezeCount <= freezeLimit)
                 col.gameObject.GetComponent<EnemyConditionManager>().ChangeCondition(EnemyConditions.Frozen);
             else
-                col.gameObject.GetComponent<Enemyhp>().damage(damage);
+                col.gameObject.GetComponent<Enemyhp>().damage(damage, AttackType.Frost);
         }
     }
 }

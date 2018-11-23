@@ -359,5 +359,24 @@ public class PlayerMovementController : MonoBehaviour
         AllowTurning();
         AllowMoving();
     }
-    
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (dashing)
+        {
+            if (col.gameObject.tag == "Enemy" || col.gameObject.tag == "TargetDummy")
+            {
+                Physics.IgnoreCollision(GetComponent<CapsuleCollider>(), col.collider,true);
+                StartCoroutine(RestorePhysics(GetComponent<CapsuleCollider>(), col.collider, dashFactor - dashTimer));
+            }
+        }
+    }
+
+    IEnumerator RestorePhysics(Collider start, Collider end, float time)
+    {
+        if (time < 0)
+            time = 0;
+        yield return new WaitForSeconds(time);
+        Physics.IgnoreCollision(start, end, false);
+    }
 }

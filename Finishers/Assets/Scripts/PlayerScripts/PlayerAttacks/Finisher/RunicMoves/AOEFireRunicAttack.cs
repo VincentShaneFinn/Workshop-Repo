@@ -17,12 +17,12 @@ public class AOEFireRunicAttack : MonoBehaviour {
         if (col.gameObject.tag == "Enemy")
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>().IncreaseFinisherMeter(PlayerDamageValues.Instance.FlameAOEFinMeterFill);
-            col.gameObject.GetComponent<Enemyhp>().damage(damage);
+            col.gameObject.GetComponent<Enemyhp>().damage(damage, AttackType.Fire);
         }
         else if (col.gameObject.tag == "TargetDummy")
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>().IncreaseFinisherMeter(PlayerDamageValues.Instance.FlameAOEFinMeterFill);
-            col.gameObject.GetComponent<Enemyhp>().damage(damage);
+            col.gameObject.GetComponent<Enemyhp>().damage(damage, AttackType.Fire);
         }
     }
 }

@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AttackType { Blade, Fire, Frost }
+
 public class Enemyhp : MonoBehaviour {
     public float currenthp;
     public float hp = 100;
     public GameObject BloodTrail;
     public GameObject IceTrail;
+    public EnemyTypeController etc;
+    public int RestancePercentage = 30;
+    public Material lowRed;
+    public Material lowBlue;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +30,24 @@ public class Enemyhp : MonoBehaviour {
             return;
         }
 
+        if(currenthp <= 33)
+        {
+            if(gameObject.tag != "TargetDummy")
+            {
+                if (etc.MyEnemyType == EnemyType.FireEnemy)
+                    etc.EnemySkin.material = lowRed;
+                else
+                    etc.EnemySkin.material = lowBlue;
+            }
+            else
+            {
+                if (etc.MyEnemyType == EnemyType.FireEnemy)
+                    etc.DummySkin.material = lowRed;
+                else
+                    etc.DummySkin.material = lowBlue;
+            }
+        }
+
         if (currenthp<=0) {
             if (gameObject.tag != "TargetDummy")
                 GetComponent<EnemyAI>().KillEnemy();
@@ -32,7 +56,16 @@ public class Enemyhp : MonoBehaviour {
         }
     }
 
-    public void damage(float d) {
+    public void damage(float d, AttackType type) {
+        if(etc.MyEnemyType == EnemyType.FireEnemy && type == AttackType.Fire)
+        {
+            d = (int)(d * ( (100-RestancePercentage) / 100f));
+        }
+        else if(etc.MyEnemyType == EnemyType.IceEnemy && type == AttackType.Frost)
+        {
+            d = (int)(d * ( (100-RestancePercentage) / 100f));
+        }
+        print("Damage " + d);
         currenthp -= d;
 
         checkhp();

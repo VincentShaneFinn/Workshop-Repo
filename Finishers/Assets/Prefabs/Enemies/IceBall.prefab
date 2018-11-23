@@ -301,7 +301,7 @@ MonoBehaviour:
   damage: 10
   obstacles:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 3072
 --- !u!114 &114423293655251636
 MonoBehaviour:
   m_ObjectHideFlags: 1

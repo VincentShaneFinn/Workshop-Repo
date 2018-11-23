@@ -101,7 +101,6 @@ public class EnemyAI : MonoBehaviour {
             }
         }
         if(StartupCheck && CurrentStatus != EnemyBehaviorStatus.Sleeping) {
-            print(CanThrow);
             startupTime += Time.deltaTime;
             if(startupTime > director.ReturnProjectileAttackDelay)
             {

@@ -313,7 +313,7 @@ MonoBehaviour:
   damage: 10
   obstacles:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 3072
 --- !u!135 &135399628313208890
 SphereCollider:
   m_ObjectHideFlags: 1

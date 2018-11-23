@@ -10,12 +10,14 @@ public class PlayerSwordHit : MonoBehaviour {
     public SkinnedMeshRenderer swordEdge;
     public Material[] OriginalSwordMaterials;
     public Material[] FireMats;
+    public AttackType CurrentAttackType;
     private bool isFinisher = false;
 
     void Start()
     {
         swordDamage = PlayerDamageValues.Instance.LightAttackDamage;
         currentSwordDamage = swordDamage;
+        CurrentAttackType = AttackType.Blade;
     }
 
     public void SetSwordDamage(float d)
@@ -31,10 +33,12 @@ public class PlayerSwordHit : MonoBehaviour {
     {
         swordEdge.materials = FireMats;
         isFinisher = true;
+        CurrentAttackType = AttackType.Fire;
     }
     public void RestoreSwordSkin()
     {
         swordEdge.materials = OriginalSwordMaterials;
+        CurrentAttackType = AttackType.Blade;
     }
 
     void OnTriggerEnter(Collider col)
@@ -45,7 +49,7 @@ public class PlayerSwordHit : MonoBehaviour {
             Enemyhp e = null;
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {
-                e.damage(currentSwordDamage);
+                e.damage(currentSwordDamage, CurrentAttackType);
             }
         }
         else if (col.gameObject.tag.Equals("TargetDummy"))
@@ -54,7 +58,7 @@ public class PlayerSwordHit : MonoBehaviour {
             Enemyhp e = null;
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {
-                e.damage(currentSwordDamage);
+                e.damage(currentSwordDamage, CurrentAttackType);
             }
         }
 

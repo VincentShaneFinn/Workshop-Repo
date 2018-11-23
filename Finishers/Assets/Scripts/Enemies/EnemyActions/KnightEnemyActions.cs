@@ -231,10 +231,14 @@ public class KnightEnemyActions : MonoBehaviour {
 
     public GameObject FireBall;
     public GameObject IceBall;
+    public EnemyTypeController etc;
 
     public IEnumerator ThrowProjectile()
     {
-        Instantiate(FireBall, transform.position, transform.rotation);
+        if (etc.MyEnemyType == EnemyType.FireEnemy)
+            Instantiate(FireBall, transform.position, transform.rotation);
+        else
+            Instantiate(IceBall, transform.position, transform.rotation);
         AI.GetDirector().ProjectileAttackCompleted();
         yield return new WaitForSeconds(.5f);
         AI.CanThrow = true;
