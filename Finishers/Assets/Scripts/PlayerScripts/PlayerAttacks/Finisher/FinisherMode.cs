@@ -34,6 +34,7 @@ public class FinisherMode : MonoBehaviour
     public Transform SlicedLimbFirePoint;
 
     //Controls Slider UI
+    public GameObject FinisherFullImage;
     public Slider finisherSlider;
     public Slider GodModeSlider;
     public int buildupVal = 20;
@@ -72,6 +73,7 @@ public class FinisherMode : MonoBehaviour
         PerformingFinisher = false;
         ExecutingFinisher = false;
 
+        FinisherFullImage.SetActive(false);
         FinisherIcon.gameObject.SetActive(true);
         FinisherIcon.SetActivated(false);
         InFinisherIcons.SetActive(false);
@@ -90,12 +92,13 @@ public class FinisherMode : MonoBehaviour
                 if (finisherSlider.value >= 100)
                 {
                     currentTarget = GetClosestEnemy();
+                    FinisherFullImage.SetActive(true);
                     if (TryFinisher && !GameStatus.GamePaused) //Input.GetButtonDown("FinishMode")
                     {
                         if (currentTarget != null)
                         {
                             finisherSlider.value = 50;
-
+                            FinisherFullImage.SetActive(false);
                             StartCoroutine(EnterFinisherMode());
                         }
                         else
@@ -103,6 +106,10 @@ public class FinisherMode : MonoBehaviour
                             print("No nearby enemy");
                         }
                     }
+                }
+                else
+                {
+                    FinisherFullImage.SetActive(false);
                 }
             }
             else

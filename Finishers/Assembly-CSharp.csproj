@@ -53,7 +53,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Checkpoint.cs" />
      <Compile Include="Assets\Scripts\DestroyInNSeconds.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\ActionManager.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\ArcAngles.cs" />
@@ -68,6 +67,10 @@
      <Compile Include="Assets\Scripts\Enemies\EnemyStaggerController.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemySword.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemySwordRange.cs" />
+     <Compile Include="Assets\Scripts\EnvironmentScripts\Checkpoint.cs" />
+     <Compile Include="Assets\Scripts\EnvironmentScripts\FinisherMeterPickup.cs" />
+     <Compile Include="Assets\Scripts\EnvironmentScripts\GodModePickup.cs" />
+     <Compile Include="Assets\Scripts\EnvironmentScripts\HealthPickupController.cs" />
      <Compile Include="Assets\Scripts\LookAtTarget.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshLink.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshModifier.cs" />

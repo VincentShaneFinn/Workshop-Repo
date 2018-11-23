@@ -194,6 +194,7 @@ e033f131358cea5a0eabf9561e781deb UnityEngine.TestRunner.dll:UnityEngine.TestTool
 70f7dc248db3379548a88e8d4fa049f8 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
+e9f70678bb1dd8583d79e62f23b0ee08 Assembly-CSharp.dll:.EnemyTypeController
 d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 486cd95c82d8305219c352c06b776e1f UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -202,7 +203,7 @@ dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 0ade5b0c6db695332e146cefa72484c0 Assembly-CSharp.dll:.EnemySword
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-1d93f42ab2dfc558a46eb3869c76dae7 Assembly-CSharp.dll:.FinisherMode
+b645cac0a73391c8e116cf4c954b2f5b Assembly-CSharp.dll:.FinisherMode
 616c9510adba00099a4789e3efe16abd Assembly-CSharp.dll:.EnemyProjectileStraight
 3d83123ff25efea22d6d62ce29fee55a Assembly-CSharp.dll:.PlayerAnimController
 1f1a5c58d7eae7e9cd2f94ea7e282645 Assembly-CSharp.dll:UnityEngine.AI.NavMeshLink
@@ -221,4 +222,6 @@ f1be46a363df415f7ec35f96181304d8 Assembly-CSharp.dll:.PlayerHealthController
 3410c48122112ba1031b73103888a26f Assembly-CSharp.dll:.PlayerDamageValues
 65968b3b1a8d8901b00426211237013c Assembly-CSharp.dll:.ChangeButtonIcon
 a4c44f2a3b558493faeba199b4fb4be2 Assembly-CSharp.dll:.PlayerMovementControllerCC
-e9f70678bb1dd8583d79e62f23b0ee08 Assembly-CSharp.dll:.EnemyTypeController
+c5f3e49c51b0a309eca119791679c623 Assembly-CSharp.dll:.HealthPickupController
+3a4c9038bb36253739fb534f2e3c4b54 Assembly-CSharp.dll:.FinisherMeterPickup
+bb06689c91c1f25ed4febe7a1c34dc41 Assembly-CSharp.dll:.GodModePickup

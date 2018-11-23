@@ -360,17 +360,20 @@ public class PlayerMovementController : MonoBehaviour
         AllowMoving();
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnCollisionStay(Collision col)
     {
-        if (dashing)
+        if (dashing && !restorePhysicsStarted)
         {
             if (col.gameObject.tag == "Enemy" || col.gameObject.tag == "TargetDummy")
             {
+                restorePhysicsStarted = true;
                 Physics.IgnoreCollision(GetComponent<CapsuleCollider>(), col.collider,true);
                 StartCoroutine(RestorePhysics(GetComponent<CapsuleCollider>(), col.collider, dashFactor - dashTimer));
             }
         }
     }
+
+    private bool restorePhysicsStarted = false;
 
     IEnumerator RestorePhysics(Collider start, Collider end, float time)
     {
@@ -378,5 +381,6 @@ public class PlayerMovementController : MonoBehaviour
             time = 0;
         yield return new WaitForSeconds(time);
         Physics.IgnoreCollision(start, end, false);
+        restorePhysicsStarted = false;
     }
 }
