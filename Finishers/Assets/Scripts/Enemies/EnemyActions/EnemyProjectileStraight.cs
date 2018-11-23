@@ -6,6 +6,7 @@ public class EnemyProjectileStraight : MonoBehaviour {
 
     public float speed = 10f;
     public float damage = 10f;
+    public LayerMask obstacles;
 
 	// Update is called once per frame
 	void Update () {
@@ -17,12 +18,11 @@ public class EnemyProjectileStraight : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerEnter(Collider col) //destroy when hit wall
     {
-        if (col.gameObject.tag != "Enemy")
-        {
+        if(obstacles.Contains(col.gameObject.layer)){
             Destroy(gameObject);
         }
-
     }
+
 }

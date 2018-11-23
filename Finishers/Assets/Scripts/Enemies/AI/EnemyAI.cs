@@ -90,19 +90,29 @@ public class EnemyAI : MonoBehaviour {
             }
             else if (CurrentStatus == EnemyBehaviorStatus.SurroundPlayer)
             {
-            }
-            if (director.TryProjectileAttack())
-            {
-                if (canThrow > 1)
+                if (CanThrow)
                 {
-                    KnightActions.ThrowProjectile();
-                    canThrow = 0;
+                    if (director.TryProjectileAttack())
+                    {
+                        CanThrow = false;
+                        StartCoroutine(KnightActions.ThrowProjectile());
+                    }
                 }
             }
         }
-        canThrow += Time.deltaTime;
+        if(StartupCheck && CurrentStatus != EnemyBehaviorStatus.Sleeping) {
+            print(CanThrow);
+            startupTime += Time.deltaTime;
+            if(startupTime > director.ReturnProjectileAttackDelay)
+            {
+                CanThrow = true;
+                StartupCheck = false;
+            }
+        }
     }
-    private float canThrow = 1f;
+    private bool StartupCheck = true;
+    public bool CanThrow = false;
+    private float startupTime = 0;
 
     public EnemyBehaviorStatus GetCurrentStatus() { return CurrentStatus; }
     public void ChangeStatus(EnemyBehaviorStatus s) { PreviousStatus = CurrentStatus;  CurrentStatus = s; }
