@@ -88,7 +88,7 @@ public class EnemyAI : MonoBehaviour {
                 if (director.TrySpecial1Attack())
                     KnightActions.StartCoroutine("PerformSpecial1Attack");
             }
-            else if (CurrentStatus == EnemyBehaviorStatus.SurroundPlayer)
+            else if (CurrentStatus == EnemyBehaviorStatus.SurroundPlayer && Vector3.Distance(transform.position, playerT.position) > ProjectileLaunchDistance)
             {
                 if (CanThrow)
                 {
@@ -110,6 +110,7 @@ public class EnemyAI : MonoBehaviour {
             }
         }
     }
+    public float ProjectileLaunchDistance = 10;
     private bool StartupCheck = true;
     public bool CanThrow = false;
     private float startupTime = 0;
