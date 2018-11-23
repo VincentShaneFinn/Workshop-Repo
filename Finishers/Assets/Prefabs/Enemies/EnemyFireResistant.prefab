@@ -532,6 +532,8 @@ GameObject:
   - component: {fileID: 114569005166041670}
   - component: {fileID: 114197278047392216}
   - component: {fileID: 114882343455110976}
+  - component: {fileID: 82669167339678600}
+  - component: {fileID: 114242159736429836}
   m_Layer: 9
   m_Name: EnemyFireResistant
   m_TagString: Enemy
@@ -3544,6 +3546,101 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.4, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &82669167339678600
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1318788245151266}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.07
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95299401794474168
 Animator:
   serializedVersion: 3
@@ -3609,6 +3706,8 @@ MonoBehaviour:
   sword: {fileID: 114343715357250196}
   firingAngle: 45
   gravity: 9.8
+  FireBall: {fileID: 1560707184676808, guid: 1faed341f3a3af34ea3c0756edcd239f, type: 2}
+  IceBall: {fileID: 1673873040471244, guid: 2ed1de34ae4b31e4289f5d2a98a01489, type: 2}
 --- !u!114 &114238431573660498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3621,6 +3720,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+--- !u!114 &114242159736429836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1318788245151266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec65ba638f3b8847a8d3e2a8409be5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHits:
+  - {fileID: 8300000, guid: b258f7a5d4def90498c83420e16b42b7, type: 3}
+  - {fileID: 8300000, guid: cc167a62bcbe5f446b7b2be91d58cf69, type: 3}
+  - {fileID: 8300000, guid: f7af85035a230d04f90e969424408bb3, type: 3}
+  enemyFootstep: {fileID: 8300000, guid: c699d8f79b1d124489cc4db77bed37de, type: 3}
+  enemyAS: {fileID: 82669167339678600}
 --- !u!114 &114343715357250196
 MonoBehaviour:
   m_ObjectHideFlags: 1

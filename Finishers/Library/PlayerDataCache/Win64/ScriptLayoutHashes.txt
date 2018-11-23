@@ -55,6 +55,7 @@ a44114bd4fa541174f78b4bb92bacb48 UnityEngine.UI.dll:UnityEngine.EventSystems.Sta
 e90403eeda069970e0b9de1533de13a6 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 2d58ca16854b99daea8c45e9c0f367b7 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 16da51d1b62ef6d4ee1849350434023b UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
+37c38d50703a7b3e40927cc816d51f2b Assembly-CSharp.dll:.PlayerSoundController
 50b0b141074b216c8b53b1bd467f73c9 Unity.TextMeshPro.dll:TMPro.TMP_InputField
 53cefe5d98cadefbab750835e70b89c0 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 486cd95c82d8305219c352c06b776e1f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -88,7 +89,7 @@ a44114bd4fa541174f78b4bb92bacb48 UnityEngine.UI.dll:UnityEngine.EventSystems.Sta
 e90403eeda069970e0b9de1533de13a6 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 2d58ca16854b99daea8c45e9c0f367b7 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 16da51d1b62ef6d4ee1849350434023b UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
-23f474a5a98a97276ab1ff725afacc88 Assembly-CSharp.dll:.GroupDirector
+d17978adc4c8ea4b32c8a51d6cd3289d Assembly-CSharp.dll:.GroupDirector
 76bfb713173de91fcb127557bc4688c3 Assembly-CSharp.dll:UnityEngine.AI.NavMeshSurface
 46a51696518bc2ab3c00c76bc10aa7b8 Assembly-CSharp.dll:.CameraFollow
 8f335a4d9a296fc602f749d49c2dba62 Assembly-CSharp.dll:.PlayerTriggerCollider
@@ -133,7 +134,7 @@ bf7f61351ff9c0f90e2cf9fa0edc2b7e Assembly-CSharp.dll:.PlayerMovementControllerRi
 12cfa2e9742f907c598a7759b077dcfa Assembly-CSharp.dll:.WieldingFlamethrower
 382b8ef512fa8d6108723a01b57af65b UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 d22c788799ee45d8676254eccf20e8b8 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
-df4cc895ec3c883f80c56bfd482947fd Assembly-CSharp.dll:.KnightEnemyActions
+e9fcbc270def5e983447a8faf09c4f57 Assembly-CSharp.dll:.KnightEnemyActions
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.AnimatorPosTranslate
 d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 486cd95c82d8305219c352c06b776e1f UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -150,6 +151,7 @@ d9d57a90bc7bccd876517257f67177a0 Assembly-CSharp.dll:.RunicFrostCircle
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.AOEFireRunicAttack
 25f15889eae1761ab2957bb7ea4fedfa Assembly-CSharp.dll:.Enemyhp
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
+ea89a394e2d90058b59ddd80373240b4 Assembly-CSharp.dll:.EnemySoundController
 394ad5be633b77bd1b0bb71dff5d3563 Assembly-CSharp.dll:.RunicFlamethrower
 e29334d60dd21f346bb559e13bd3d454 Assembly-CSharp.dll:.ChangeCameraPerpective
 e6f12981bcbf247534a54d8e04aee4a3 Assembly-CSharp.dll:UnityEngine.AI.NavMeshModifier
@@ -200,7 +202,8 @@ dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 0ade5b0c6db695332e146cefa72484c0 Assembly-CSharp.dll:.EnemySword
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-972b0d4cea297983e6176be5b3e3b74e Assembly-CSharp.dll:.FinisherMode
+1d93f42ab2dfc558a46eb3869c76dae7 Assembly-CSharp.dll:.FinisherMode
+78a59e2441b5047b85f8768a4e089708 Assembly-CSharp.dll:.EnemyProjectileStraight
 3d83123ff25efea22d6d62ce29fee55a Assembly-CSharp.dll:.PlayerAnimController
 1f1a5c58d7eae7e9cd2f94ea7e282645 Assembly-CSharp.dll:UnityEngine.AI.NavMeshLink
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.GodModeText

@@ -14,7 +14,6 @@ public class Enemyhp : MonoBehaviour {
 	}
 
     void checkhp() {
-        print("ow");
         var randomRotation = Quaternion.Euler(transform.rotation.x, Random.Range(0, 360), transform.rotation.z);
         GameObject blood = Instantiate(BloodTrail, transform.position, randomRotation);
         Destroy(blood, 1);

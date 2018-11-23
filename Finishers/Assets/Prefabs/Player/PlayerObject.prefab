@@ -6103,7 +6103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1405125711621270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: -40}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4902036229805724}
@@ -9913,9 +9913,9 @@ MonoBehaviour:
   FrostAOEExplodeDamge: 60
   FrostTimeToMelt: 8
   GodModeDamage: 15
-  NormalAttackFinMeterFill: 10
-  SiphoningFinMeterFill: 20
-  FlameThrowFinMeterFill: 5
+  NormalAttackFinMeterFill: 7.5
+  SiphoningFinMeterFill: 10
+  FlameThrowFinMeterFill: 2.5
   FlameAOEFinMeterFill: 5
   ExecuteFinisherGMFill: 34
   SiphoningGainHealth: 25
@@ -11171,7 +11171,7 @@ MonoBehaviour:
   swordController: {fileID: 114033124021910668}
   EnemyFinisherPlacement: {fileID: 4063822928579454}
   currentTarget: {fileID: 0}
-  BlastBeam: {fileID: 1793182956784890, guid: 4d88dc98b146f3e45864d609736670c6, type: 2}
+  BlastBeam: {fileID: 0}
   TopHalf: {fileID: 1786564139995998, guid: 5d529feba4335e947a85f58bf49fc210, type: 2}
   BottomHalf: {fileID: 1848987941572450, guid: c9eac2a4d736b2a4e96b86c92f88e4e6, type: 2}
   SlicedLimb: {fileID: 1556134404968722, guid: deac485d74609cc4dbe92f9060f3dc5b, type: 2}
@@ -11326,7 +11326,7 @@ MonoBehaviour:
   OOCMusicSource: {fileID: 82508627991493166}
   InCombatMusicSource: {fileID: 82495865140356746}
   TransitionDelay: 3
-  desiredGameVolume: 0.05
+  desiredGameVolume: 0.08
 --- !u!114 &114959277075981870
 MonoBehaviour:
   m_ObjectHideFlags: 1

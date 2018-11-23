@@ -27,9 +27,11 @@ public class GroupDirector : MonoBehaviour {
     private ActionManager myActionManager;
     public float ReturnNormalAttackDelay = 1f;
     public float ReturnSpecial1AttackDelay = 5f;
+    public float ReturnProjectileAttackDelay = 2.5f;
     public int MaxAttackActions = 2;
     public int MaxNormalAttacks = 2;
     public int MaxSpecial1Attacks = 1;
+    public int MaxProjectileAttacks = 2;
     public float SendOrderTime = 1;
     private float SendOrderCounter = 0;
     private bool CombatStarted = false;
@@ -42,6 +44,7 @@ public class GroupDirector : MonoBehaviour {
         myActionManager.MaxAttackActions = MaxAttackActions;
         myActionManager.MaxNormalAttacks = MaxNormalAttacks;
         myActionManager.MaxSpecial1Attacks = MaxSpecial1Attacks;
+        myActionManager.MaxProjectileAttacks = MaxSpecial1Attacks;
         foreach (GameObject door in Exits)
         {
             door.SetActive(false);
@@ -173,6 +176,16 @@ public class GroupDirector : MonoBehaviour {
     public void Special1AttackCompleted()
     {
         StartCoroutine(ExecuteAfterTime(ReturnSpecial1AttackDelay, () => myActionManager.Special1AttackCompleted()));
+    }
+
+    //Prohjectile take and return
+    public bool TryProjectileAttack()
+    {
+        return myActionManager.TryProjectileAttack();
+    }
+    public void ProjectileAttackCompleted()
+    {
+        StartCoroutine(ExecuteAfterTime(ReturnProjectileAttackDelay, () => myActionManager.ProjectileAttackCompleted()));
     }
 
     //Used to delay Returning attacks to ActionManager

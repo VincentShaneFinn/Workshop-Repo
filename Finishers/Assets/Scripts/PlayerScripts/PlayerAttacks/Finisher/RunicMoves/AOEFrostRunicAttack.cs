@@ -12,6 +12,7 @@ public class AOEFrostRunicAttack : MonoBehaviour {
     {
         damage = PlayerDamageValues.Instance.FrostAOEDamage;
         freezeLimit = PlayerDamageValues.Instance.FrostAOEFreezeCount;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSoundController>().PlayFlameAOE();
     }
 
     void OnTriggerEnter(Collider col)

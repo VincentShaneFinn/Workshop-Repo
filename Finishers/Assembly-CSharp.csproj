@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Enemies\AI\ArcAngles.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\Enemies\AI\GroupDirector.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyActions\EnemyProjectileStraight.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyActions\KnightEnemyActions.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyConditionManager.cs" />
      <Compile Include="Assets\Scripts\Enemies\Enemyhp.cs" />
@@ -104,8 +105,10 @@
      <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerCC.cs" />
      <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerRigidbody.cs" />
      <Compile Include="Assets\Scripts\Save.cs" />
+     <Compile Include="Assets\Scripts\SoundScripts\EnemySoundController.cs" />
      <Compile Include="Assets\Scripts\SoundScripts\MusicController.cs" />
      <Compile Include="Assets\Scripts\SoundScripts\PlayerFootStepController.cs" />
+     <Compile Include="Assets\Scripts\SoundScripts\PlayerSoundController.cs" />
      <Compile Include="Assets\Scripts\SoundScripts\PlayerSwordSoundController.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ChangeButtonIcon.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ControlMethodDetector.cs" />

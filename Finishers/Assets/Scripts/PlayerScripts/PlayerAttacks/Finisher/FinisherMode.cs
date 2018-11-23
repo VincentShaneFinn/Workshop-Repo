@@ -28,7 +28,6 @@ public class FinisherMode : MonoBehaviour
 
     [HideInInspector]public GameObject currentTarget;
 
-    public GameObject BlastBeam;
     public GameObject TopHalf;
     public GameObject BottomHalf;
     public GameObject SlicedLimb;
@@ -54,6 +53,8 @@ public class FinisherMode : MonoBehaviour
     public bool TryFinisher = false;
     public bool CanFinish = true;
     //private RunicInputHelper RunicSequence;
+
+    public PlayerSoundController psc;
 
     private List<Direction> RunicQue;
     private List<FinisherAbstract> FinisherMoves = new List<FinisherAbstract>();
@@ -140,22 +141,26 @@ public class FinisherMode : MonoBehaviour
                     UIanim.Play("RunicUpCarve");
                     CharAnim.Play("Carve 1");
                     RunicQue.Add(Direction.up);
+                    psc.PlayRunicStab(Direction.up);
                 }
                 if (Input.GetButtonDown("RightButton"))
                 {
                     UIanim.Play("RunicRightCarve");
                     RunicQue.Add(Direction.right);
+                    psc.PlayRunicStab(Direction.right);
                 }
                 if (Input.GetButtonDown("DownButton"))
                 {
                     UIanim.Play("RunicDownCarve");
                     CharAnim.Play("Carve 2");
                     RunicQue.Add(Direction.down);
+                    psc.PlayRunicStab(Direction.down);
                 }
                 if (Input.GetButtonDown("LeftButton"))
                 {
                     UIanim.Play("RunicLeftCarve");
                     RunicQue.Add(Direction.left);
+                    psc.PlayRunicStab(Direction.left);
                 }
 
                 bool goodSoFar = false;

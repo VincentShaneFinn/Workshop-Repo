@@ -9,6 +9,7 @@ public class AOEFireRunicAttack : MonoBehaviour {
     void Start()
     {
         damage = PlayerDamageValues.Instance.FlameAOEDamage;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSoundController>().PlayFlameAOE();
     }
 
     void OnTriggerEnter(Collider col)
