@@ -23,6 +23,7 @@ a9adc5dccaeecf46986e382962ee25f3 Assembly-CSharp.dll:.DestroyInNSeconds
 f4a7005db9ad7b2343f420c3f9bb3f0f Assembly-CSharp.dll:.GameStatus
 f6637497451c9a030c421de4a1ad5cdb Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
 b14b4630cc47b6e9ea8a644551a6a8cc Unity.TextMeshPro.dll:TMPro.TMP_Text
+c5f3e49c51b0a309eca119791679c623 Assembly-CSharp.dll:.HealthPickupController
 53cefe5d98cadefbab750835e70b89c0 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 486cd95c82d8305219c352c06b776e1f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 da2091a04d360891450faf16cdf621f1 UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -90,6 +91,7 @@ e90403eeda069970e0b9de1533de13a6 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 2d58ca16854b99daea8c45e9c0f367b7 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 16da51d1b62ef6d4ee1849350434023b UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 d17978adc4c8ea4b32c8a51d6cd3289d Assembly-CSharp.dll:.GroupDirector
+bb06689c91c1f25ed4febe7a1c34dc41 Assembly-CSharp.dll:.GodModePickup
 76bfb713173de91fcb127557bc4688c3 Assembly-CSharp.dll:UnityEngine.AI.NavMeshSurface
 46a51696518bc2ab3c00c76bc10aa7b8 Assembly-CSharp.dll:.CameraFollow
 8f335a4d9a296fc602f749d49c2dba62 Assembly-CSharp.dll:.PlayerTriggerCollider
@@ -176,6 +178,7 @@ da21fc3f8056b1f91c3dd09c7bf4f90a UnityEngine.Networking.dll:UnityEngine.Networki
 529a95e9e8e7686c4816e08fbb37183f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 fc061f3ae8a876c0687e86378d4a447c UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 7ca56e063bd071986fff4f513cc4f477 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
+3a4c9038bb36253739fb534f2e3c4b54 Assembly-CSharp.dll:.FinisherMeterPickup
 b8cceb6d4bfe708b97a60b2a00a7170c Assembly-CSharp.dll:.GodMode
 72a8523b432c0a5317826b7a9e0a0e79 Unity.TextMeshPro.dll:TMPro.PackageResourceImporterWindow
 ab4e3d5d919ba3c6ca506c39dd011370 Assembly-CSharp.dll:.Siphoncut
@@ -203,7 +206,7 @@ dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 0ade5b0c6db695332e146cefa72484c0 Assembly-CSharp.dll:.EnemySword
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-b645cac0a73391c8e116cf4c954b2f5b Assembly-CSharp.dll:.FinisherMode
+aac831672947997e2d55fce5018b5651 Assembly-CSharp.dll:.FinisherMode
 616c9510adba00099a4789e3efe16abd Assembly-CSharp.dll:.EnemyProjectileStraight
 3d83123ff25efea22d6d62ce29fee55a Assembly-CSharp.dll:.PlayerAnimController
 1f1a5c58d7eae7e9cd2f94ea7e282645 Assembly-CSharp.dll:UnityEngine.AI.NavMeshLink
@@ -222,6 +225,3 @@ f1be46a363df415f7ec35f96181304d8 Assembly-CSharp.dll:.PlayerHealthController
 3410c48122112ba1031b73103888a26f Assembly-CSharp.dll:.PlayerDamageValues
 65968b3b1a8d8901b00426211237013c Assembly-CSharp.dll:.ChangeButtonIcon
 a4c44f2a3b558493faeba199b4fb4be2 Assembly-CSharp.dll:.PlayerMovementControllerCC
-c5f3e49c51b0a309eca119791679c623 Assembly-CSharp.dll:.HealthPickupController
-3a4c9038bb36253739fb534f2e3c4b54 Assembly-CSharp.dll:.FinisherMeterPickup
-bb06689c91c1f25ed4febe7a1c34dc41 Assembly-CSharp.dll:.GodModePickup

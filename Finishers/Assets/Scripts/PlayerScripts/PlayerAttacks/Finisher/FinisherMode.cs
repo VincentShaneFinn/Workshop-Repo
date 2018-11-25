@@ -131,13 +131,11 @@ public class FinisherMode : MonoBehaviour
         else
         {
             CameraBase.rotation = PlayerRotWrapper.rotation;
-            if (currentTarget != null)
+
+            if (PerformingFinisher && !ExecutingFinisher && !GameStatus.GamePaused) //MARK: Unsure of how we will do the full finisher carves
             {
                 currentTarget.transform.position = EnemyFinisherPlacement.position;
                 currentTarget.transform.rotation = EnemyFinisherPlacement.rotation;
-            }
-            if (PerformingFinisher && !ExecutingFinisher && !GameStatus.GamePaused) //MARK: Unsure of how we will do the full finisher carves
-            {
                 if (Input.GetButtonDown("QuickFinish"))
                 {
                     FailFinisherMode();
@@ -231,6 +229,7 @@ public class FinisherMode : MonoBehaviour
         GodModeSlider.value += val;
     }
 
+    public GameObject SwordThrowAnimObj;
     public IEnumerator EnterFinisherMode()
     {
         GameStatus.FinisherModeActive = true;
@@ -245,12 +244,6 @@ public class FinisherMode : MonoBehaviour
         PlayerRotWrapper.LookAt(new Vector3(currentTarget.transform.position.x,
                                 PlayerRotWrapper.transform.position.y,
                                 currentTarget.transform.position.z));
-        //CameraBase.LookAt(new Vector3(currentTarget.transform.position.x,
-        //                CameraBase.position.y,
-        //                currentTarget.transform.position.z));
-
-        currentTarget.transform.position = EnemyFinisherPlacement.position;
-        currentTarget.transform.parent = EnemyFinisherPlacement;
 
         if (currentTarget.tag != "TargetDummy")
         {
@@ -259,9 +252,55 @@ public class FinisherMode : MonoBehaviour
         }
 
         UIanim.Play("FinisherRunicIdleStance");
-        CharAnim.Play("FinisherStart");
 
-        yield return null;
+        Time.timeScale = slowMoModifier;
+
+        if (usedSwordGrapple)
+        {
+            //moves camera
+            cam.MoveToAimingLocation(true); //Mark make sure camera takes as long as the animation
+
+            usedSwordGrapple = false;
+
+            //move sword forward and back over a small period
+            SwordThrowAnimObj.SetActive(true);
+            var savedSwordPos = SwordThrowAnimObj.transform.localPosition;
+            var savedSwordRot = SwordThrowAnimObj.transform.localRotation;
+            var currentSwordPos = SwordThrowAnimObj.transform.position;
+            Vector3 FinalTarget = EnemyFinisherPlacement.position;
+            float timeToMove = .25f;
+            var t = 0f;
+            while (t < 1)
+            {
+                t += Time.unscaledDeltaTime / timeToMove;
+                SwordThrowAnimObj.transform.position = Vector3.Lerp(currentSwordPos, currentTarget.transform.position, t);
+                yield return null;
+            }
+            currentSwordPos = SwordThrowAnimObj.transform.position;
+            var currentTargetPos = currentTarget.transform.position;
+            t = 0f;
+            while (t < 1)
+            {
+                t += Time.unscaledDeltaTime / timeToMove;
+                SwordThrowAnimObj.transform.position = Vector3.Lerp(currentSwordPos, FinalTarget, t);
+                currentTarget.transform.position = Vector3.Lerp(currentTargetPos, FinalTarget, t);
+                yield return null;
+            }
+            SwordThrowAnimObj.transform.localPosition = savedSwordPos;
+            SwordThrowAnimObj.transform.localRotation = savedSwordRot;
+            SwordThrowAnimObj.SetActive(false);
+            CharAnim.Play("FinisherStart");
+            yield return null;
+        }
+        else
+        {
+            CharAnim.Play("FinisherStart");
+            yield return null;
+        }
+
+        currentTarget.transform.position = EnemyFinisherPlacement.position;
+        currentTarget.transform.rotation = EnemyFinisherPlacement.rotation;
+        currentTarget.transform.parent = EnemyFinisherPlacement;
 
         //moves camera
         cam.MoveToFinisherModeLocation(); //Mark make sure camera takes as long as the animation
@@ -277,7 +316,6 @@ public class FinisherMode : MonoBehaviour
 
         PerformingFinisher = true;
         FinisherCount = FinisherTime;
-        Time.timeScale = slowMoModifier;
 
         FinisherIcon.SetActivated(false);
         InFinisherIcons.SetActive(true);
@@ -357,57 +395,86 @@ public class FinisherMode : MonoBehaviour
 
     public ChangeButtonIcon FinisherIcon;
     public GameObject InFinisherIcons;
+    public SiphonHolsterController shc;
+    public float GrappleFinishRange = 30;
+    private bool usedSwordGrapple = false;
+
     public GameObject GetClosestEnemy()
     {
         GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if(Enemies.Length <= 0)
             FinisherIcon.SetActivated(false);
 
+        float range = 5;
+        if (shc.HasSword())
+            range = GrappleFinishRange;
+
         GameObject thisCurrentTarget = null;
         float lowestDistance = Mathf.Infinity;
+        GameObject thisCurrentDotTarget = null;
+        float lowestDotDistance = Mathf.Infinity;
         foreach (GameObject Enemy in Enemies)
         {
-            if (Vector3.Distance(Enemy.transform.position, transform.position) < 5 && Enemy.GetComponent<NavMeshAgent>().isActiveAndEnabled)
+            if (Vector3.Distance(Enemy.transform.position, transform.position) < range && Enemy.GetComponent<NavMeshAgent>().isActiveAndEnabled)
             {
                 //check if the player is in front of you
-                var heading = Enemy.transform.position - PlayerRotWrapper.position;
-                float dot = Vector3.Dot(heading, PlayerRotWrapper.forward);
-                if (dot > .5) // must be 30 degrees in front
+                var heading = Enemy.transform.position - CameraBase.position;
+                float dot = Mathf.Abs(Vector3.Angle(CameraBase.forward, heading));
+                if (dot < 30) // must be 30 degrees in front
                 {
                     if (heading.magnitude < lowestDistance)
                     {
-                        FinisherIcon.SetActivated(true);
-                        FinisherIcon.transform.position = Enemy.transform.position;
                         thisCurrentTarget = Enemy;
                         lowestDistance = heading.magnitude;
                     }
-                }
-            }
-        }
-
-        GameObject[] TargetDummies = GameObject.FindGameObjectsWithTag("TargetDummy");
-        foreach (GameObject dummy in TargetDummies)
-        {
-            if (Vector3.Distance(dummy.transform.position, transform.position) < 5)
-            {
-                //check if the player is in front of you
-                var heading = dummy.transform.position - PlayerRotWrapper.position;
-                float dot = Vector3.Dot(heading, PlayerRotWrapper.forward);
-                if (dot > .5) // must be 30 degrees in front
-                {
-                    if (heading.magnitude < lowestDistance)
+                    if (dot < lowestDotDistance)
                     {
-                        FinisherIcon.SetActivated(true);
-                        FinisherIcon.transform.position = dummy.transform.position;
-                        thisCurrentTarget = dummy;
-                        lowestDistance = heading.magnitude;
+                        thisCurrentDotTarget = Enemy;
+                        lowestDotDistance = dot;
                     }
                 }
             }
         }
-        if(thisCurrentTarget != null)
-            return thisCurrentTarget;
+        if (!GameStatus.InCombat)
+        {
+            GameObject[] TargetDummies = GameObject.FindGameObjectsWithTag("TargetDummy");
+            foreach (GameObject dummy in TargetDummies)
+            {
+                if (Vector3.Distance(dummy.transform.position, transform.position) < range)
+                {
+                    //check if the player is in front of you
+                    var heading = dummy.transform.position - CameraBase.position;
+                    float dot = Mathf.Abs(Vector3.Angle(CameraBase.forward, heading));
+                    if (dot < 30) // must be 30 degrees in front
+                    {
+                        if (heading.magnitude < lowestDistance)
+                        {
+                            thisCurrentTarget = dummy;
+                            lowestDistance = heading.magnitude;
+                        }
+                        if (dot < lowestDotDistance)
+                        {
+                            thisCurrentDotTarget = dummy;
+                            lowestDotDistance = dot;
+                        }
+                    }
+                }
+            }
+        }
 
+        if (thisCurrentTarget != null)
+        {
+            FinisherIcon.SetActivated(true);
+            if (Vector3.Distance(thisCurrentDotTarget.transform.position,this.transform.position) > 5)
+            {
+                FinisherIcon.transform.position = thisCurrentDotTarget.transform.position;
+                usedSwordGrapple = true;
+                return thisCurrentDotTarget;
+            }
+            FinisherIcon.transform.position = thisCurrentTarget.transform.position;
+            return thisCurrentTarget;
+        }
+        
         FinisherIcon.SetActivated(false);
         return null;
     }

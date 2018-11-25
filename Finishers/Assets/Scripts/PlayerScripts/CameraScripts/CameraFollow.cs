@@ -60,7 +60,7 @@ public class CameraFollow : MonoBehaviour {
             transform.rotation = localRotation;
             forwardContainer.transform.rotation = localRotationJustY;
         }
-        if (!GameStatus.GamePaused)
+        if (!GameStatus.GamePaused && !GameStatus.FinisherModeActive)
         {
             CameraUpdater();
         }

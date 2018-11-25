@@ -32,7 +32,7 @@ public class WieldingFlamethrower : MonoBehaviour {
         pmc.rotationSpeed = 1; //MARK: temporary slow player;
         pmc.walkSpeed = 2;
         CF.SetSensitivity(60);
-        CMC.MoveToAimingLocation();
+        CMC.MoveToAimingLocation(false);
         //bool leftInput = Input.GetAxisRaw("Mouse X") > 0; // gets right
         //bool rightInput = Input.GetAxisRaw("Mouse Y") < 0; // gets left
         pmc.Aiming = true;

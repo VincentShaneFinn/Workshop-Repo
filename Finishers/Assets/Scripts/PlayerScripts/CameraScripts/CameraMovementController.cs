@@ -28,7 +28,7 @@ public class CameraMovementController : MonoBehaviour {
                 currentTargetLocation = OOCCameraLocation;
             }
             currentSpeed = .4f;
-            CallCoroutineHelper();
+            CallCoroutineHelper(false);
         }
     }
 
@@ -38,16 +38,16 @@ public class CameraMovementController : MonoBehaviour {
 
         currentTargetLocation = FinisherModeCameraLocation;
         currentSpeed = .45f;
-        CallCoroutineHelper();
+        CallCoroutineHelper(true);
     }
 
     //We will need to test these next two
-    public void MoveToAimingLocation()
+    public void MoveToAimingLocation(bool unscaled)
     {
         PMC.Aiming = true;
         currentTargetLocation = AimingCameraLocation;
         currentSpeed = .1f;
-        CallCoroutineHelper();
+        CallCoroutineHelper(unscaled);
     }
     public void ReturnFromAimingLocation()
     {
@@ -57,18 +57,18 @@ public class CameraMovementController : MonoBehaviour {
         else
             currentTargetLocation = OOCCameraLocation;
         currentSpeed = .1f;
-        CallCoroutineHelper();
+        CallCoroutineHelper(false);
     }
 
     Coroutine co;
 
-    public void CallCoroutineHelper()
+    public void CallCoroutineHelper(bool unscaled)
     {
         // stop the coroutine
         if(co != null)
             StopCoroutine(co);
 
-        IEnumerable move = moveToCurrentTarget();
+        IEnumerable move = moveToCurrentTarget(unscaled);
 
         // start the coroutine:
         co = StartCoroutine(move.GetEnumerator());
@@ -76,7 +76,7 @@ public class CameraMovementController : MonoBehaviour {
 
     bool isMoving = false;
 
-    IEnumerable moveToCurrentTarget()
+    IEnumerable moveToCurrentTarget(bool unscaled)
     {
         //Make sure there is only one instance of this function running
         if (isMoving)
@@ -93,7 +93,10 @@ public class CameraMovementController : MonoBehaviour {
 
         while (counter < currentSpeed)
         {
-            counter += Time.deltaTime;
+            if (unscaled)
+                counter += Time.unscaledDeltaTime;
+            else
+                counter += Time.deltaTime;
             transform.localPosition = Vector3.Lerp(startPos, currentTargetLocation.localPosition, counter / currentSpeed);
             transform.localRotation = Quaternion.Lerp(startRot, currentTargetLocation.localRotation, counter / currentSpeed);
             yield return null;

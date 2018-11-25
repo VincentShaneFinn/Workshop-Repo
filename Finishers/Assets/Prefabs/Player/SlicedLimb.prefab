@@ -8716,6 +8716,7 @@ MonoBehaviour:
   - {fileID: 2100006, guid: 7f636c539abd74941a18d4d98bda71bd, type: 3}
   FireMats:
   - {fileID: 2100000, guid: 2cd8e404df23c724482d4b4752e04a30, type: 2}
+  CurrentAttackType: 0
 --- !u!114 &114628514386654698
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -21,7 +21,7 @@ public class SiphonHolsterController : MonoBehaviour {
     
     // Update is called once per frame
 	void Update () {
-        if (!GameStatus.GamePaused)
+        if (!GameStatus.GamePaused && !GameStatus.FinisherModeActive)
         {
             if(buttonPressed && GameStatus.FinisherModeActive)
             {
@@ -35,7 +35,7 @@ public class SiphonHolsterController : MonoBehaviour {
             }
             if (Input.GetButtonDown("SpecialAttack"))
             {
-                CMC.MoveToAimingLocation();
+                CMC.MoveToAimingLocation(false);
                 buttonPressed = true;
             }
             if (Input.GetButton("SpecialAttack"))
@@ -103,5 +103,12 @@ public class SiphonHolsterController : MonoBehaviour {
         {
             Swords.Add(Instantiate(ThrowableSword, gameObject.transform));
         }
+    }
+
+    public bool HasSword()
+    {
+        if (CurrentSword != null)
+            return true;
+        return false;
     }
 }
