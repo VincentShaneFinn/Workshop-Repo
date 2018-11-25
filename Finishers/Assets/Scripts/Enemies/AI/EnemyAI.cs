@@ -66,6 +66,8 @@ public class EnemyAI : MonoBehaviour {
             GetEnemyMovementCtrl.SetTarget(playerT);
         }
 
+        //we will need to make some new moves if it is a boss, currently preventing boss from jumping
+
         //obviosuly if your currently doing something, or shouldnt be able to do something, you can't attack
         if (!director.IsBusy(CurrentStatus) && myAction == EnemyActions.None) {
             if (checkplayer(attackrange))
@@ -83,7 +85,7 @@ public class EnemyAI : MonoBehaviour {
                 }
             }
             //This will need to go to KnightEnemyActions and check which attack it should attempt, rather than using range
-            else if (checkplayer(Special1RangeTEMP) && Vector3.Distance(transform.position, playerT.position) > Special1RangeTEMP - 1) // we will need an alternative way to check if doing special 1 is right that is specific to the enemy
+            else if (checkplayer(Special1RangeTEMP) && Vector3.Distance(transform.position, playerT.position) > Special1RangeTEMP - 1 && etc.MyEnemyType != EnemyType.Boss) // we will need an alternative way to check if doing special 1 is right that is specific to the enemy
             {
                 if (director.TrySpecial1Attack())
                     KnightActions.StartCoroutine("PerformSpecial1Attack");
@@ -241,6 +243,11 @@ public class EnemyAI : MonoBehaviour {
         return a;
     }
 
+    public int finishersToKill = 1;
+    private int timesKilled = 0;
+    public int GetTimesKilled() { return timesKilled; }
+    public EnemyTypeController etc;
+    public Transform FountainTop;
     //THIS IS THE ONLY WAY AN ENEMY SHOULD BE KILLED
     public void KillEnemy()
     {
@@ -262,7 +269,38 @@ public class EnemyAI : MonoBehaviour {
                     break;
             }
 
-        Destroy(gameObject);
+        timesKilled++;
+        if (timesKilled >= finishersToKill)
+            Destroy(gameObject);
+
+        //Boss specific code
+        if (etc.MyEnemyType == EnemyType.Boss && (float)(finishersToKill - GetTimesKilled()) / finishersToKill < .34f)
+        {
+            etc.EnemySkin.material = GetComponent<Enemyhp>().lowRed;
+            GetEnemyMovementCtrl.ResumeMovement();
+            GetEnemyMovementCtrl.SetLockToGround(true);
+            GetComponent<EnemyMovementController>().EnableNavAgent();
+        }
+        else if(etc.MyEnemyType == EnemyType.Boss && (float)(finishersToKill - GetTimesKilled()) / finishersToKill < .68f)
+        {
+            StartCoroutine(PutOnFountain());
+        }
+    }
+    IEnumerator PutOnFountain()
+    {
+        yield return new WaitForSeconds(1);
+        ChangeStatus(EnemyBehaviorStatus.Busy);
+        GetEnemyMovementCtrl.StopMovement();
+        GetEnemyMovementCtrl.SetLockToGround(false);
+        GetComponent<EnemyMovementController>().DisableNavAgent();
+        yield return null;
+        transform.position = FountainTop.position;
+    }
+
+    public void BeingFinished()
+    {
+        ChangeStatus(EnemyBehaviorStatus.BeingFinished);
+        anim.Play("Hit4");
     }
 
     public void wakeup() {

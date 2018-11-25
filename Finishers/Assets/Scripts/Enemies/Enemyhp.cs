@@ -29,7 +29,7 @@ public class Enemyhp : MonoBehaviour {
             FrozenEnemyHit();
             return;
         }
-
+        
         if(currenthp <= 33)
         {
             if(gameObject.tag != "TargetDummy")
@@ -65,8 +65,10 @@ public class Enemyhp : MonoBehaviour {
         {
             d = (int)(d * ( (100-RestancePercentage) / 100f));
         }
-        print("Damage " + d);
-        currenthp -= d;
+
+        //dont damage boss
+        if(etc.MyEnemyType != EnemyType.Boss)
+            currenthp -= d;
 
         checkhp();
     }

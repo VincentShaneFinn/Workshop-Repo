@@ -3805,6 +3805,8 @@ MonoBehaviour:
   anim: {fileID: 95299401794474168}
   ProjectileLaunchDistance: 10
   CanThrow: 0
+  finishersToKill: 1
+  etc: {fileID: 114445207547743990}
 --- !u!114 &114872146328366510
 MonoBehaviour:
   m_ObjectHideFlags: 1

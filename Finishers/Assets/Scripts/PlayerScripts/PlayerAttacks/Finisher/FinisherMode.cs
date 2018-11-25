@@ -248,7 +248,8 @@ public class FinisherMode : MonoBehaviour
         if (currentTarget.tag != "TargetDummy")
         {
             currentTarget.GetComponent<EnemyMovementController>().StopMovement();
-            currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.BeingFinished);
+            currentTarget.GetComponent<EnemyAI>().BeingFinished();
+            yield return null;
         }
 
         UIanim.Play("FinisherRunicIdleStance");
@@ -378,6 +379,13 @@ public class FinisherMode : MonoBehaviour
         else
             Destroy(currentTarget);
 
+        if(currentTarget != null)
+        {
+            currentTarget.transform.parent = null;
+            currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker);
+            currentTarget.GetComponent<EnemyMovementController>().HelpKnockback();
+        }
+
         inFinisherMode = false;
         ExecutingFinisher = false;
         CurrentFinisherMode = FinisherModes.Runic;
@@ -415,7 +423,7 @@ public class FinisherMode : MonoBehaviour
         float lowestDotDistance = Mathf.Infinity;
         foreach (GameObject Enemy in Enemies)
         {
-            if (Vector3.Distance(Enemy.transform.position, transform.position) < range && Enemy.GetComponent<NavMeshAgent>().isActiveAndEnabled)
+            if (Vector3.Distance(Enemy.transform.position, transform.position) < range)
             {
                 //check if the player is in front of you
                 var heading = Enemy.transform.position - CameraBase.position;

@@ -229,12 +229,20 @@ public class GroupDirector : MonoBehaviour {
                 enemy.ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker);
         }
     }
+
+    public bool bossGroup = false;
+
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
             WakeUpEnemies();
 
+            if (bossGroup)
+            {
+                col.gameObject.GetComponent<FinisherMode>().IncreaseFinisherMeter(-100);
+                col.gameObject.GetComponent<FinisherMode>().IncreaseGodModeMeter(-100);
+            }
 
             //enter combat
             CloseExits();

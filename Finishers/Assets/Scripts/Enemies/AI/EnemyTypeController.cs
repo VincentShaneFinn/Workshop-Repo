@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyType { FireEnemy, IceEnemy}
+public enum EnemyType { FireEnemy, IceEnemy, Boss}
 
 public class EnemyTypeController : MonoBehaviour {
 
@@ -24,6 +24,9 @@ public class EnemyTypeController : MonoBehaviour {
                 case EnemyType.IceEnemy:
                     DummySkin.material = IceEnemyMat;
                     break;
+                default:
+                    DummySkin.material = FireEnemyMat;
+                    break;
             }
         }
         else
@@ -35,6 +38,9 @@ public class EnemyTypeController : MonoBehaviour {
                     break;
                 case EnemyType.IceEnemy:
                     EnemySkin.material = IceEnemyMat;
+                    break;
+                default:
+                    EnemySkin.material = FireEnemyMat;
                     break;
             }
         }
