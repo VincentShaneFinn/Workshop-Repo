@@ -225,3 +225,4 @@ f1be46a363df415f7ec35f96181304d8 Assembly-CSharp.dll:.PlayerHealthController
 3410c48122112ba1031b73103888a26f Assembly-CSharp.dll:.PlayerDamageValues
 65968b3b1a8d8901b00426211237013c Assembly-CSharp.dll:.ChangeButtonIcon
 a4c44f2a3b558493faeba199b4fb4be2 Assembly-CSharp.dll:.PlayerMovementControllerCC
+ca6db95420335b34223894b64c6dc59c Assembly-CSharp.dll:.Launch_ragdoll
