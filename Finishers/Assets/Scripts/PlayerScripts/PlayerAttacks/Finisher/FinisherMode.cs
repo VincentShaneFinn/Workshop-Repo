@@ -382,8 +382,11 @@ public class FinisherMode : MonoBehaviour
         if(currentTarget != null)
         {
             currentTarget.transform.parent = null;
-            currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker);
-            currentTarget.GetComponent<EnemyMovementController>().HelpKnockback();
+            if (currentTarget.GetComponent<EnemyAI>() != null)
+            {
+                currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker);
+                currentTarget.GetComponent<EnemyMovementController>().HelpKnockback();
+            }
         }
 
         inFinisherMode = false;
