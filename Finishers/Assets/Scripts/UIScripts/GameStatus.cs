@@ -60,9 +60,22 @@ public class GameStatus : MonoBehaviour {
         return save;
     }
 
+    public Text saveGamePopup;
+    private bool ignoreFirst = false;
+    private void DelaySaveGameTextRemove()
+    {
+        saveGamePopup.text = "";
+    }
 
     public void SaveGame()
     {
+        if (!ignoreFirst)
+            ignoreFirst = true;
+        else
+        {
+            saveGamePopup.text = "Saved Game";
+            Invoke("DelaySaveGameTextRemove", 3);
+        }
         // 1
         Save save = CreateSaveGameObject();
 
