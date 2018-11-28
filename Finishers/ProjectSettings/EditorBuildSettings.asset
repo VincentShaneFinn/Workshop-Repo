@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Week8-9/Week8StartHere.unity
-    guid: b7a69c25109e94944b002e0acf319130
+    path: Assets/Scenes/Week10-11/Week10NotReadyYet.unity
+    guid: db4537ab8a6ef1d46af7d824d7884f73
   m_configObjects: {}

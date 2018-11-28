@@ -248,7 +248,9 @@ public class GroupDirector : MonoBehaviour {
             CloseExits();
             playerUpdater.EnterCombatState();
 
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            foreach (BoxCollider collider in gameObject.GetComponents<BoxCollider>()) {
+                collider.enabled = false;
+            }
             CombatStarted = true;
         }
     }

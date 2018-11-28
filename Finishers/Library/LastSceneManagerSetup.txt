@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Week8-9/CarlosGreg Level/Desert Level - Version 01.unity
-  isLoaded: 1
-  isActive: 1
