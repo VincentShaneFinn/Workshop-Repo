@@ -269,6 +269,8 @@ public class GroupDirector : MonoBehaviour {
         {
             exit.SetActive(false);
         }
+        GameStatus.GroupsDefeated++;
+        print(GameStatus.GroupsDefeated);
     }
 
 }

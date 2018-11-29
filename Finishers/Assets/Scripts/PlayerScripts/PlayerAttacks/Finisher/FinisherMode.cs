@@ -99,7 +99,7 @@ public class FinisherMode : MonoBehaviour
                         {
                             finisherSlider.value = 50;
                             FinisherFullImage.SetActive(false);
-                            StartCoroutine(EnterFinisherMode());
+                            StartCoroutine(EnterFinisherMode(usedSwordGrapple));
                         }
                         else
                         {
@@ -230,7 +230,7 @@ public class FinisherMode : MonoBehaviour
     }
 
     public GameObject SwordThrowAnimObj;
-    public IEnumerator EnterFinisherMode()
+    public IEnumerator EnterFinisherMode(bool usedSwordGrapple)
     {
         GameStatus.FinisherModeActive = true;
         Player.GetComponent<PlayerMovementController>().PreventMoving();
@@ -426,6 +426,7 @@ public class FinisherMode : MonoBehaviour
         float lowestDotDistance = Mathf.Infinity;
         foreach (GameObject Enemy in Enemies)
         {
+            usedSwordGrapple = false;
             if (Vector3.Distance(Enemy.transform.position, transform.position) < range)
             {
                 //check if the player is in front of you

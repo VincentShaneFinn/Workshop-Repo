@@ -13,6 +13,7 @@ public class GameStatus : MonoBehaviour {
     public static bool InCombat;
     public static ControlType CurrentControlType;
     public static bool LoadGameBool = false;
+    public static int GroupsDefeated = 0; 
 
     void Start()
     {
@@ -29,6 +30,49 @@ public class GameStatus : MonoBehaviour {
             CheckpointP = transform.parent.position;
             SaveGame();
         }
+    }
+
+    public GameObject Key1;
+    public GameObject Key2;
+    public GameObject Key3;
+    public GameObject Door1;
+    public GameObject Door2;
+    private bool openedDoors = false;
+
+    private void Update()
+    {
+        if(GroupsDefeated >= 3)
+        {
+            Key1.SetActive(true);
+        }
+        if(GroupsDefeated >= 6)
+        {
+            Key2.SetActive(true);
+        }
+        if(GroupsDefeated >= 9)
+        {
+            Key3.SetActive(true);
+            if (!openedDoors && Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, Door1.transform.position) < 20)
+            {
+                openedDoors = true;
+                StartCoroutine(OpenDoors());
+            }
+        }
+    }
+
+    IEnumerator OpenDoors()
+    {
+        float timeToOpen = 5;
+        float count = 0;
+        while (count <= timeToOpen)
+        {
+            count += Time.deltaTime;
+            Door1.transform.Translate(Vector3.right * 1f * Time.deltaTime);
+            Door2.transform.Translate(Vector3.left * 1f * Time.deltaTime);
+            yield return null;
+        }
+
+
     }
 
     public List<GameObject> Groups;
