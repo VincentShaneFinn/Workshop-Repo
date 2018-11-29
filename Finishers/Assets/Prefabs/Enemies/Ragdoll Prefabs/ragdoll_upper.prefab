@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 54699677287707046}
   - component: {fileID: 136027475737484312}
   - component: {fileID: 114652838170091588}
+  - component: {fileID: 114864853855188760}
   m_Layer: 0
   m_Name: ragdoll_upper
   m_TagString: Untagged
@@ -2540,6 +2541,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 5000
   hips: {fileID: 1272448146160552}
+--- !u!114 &114864853855188760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1297172243018412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3171df0708140541bd4d74326dc1073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroyTime: 10
 --- !u!135 &135064350746604376
 SphereCollider:
   m_ObjectHideFlags: 1

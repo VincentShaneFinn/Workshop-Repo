@@ -91,6 +91,26 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
+
+    }
+
+    public bool isDashing()
+    {
+        return dashing;
+    }
+
+    private Vector3 desiredVelocity;
+    public float slopeRayHeight = 0;
+    public float steepSlopeAngle = 45;
+    public float slopeThreshold = .2f;
+    public CapsuleCollider myCollider;
+    public Animator CharAnim;
+    private bool jumpPressed = false;
+
+    void FixedUpdate()
+    {
+        Transform forward = new Transform();
+        forward=forward.
         grounded = Physics.CheckSphere(GroundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
 
         // If the run button is set to toggle, then switch between walk/run speed. (We use Update for this...
@@ -204,7 +224,7 @@ public class PlayerMovementController : MonoBehaviour
                 falling = true;
                 fallStartLevel = myTransform.position.y;
             }
-            
+
             // If air control is allowed, check movement but don't touch the y component
             if (airControl && playerControl && !dashing)
             {
@@ -220,9 +240,10 @@ public class PlayerMovementController : MonoBehaviour
 
         if (CanTurn && !GameStatus.FinisherModeActive)
         {
-            
+
             Vector3 movement = new Vector3((moveDirection).x, 0.0f, (moveDirection).z);
-            if (!Aiming) {
+            if (!Aiming)
+            {
                 if (movement != Vector3.zero)
                 {
                     //print((float)(Time.deltaTime + (1.0 - Time.timeScale)));
@@ -231,29 +252,17 @@ public class PlayerMovementController : MonoBehaviour
                     //rotationwrapper.transform.rotation = Quaternion.LookRotation(movement);
                 }
             }
-            else {
+            else
+            {
                 float y = CameraBase.transform.eulerAngles.y;
                 rotationwrapper.transform.eulerAngles = new Vector3(0, y, 0);
                 //rotationwrapper.transform.rotation = CameraBaseRotJustY;
             }
         }
         dashed = false;
-    }
 
-    public bool isDashing()
-    {
-        return dashing;
-    }
 
-    private Vector3 desiredVelocity;
-    public float slopeRayHeight = 0;
-    public float steepSlopeAngle = 45;
-    public float slopeThreshold = .2f;
-    public CapsuleCollider myCollider;
-    public Animator CharAnim;
-    private bool jumpPressed = false;
-    void FixedUpdate()
-    {
+
         if (CanMove)
         {
             if (grounded && myRigidbody.velocity.y > 0) //measure to prevent up velocity if moving on a slope, but dont do this if just jumped
@@ -284,7 +293,7 @@ public class PlayerMovementController : MonoBehaviour
         else
             CharAnim.SetFloat("Running", 0);
         if(jumpPressed)
-            myRigidbody.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+            myRigidbody.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
         jumpPressed = false;
     }
 

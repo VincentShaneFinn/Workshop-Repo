@@ -143,6 +143,10 @@ public class GodMode : MonoBehaviour {
     int InputIndex = 0;
     public void ChoseInput()
     {
+        UpIcon.transform.LookAt(cmc.transform);
+        RightIcon.transform.LookAt(cmc.transform);
+        DownIcon.transform.LookAt(cmc.transform);
+        LeftIcon.transform.LookAt(cmc.transform);
         InputIndex = Random.Range(0, 4);
         switch (InputIndex)
         {
@@ -170,7 +174,9 @@ public class GodMode : MonoBehaviour {
                 DownIcon.SetActive(false);
                 LeftIcon.SetActive(true);
                 break;
+
         }
+
     }
     public bool CheckUserInput()
     {
@@ -234,10 +240,10 @@ public class GodMode : MonoBehaviour {
             transform.position = Vector3.Lerp(currentPos, enemy.transform.position +  direction * 1.5f, t);//change direction to enemy.transform.forward to place in front of enemies
             Vector3 currentTargetPostition = new Vector3(enemy.transform.position.x, this.transform.position.y, enemy.transform.position.z);
             //PlayerRotWrapper.transform.LookAt(currentTargetPostition);
-            //cf.transform.LookAt(currentTargetPostition); //MARK: this is technically a bug, but the dynamic camera looks kinda good
+            cf.transform.LookAt(currentTargetPostition); //MARK: this is technically a bug, but the dynamic camera looks kinda good
             Quaternion rot = Quaternion.LookRotation(currentTargetPostition - transform.position);
             PlayerRotWrapper.transform.rotation = Quaternion.Slerp(PlayerRotWrapper.transform.rotation, rot, t);
-            cf.transform.rotation = Quaternion.Slerp(cf.transform.rotation, rot, t);
+            //cf.transform.rotation = Quaternion.Slerp(cf.transform.rotation, rot, 1);
             yield return null;
         }
 

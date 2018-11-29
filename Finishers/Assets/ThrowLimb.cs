@@ -84,6 +84,7 @@ public class ThrowLimb : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
+
         if (col.gameObject.tag == "Enemy")
         {
             if (firedPressed)
@@ -113,7 +114,12 @@ public class ThrowLimb : MonoBehaviour {
         else if (obstacleLayers.Contains(col.gameObject.layer))
         {
             if (firedPressed)
+            {
+                Destroy(this);
                 HitWall = true;
+            }
+                
+
         }
     }
 }

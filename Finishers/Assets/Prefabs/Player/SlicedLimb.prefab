@@ -2484,6 +2484,7 @@ GameObject:
   - component: {fileID: 65040728116389174}
   - component: {fileID: 114711328865795248}
   - component: {fileID: 54805943949247264}
+  - component: {fileID: 114937226972960932}
   m_Layer: 9
   m_Name: SlicedLimb
   m_TagString: Untagged
@@ -8750,6 +8751,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   LineMat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &114937226972960932
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1556134404968722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3171df0708140541bd4d74326dc1073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroyTime: 10
 --- !u!137 &137021985178966824
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -16,6 +16,7 @@ public class FinisherMeterPickup : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
         fm.IncreaseFinisherMeter(FinisherMeterFill);
+        Destroy(gameObject);
     }
 
 }
