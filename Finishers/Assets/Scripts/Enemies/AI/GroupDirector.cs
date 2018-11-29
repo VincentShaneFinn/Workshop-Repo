@@ -52,18 +52,18 @@ public class GroupDirector : MonoBehaviour {
     }
     public void Update()
     {
+        Enemies = Enemies.Where(item => item != null).ToList(); // remove killed enemies from list
+        currentPrimaryAttackers = 0;
+        currentArcRunners = 0;
+
+        if (Enemies.Count <= 0)
+        {
+            OpenExits();
+            playerUpdater.ExitCombatState();
+            gameObject.SetActive(false);
+        }
         if (CombatStarted)
         {
-            Enemies = Enemies.Where(item => item != null).ToList(); // remove killed enemies from list
-            currentPrimaryAttackers = 0;
-            currentArcRunners = 0;
-
-            if (Enemies.Count <= 0)
-            {
-                OpenExits();
-                playerUpdater.ExitCombatState();
-                gameObject.SetActive(false);
-            }
 
             if (SendOrderCounter < 0)
             {

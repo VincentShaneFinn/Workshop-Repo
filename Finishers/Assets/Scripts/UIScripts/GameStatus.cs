@@ -41,6 +41,10 @@ public class GameStatus : MonoBehaviour {
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            GroupsDefeated = 8;
+        }
         if(GroupsDefeated >= 3)
         {
             Key1.SetActive(true);
