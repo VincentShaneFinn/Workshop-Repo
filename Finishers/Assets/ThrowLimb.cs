@@ -88,6 +88,10 @@ public class ThrowLimb : MonoBehaviour {
         {
             if (firedPressed)
             {
+                if(col.gameObject.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.Boss)//BossComment added to check if boss, temporary
+                {
+                    return;
+                }
                 if (CurrentlyKilledCount < KillLimit)
                 {
                     col.gameObject.GetComponent<EnemyAI>().KillEnemy();

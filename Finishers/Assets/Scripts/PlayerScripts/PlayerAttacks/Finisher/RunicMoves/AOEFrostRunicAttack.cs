@@ -19,6 +19,10 @@ public class AOEFrostRunicAttack : MonoBehaviour {
     {
         if (col.gameObject.tag == "Enemy")
         {
+            if (col.gameObject.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.Boss)//BossComment added to check if boss, temporary
+            {
+                return;
+            }
             GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>().IncreaseFinisherMeter(PlayerDamageValues.Instance.FlameAOEFinMeterFill);
             freezeCount++;
             if (freezeCount <= freezeLimit)

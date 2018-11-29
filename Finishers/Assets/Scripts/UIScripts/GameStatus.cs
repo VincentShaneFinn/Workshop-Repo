@@ -170,6 +170,7 @@ public class GameStatus : MonoBehaviour {
             // 4
             HealthSlider.value = save.healthMeter;
             FinisherSlider.value = save.finisherMeter;
+            GroupsDefeated = save.DeadGroups.Count;
 
             playerT.position =new Vector3(save.playerX, save.playerY, save.playerZ);
 
