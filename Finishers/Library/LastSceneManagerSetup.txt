@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Week8-9/Week8StartHere.unity
-  isLoaded: 1
-  isActive: 1
