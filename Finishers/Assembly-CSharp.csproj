@@ -116,8 +116,10 @@
      <Compile Include="Assets\Scripts\SoundScripts\PlayerFootStepController.cs" />
      <Compile Include="Assets\Scripts\SoundScripts\PlayerSoundController.cs" />
      <Compile Include="Assets\Scripts\SoundScripts\PlayerSwordSoundController.cs" />
+     <Compile Include="Assets\Scripts\UIScripts\AnimateLine.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ChangeButtonIcon.cs" />
      <Compile Include="Assets\Scripts\UIScripts\ControlMethodDetector.cs" />
+     <Compile Include="Assets\Scripts\UIScripts\FinisherLineAnimator.cs" />
      <Compile Include="Assets\Scripts\UIScripts\GameStatus.cs" />
      <Compile Include="Assets\Scripts\UIScripts\GodModeText.cs" />
      <Compile Include="Assets\Scripts\UIScripts\UIManager.cs" />

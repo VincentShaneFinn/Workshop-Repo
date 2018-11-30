@@ -141,35 +141,10 @@ public class FinisherMode : MonoBehaviour
                     FailFinisherMode();
                     return;
                 }
-                if (Input.GetButtonDown("UpButton"))
-                {
-                    UIanim.Play("RunicUpCarve");
-                    CharAnim.Play("Carve 1");
-                    RunicQue.Add(Direction.up);
-                    psc.PlayRunicStab(Direction.up);
-                }
-                if (Input.GetButtonDown("RightButton"))
-                {
-                    UIanim.Play("RunicRightCarve");
-                    RunicQue.Add(Direction.right);
-                    psc.PlayRunicStab(Direction.right);
-                }
-                if (Input.GetButtonDown("DownButton"))
-                {
-                    UIanim.Play("RunicDownCarve");
-                    CharAnim.Play("Carve 2");
-                    RunicQue.Add(Direction.down);
-                    psc.PlayRunicStab(Direction.down);
-                }
-                if (Input.GetButtonDown("LeftButton"))
-                {
-                    UIanim.Play("RunicLeftCarve");
-                    RunicQue.Add(Direction.left);
-                    psc.PlayRunicStab(Direction.left);
-                }
+                ProcessPlayerInput();
 
                 bool goodSoFar = false;
-                foreach(FinisherAbstract RCombo in FinisherMoves)
+                foreach (FinisherAbstract RCombo in FinisherMoves)
                 {
                     goodSoFar = RCombo.checkSoFar(RunicQue);
                     if (goodSoFar)
@@ -190,7 +165,8 @@ public class FinisherMode : MonoBehaviour
                 {
                     bool goodCombo = false;
                     FinisherAbstract FinisherToPerform = null;
-                    foreach (FinisherAbstract f in FinisherMoves) {
+                    foreach (FinisherAbstract f in FinisherMoves)
+                    {
                         //goodCombo = f.startfinisher(this, RunicQue);
                         goodCombo = f.check(RunicQue);
                         FinisherToPerform = f;
@@ -201,7 +177,8 @@ public class FinisherMode : MonoBehaviour
                     {
                         FailFinisherMode();
                     }
-                    else {
+                    else
+                    {
                         StartCoroutine(ExecuteFinisher(FinisherToPerform));
                     }
                 }
@@ -218,6 +195,126 @@ public class FinisherMode : MonoBehaviour
         }
         //print(NearbyEnemies);
         TryFinisher = false;
+    }
+
+    //animate line
+    private List<Direction> InputList = new List<Direction>();
+    private ElementType CurrentFinisherElement;
+
+    private void AddInput(Direction input)
+    {           
+        //might be good to have the state of the element to help with the color
+        //so it should be LeftToRightAnim(runic)
+        InputList.Add(input);
+        if(InputList.Count > 1)
+        {
+            switch (InputList[InputList.Count - 2])
+            {
+                case Direction.left:
+                    switch(InputList[InputList.Count - 1])
+                    {
+                        case Direction.up:
+                            FinisherLineAnimator.LeftToUpAnim(CurrentFinisherElement);
+                            break;
+                        case Direction.down:
+                            FinisherLineAnimator.LeftToDownAnim(CurrentFinisherElement);
+                            break;
+                        case Direction.right:
+                            FinisherLineAnimator.LeftToRightAnim(CurrentFinisherElement);
+                            break;
+                    }
+                    break;
+                case Direction.right:
+                    switch (InputList[InputList.Count - 1])
+                    {
+                        case Direction.up:
+                            FinisherLineAnimator.RightToUpAnim(CurrentFinisherElement);
+                            break;
+                        case Direction.left:
+                            FinisherLineAnimator.RightToLeftAnim(CurrentFinisherElement);
+                            break;
+                        case Direction.down:
+                            FinisherLineAnimator.RightToDownAnim(CurrentFinisherElement);
+                            break;
+                    }
+                    break;
+                case Direction.up:
+                    switch (InputList[InputList.Count - 1])
+                    {
+                        case Direction.right:
+                            FinisherLineAnimator.UpToRightAnim(CurrentFinisherElement);
+                            break;
+                        case Direction.left:
+                            FinisherLineAnimator.UpToLeftAnim(CurrentFinisherElement);
+                            break;
+                    }
+                    break;
+                case Direction.down:
+                    switch (InputList[InputList.Count - 1])
+                    {
+                        case Direction.right:
+                            FinisherLineAnimator.DownToRightAnim(CurrentFinisherElement);
+                            break;
+                        case Direction.left:
+                            FinisherLineAnimator.DownToLeftAnim(CurrentFinisherElement);
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+
+            }
+        }
+        else
+        {
+            switch (input)
+            {
+                case Direction.left:
+                    CurrentFinisherElement = ElementType.Fire;
+                    break;
+                case Direction.up:
+                    CurrentFinisherElement = ElementType.Electricity;
+                    break;
+                case Direction.right:
+                    CurrentFinisherElement = ElementType.Ice;
+                    break;
+
+            }
+        }
+    }
+
+    private void ProcessPlayerInput()
+    {
+        if (Input.GetButtonDown("UpButton"))
+        {
+            UIanim.Play("RunicUpCarve");
+            CharAnim.Play("Carve 1");
+            RunicQue.Add(Direction.up);
+            psc.PlayRunicStab(Direction.up);
+            AddInput(Direction.up);
+        }
+        if (Input.GetButtonDown("RightButton"))
+        {
+            UIanim.Play("RunicRightCarve");
+            RunicQue.Add(Direction.right);
+            psc.PlayRunicStab(Direction.right);
+            AddInput(Direction.right);
+        }
+        if (Input.GetButtonDown("DownButton"))
+        {
+            UIanim.Play("RunicDownCarve");
+            CharAnim.Play("Carve 2");
+            RunicQue.Add(Direction.down);
+            psc.PlayRunicStab(Direction.down);
+            AddInput(Direction.down);
+        }
+        if (Input.GetButtonDown("LeftButton"))
+        {
+            UIanim.Play("RunicLeftCarve");
+            RunicQue.Add(Direction.left);
+            psc.PlayRunicStab(Direction.left);
+            AddInput(Direction.left);
+        }
     }
 
     public void IncreaseFinisherMeter(float val)
@@ -324,6 +421,7 @@ public class FinisherMode : MonoBehaviour
 
         //RunicSequence.RestartQue();
         RunicQue.Clear();
+        InputList.Clear();
         //yield return null;
     }
 
