@@ -109,6 +109,8 @@ public class PlayerMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Transform forward = new Transform();
+        forward=forward.
         grounded = Physics.CheckSphere(GroundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
 
         // If the run button is set to toggle, then switch between walk/run speed. (We use Update for this...
