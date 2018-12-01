@@ -63,6 +63,10 @@ public class FinisherMode : MonoBehaviour
     {
         FinisherMoves.Add(finisher);
     }
+    public void RemoveFinisherMove(FinisherAbstract finisher)
+    {
+        FinisherMoves.Remove(finisher);
+    }
 
     void Start()
     {
@@ -82,6 +86,17 @@ public class FinisherMode : MonoBehaviour
         RunicQue = new List<Direction>();
     }
 
+    //TutorialPillarComment
+    public bool PillarFinisherNearby = false;
+    public GameObject PillarTarget = null;
+    public bool PillarFinisherUsed = false;
+    private TutorialPillar PillarTutorial;
+
+    void HidePopup()
+    {
+        TutorialPopups.Instance.HideTutorialPopup();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -89,7 +104,38 @@ public class FinisherMode : MonoBehaviour
         {
             if (FinisherModeCooldownCount >= FinisherModeCooldownTime && CanFinish)
             {
-                if (finisherSlider.value >= 100)
+                if (PillarFinisherNearby && PillarTarget != null)//TutorialPillarComment
+                {
+                    FinisherIcon.SetActivated(true);
+                    FinisherIcon.transform.position = PillarTarget.transform.position;
+                    FinisherIcon.transform.position += Vector3.up * 2f;
+                    if (TryFinisher && !GameStatus.GamePaused)
+                    {
+                        PillarFinisherUsed = true;
+                        currentTarget = PillarTarget;
+                        PillarTutorial = PillarTarget.GetComponent<TutorialPillar>();
+                        switch (PillarTutorial.FinisherUnlock)
+                        {
+                            case Finishers.Siphoning:
+                                GetComponent<Siphoncut>().enabled = true;
+                                break;
+                            case Finishers.FlameSword:
+                                GetComponent<RunicFireSword>().enabled = true;
+                                break;
+                            case Finishers.Flamethrower:
+                                GetComponent<RunicFlamethrower>().enabled = true;
+                                break;
+                            case Finishers.FlameAOE:
+                                GetComponent<RunicFireCircle>().enabled = true;
+                                break;
+                            case Finishers.FrostAOE:
+                                GetComponent<RunicFrostCircle>().enabled = true;
+                                break;
+                        }
+                        StartCoroutine(EnterFinisherMode(false));
+                    }
+                }
+                else if (finisherSlider.value >= 100)
                 {
                     currentTarget = GetClosestEnemy();
                     FinisherFullImage.SetActive(true);
@@ -134,8 +180,11 @@ public class FinisherMode : MonoBehaviour
 
             if (PerformingFinisher && !ExecutingFinisher && !GameStatus.GamePaused) //MARK: Unsure of how we will do the full finisher carves
             {
-                currentTarget.transform.position = EnemyFinisherPlacement.position;
-                currentTarget.transform.rotation = EnemyFinisherPlacement.rotation;
+                if (!PillarFinisherUsed)
+                {
+                    currentTarget.transform.position = EnemyFinisherPlacement.position;
+                    currentTarget.transform.rotation = EnemyFinisherPlacement.rotation;
+                }
                 if (Input.GetButtonDown("QuickFinish"))
                 {
                     FailFinisherMode();
@@ -183,7 +232,7 @@ public class FinisherMode : MonoBehaviour
                     }
                 }
 
-                if (FinisherCount <= 0 && !ExecutingFinisher)
+                if (FinisherCount <= 0 && !ExecutingFinisher && !PillarFinisherUsed)
                 {
                     FailFinisherMode();
                 }
@@ -339,14 +388,16 @@ public class FinisherMode : MonoBehaviour
         //move enemy into place and lock controls.
 
         PlayerRotWrapper.LookAt(new Vector3(currentTarget.transform.position.x,
-                                PlayerRotWrapper.transform.position.y,
-                                currentTarget.transform.position.z));
-
-        if (currentTarget.tag != "TargetDummy")
+                                    PlayerRotWrapper.transform.position.y,
+                                    currentTarget.transform.position.z));
+        if (!PillarFinisherUsed)
         {
-            currentTarget.GetComponent<EnemyMovementController>().StopMovement();
-            currentTarget.GetComponent<EnemyAI>().BeingFinished();
-            yield return null;
+            if (currentTarget.tag != "TargetDummy")
+            {
+                currentTarget.GetComponent<EnemyMovementController>().StopMovement();
+                currentTarget.GetComponent<EnemyAI>().BeingFinished();
+                yield return null;
+            }
         }
 
         UIanim.Play("FinisherRunicIdleStance");
@@ -398,7 +449,12 @@ public class FinisherMode : MonoBehaviour
 
         currentTarget.transform.position = EnemyFinisherPlacement.position;
         currentTarget.transform.rotation = EnemyFinisherPlacement.rotation;
-        currentTarget.transform.parent = EnemyFinisherPlacement;
+        //currentTarget.transform.parent = EnemyFinisherPlacement;
+        if (PillarFinisherUsed)
+        {
+            currentTarget.transform.position += Vector3.down;
+            TutorialPopups.Instance.ShowTutorialPopup(PillarTutorial.FinisherUnlock);
+        }
 
         //moves camera
         cam.MoveToFinisherModeLocation(); //Mark make sure camera takes as long as the animation
@@ -455,6 +511,28 @@ public class FinisherMode : MonoBehaviour
         InFinisherIcons.SetActive(false);
         didFail = true;
 
+        if (PillarFinisherUsed)
+        {
+            switch (PillarTutorial.FinisherUnlock)
+            {
+                case Finishers.Siphoning:
+                    GetComponent<Siphoncut>().enabled = false;
+                    break;
+                case Finishers.FlameSword:
+                    GetComponent<RunicFireSword>().enabled = false;
+                    break;
+                case Finishers.Flamethrower:
+                    GetComponent<RunicFlamethrower>().enabled = false;
+                    break;
+                case Finishers.FlameAOE:
+                    GetComponent<RunicFireCircle>().enabled = false;
+                    break;
+                case Finishers.FrostAOE:
+                    GetComponent<RunicFrostCircle>().enabled = false;
+                    break;
+            }
+        }
+
         StartCoroutine(LeavingFinisherMode());
     }
 
@@ -466,29 +544,42 @@ public class FinisherMode : MonoBehaviour
             CharAnim.Play("FinisherExecution");
             yield return new WaitForSecondsRealtime(1f);
             CharAnim.Play("Idle");
-            didFail = false;
         }
         Player.GetComponent<PlayerMovementController>().AllowMoving(); //MARK: barely noticable bug where if you move and do flamethrower finisher, you may move for 1 frame
         Player.GetComponent<PlayerMovementController>().AllowTurning();
 
-
-        if (currentTarget.tag != "TargetDummy")
-            currentTarget.GetComponent<EnemyAI>().KillEnemy();
-        else
-            Destroy(currentTarget);
-
-        if(currentTarget != null)
+        if (!PillarFinisherUsed)
         {
-            currentTarget.transform.parent = null;
-            if (currentTarget.GetComponent<EnemyAI>() != null)
+            if (currentTarget.tag != "TargetDummy")
+                currentTarget.GetComponent<EnemyAI>().KillEnemy();
+            else
+                Destroy(currentTarget);
+
+            if (currentTarget != null)
             {
-                currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker);
-                currentTarget.GetComponent<EnemyMovementController>().HelpKnockback();
+                currentTarget.transform.parent = null;
+                if (currentTarget.GetComponent<EnemyAI>() != null)
+                {
+                    currentTarget.GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.PrimaryAttacker);
+                    currentTarget.GetComponent<EnemyMovementController>().HelpKnockback();
+                }
             }
         }
+        else if (!didFail) //TutorialPopupStuff
+        {
+            Invoke("HidePopup", 4f);
+            Destroy(currentTarget);
+        }
+        else
+        {
+            Invoke("HidePopup",0f);
+        }
+        didFail = false;
 
         inFinisherMode = false;
         ExecutingFinisher = false;
+        PillarFinisherUsed = false;
+
         CurrentFinisherMode = FinisherModes.Runic;
         currentTarget = null;
         yield return null;
@@ -500,6 +591,7 @@ public class FinisherMode : MonoBehaviour
         FinisherModeCooldownCount = 0;
         Time.timeScale = 1;
         GameStatus.FinisherModeActive = false;
+
     }
 
     public ChangeButtonIcon FinisherIcon;

@@ -8,8 +8,13 @@ public class Siphoncut : FinisherAbstract {
     public Transform SlicedLimbFirePoint;
     public SiphonHolsterController shc;
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
         GetComponent<FinisherMode>().AddFinisherMove(this);
+    }
+
+    void OnDisable()
+    {
+        GetComponent<FinisherMode>().RemoveFinisherMove(this);
     }
 	
 	// Update is called once per frame

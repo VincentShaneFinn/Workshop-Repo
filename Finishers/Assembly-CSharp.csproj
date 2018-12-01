@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\EnvironmentScripts\FinisherMeterPickup.cs" />
      <Compile Include="Assets\Scripts\EnvironmentScripts\GodModePickup.cs" />
      <Compile Include="Assets\Scripts\EnvironmentScripts\HealthPickupController.cs" />
+     <Compile Include="Assets\Scripts\EnvironmentScripts\TutorialPillar.cs" />
      <Compile Include="Assets\Scripts\LookAtTarget.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshLink.cs" />
      <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshModifier.cs" />
@@ -123,6 +124,7 @@
      <Compile Include="Assets\Scripts\UIScripts\FinisherLineAnimator.cs" />
      <Compile Include="Assets\Scripts\UIScripts\GameStatus.cs" />
      <Compile Include="Assets\Scripts\UIScripts\GodModeText.cs" />
+     <Compile Include="Assets\Scripts\UIScripts\TutorialPopups.cs" />
      <Compile Include="Assets\Scripts\UIScripts\UIManager.cs" />
      <Compile Include="Assets\ThrowLimb.cs" />
      <Compile Include="Assets\ThrowPart.cs" />

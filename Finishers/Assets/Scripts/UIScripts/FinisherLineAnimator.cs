@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum ElementType { Fire, Ice, Electricity } //using electricity for siphoning for now
 
+// todo refactor to behave like TutorialPopups
 public class FinisherLineAnimator : MonoBehaviour {
 
     static FinisherLineAnimator lineAnimator;
@@ -44,7 +45,7 @@ public class FinisherLineAnimator : MonoBehaviour {
         DownToLeftRed.SetActive(false);
         DownToRightBlue.SetActive(false);
         DownToRightRed.SetActive(false);
-}
+    }
 
     // Update is called once per frame
     void Update () {

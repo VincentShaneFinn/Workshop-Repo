@@ -11,9 +11,16 @@ public class RunicFireSword : FinisherAbstract {
     private GameObject currentflame;
     private bool LightSword = false;
 
-	void Start () {
+    // Use this for initialization
+    void OnEnable()
+    {
         GetComponent<FinisherMode>().AddFinisherMove(this);
         SwordCount = SwordTimer;
+    }
+
+    void OnDisable()
+    {
+        GetComponent<FinisherMode>().RemoveFinisherMove(this);
     }
 
     void Update()

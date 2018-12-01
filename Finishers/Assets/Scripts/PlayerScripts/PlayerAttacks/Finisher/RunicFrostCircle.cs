@@ -6,10 +6,17 @@ public class RunicFrostCircle : FinisherAbstract {
     // Use this for initialization
     public GameObject FrostCircle;
 
-	void Start () {
+    // Use this for initialization
+    void OnEnable()
+    {
         GetComponent<FinisherMode>().AddFinisherMove(this);
-	}
-	
+    }
+
+    void OnDisable()
+    {
+        GetComponent<FinisherMode>().RemoveFinisherMove(this);
+    }
+
     public override void startfinisher(FinisherMode f) {
         Transform PlayerGround = GetComponent<PlayerMovementController>().GroundChecker;
         Instantiate(FrostCircle, PlayerGround.position, PlayerGround.rotation);
