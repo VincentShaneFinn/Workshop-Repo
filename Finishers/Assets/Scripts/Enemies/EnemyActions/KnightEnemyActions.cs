@@ -243,4 +243,17 @@ public class KnightEnemyActions : MonoBehaviour {
         yield return new WaitForSeconds(.5f);
         AI.CanThrow = true;
     }
+
+
+    public GameObject FireAOE;
+    //This is a boss only attack
+    public IEnumerator ThrowFireAOE()
+    {
+        AI.CanThrowAOE = false;
+        Instantiate(FireBall, transform.position, Quaternion.LookRotation(playerT.transform.position - transform.position));//set to look at player
+
+        yield return new WaitForSeconds(1f);
+        AI.CanThrowAOE = true;
+    }
+
 }

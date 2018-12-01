@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour {
     // Use this for initialization
     void Start() {
         GetEnemyMovementCtrl = GetComponent<EnemyMovementController>();
-        director = GetComponentInParent<GroupDirector>();
+        SetDirector(GetComponentInParent<GroupDirector>());
         playerT = GameObject.FindGameObjectWithTag("Player").transform;
         myAction = EnemyActions.None;
     }
@@ -101,6 +101,10 @@ public class EnemyAI : MonoBehaviour {
                     }
                 }
             }
+        }
+        if(CurrentStatus == EnemyBehaviorStatus.Busy && CanThrowAOE) //BossComment
+        {
+            StartCoroutine(KnightActions.ThrowFireAOE());
         }
         if(StartupCheck && CurrentStatus != EnemyBehaviorStatus.Sleeping) {
             startupTime += Time.deltaTime;
@@ -243,11 +247,12 @@ public class EnemyAI : MonoBehaviour {
         return a;
     }
 
-    public int finishersToKill = 1;
+    public int finishersToKill = 1; //BossComment stuff
     private int timesKilled = 0;
     public int GetTimesKilled() { return timesKilled; }
     public EnemyTypeController etc;
     public Transform FountainTop;
+    public bool CanThrowAOE = true ;
     //THIS IS THE ONLY WAY AN ENEMY SHOULD BE KILLED
     public void KillEnemy()
     {
@@ -273,7 +278,7 @@ public class EnemyAI : MonoBehaviour {
         if (timesKilled >= finishersToKill)
             Destroy(gameObject);
 
-        //Boss specific code
+        //BossComment specific code
         if (etc.MyEnemyType == EnemyType.Boss && (float)(finishersToKill - GetTimesKilled()) / finishersToKill < .34f)
         {
             etc.EnemySkin.material = GetComponent<Enemyhp>().lowRed;
@@ -325,6 +330,11 @@ public class EnemyAI : MonoBehaviour {
     public GroupDirector GetDirector()
     {
         return director;
+    }
+    public void SetDirector(GroupDirector d)
+    {
+        if(d != null)
+            director = d;
     }
 
     //IEnumerator GuardState() {

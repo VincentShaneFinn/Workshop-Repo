@@ -50,13 +50,21 @@ public class GroupDirector : MonoBehaviour {
             door.SetActive(false);
         }
     }
+
+    //BossComment comments ending with this are for tthe boss group
+
     public void Update()
     {
+        if (bossHomies)//BossComment add this if
+        {
+            Enemies = new List<EnemyAI>(GetComponentsInChildren<EnemyAI>());
+        }
+
         Enemies = Enemies.Where(item => item != null).ToList(); // remove killed enemies from list
         currentPrimaryAttackers = 0;
         currentArcRunners = 0;
 
-        if (Enemies.Count <= 0)
+        if (Enemies.Count <= 0 && !bossHomies) //BossComment added !bossHomies
         {
             OpenExits();
             playerUpdater.ExitCombatState();
@@ -230,7 +238,9 @@ public class GroupDirector : MonoBehaviour {
         }
     }
 
-    public bool bossGroup = false;
+    public bool bossGroup = false;//BossComment
+    public bool bossHomies = false;//BossComment
+    public GameObject bossHomiesObj;//BossComment
 
     void OnTriggerEnter(Collider col)
     {
@@ -238,7 +248,7 @@ public class GroupDirector : MonoBehaviour {
         {
             WakeUpEnemies();
 
-            if (bossGroup)
+            if (bossGroup)//BossComment
             {
                 col.gameObject.GetComponent<FinisherMode>().IncreaseFinisherMeter(-100);
                 col.gameObject.GetComponent<FinisherMode>().IncreaseGodModeMeter(-100);
@@ -269,8 +279,14 @@ public class GroupDirector : MonoBehaviour {
         {
             exit.SetActive(false);
         }
-        GameStatus.GroupsDefeated++;
-        print(GameStatus.GroupsDefeated);
+        if (bossGroup) //BossComment
+        {
+            bossHomiesObj.SetActive(false);
+        }
+        else
+        {
+            GameStatus.GroupsDefeated++;
+        }
     }
 
 }

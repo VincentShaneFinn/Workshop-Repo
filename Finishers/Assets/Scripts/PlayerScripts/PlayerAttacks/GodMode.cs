@@ -116,7 +116,10 @@ public class GodMode : MonoBehaviour {
                     yield return new WaitForSecondsRealtime(1f);
 
                     GodModeSlider.value -= 34;
-                    Destroy(closestEnemy);
+                    if (closestEnemy.tag != "TargetDummy")
+                        closestEnemy.GetComponent<EnemyAI>().KillEnemy();
+                    else
+                        Destroy(closestEnemy);
                     GetComponent<FinisherMode>().IncreaseFinisherMeter(20);
                     kills++;
                     if (timeRanOut)
@@ -255,6 +258,8 @@ public class GodMode : MonoBehaviour {
 
         foreach (GameObject Enemy in Enemies)
         {
+            if (Enemy.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.Boss) //BossComment temporary boss check
+                continue;
             if (Vector3.Distance(Enemy.transform.position, transform.position) < GodModeDistance && Enemy.GetComponent<NavMeshAgent>().isActiveAndEnabled)
             {
                 enemies.Add(Enemy);

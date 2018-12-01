@@ -53,10 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LightAttackDamage: 5
   FlamethrowerWaveDamage: 10
-  FlameAOEDamage: 40
-  FrostAOEFreezeCount: 4
+  FlameAOEDamage: 50
+  FrostAOEFreezeCount: 3
   FrostAOEDamage: 20
-  FrostAOEExplodeDamge: 60
+  FrostAOEExplodeDamge: 30
   FrostTimeToMelt: 8
   GodModeDamage: 15
   NormalAttackFinMeterFill: 7.5
