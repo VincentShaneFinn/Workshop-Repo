@@ -7,6 +7,7 @@ public class RunicFireSword : FinisherAbstract {
     public float SwordTimer;
     private float SwordCount;
     public PlayerSwordHit sword;
+    public GameObject FlameSword;
     public GameObject Flames;
     private GameObject currentflame;
     private bool LightSword = false;
@@ -26,16 +27,18 @@ public class RunicFireSword : FinisherAbstract {
                 SwordCount = 0;
                 currentflame = Instantiate(Flames, sword.gameObject.transform.position, sword.gameObject.transform.rotation);
                 currentflame.transform.parent = sword.swordEdge.transform;
-                Destroy(currentflame, .2f);
+                Destroy(currentflame, .4f);
             }
 
             if (SwordCount < SwordTimer)
             {
+                FlameSword.SetActive(true);
                 sword.SetFireSkin();
                 sword.SetSwordDamage(PlayerDamageValues.Instance.GodModeDamage);
             }
             else
             {
+                FlameSword.SetActive(false);
                 sword.RestoreSwordDamage();
                 sword.RestoreSwordSkin();
             }

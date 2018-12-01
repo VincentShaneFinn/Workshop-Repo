@@ -50,6 +50,7 @@ public class PlayerSwordHit : MonoBehaviour {
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {
                 e.damage(currentSwordDamage, CurrentAttackType);
+                Debug.Log(gameObject);
             }
         }
         else if (col.gameObject.tag.Equals("TargetDummy"))
