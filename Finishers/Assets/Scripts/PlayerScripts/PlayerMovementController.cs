@@ -252,15 +252,20 @@ public class PlayerMovementController : MonoBehaviour
     public CapsuleCollider myCollider;
     public Animator CharAnim;
     private bool jumpPressed = false;
+
     void FixedUpdate()
     {
         if (CanMove)
         {
             if (grounded && myRigidbody.velocity.y > 0) //measure to prevent up velocity if moving on a slope, but dont do this if just jumped
             {
-                if (jumpTimer > .2f)
+                if (jumpTimer > 1f)
                 {
                     desiredVelocity = new Vector3(moveDirection.x, 0, moveDirection.z);
+                }
+                else
+                {
+                    desiredVelocity = new Vector3(moveDirection.x, myRigidbody.velocity.y, moveDirection.z);
                 }
             }
             else

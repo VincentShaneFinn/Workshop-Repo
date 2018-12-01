@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum ControlType { PC, PS4, Xbox }
@@ -158,7 +159,8 @@ public class GameStatus : MonoBehaviour {
         if (!LoadGameBool)
         {
             LoadGameBool = true;
-            GetComponent<UIManager>().RestartGame();
+            int index = SceneManager.GetActiveScene().buildIndex;//reload scene
+            SceneManager.LoadScene(index);
             return;
         }
         // 1
@@ -196,6 +198,6 @@ public class GameStatus : MonoBehaviour {
 
     public void PlayerDied()
     {
-        Invoke("LoadGame", 3);
+        Invoke("LoadGame", 1.5f);
     }
 }
