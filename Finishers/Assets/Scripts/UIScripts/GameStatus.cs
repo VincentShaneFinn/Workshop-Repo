@@ -37,10 +37,19 @@ public class GameStatus : MonoBehaviour {
     public GameObject Key3;
     public GameObject Door1;
     public GameObject Door2;
+    public GameObject KeyText;
     private bool openedDoors = false;
 
     private void Update()
     {
+        if (Door1 == null)
+        {
+            Key1.SetActive(false);
+            Key2.SetActive(false);
+            Key3.SetActive(false);
+            KeyText.SetActive(false);
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.L))
         {
             GroupsDefeated = 8;

@@ -18,6 +18,7 @@ public class AOEFireRunicAttack : MonoBehaviour {
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>().IncreaseFinisherMeter(PlayerDamageValues.Instance.FlameAOEFinMeterFill);
             col.gameObject.GetComponent<Enemyhp>().damage(damage, AttackType.Fire);
+            col.gameObject.GetComponent<EnemyMovementController>().HelpKnockback();
         }
         else if (col.gameObject.tag == "TargetDummy")
         {

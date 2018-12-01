@@ -9275,6 +9275,7 @@ MonoBehaviour:
   Key3: {fileID: 1306198626433348}
   Door1: {fileID: 0}
   Door2: {fileID: 0}
+  KeyText: {fileID: 1579891995011094}
   Groups: []
   playerT: {fileID: 4902036229805724}
   HealthSlider: {fileID: 114753867066353640}
