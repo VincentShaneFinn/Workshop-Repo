@@ -63,6 +63,7 @@ public class EnemyConditionManager : MonoBehaviour {
             ai.anim.speed = 1;
             ai.anim.Play("Idle");
         }
+        ChangeCondition(EnemyConditions.Normal);
 
     }
 

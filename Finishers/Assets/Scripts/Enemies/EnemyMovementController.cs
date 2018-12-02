@@ -169,7 +169,6 @@ public class EnemyMovementController : MonoBehaviour {
 
     public void HelpKnockback(float optionalFactor = 7f)
     {
-        print(optionalFactor);
         StartCoroutine(KnockbackEnemy(optionalFactor));
     }
 

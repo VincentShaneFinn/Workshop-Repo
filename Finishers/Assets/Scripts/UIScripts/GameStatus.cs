@@ -14,7 +14,7 @@ public class GameStatus : MonoBehaviour {
     public static bool InCombat;
     public static ControlType CurrentControlType;
     public static bool LoadGameBool = false;
-    public static int GroupsDefeated = 0; 
+    public static int GroupsDefeated = 0;
 
     void Start()
     {
@@ -25,12 +25,12 @@ public class GameStatus : MonoBehaviour {
         fm = GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>();
         if (LoadGameBool)
         {
-            LoadGame();
+            Invoke("LoadGame", .05f);
         }
         else
         {
             CheckpointP = transform.parent.position;
-            SaveGame();
+            Invoke("SaveGame", .05f);
         }
     }
 
@@ -96,7 +96,7 @@ public class GameStatus : MonoBehaviour {
     public Slider HealthSlider;
     public Slider FinisherSlider;
     public Vector3 CheckpointP;
-    public FinisherMode fm;
+    private FinisherMode fm;
 
     private Save CreateSaveGameObject()
     {
@@ -113,7 +113,7 @@ public class GameStatus : MonoBehaviour {
         i = 0;
         foreach (GameObject targetGameObject in Pillars)
         {
-            if (targetGameObject == null)
+            if (targetGameObject == null || !targetGameObject.activeSelf)
             {
                 save.FinishedPillars.Add(i);
             }

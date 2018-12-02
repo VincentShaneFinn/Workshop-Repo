@@ -305,7 +305,7 @@ public class EnemyAI : MonoBehaviour {
 
     IEnumerator DestroyEnemy()
     {
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(1.7f);
         Destroy(gameObject);
     }
     IEnumerator PutOnFountain()
