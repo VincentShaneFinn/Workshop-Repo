@@ -27,6 +27,9 @@ public class GodMode : MonoBehaviour {
     public GameObject DownIcon;
     public GameObject LeftIcon;
 
+    public GameObject TopHalf;
+    public GameObject BottomHalf;
+
     // Update is called once per frame
     void Update()
     {
@@ -56,6 +59,7 @@ public class GodMode : MonoBehaviour {
         GetComponent<FinisherMode>().CanFinish = false;
         bool timeRanOut = false;
         bool firstEnemy = true;
+        bool swipeLeft = true;
         int kills = 0;
         List<GameObject> Enemies = GetEnemies();
         GameObject closestEnemy = null;
@@ -65,7 +69,7 @@ public class GodMode : MonoBehaviour {
             pmc.PreventMoving();
             pmc.PreventTuring();
             GameStatus.FinisherModeActive = true;
-            CharAnim.Play("Carve 1");
+            CharAnim.Play("Carve 1"); //Enter animation
             closestEnemy = FindClosestEnemy(Enemies);
 
             //Go throug the nearby enemies
@@ -112,12 +116,27 @@ public class GodMode : MonoBehaviour {
                         yield return null;
                     }
                     HideInputs();
-                    CharAnim.Play("FinisherExecution");
-                    yield return new WaitForSecondsRealtime(1f);
+                    if (swipeLeft)
+                    {
+                        CharAnim.Play("Attack 1");
+                        swipeLeft = false;
+                    }
+                    else
+                    {
+                        CharAnim.Play("Attack 2");
+                        swipeLeft = true;
+                    }
+                    yield return new WaitForSecondsRealtime(.4f);
+
+                    //GameObject part1 = Instantiate(TopHalf, new Vector3(closestEnemy.transform.position.x, transform.position.y, closestEnemy.transform.position.z), closestEnemy.transform.rotation);
+                    //GameObject part2 = Instantiate(BottomHalf, new Vector3(closestEnemy.transform.position.x, transform.position.y - 1f, closestEnemy.transform.position.z), closestEnemy.transform.rotation);
 
                     GodModeSlider.value -= 34;
                     if (closestEnemy.tag != "TargetDummy")
+                    {
                         closestEnemy.GetComponent<EnemyAI>().KillEnemy();
+                        closestEnemy.GetComponent<EnemyTypeController>().MyEnemyType = EnemyType.Boss; // todo my code sucks
+                    }
                     else
                         Destroy(closestEnemy);
                     GetComponent<FinisherMode>().IncreaseFinisherMeter(20);
@@ -246,6 +265,13 @@ public class GodMode : MonoBehaviour {
 
         Vector3 targetPostition = new Vector3(enemy.transform.position.x, this.transform.position.y, enemy.transform.position.z);
         PlayerRotWrapper.transform.LookAt(targetPostition);
+        cf.transform.LookAt(targetPostition);
+        EnemyAI ai = enemy.GetComponent<EnemyAI>();
+        if(ai != null)
+        {
+            ai.anim.Play("Hit4");
+        }
+        yield return null;
     }
 
     public Transform PlayerRotWrapper;
@@ -259,6 +285,8 @@ public class GodMode : MonoBehaviour {
         foreach (GameObject Enemy in Enemies)
         {
             if (Enemy.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.Boss) //BossComment temporary boss check
+                continue;
+            else if (!Enemy.GetComponent<EnemyAI>().enabled)
                 continue;
             if (Vector3.Distance(Enemy.transform.position, transform.position) < GodModeDistance && Enemy.GetComponent<NavMeshAgent>().isActiveAndEnabled)
             {

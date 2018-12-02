@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eedb25c151035b54c8917beabab1903b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthMeterFill: 10
+  HealthMeterFill: 50
 --- !u!135 &135771296704406000
 SphereCollider:
   m_ObjectHideFlags: 1

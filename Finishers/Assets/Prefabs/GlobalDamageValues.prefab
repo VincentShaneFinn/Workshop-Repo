@@ -60,6 +60,7 @@ MonoBehaviour:
   FrostTimeToMelt: 8
   GodModeDamage: 15
   NormalAttackFinMeterFill: 7.5
+  ElementalSwordAttackFinMeterFill: 12
   SiphoningFinMeterFill: 10
   FlameThrowFinMeterFill: 2.5
   FlameAOEFinMeterFill: 5

@@ -254,7 +254,7 @@ public class EnemyAI : MonoBehaviour {
     public Transform FountainTop;
     public bool CanThrowAOE = true ;
     //THIS IS THE ONLY WAY AN ENEMY SHOULD BE KILLED
-    public void KillEnemy()
+    public void KillEnemy(bool forceDestroy = false)
     {
         if (ArcAngle != 360 && CurrentStatus != EnemyBehaviorStatus.ArcRunner)
         {
@@ -275,8 +275,19 @@ public class EnemyAI : MonoBehaviour {
             }
 
         timesKilled++;
-        if (timesKilled >= finishersToKill)
-            Destroy(gameObject);
+        if (timesKilled >= finishersToKill) //kill enemy with an animation playing
+        {
+            if (forceDestroy)
+                Destroy(gameObject);
+            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+            GetEnemyMovementCtrl.enabled = false;
+            CurrentStatus = EnemyBehaviorStatus.Dying;
+            
+            GetComponent<CapsuleCollider>().enabled = false;
+            anim.Play("Death");
+            this.enabled = false;
+            StartCoroutine(DestroyEnemy());
+        }
 
         //BossComment specific code
         if (etc.MyEnemyType == EnemyType.Boss && (float)(finishersToKill - GetTimesKilled()) / finishersToKill < .34f)
@@ -290,6 +301,12 @@ public class EnemyAI : MonoBehaviour {
         {
             StartCoroutine(PutOnFountain());
         }
+    }
+
+    IEnumerator DestroyEnemy()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        Destroy(gameObject);
     }
     IEnumerator PutOnFountain()
     {

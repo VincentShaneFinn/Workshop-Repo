@@ -23,6 +23,10 @@ public class EnemyProjectileStraight : MonoBehaviour {
         if(obstacles.Contains(col.gameObject.layer)){
             Destroy(gameObject);
         }
+        else if(col.gameObject.tag == "FinisherEffect")
+        {
+            Destroy(gameObject);
+        }
     }
 
 }

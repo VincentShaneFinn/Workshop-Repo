@@ -30,7 +30,7 @@ public class AOEFrostRunicAttack : MonoBehaviour {
             else
             {
                 col.gameObject.GetComponent<Enemyhp>().damage(damage, AttackType.Frost);
-                col.gameObject.GetComponent<EnemyMovementController>().HelpKnockback();
+                col.gameObject.GetComponent<EnemyMovementController>().HelpKnockback(20);
             }
         }
         else if (col.gameObject.tag == "TargetDummy")

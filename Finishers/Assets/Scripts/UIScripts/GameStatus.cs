@@ -22,6 +22,7 @@ public class GameStatus : MonoBehaviour {
         FinisherModeActive = false;
         InCombat = false;
         Time.timeScale = 1;
+        fm = GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>();
         if (LoadGameBool)
         {
             LoadGame();
@@ -90,10 +91,12 @@ public class GameStatus : MonoBehaviour {
     }
 
     public List<GameObject> Groups;
+    public List<GameObject> Pillars;
     public Transform playerT;
     public Slider HealthSlider;
     public Slider FinisherSlider;
     public Vector3 CheckpointP;
+    public FinisherMode fm;
 
     private Save CreateSaveGameObject()
     {
@@ -104,6 +107,15 @@ public class GameStatus : MonoBehaviour {
             if (!targetGameObject.activeSelf)
             {
                 save.DeadGroups.Add(i);
+            }
+            i++;
+        }
+        i = 0;
+        foreach (GameObject targetGameObject in Pillars)
+        {
+            if (targetGameObject == null)
+            {
+                save.FinishedPillars.Add(i);
             }
             i++;
         }
@@ -176,6 +188,31 @@ public class GameStatus : MonoBehaviour {
             foreach (int index in save.DeadGroups)
             {
                 Groups[index].SetActive(false);
+            }
+
+            List<FinisherAbstract> FinishersUnlocked = new List<FinisherAbstract>();
+            foreach (int index in save.FinishedPillars)
+            {
+                TutorialPillar pillarTutorial = Pillars[index].GetComponent<TutorialPillar>();
+                switch (pillarTutorial.FinisherUnlock)
+                {
+                    case Finishers.Siphoning:
+                        fm.GetComponent<Siphoncut>().enabled = true;
+                        break;
+                    case Finishers.FlameSword:
+                        fm.GetComponent<RunicFireSword>().enabled = true;
+                        break;
+                    case Finishers.Flamethrower:
+                        fm.GetComponent<RunicFlamethrower>().enabled = true;
+                        break;
+                    case Finishers.FlameAOE:
+                        fm.GetComponent<RunicFireCircle>().enabled = true;
+                        break;
+                    case Finishers.FrostAOE:
+                        fm.GetComponent<RunicFrostCircle>().enabled = true;
+                        break;
+                }
+                Pillars[index].SetActive(false);
             }
 
             // 4

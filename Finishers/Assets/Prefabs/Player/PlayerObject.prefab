@@ -885,8 +885,6 @@ GameObject:
   - component: {fileID: 4614259022420134}
   - component: {fileID: 198237991863766662}
   - component: {fileID: 199950073392212086}
-  - component: {fileID: 114402976567750308}
-  - component: {fileID: 65606834045792514}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -10309,18 +10307,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65606834045792514
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1125589106245188}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 10, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65687867870100652
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -11385,10 +11371,12 @@ MonoBehaviour:
   Door2: {fileID: 0}
   KeyText: {fileID: 1579891995011094}
   Groups: []
+  Pillars: []
   playerT: {fileID: 4902036229805724}
   HealthSlider: {fileID: 114753867066353640}
   FinisherSlider: {fileID: 114899734874593796}
   CheckpointP: {x: 0, y: 1, z: 0}
+  fm: {fileID: 0}
   saveGamePopup: {fileID: 114810680888769616}
 --- !u!114 &114037611160541244
 MonoBehaviour:
@@ -13439,25 +13427,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114402976567750308
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1125589106245188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d63d1a85fdd2d1047b7fb84244d91031, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finisherObject: {fileID: 0}
-  swordDamage: 30
-  swordEdge: {fileID: 0}
-  OriginalSwordMaterials:
-  - {fileID: 2100006, guid: 7f636c539abd74941a18d4d98bda71bd, type: 3}
-  FireMats:
-  - {fileID: 2100000, guid: 2cd8e404df23c724482d4b4752e04a30, type: 2}
-  CurrentAttackType: 0
 --- !u!114 &114404065249166980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16887,6 +16856,8 @@ MonoBehaviour:
   RightIcon: {fileID: 1729100956127106}
   DownIcon: {fileID: 1419431728537560}
   LeftIcon: {fileID: 1432484796277048}
+  TopHalf: {fileID: 1383383472105772, guid: 0e07498eaf0895948a9ac934fd8544b1, type: 2}
+  BottomHalf: {fileID: 1359643903492266, guid: 998528f5c1ccd3c42b6c1130c8ce7aa9, type: 2}
   PlayerRotWrapper: {fileID: 4803805274782844}
 --- !u!114 &114926286291277224
 MonoBehaviour:
