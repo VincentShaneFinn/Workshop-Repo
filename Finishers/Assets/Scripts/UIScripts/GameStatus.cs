@@ -54,7 +54,7 @@ public class GameStatus : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            GroupsDefeated = 8;
+            GroupsDefeated = 9;
         }
         if(GroupsDefeated >= 3)
         {
