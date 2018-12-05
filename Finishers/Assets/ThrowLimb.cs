@@ -94,7 +94,7 @@ public class ThrowLimb : MonoBehaviour {
                 }
                 if (CurrentlyKilledCount < KillLimit)
                 {
-                    col.gameObject.GetComponent<EnemyAI>().KillEnemy();
+                    col.gameObject.GetComponent<EnemyAI>().KillEnemy(true);
                     CurrentlyKilledCount++;
                     FinMode.IncreaseFinisherMeter(PlayerDamageValues.Instance.SiphoningFinMeterFill);
                     DeadBodies[CurrentlyKilledCount - 1].SetActive(true);

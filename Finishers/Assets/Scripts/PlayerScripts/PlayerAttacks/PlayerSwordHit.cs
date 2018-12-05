@@ -17,7 +17,7 @@ public class PlayerSwordHit : MonoBehaviour {
     {
         swordDamage = PlayerDamageValues.Instance.LightAttackDamage;
         currentSwordDamage = swordDamage;
-        CurrentAttackType = AttackType.Blade;
+        CurrentAttackType = AttackType.NormalBlade;
     }
 
     public void SetSwordDamage(float d)
@@ -38,14 +38,21 @@ public class PlayerSwordHit : MonoBehaviour {
     public void RestoreSwordSkin()
     {
         swordEdge.materials = OriginalSwordMaterials;
-        CurrentAttackType = AttackType.Blade;
+        CurrentAttackType = AttackType.NormalBlade;
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag.Equals("Enemy"))
         {
-            finisherObject.IncreaseFinisherMeter(PlayerDamageValues.Instance.NormalAttackFinMeterFill);
+            if (CurrentAttackType == AttackType.NormalBlade)
+            {
+                finisherObject.IncreaseFinisherMeter(PlayerDamageValues.Instance.NormalAttackFinMeterFill);
+            }
+            else
+            {
+                finisherObject.IncreaseFinisherMeter(PlayerDamageValues.Instance.ElementalSwordAttackFinMeterFill);
+            }
             Enemyhp e = null;
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {

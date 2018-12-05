@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum ControlType { PC, PS4, Xbox }
@@ -13,7 +14,7 @@ public class GameStatus : MonoBehaviour {
     public static bool InCombat;
     public static ControlType CurrentControlType;
     public static bool LoadGameBool = false;
-    public static int GroupsDefeated = 0; 
+    public static int GroupsDefeated = 0;
 
     void Start()
     {
@@ -21,14 +22,15 @@ public class GameStatus : MonoBehaviour {
         FinisherModeActive = false;
         InCombat = false;
         Time.timeScale = 1;
+        fm = GameObject.FindGameObjectWithTag("Player").GetComponent<FinisherMode>();
         if (LoadGameBool)
         {
-            LoadGame();
+            Invoke("LoadGame", .05f);
         }
         else
         {
             CheckpointP = transform.parent.position;
-            SaveGame();
+            Invoke("SaveGame", .05f);
         }
     }
 
@@ -89,10 +91,12 @@ public class GameStatus : MonoBehaviour {
     }
 
     public List<GameObject> Groups;
+    public List<GameObject> Pillars;
     public Transform playerT;
     public Slider HealthSlider;
     public Slider FinisherSlider;
     public Vector3 CheckpointP;
+    private FinisherMode fm;
 
     private Save CreateSaveGameObject()
     {
@@ -103,6 +107,15 @@ public class GameStatus : MonoBehaviour {
             if (!targetGameObject.activeSelf)
             {
                 save.DeadGroups.Add(i);
+            }
+            i++;
+        }
+        i = 0;
+        foreach (GameObject targetGameObject in Pillars)
+        {
+            if (targetGameObject == null || !targetGameObject.activeSelf)
+            {
+                save.FinishedPillars.Add(i);
             }
             i++;
         }
@@ -158,7 +171,8 @@ public class GameStatus : MonoBehaviour {
         if (!LoadGameBool)
         {
             LoadGameBool = true;
-            GetComponent<UIManager>().RestartGame();
+            int index = SceneManager.GetActiveScene().buildIndex;//reload scene
+            SceneManager.LoadScene(index);
             return;
         }
         // 1
@@ -174,6 +188,31 @@ public class GameStatus : MonoBehaviour {
             foreach (int index in save.DeadGroups)
             {
                 Groups[index].SetActive(false);
+            }
+
+            List<FinisherAbstract> FinishersUnlocked = new List<FinisherAbstract>();
+            foreach (int index in save.FinishedPillars)
+            {
+                TutorialPillar pillarTutorial = Pillars[index].GetComponent<TutorialPillar>();
+                switch (pillarTutorial.FinisherUnlock)
+                {
+                    case Finishers.Siphoning:
+                        fm.GetComponent<Siphoncut>().enabled = true;
+                        break;
+                    case Finishers.FlameSword:
+                        fm.GetComponent<RunicFireSword>().enabled = true;
+                        break;
+                    case Finishers.Flamethrower:
+                        fm.GetComponent<RunicFlamethrower>().enabled = true;
+                        break;
+                    case Finishers.FlameAOE:
+                        fm.GetComponent<RunicFireCircle>().enabled = true;
+                        break;
+                    case Finishers.FrostAOE:
+                        fm.GetComponent<RunicFrostCircle>().enabled = true;
+                        break;
+                }
+                Pillars[index].SetActive(false);
             }
 
             // 4
@@ -196,6 +235,6 @@ public class GameStatus : MonoBehaviour {
 
     public void PlayerDied()
     {
-        Invoke("LoadGame", 3);
+        Invoke("LoadGame", 1.5f);
     }
 }

@@ -19,7 +19,7 @@ public class AOEFrostRunicAttack : MonoBehaviour {
     {
         if (col.gameObject.tag == "Enemy")
         {
-            if (col.gameObject.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.Boss)//BossComment added to check if boss, temporary
+            if (col.gameObject.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.Boss || col.gameObject.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.IceEnemy)//BossComment added to check if boss, temporary
             {
                 return;
             }
@@ -30,7 +30,7 @@ public class AOEFrostRunicAttack : MonoBehaviour {
             else
             {
                 col.gameObject.GetComponent<Enemyhp>().damage(damage, AttackType.Frost);
-                col.gameObject.GetComponent<EnemyMovementController>().HelpKnockback();
+                col.gameObject.GetComponent<EnemyMovementController>().HelpKnockback(20);
             }
         }
         else if (col.gameObject.tag == "TargetDummy")

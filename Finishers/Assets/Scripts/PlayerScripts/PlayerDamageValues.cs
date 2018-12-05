@@ -27,6 +27,7 @@ public class PlayerDamageValues : MonoBehaviour
 
     //finisher bar fill values
     public float NormalAttackFinMeterFill;
+    public float ElementalSwordAttackFinMeterFill;
     public float SiphoningFinMeterFill;
     public float FlameThrowFinMeterFill;
     public float FlameAOEFinMeterFill;

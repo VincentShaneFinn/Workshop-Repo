@@ -67,6 +67,14 @@ public class FinisherMode : MonoBehaviour
     {
         FinisherMoves.Remove(finisher);
     }
+    public List<FinisherAbstract> GetUnlockedFinishers()
+    {
+        return FinisherMoves;
+    }
+    public void SetUnlockedFinishers(List<FinisherAbstract> fa)
+    {
+        FinisherMoves = fa;
+    }
 
     void Start()
     {
@@ -498,7 +506,7 @@ public class FinisherMode : MonoBehaviour
         yield return null; // do stuff to perform the finisher
 
         IncreaseGodModeMeter(PlayerDamageValues.Instance.ExecuteFinisherGMFill);
-        StartCoroutine(LeavingFinisherMode());
+        StartCoroutine(LeavingFinisherMode(FinisherToPerform));
     }
 
     private bool didFail = false;
@@ -536,7 +544,7 @@ public class FinisherMode : MonoBehaviour
         StartCoroutine(LeavingFinisherMode());
     }
 
-    IEnumerator LeavingFinisherMode()
+    IEnumerator LeavingFinisherMode(FinisherAbstract finisherAbstractUsed = null)
     {
         UIanim.Play("idle");
         if (didFail)
@@ -551,7 +559,10 @@ public class FinisherMode : MonoBehaviour
         if (!PillarFinisherUsed)
         {
             if (currentTarget.tag != "TargetDummy")
-                currentTarget.GetComponent<EnemyAI>().KillEnemy();
+                if (finisherAbstractUsed != null && (finisherAbstractUsed is Siphoncut)) //electricity is used for siphoning for now
+                    currentTarget.GetComponent<EnemyAI>().KillEnemy(true);
+                else
+                    currentTarget.GetComponent<EnemyAI>().KillEnemy();
             else
                 Destroy(currentTarget);
 
@@ -616,6 +627,8 @@ public class FinisherMode : MonoBehaviour
         float lowestDotDistance = Mathf.Infinity;
         foreach (GameObject Enemy in Enemies)
         {
+            if (!Enemy.GetComponent<EnemyAI>().enabled)
+                continue;
             usedSwordGrapple = false;
             if (Vector3.Distance(Enemy.transform.position, transform.position) < range)
             {

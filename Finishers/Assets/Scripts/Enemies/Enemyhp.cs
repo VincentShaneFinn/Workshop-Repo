@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackType { Blade, Fire, Frost }
+public enum AttackType { NormalBlade, HeavyBlade, Fire, Frost }
 
 public class Enemyhp : MonoBehaviour {
     public float currenthp;

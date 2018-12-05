@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Save {
     public List<int> DeadGroups = new List<int>();
+    public List<int> FinishedPillars = new List<int>();
     public float playerX = 0;
     public float playerY = 1;
     public float playerZ = 0;

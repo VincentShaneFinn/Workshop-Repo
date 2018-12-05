@@ -167,13 +167,13 @@ public class EnemyMovementController : MonoBehaviour {
         ResumeMovement();
     }
 
-    public void HelpKnockback()
+    public void HelpKnockback(float optionalFactor = 7f)
     {
-        StartCoroutine(KnockbackEnemy());
+        StartCoroutine(KnockbackEnemy(optionalFactor));
     }
 
     //currently a fundamental issue with this, we need to handle this a better way, basically restart if this coroutine is in progress
-    private IEnumerator KnockbackEnemy()
+    private IEnumerator KnockbackEnemy(float speed)
     {
         if (agent.isActiveAndEnabled)
         {
@@ -182,8 +182,7 @@ public class EnemyMovementController : MonoBehaviour {
             GetComponent<EnemyAI>().anim.Play("Hit4");
             GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            float time = .2f;//.15f;
-            float speed = 7; // keep greater than 6
+            float time = .3f;//.15f;
             Vector3 dir = (transform.position - player.transform.position).normalized;
             dir.y = 0;
             float count = 0;
