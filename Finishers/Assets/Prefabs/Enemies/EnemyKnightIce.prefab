@@ -3717,7 +3717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currenthp: 0
   hp: 100
-  BloodTrail: {fileID: 1663683648419342, guid: bc56bd78c72f6fe4f96a569ce15715bb, type: 2}
+  BloodTrail: {fileID: 1683688547672604, guid: bc56bd78c72f6fe4f96a569ce15715bb, type: 2}
   IceTrail: {fileID: 1373956950994334, guid: 50311cbdcf0302e4aa26c0ce4cd5801a, type: 2}
   etc: {fileID: 114156429794931164}
   RestancePercentage: 30
@@ -3805,6 +3805,7 @@ MonoBehaviour:
   finishersToKill: 1
   etc: {fileID: 114156429794931164}
   FountainTop: {fileID: 0}
+  CanThrowAOE: 1
 --- !u!114 &114859055148087802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3824,6 +3825,7 @@ MonoBehaviour:
   FireBall: {fileID: 1560707184676808, guid: 1faed341f3a3af34ea3c0756edcd239f, type: 2}
   IceBall: {fileID: 1673873040471244, guid: 2ed1de34ae4b31e4289f5d2a98a01489, type: 2}
   etc: {fileID: 114156429794931164}
+  FireAOE: {fileID: 0}
 --- !u!114 &114939918341473792
 MonoBehaviour:
   m_ObjectHideFlags: 1
