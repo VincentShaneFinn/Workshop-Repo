@@ -1,0 +1,1742 @@
+fileFormatVersion: 2
+guid: 4dc2534342fee004ab2c8d7cb8452b6c
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Back_Wall
+    100002: BigB
+    100004: BigB2
+    100006: Bridges
+    100008: Building7
+    100010: Building7 1
+    100012: Building7 2
+    100014: Building7 3
+    100016: Building8
+    100018: Building8 1
+    100020: Building9
+    100022: Building_05
+    100024: Building_1
+    100026: Building_9
+    100028: buildings
+    100030: Cain_Belt
+    100032: Cain_Body
+    100034: Cain_Robe
+    100036: //RootNode
+    100038: Environment_Ruins_Building_2_Variant01
+    100040: Environment_Ruins_Building_2_Variant02
+    100042: Environment_Ruins_Building_2_Variant03
+    100044: Environment_Ruins_Building_3_Variant01
+    100046: Environment_Ruins_Building_3_Variant01_ExportRNfosterParent1
+    100048: Environment_Ruins_Building_3_Variant02
+    100050: Environment_Ruins_Building_4_Variant01
+    100052: Environment_Ruins_Building_4_Variant02
+    100054: Floor
+    100056: Floor 1
+    100058: Foundation
+    100060: Foundation 1
+    100062: Foundation 2
+    100064: Foundation 3
+    100066: Foundation 4
+    100068: Foundation 5
+    100070: Foundation 6
+    100072: Foundation 7
+    100074: Foundation 8
+    100076: Foundation 9
+    100078: Front_Wall
+    100080: Ground
+    100082: Ground1
+    100084: group1
+    100086: House07_05
+    100088: House07_05 1
+    100090: House7_010
+    100092: House7_02
+    100094: House7_02 1
+    100096: House7_03
+    100098: House7_03 1
+    100100: House7_03 2
+    100102: House7_03 3
+    100104: House7_03 4
+    100106: House7_03 5
+    100108: House7_04
+    100110: House7_04 1
+    100112: House7_06
+    100114: House7_07
+    100116: House7_08
+    100118: House7_09
+    100120: Main_Wall
+    100122: Paalce_ararea
+    100124: Palace
+    100126: Palace 1
+    100128: pCube
+    100130: pCube 1
+    100132: pCube 2
+    100134: pCube10
+    100136: pCube10 1
+    100138: pCube100
+    100140: pCube102
+    100142: pCube103
+    100144: pCube107
+    100146: pCube108
+    100148: pCube110
+    100150: pCube111
+    100152: pCube114
+    100154: pCube119
+    100156: pCube12
+    100158: pCube120
+    100160: pCube126
+    100162: pCube126 1
+    100164: pCube126 2
+    100166: pCube126 3
+    100168: pCube126 4
+    100170: pCube126 5
+    100172: pCube126 6
+    100174: pCube126 7
+    100176: pCube132
+    100178: pCube133
+    100180: pCube134
+    100182: pCube135
+    100184: pCube136
+    100186: pCube139
+    100188: pCube14
+    100190: pCube14 1
+    100192: pCube142
+    100194: pCube15
+    100196: pCube15 1
+    100198: pCube15 2
+    100200: pCube15 3
+    100202: pCube153
+    100204: pCube154
+    100206: pCube155
+    100208: pCube157
+    100210: pCube158
+    100212: pCube159
+    100214: pCube16
+    100216: pCube16 1
+    100218: pCube16 2
+    100220: pCube160
+    100222: pCube161
+    100224: pCube162
+    100226: pCube163
+    100228: pCube17
+    100230: pCube17 1
+    100232: pCube17 2
+    100234: pCube18
+    100236: pCube18 1
+    100238: pCube19
+    100240: pCube2
+    100242: pCube2 1
+    100244: pCube2 2
+    100246: pCube20
+    100248: pCube21
+    100250: pCube22
+    100252: pCube23
+    100254: pCube24
+    100256: pCube24 1
+    100258: pCube25
+    100260: pCube26
+    100262: pCube26 1
+    100264: pCube27
+    100266: pCube28
+    100268: pCube3
+    100270: pCube3 1
+    100272: pCube3 2
+    100274: pCube3 3
+    100276: pCube31
+    100278: pCube31 1
+    100280: pCube4
+    100282: pCube4 1
+    100284: pCube6
+    100286: pCube6 1
+    100288: pCube7
+    100290: pCube7 1
+    100292: pCube7 2
+    100294: pCube7 3
+    100296: pCube7 4
+    100298: pCube9
+    100300: pCube90
+    100302: pCube91
+    100304: pCube95
+    100306: pCube97
+    100308: pCube99
+    100310: pCylinder1
+    100312: pCylinder1 1
+    100314: pCylinder1 2
+    100316: pCylinder10
+    100318: pCylinder10 1
+    100320: pCylinder11
+    100322: pCylinder11 1
+    100324: pCylinder12
+    100326: pCylinder13
+    100328: pCylinder14
+    100330: pCylinder15
+    100332: pCylinder16
+    100334: pCylinder16 1
+    100336: pCylinder17
+    100338: pCylinder17 1
+    100340: pCylinder18
+    100342: pCylinder19
+    100344: pCylinder2
+    100346: pCylinder2 1
+    100348: pCylinder20
+    100350: pCylinder21
+    100352: pCylinder21 1
+    100354: pCylinder22
+    100356: pCylinder23
+    100358: pCylinder24
+    100360: pCylinder24 1
+    100362: pCylinder25
+    100364: pCylinder26
+    100366: pCylinder27
+    100368: pCylinder27 1
+    100370: pCylinder28
+    100372: pCylinder29
+    100374: pCylinder3
+    100376: pCylinder30
+    100378: pCylinder31
+    100380: pCylinder31 1
+    100382: pCylinder32
+    100384: pCylinder32 1
+    100386: pCylinder33
+    100388: pCylinder33 1
+    100390: pCylinder34
+    100392: pCylinder35
+    100394: pCylinder35 1
+    100396: pCylinder36
+    100398: pCylinder37
+    100400: pCylinder37 1
+    100402: pCylinder38
+    100404: pCylinder38 1
+    100406: pCylinder39
+    100408: pCylinder39 1
+    100410: pCylinder4
+    100412: pCylinder40
+    100414: pCylinder40 1
+    100416: pCylinder41
+    100418: pCylinder41 1
+    100420: pCylinder42
+    100422: pCylinder42 1
+    100424: pCylinder43
+    100426: pCylinder43 1
+    100428: pCylinder44
+    100430: pCylinder44 1
+    100432: pCylinder45
+    100434: pCylinder45 1
+    100436: pCylinder46
+    100438: pCylinder47
+    100440: pCylinder48
+    100442: pCylinder48 1
+    100444: pCylinder49
+    100446: pCylinder49 1
+    100448: pCylinder5
+    100450: pCylinder5 1
+    100452: pCylinder50
+    100454: pCylinder50 1
+    100456: pCylinder51
+    100458: pCylinder51 1
+    100460: pCylinder58
+    100462: pCylinder59
+    100464: pCylinder6
+    100466: pCylinder60
+    100468: pCylinder61
+    100470: pCylinder62
+    100472: pCylinder63
+    100474: pCylinder65
+    100476: pCylinder66
+    100478: pCylinder69
+    100480: pCylinder7
+    100482: pCylinder70
+    100484: pCylinder71
+    100486: pCylinder72
+    100488: pCylinder73
+    100490: pCylinder74
+    100492: pCylinder75
+    100494: pCylinder76
+    100496: pCylinder77
+    100498: pCylinder78
+    100500: pCylinder79
+    100502: pCylinder8
+    100504: pCylinder8 1
+    100506: pCylinder80
+    100508: pCylinder81
+    100510: pCylinder82
+    100512: pCylinder83
+    100514: pCylinder84
+    100516: pCylinder85
+    100518: pCylinder86
+    100520: pCylinder87
+    100522: pCylinder88
+    100524: pCylinder9
+    100526: pCylinder9 1
+    100528: Pillar
+    100530: Pillar 1
+    100532: Pillar 2
+    100534: Pillar 3
+    100536: Pillar 4
+    100538: Pillar 5
+    100540: Pillar10
+    100542: Pillar10 1
+    100544: Pillar10 2
+    100546: Pillar10 3
+    100548: Pillar5
+    100550: Pillar6
+    100552: Pillar7
+    100554: Pillar8
+    100556: Pillar9
+    100558: Pillar_02
+    100560: Pillar_Body
+    100562: Pillar_Body 1
+    100564: Pillar_Body 2
+    100566: Pillar_Body 3
+    100568: Pillar_Body 4
+    100570: Pillar_Body 5
+    100572: Pillar_Body 6
+    100574: Pillar_Body 7
+    100576: Pillar_Body 8
+    100578: Pillar_Bottom
+    100580: Pillar_Bottom 1
+    100582: Pillar_Bottom 10
+    100584: Pillar_Bottom 2
+    100586: Pillar_Bottom 3
+    100588: Pillar_Bottom 4
+    100590: Pillar_Bottom 5
+    100592: Pillar_Bottom 6
+    100594: Pillar_Bottom 7
+    100596: Pillar_Bottom 8
+    100598: Pillar_Bottom 9
+    100600: Pillar_Top
+    100602: Pillar_Top 1
+    100604: Pillar_Top 10
+    100606: Pillar_Top 11
+    100608: Pillar_Top 12
+    100610: Pillar_Top 13
+    100612: Pillar_Top 14
+    100614: Pillar_Top 15
+    100616: Pillar_Top 2
+    100618: Pillar_Top 3
+    100620: Pillar_Top 4
+    100622: Pillar_Top 5
+    100624: Pillar_Top 6
+    100626: Pillar_Top 7
+    100628: Pillar_Top 8
+    100630: Pillar_Top 9
+    100632: Pillar_Top1
+    100634: Pillar_Top1 1
+    100636: Pillar_Top1 2
+    100638: Pillar_Top1 3
+    100640: Pillar_Top1 4
+    100642: Pillar_Top1 5
+    100644: PillarGroup
+    100646: PillarGroup1
+    100648: PillarGroup2
+    100650: PillarGroup3
+    100652: Pillars
+    100654: Pillars 1
+    100656: Pillars 2
+    100658: Player_Reference
+    100660: polySurface1
+    100662: polySurface1 1
+    100664: polySurface14
+    100666: polySurface15
+    100668: polySurface30
+    100670: polySurface31
+    100672: polySurface32
+    100674: polySurface32 1
+    100676: Ramps
+    100678: Roof
+    100680: Roof 1
+    100682: Shrines
+    100684: Side_Wall_01
+    100686: Side_Wall_02
+    100688: Upper_Palace
+    100690: Viewing_Deck
+    100692: Wall_Back
+    100694: Wall_Back 1
+    100696: Wall_Back 2
+    100698: Wall_Back 3
+    100700: Wall_Front
+    100702: Wall_Front 1
+    100704: Wall_Front 2
+    100706: Wall_Front 3
+    100708: Wall_Front 4
+    100710: Wall_Front 5
+    100712: Wall_Front 6
+    100714: Wall_Front 7
+    100716: Wall_Front3
+    100718: Wall_Middle
+    100720: Wall_Side
+    100722: Wall_side1
+    100724: Wall_side2
+    100726: Wall_Side_01
+    100728: Wall_Side_01 1
+    100730: Wall_Side_01 2
+    100732: Wall_Side_01 3
+    100734: Wall_Side_02
+    100736: Wall_Side_02 1
+    100738: Wall_Side_02 2
+    100740: Wall_Side_02 3
+    100742: Wall_Side_02 4
+    100744: Wall_Side_02 5
+    100746: WAlls_n_shit
+    100748: Wallsss
+    400000: Back_Wall
+    400002: BigB
+    400004: BigB2
+    400006: Bridges
+    400008: Building7
+    400010: Building7 1
+    400012: Building7 2
+    400014: Building7 3
+    400016: Building8
+    400018: Building8 1
+    400020: Building9
+    400022: Building_05
+    400024: Building_1
+    400026: Building_9
+    400028: buildings
+    400030: Cain_Belt
+    400032: Cain_Body
+    400034: Cain_Robe
+    400036: //RootNode
+    400038: Environment_Ruins_Building_2_Variant01
+    400040: Environment_Ruins_Building_2_Variant02
+    400042: Environment_Ruins_Building_2_Variant03
+    400044: Environment_Ruins_Building_3_Variant01
+    400046: Environment_Ruins_Building_3_Variant01_ExportRNfosterParent1
+    400048: Environment_Ruins_Building_3_Variant02
+    400050: Environment_Ruins_Building_4_Variant01
+    400052: Environment_Ruins_Building_4_Variant02
+    400054: Floor
+    400056: Floor 1
+    400058: Foundation
+    400060: Foundation 1
+    400062: Foundation 2
+    400064: Foundation 3
+    400066: Foundation 4
+    400068: Foundation 5
+    400070: Foundation 6
+    400072: Foundation 7
+    400074: Foundation 8
+    400076: Foundation 9
+    400078: Front_Wall
+    400080: Ground
+    400082: Ground1
+    400084: group1
+    400086: House07_05
+    400088: House07_05 1
+    400090: House7_010
+    400092: House7_02
+    400094: House7_02 1
+    400096: House7_03
+    400098: House7_03 1
+    400100: House7_03 2
+    400102: House7_03 3
+    400104: House7_03 4
+    400106: House7_03 5
+    400108: House7_04
+    400110: House7_04 1
+    400112: House7_06
+    400114: House7_07
+    400116: House7_08
+    400118: House7_09
+    400120: Main_Wall
+    400122: Paalce_ararea
+    400124: Palace
+    400126: Palace 1
+    400128: pCube
+    400130: pCube 1
+    400132: pCube 2
+    400134: pCube10
+    400136: pCube10 1
+    400138: pCube100
+    400140: pCube102
+    400142: pCube103
+    400144: pCube107
+    400146: pCube108
+    400148: pCube110
+    400150: pCube111
+    400152: pCube114
+    400154: pCube119
+    400156: pCube12
+    400158: pCube120
+    400160: pCube126
+    400162: pCube126 1
+    400164: pCube126 2
+    400166: pCube126 3
+    400168: pCube126 4
+    400170: pCube126 5
+    400172: pCube126 6
+    400174: pCube126 7
+    400176: pCube132
+    400178: pCube133
+    400180: pCube134
+    400182: pCube135
+    400184: pCube136
+    400186: pCube139
+    400188: pCube14
+    400190: pCube14 1
+    400192: pCube142
+    400194: pCube15
+    400196: pCube15 1
+    400198: pCube15 2
+    400200: pCube15 3
+    400202: pCube153
+    400204: pCube154
+    400206: pCube155
+    400208: pCube157
+    400210: pCube158
+    400212: pCube159
+    400214: pCube16
+    400216: pCube16 1
+    400218: pCube16 2
+    400220: pCube160
+    400222: pCube161
+    400224: pCube162
+    400226: pCube163
+    400228: pCube17
+    400230: pCube17 1
+    400232: pCube17 2
+    400234: pCube18
+    400236: pCube18 1
+    400238: pCube19
+    400240: pCube2
+    400242: pCube2 1
+    400244: pCube2 2
+    400246: pCube20
+    400248: pCube21
+    400250: pCube22
+    400252: pCube23
+    400254: pCube24
+    400256: pCube24 1
+    400258: pCube25
+    400260: pCube26
+    400262: pCube26 1
+    400264: pCube27
+    400266: pCube28
+    400268: pCube3
+    400270: pCube3 1
+    400272: pCube3 2
+    400274: pCube3 3
+    400276: pCube31
+    400278: pCube31 1
+    400280: pCube4
+    400282: pCube4 1
+    400284: pCube6
+    400286: pCube6 1
+    400288: pCube7
+    400290: pCube7 1
+    400292: pCube7 2
+    400294: pCube7 3
+    400296: pCube7 4
+    400298: pCube9
+    400300: pCube90
+    400302: pCube91
+    400304: pCube95
+    400306: pCube97
+    400308: pCube99
+    400310: pCylinder1
+    400312: pCylinder1 1
+    400314: pCylinder1 2
+    400316: pCylinder10
+    400318: pCylinder10 1
+    400320: pCylinder11
+    400322: pCylinder11 1
+    400324: pCylinder12
+    400326: pCylinder13
+    400328: pCylinder14
+    400330: pCylinder15
+    400332: pCylinder16
+    400334: pCylinder16 1
+    400336: pCylinder17
+    400338: pCylinder17 1
+    400340: pCylinder18
+    400342: pCylinder19
+    400344: pCylinder2
+    400346: pCylinder2 1
+    400348: pCylinder20
+    400350: pCylinder21
+    400352: pCylinder21 1
+    400354: pCylinder22
+    400356: pCylinder23
+    400358: pCylinder24
+    400360: pCylinder24 1
+    400362: pCylinder25
+    400364: pCylinder26
+    400366: pCylinder27
+    400368: pCylinder27 1
+    400370: pCylinder28
+    400372: pCylinder29
+    400374: pCylinder3
+    400376: pCylinder30
+    400378: pCylinder31
+    400380: pCylinder31 1
+    400382: pCylinder32
+    400384: pCylinder32 1
+    400386: pCylinder33
+    400388: pCylinder33 1
+    400390: pCylinder34
+    400392: pCylinder35
+    400394: pCylinder35 1
+    400396: pCylinder36
+    400398: pCylinder37
+    400400: pCylinder37 1
+    400402: pCylinder38
+    400404: pCylinder38 1
+    400406: pCylinder39
+    400408: pCylinder39 1
+    400410: pCylinder4
+    400412: pCylinder40
+    400414: pCylinder40 1
+    400416: pCylinder41
+    400418: pCylinder41 1
+    400420: pCylinder42
+    400422: pCylinder42 1
+    400424: pCylinder43
+    400426: pCylinder43 1
+    400428: pCylinder44
+    400430: pCylinder44 1
+    400432: pCylinder45
+    400434: pCylinder45 1
+    400436: pCylinder46
+    400438: pCylinder47
+    400440: pCylinder48
+    400442: pCylinder48 1
+    400444: pCylinder49
+    400446: pCylinder49 1
+    400448: pCylinder5
+    400450: pCylinder5 1
+    400452: pCylinder50
+    400454: pCylinder50 1
+    400456: pCylinder51
+    400458: pCylinder51 1
+    400460: pCylinder58
+    400462: pCylinder59
+    400464: pCylinder6
+    400466: pCylinder60
+    400468: pCylinder61
+    400470: pCylinder62
+    400472: pCylinder63
+    400474: pCylinder65
+    400476: pCylinder66
+    400478: pCylinder69
+    400480: pCylinder7
+    400482: pCylinder70
+    400484: pCylinder71
+    400486: pCylinder72
+    400488: pCylinder73
+    400490: pCylinder74
+    400492: pCylinder75
+    400494: pCylinder76
+    400496: pCylinder77
+    400498: pCylinder78
+    400500: pCylinder79
+    400502: pCylinder8
+    400504: pCylinder8 1
+    400506: pCylinder80
+    400508: pCylinder81
+    400510: pCylinder82
+    400512: pCylinder83
+    400514: pCylinder84
+    400516: pCylinder85
+    400518: pCylinder86
+    400520: pCylinder87
+    400522: pCylinder88
+    400524: pCylinder9
+    400526: pCylinder9 1
+    400528: Pillar
+    400530: Pillar 1
+    400532: Pillar 2
+    400534: Pillar 3
+    400536: Pillar 4
+    400538: Pillar 5
+    400540: Pillar10
+    400542: Pillar10 1
+    400544: Pillar10 2
+    400546: Pillar10 3
+    400548: Pillar5
+    400550: Pillar6
+    400552: Pillar7
+    400554: Pillar8
+    400556: Pillar9
+    400558: Pillar_02
+    400560: Pillar_Body
+    400562: Pillar_Body 1
+    400564: Pillar_Body 2
+    400566: Pillar_Body 3
+    400568: Pillar_Body 4
+    400570: Pillar_Body 5
+    400572: Pillar_Body 6
+    400574: Pillar_Body 7
+    400576: Pillar_Body 8
+    400578: Pillar_Bottom
+    400580: Pillar_Bottom 1
+    400582: Pillar_Bottom 10
+    400584: Pillar_Bottom 2
+    400586: Pillar_Bottom 3
+    400588: Pillar_Bottom 4
+    400590: Pillar_Bottom 5
+    400592: Pillar_Bottom 6
+    400594: Pillar_Bottom 7
+    400596: Pillar_Bottom 8
+    400598: Pillar_Bottom 9
+    400600: Pillar_Top
+    400602: Pillar_Top 1
+    400604: Pillar_Top 10
+    400606: Pillar_Top 11
+    400608: Pillar_Top 12
+    400610: Pillar_Top 13
+    400612: Pillar_Top 14
+    400614: Pillar_Top 15
+    400616: Pillar_Top 2
+    400618: Pillar_Top 3
+    400620: Pillar_Top 4
+    400622: Pillar_Top 5
+    400624: Pillar_Top 6
+    400626: Pillar_Top 7
+    400628: Pillar_Top 8
+    400630: Pillar_Top 9
+    400632: Pillar_Top1
+    400634: Pillar_Top1 1
+    400636: Pillar_Top1 2
+    400638: Pillar_Top1 3
+    400640: Pillar_Top1 4
+    400642: Pillar_Top1 5
+    400644: PillarGroup
+    400646: PillarGroup1
+    400648: PillarGroup2
+    400650: PillarGroup3
+    400652: Pillars
+    400654: Pillars 1
+    400656: Pillars 2
+    400658: Player_Reference
+    400660: polySurface1
+    400662: polySurface1 1
+    400664: polySurface14
+    400666: polySurface15
+    400668: polySurface30
+    400670: polySurface31
+    400672: polySurface32
+    400674: polySurface32 1
+    400676: Ramps
+    400678: Roof
+    400680: Roof 1
+    400682: Shrines
+    400684: Side_Wall_01
+    400686: Side_Wall_02
+    400688: Upper_Palace
+    400690: Viewing_Deck
+    400692: Wall_Back
+    400694: Wall_Back 1
+    400696: Wall_Back 2
+    400698: Wall_Back 3
+    400700: Wall_Front
+    400702: Wall_Front 1
+    400704: Wall_Front 2
+    400706: Wall_Front 3
+    400708: Wall_Front 4
+    400710: Wall_Front 5
+    400712: Wall_Front 6
+    400714: Wall_Front 7
+    400716: Wall_Front3
+    400718: Wall_Middle
+    400720: Wall_Side
+    400722: Wall_side1
+    400724: Wall_side2
+    400726: Wall_Side_01
+    400728: Wall_Side_01 1
+    400730: Wall_Side_01 2
+    400732: Wall_Side_01 3
+    400734: Wall_Side_02
+    400736: Wall_Side_02 1
+    400738: Wall_Side_02 2
+    400740: Wall_Side_02 3
+    400742: Wall_Side_02 4
+    400744: Wall_Side_02 5
+    400746: WAlls_n_shit
+    400748: Wallsss
+    2100000: lambert1
+    2100002: lambert2
+    2100004: Default_Material
+    2300000: Back_Wall
+    2300002: Cain_Belt
+    2300004: Cain_Body
+    2300006: Cain_Robe
+    2300008: Floor
+    2300010: Floor 1
+    2300012: Foundation
+    2300014: Foundation 1
+    2300016: Foundation 2
+    2300018: Foundation 3
+    2300020: Foundation 4
+    2300022: Foundation 5
+    2300024: Foundation 6
+    2300026: Foundation 7
+    2300028: Foundation 8
+    2300030: Foundation 9
+    2300032: Front_Wall
+    2300034: Ground
+    2300036: Ground1
+    2300038: pCube
+    2300040: pCube 1
+    2300042: pCube 2
+    2300044: pCube10
+    2300046: pCube10 1
+    2300048: pCube100
+    2300050: pCube102
+    2300052: pCube103
+    2300054: pCube107
+    2300056: pCube108
+    2300058: pCube110
+    2300060: pCube111
+    2300062: pCube114
+    2300064: pCube119
+    2300066: pCube12
+    2300068: pCube120
+    2300070: pCube126
+    2300072: pCube126 1
+    2300074: pCube126 2
+    2300076: pCube126 3
+    2300078: pCube126 4
+    2300080: pCube126 5
+    2300082: pCube126 6
+    2300084: pCube126 7
+    2300086: pCube132
+    2300088: pCube133
+    2300090: pCube134
+    2300092: pCube135
+    2300094: pCube136
+    2300096: pCube139
+    2300098: pCube14
+    2300100: pCube142
+    2300102: pCube15
+    2300104: pCube15 1
+    2300106: pCube15 2
+    2300108: pCube15 3
+    2300110: pCube153
+    2300112: pCube154
+    2300114: pCube155
+    2300116: pCube157
+    2300118: pCube158
+    2300120: pCube159
+    2300122: pCube16
+    2300124: pCube16 1
+    2300126: pCube16 2
+    2300128: pCube160
+    2300130: pCube161
+    2300132: pCube162
+    2300134: pCube163
+    2300136: pCube17
+    2300138: pCube17 1
+    2300140: pCube17 2
+    2300142: pCube18
+    2300144: pCube18 1
+    2300146: pCube19
+    2300148: pCube2
+    2300150: pCube2 1
+    2300152: pCube2 2
+    2300154: pCube20
+    2300156: pCube21
+    2300158: pCube22
+    2300160: pCube23
+    2300162: pCube24
+    2300164: pCube24 1
+    2300166: pCube25
+    2300168: pCube26
+    2300170: pCube26 1
+    2300172: pCube27
+    2300174: pCube28
+    2300176: pCube3
+    2300178: pCube3 1
+    2300180: pCube3 2
+    2300182: pCube3 3
+    2300184: pCube31
+    2300186: pCube31 1
+    2300188: pCube4
+    2300190: pCube4 1
+    2300192: pCube6
+    2300194: pCube6 1
+    2300196: pCube7
+    2300198: pCube7 1
+    2300200: pCube7 2
+    2300202: pCube7 3
+    2300204: pCube7 4
+    2300206: pCube9
+    2300208: pCube90
+    2300210: pCube91
+    2300212: pCube95
+    2300214: pCube97
+    2300216: pCube99
+    2300218: pCylinder1
+    2300220: pCylinder1 1
+    2300222: pCylinder1 2
+    2300224: pCylinder10
+    2300226: pCylinder10 1
+    2300228: pCylinder11
+    2300230: pCylinder11 1
+    2300232: pCylinder12
+    2300234: pCylinder13
+    2300236: pCylinder14
+    2300238: pCylinder15
+    2300240: pCylinder16
+    2300242: pCylinder16 1
+    2300244: pCylinder17
+    2300246: pCylinder17 1
+    2300248: pCylinder18
+    2300250: pCylinder19
+    2300252: pCylinder2
+    2300254: pCylinder2 1
+    2300256: pCylinder20
+    2300258: pCylinder21
+    2300260: pCylinder21 1
+    2300262: pCylinder22
+    2300264: pCylinder23
+    2300266: pCylinder24
+    2300268: pCylinder24 1
+    2300270: pCylinder25
+    2300272: pCylinder26
+    2300274: pCylinder27
+    2300276: pCylinder27 1
+    2300278: pCylinder28
+    2300280: pCylinder29
+    2300282: pCylinder3
+    2300284: pCylinder30
+    2300286: pCylinder31
+    2300288: pCylinder31 1
+    2300290: pCylinder32
+    2300292: pCylinder32 1
+    2300294: pCylinder33
+    2300296: pCylinder33 1
+    2300298: pCylinder34
+    2300300: pCylinder35
+    2300302: pCylinder35 1
+    2300304: pCylinder36
+    2300306: pCylinder37
+    2300308: pCylinder37 1
+    2300310: pCylinder38
+    2300312: pCylinder38 1
+    2300314: pCylinder39
+    2300316: pCylinder39 1
+    2300318: pCylinder4
+    2300320: pCylinder40
+    2300322: pCylinder40 1
+    2300324: pCylinder41
+    2300326: pCylinder41 1
+    2300328: pCylinder42
+    2300330: pCylinder42 1
+    2300332: pCylinder43
+    2300334: pCylinder43 1
+    2300336: pCylinder44
+    2300338: pCylinder44 1
+    2300340: pCylinder45
+    2300342: pCylinder45 1
+    2300344: pCylinder46
+    2300346: pCylinder47
+    2300348: pCylinder48
+    2300350: pCylinder48 1
+    2300352: pCylinder49
+    2300354: pCylinder49 1
+    2300356: pCylinder5
+    2300358: pCylinder5 1
+    2300360: pCylinder50
+    2300362: pCylinder50 1
+    2300364: pCylinder51
+    2300366: pCylinder51 1
+    2300368: pCylinder58
+    2300370: pCylinder59
+    2300372: pCylinder6
+    2300374: pCylinder60
+    2300376: pCylinder61
+    2300378: pCylinder62
+    2300380: pCylinder63
+    2300382: pCylinder65
+    2300384: pCylinder66
+    2300386: pCylinder69
+    2300388: pCylinder7
+    2300390: pCylinder70
+    2300392: pCylinder71
+    2300394: pCylinder72
+    2300396: pCylinder73
+    2300398: pCylinder74
+    2300400: pCylinder75
+    2300402: pCylinder76
+    2300404: pCylinder77
+    2300406: pCylinder78
+    2300408: pCylinder79
+    2300410: pCylinder8
+    2300412: pCylinder8 1
+    2300414: pCylinder80
+    2300416: pCylinder81
+    2300418: pCylinder82
+    2300420: pCylinder83
+    2300422: pCylinder84
+    2300424: pCylinder85
+    2300426: pCylinder86
+    2300428: pCylinder87
+    2300430: pCylinder88
+    2300432: pCylinder9
+    2300434: pCylinder9 1
+    2300436: Pillar_Body
+    2300438: Pillar_Body 1
+    2300440: Pillar_Body 2
+    2300442: Pillar_Body 3
+    2300444: Pillar_Body 4
+    2300446: Pillar_Body 5
+    2300448: Pillar_Body 6
+    2300450: Pillar_Body 7
+    2300452: Pillar_Body 8
+    2300454: Pillar_Bottom
+    2300456: Pillar_Bottom 1
+    2300458: Pillar_Bottom 10
+    2300460: Pillar_Bottom 2
+    2300462: Pillar_Bottom 3
+    2300464: Pillar_Bottom 4
+    2300466: Pillar_Bottom 5
+    2300468: Pillar_Bottom 6
+    2300470: Pillar_Bottom 7
+    2300472: Pillar_Bottom 8
+    2300474: Pillar_Bottom 9
+    2300476: Pillar_Top
+    2300478: Pillar_Top 1
+    2300480: Pillar_Top 10
+    2300482: Pillar_Top 11
+    2300484: Pillar_Top 12
+    2300486: Pillar_Top 13
+    2300488: Pillar_Top 14
+    2300490: Pillar_Top 15
+    2300492: Pillar_Top 2
+    2300494: Pillar_Top 3
+    2300496: Pillar_Top 4
+    2300498: Pillar_Top 5
+    2300500: Pillar_Top 6
+    2300502: Pillar_Top 7
+    2300504: Pillar_Top 8
+    2300506: Pillar_Top 9
+    2300508: Pillar_Top1
+    2300510: Pillar_Top1 1
+    2300512: Pillar_Top1 2
+    2300514: Pillar_Top1 3
+    2300516: Pillar_Top1 4
+    2300518: Pillar_Top1 5
+    2300520: polySurface1
+    2300522: polySurface1 1
+    2300524: polySurface14
+    2300526: polySurface15
+    2300528: polySurface30
+    2300530: polySurface31
+    2300532: polySurface32
+    2300534: polySurface32 1
+    2300536: Roof
+    2300538: Roof 1
+    2300540: Side_Wall_01
+    2300542: Side_Wall_02
+    2300544: Viewing_Deck
+    2300546: Wall_Back
+    2300548: Wall_Back 1
+    2300550: Wall_Back 2
+    2300552: Wall_Back 3
+    2300554: Wall_Front
+    2300556: Wall_Front 1
+    2300558: Wall_Front 2
+    2300560: Wall_Front 3
+    2300562: Wall_Front 4
+    2300564: Wall_Front 5
+    2300566: Wall_Front 6
+    2300568: Wall_Front 7
+    2300570: Wall_Front3
+    2300572: Wall_Middle
+    2300574: Wall_Side
+    2300576: Wall_side1
+    2300578: Wall_side2
+    2300580: Wall_Side_01
+    2300582: Wall_Side_01 1
+    2300584: Wall_Side_01 2
+    2300586: Wall_Side_01 3
+    2300588: Wall_Side_02
+    2300590: Wall_Side_02 1
+    2300592: Wall_Side_02 2
+    2300594: Wall_Side_02 3
+    2300596: Wall_Side_02 4
+    2300598: Wall_Side_02 5
+    3300000: Back_Wall
+    3300002: Cain_Belt
+    3300004: Cain_Body
+    3300006: Cain_Robe
+    3300008: Floor
+    3300010: Floor 1
+    3300012: Foundation
+    3300014: Foundation 1
+    3300016: Foundation 2
+    3300018: Foundation 3
+    3300020: Foundation 4
+    3300022: Foundation 5
+    3300024: Foundation 6
+    3300026: Foundation 7
+    3300028: Foundation 8
+    3300030: Foundation 9
+    3300032: Front_Wall
+    3300034: Ground
+    3300036: Ground1
+    3300038: pCube
+    3300040: pCube 1
+    3300042: pCube 2
+    3300044: pCube10
+    3300046: pCube10 1
+    3300048: pCube100
+    3300050: pCube102
+    3300052: pCube103
+    3300054: pCube107
+    3300056: pCube108
+    3300058: pCube110
+    3300060: pCube111
+    3300062: pCube114
+    3300064: pCube119
+    3300066: pCube12
+    3300068: pCube120
+    3300070: pCube126
+    3300072: pCube126 1
+    3300074: pCube126 2
+    3300076: pCube126 3
+    3300078: pCube126 4
+    3300080: pCube126 5
+    3300082: pCube126 6
+    3300084: pCube126 7
+    3300086: pCube132
+    3300088: pCube133
+    3300090: pCube134
+    3300092: pCube135
+    3300094: pCube136
+    3300096: pCube139
+    3300098: pCube14
+    3300100: pCube142
+    3300102: pCube15
+    3300104: pCube15 1
+    3300106: pCube15 2
+    3300108: pCube15 3
+    3300110: pCube153
+    3300112: pCube154
+    3300114: pCube155
+    3300116: pCube157
+    3300118: pCube158
+    3300120: pCube159
+    3300122: pCube16
+    3300124: pCube16 1
+    3300126: pCube16 2
+    3300128: pCube160
+    3300130: pCube161
+    3300132: pCube162
+    3300134: pCube163
+    3300136: pCube17
+    3300138: pCube17 1
+    3300140: pCube17 2
+    3300142: pCube18
+    3300144: pCube18 1
+    3300146: pCube19
+    3300148: pCube2
+    3300150: pCube2 1
+    3300152: pCube2 2
+    3300154: pCube20
+    3300156: pCube21
+    3300158: pCube22
+    3300160: pCube23
+    3300162: pCube24
+    3300164: pCube24 1
+    3300166: pCube25
+    3300168: pCube26
+    3300170: pCube26 1
+    3300172: pCube27
+    3300174: pCube28
+    3300176: pCube3
+    3300178: pCube3 1
+    3300180: pCube3 2
+    3300182: pCube3 3
+    3300184: pCube31
+    3300186: pCube31 1
+    3300188: pCube4
+    3300190: pCube4 1
+    3300192: pCube6
+    3300194: pCube6 1
+    3300196: pCube7
+    3300198: pCube7 1
+    3300200: pCube7 2
+    3300202: pCube7 3
+    3300204: pCube7 4
+    3300206: pCube9
+    3300208: pCube90
+    3300210: pCube91
+    3300212: pCube95
+    3300214: pCube97
+    3300216: pCube99
+    3300218: pCylinder1
+    3300220: pCylinder1 1
+    3300222: pCylinder1 2
+    3300224: pCylinder10
+    3300226: pCylinder10 1
+    3300228: pCylinder11
+    3300230: pCylinder11 1
+    3300232: pCylinder12
+    3300234: pCylinder13
+    3300236: pCylinder14
+    3300238: pCylinder15
+    3300240: pCylinder16
+    3300242: pCylinder16 1
+    3300244: pCylinder17
+    3300246: pCylinder17 1
+    3300248: pCylinder18
+    3300250: pCylinder19
+    3300252: pCylinder2
+    3300254: pCylinder2 1
+    3300256: pCylinder20
+    3300258: pCylinder21
+    3300260: pCylinder21 1
+    3300262: pCylinder22
+    3300264: pCylinder23
+    3300266: pCylinder24
+    3300268: pCylinder24 1
+    3300270: pCylinder25
+    3300272: pCylinder26
+    3300274: pCylinder27
+    3300276: pCylinder27 1
+    3300278: pCylinder28
+    3300280: pCylinder29
+    3300282: pCylinder3
+    3300284: pCylinder30
+    3300286: pCylinder31
+    3300288: pCylinder31 1
+    3300290: pCylinder32
+    3300292: pCylinder32 1
+    3300294: pCylinder33
+    3300296: pCylinder33 1
+    3300298: pCylinder34
+    3300300: pCylinder35
+    3300302: pCylinder35 1
+    3300304: pCylinder36
+    3300306: pCylinder37
+    3300308: pCylinder37 1
+    3300310: pCylinder38
+    3300312: pCylinder38 1
+    3300314: pCylinder39
+    3300316: pCylinder39 1
+    3300318: pCylinder4
+    3300320: pCylinder40
+    3300322: pCylinder40 1
+    3300324: pCylinder41
+    3300326: pCylinder41 1
+    3300328: pCylinder42
+    3300330: pCylinder42 1
+    3300332: pCylinder43
+    3300334: pCylinder43 1
+    3300336: pCylinder44
+    3300338: pCylinder44 1
+    3300340: pCylinder45
+    3300342: pCylinder45 1
+    3300344: pCylinder46
+    3300346: pCylinder47
+    3300348: pCylinder48
+    3300350: pCylinder48 1
+    3300352: pCylinder49
+    3300354: pCylinder49 1
+    3300356: pCylinder5
+    3300358: pCylinder5 1
+    3300360: pCylinder50
+    3300362: pCylinder50 1
+    3300364: pCylinder51
+    3300366: pCylinder51 1
+    3300368: pCylinder58
+    3300370: pCylinder59
+    3300372: pCylinder6
+    3300374: pCylinder60
+    3300376: pCylinder61
+    3300378: pCylinder62
+    3300380: pCylinder63
+    3300382: pCylinder65
+    3300384: pCylinder66
+    3300386: pCylinder69
+    3300388: pCylinder7
+    3300390: pCylinder70
+    3300392: pCylinder71
+    3300394: pCylinder72
+    3300396: pCylinder73
+    3300398: pCylinder74
+    3300400: pCylinder75
+    3300402: pCylinder76
+    3300404: pCylinder77
+    3300406: pCylinder78
+    3300408: pCylinder79
+    3300410: pCylinder8
+    3300412: pCylinder8 1
+    3300414: pCylinder80
+    3300416: pCylinder81
+    3300418: pCylinder82
+    3300420: pCylinder83
+    3300422: pCylinder84
+    3300424: pCylinder85
+    3300426: pCylinder86
+    3300428: pCylinder87
+    3300430: pCylinder88
+    3300432: pCylinder9
+    3300434: pCylinder9 1
+    3300436: Pillar_Body
+    3300438: Pillar_Body 1
+    3300440: Pillar_Body 2
+    3300442: Pillar_Body 3
+    3300444: Pillar_Body 4
+    3300446: Pillar_Body 5
+    3300448: Pillar_Body 6
+    3300450: Pillar_Body 7
+    3300452: Pillar_Body 8
+    3300454: Pillar_Bottom
+    3300456: Pillar_Bottom 1
+    3300458: Pillar_Bottom 10
+    3300460: Pillar_Bottom 2
+    3300462: Pillar_Bottom 3
+    3300464: Pillar_Bottom 4
+    3300466: Pillar_Bottom 5
+    3300468: Pillar_Bottom 6
+    3300470: Pillar_Bottom 7
+    3300472: Pillar_Bottom 8
+    3300474: Pillar_Bottom 9
+    3300476: Pillar_Top
+    3300478: Pillar_Top 1
+    3300480: Pillar_Top 10
+    3300482: Pillar_Top 11
+    3300484: Pillar_Top 12
+    3300486: Pillar_Top 13
+    3300488: Pillar_Top 14
+    3300490: Pillar_Top 15
+    3300492: Pillar_Top 2
+    3300494: Pillar_Top 3
+    3300496: Pillar_Top 4
+    3300498: Pillar_Top 5
+    3300500: Pillar_Top 6
+    3300502: Pillar_Top 7
+    3300504: Pillar_Top 8
+    3300506: Pillar_Top 9
+    3300508: Pillar_Top1
+    3300510: Pillar_Top1 1
+    3300512: Pillar_Top1 2
+    3300514: Pillar_Top1 3
+    3300516: Pillar_Top1 4
+    3300518: Pillar_Top1 5
+    3300520: polySurface1
+    3300522: polySurface1 1
+    3300524: polySurface14
+    3300526: polySurface15
+    3300528: polySurface30
+    3300530: polySurface31
+    3300532: polySurface32
+    3300534: polySurface32 1
+    3300536: Roof
+    3300538: Roof 1
+    3300540: Side_Wall_01
+    3300542: Side_Wall_02
+    3300544: Viewing_Deck
+    3300546: Wall_Back
+    3300548: Wall_Back 1
+    3300550: Wall_Back 2
+    3300552: Wall_Back 3
+    3300554: Wall_Front
+    3300556: Wall_Front 1
+    3300558: Wall_Front 2
+    3300560: Wall_Front 3
+    3300562: Wall_Front 4
+    3300564: Wall_Front 5
+    3300566: Wall_Front 6
+    3300568: Wall_Front 7
+    3300570: Wall_Front3
+    3300572: Wall_Middle
+    3300574: Wall_Side
+    3300576: Wall_side1
+    3300578: Wall_side2
+    3300580: Wall_Side_01
+    3300582: Wall_Side_01 1
+    3300584: Wall_Side_01 2
+    3300586: Wall_Side_01 3
+    3300588: Wall_Side_02
+    3300590: Wall_Side_02 1
+    3300592: Wall_Side_02 2
+    3300594: Wall_Side_02 3
+    3300596: Wall_Side_02 4
+    3300598: Wall_Side_02 5
+    4300000: Foundation
+    4300002: Wall_Front
+    4300004: Wall_Side_01
+    4300006: Foundation
+    4300008: Wall_Front
+    4300010: Wall_Side_01
+    4300012: Wall_Side_02
+    4300014: Foundation
+    4300016: Wall_Front
+    4300018: Wall_Side_01
+    4300020: Foundation
+    4300022: Wall_Back
+    4300024: Wall_Side_02
+    4300026: Foundation
+    4300028: Wall_Side_02
+    4300030: Wall_Front
+    4300032: Foundation
+    4300034: Wall_Front
+    4300036: Wall_Side_02
+    4300038: Foundation
+    4300040: Wall_Front
+    4300042: Wall_Back
+    4300044: Wall_Side_02
+    4300046: Foundation
+    4300048: Wall_Front
+    4300050: Wall_Side_01
+    4300052: Wall_Side_02
+    4300054: Floor
+    4300056: Wall_Middle
+    4300058: Wall_Front
+    4300060: Wall_Side
+    4300062: Wall_Back
+    4300064: Foundation
+    4300066: Wall_Back
+    4300068: Wall_side1
+    4300070: Wall_side2
+    4300072: Roof
+    4300074: Wall_Front3
+    4300076: Back_Wall
+    4300078: Foundation
+    4300080: Front_Wall
+    4300082: Side_Wall_01
+    4300084: Side_Wall_02
+    4300086: pCube26
+    4300088: pCube27
+    4300090: pCube28
+    4300092: pCube17
+    4300094: pCube31
+    4300096: pCube24
+    4300098: pCube17
+    4300100: pCube25
+    4300102: polySurface1
+    4300104: pCube18
+    4300106: pCylinder1
+    4300108: pCube3
+    4300110: pCylinder8
+    4300112: pCylinder9
+    4300114: pCylinder10
+    4300116: pCube31
+    4300118: pCube26
+    4300120: pCube24
+    4300122: polySurface32
+    4300124: pCube7
+    4300126: pCylinder11
+    4300128: pCylinder4
+    4300130: pCube20
+    4300132: pCylinder2
+    4300134: pCylinder6
+    4300136: pCylinder5
+    4300138: pCube21
+    4300140: pCylinder7
+    4300142: pCube23
+    4300144: pCube22
+    4300146: pCube7
+    4300148: pCube19
+    4300150: pCylinder1
+    4300152: pCube3
+    4300154: polySurface31
+    4300156: polySurface30
+    4300158: pCube18
+    4300160: pCube15
+    4300162: polySurface32
+    4300164: pCube15
+    4300166: pCube
+    4300168: pCube6
+    4300170: pCube2
+    4300172: polySurface1
+    4300174: polySurface14
+    4300176: polySurface15
+    4300178: pCube3
+    4300180: pCube7
+    4300182: pCube16
+    4300184: pCube17
+    4300186: pCube15
+    4300188: pCube10
+    4300190: pCube4
+    4300192: pCube
+    4300194: pCube16
+    4300196: pCube2
+    4300198: pCube7
+    4300200: pCube9
+    4300202: pCube15
+    4300204: pCube14
+    4300206: pCube12
+    4300208: pCube10
+    4300210: pCube7
+    4300212: pCube4
+    4300214: pCube3
+    4300216: pCube
+    4300218: pCube6
+    4300220: pCube2
+    4300222: pCube16
+    4300224: pCube163
+    4300226: pCube155
+    4300228: pCube157
+    4300230: pCube154
+    4300232: pCube153
+    4300234: pCube158
+    4300236: pCube159
+    4300238: pCube160
+    4300240: pCube161
+    4300242: pCube162
+    4300244: Pillar_Body
+    4300246: Pillar_Bottom
+    4300248: Viewing_Deck
+    4300250: pCube120
+    4300252: pCube114
+    4300254: pCube132
+    4300256: pCube133
+    4300258: pCube134
+    4300260: pCube139
+    4300262: pCube119
+    4300264: pCube111
+    4300266: pCube110
+    4300268: pCube108
+    4300270: pCube107
+    4300272: pCube103
+    4300274: pCube102
+    4300276: pCube100
+    4300278: pCube99
+    4300280: pCube97
+    4300282: pCube95
+    4300284: pCube91
+    4300286: pCube90
+    4300288: pCube135
+    4300290: pCube136
+    4300292: Pillar_Top
+    4300294: Pillar_Bottom
+    4300296: pCube126
+    4300298: Pillar_Top
+    4300300: Pillar_Bottom
+    4300302: pCube126
+    4300304: Pillar_Top
+    4300306: pCube126
+    4300308: Pillar_Top1
+    4300310: Pillar_Top
+    4300312: pCube126
+    4300314: Pillar_Top1
+    4300316: Pillar_Top
+    4300318: pCube126
+    4300320: Pillar_Top1
+    4300322: Pillar_Top
+    4300324: pCube126
+    4300326: Pillar_Top1
+    4300328: Pillar_Top
+    4300330: pCube126
+    4300332: Pillar_Top1
+    4300334: Pillar_Top
+    4300336: pCube126
+    4300338: Pillar_Top1
+    4300340: pCube142
+    4300342: pCylinder27
+    4300344: pCylinder33
+    4300346: pCylinder32
+    4300348: pCylinder21
+    4300350: pCylinder17
+    4300352: pCylinder16
+    4300354: pCylinder83
+    4300356: pCylinder84
+    4300358: pCylinder85
+    4300360: pCylinder86
+    4300362: pCylinder87
+    4300364: pCylinder88
+    4300366: Ground1
+    4300368: Pillar_Body
+    4300370: Pillar_Top
+    4300372: Pillar_Bottom
+    4300374: Pillar_Body
+    4300376: Pillar_Top
+    4300378: Pillar_Bottom
+    4300380: Pillar_Body
+    4300382: Pillar_Top
+    4300384: Pillar_Bottom
+    4300386: Pillar_Body
+    4300388: Pillar_Top
+    4300390: Pillar_Bottom
+    4300392: Pillar_Body
+    4300394: Pillar_Top
+    4300396: Pillar_Bottom
+    4300398: Pillar_Body
+    4300400: Pillar_Top
+    4300402: Pillar_Bottom
+    4300404: Pillar_Body
+    4300406: Pillar_Top
+    4300408: Pillar_Bottom
+    4300410: Pillar_Body
+    4300412: Pillar_Top
+    4300414: Pillar_Bottom
+    4300416: Cain_Robe
+    4300418: Cain_Belt
+    4300420: Cain_Body
+    4300422: Roof
+    4300424: pCylinder1
+    4300426: pCylinder2
+    4300428: pCylinder3
+    4300430: pCylinder5
+    4300432: pCylinder8
+    4300434: pCylinder9
+    4300436: pCylinder10
+    4300438: pCylinder11
+    4300440: pCylinder12
+    4300442: pCylinder13
+    4300444: pCylinder14
+    4300446: pCylinder15
+    4300448: pCylinder16
+    4300450: pCylinder17
+    4300452: pCylinder18
+    4300454: pCylinder19
+    4300456: pCylinder20
+    4300458: pCylinder21
+    4300460: pCylinder22
+    4300462: pCylinder23
+    4300464: pCylinder24
+    4300466: pCylinder25
+    4300468: pCylinder26
+    4300470: pCylinder27
+    4300472: pCylinder28
+    4300474: pCylinder29
+    4300476: pCylinder30
+    4300478: pCylinder31
+    4300480: pCylinder32
+    4300482: pCylinder33
+    4300484: pCylinder34
+    4300486: pCylinder35
+    4300488: pCylinder36
+    4300490: pCylinder37
+    4300492: pCylinder38
+    4300494: pCylinder39
+    4300496: pCylinder40
+    4300498: pCylinder41
+    4300500: pCylinder42
+    4300502: pCylinder43
+    4300504: pCylinder44
+    4300506: pCylinder45
+    4300508: pCylinder46
+    4300510: pCylinder47
+    4300512: pCylinder48
+    4300514: pCylinder49
+    4300516: pCylinder50
+    4300518: pCylinder51
+    4300520: Floor
+    4300522: Ground
+    4300524: pCylinder37
+    4300526: pCylinder35
+    4300528: pCylinder31
+    4300530: pCylinder24
+    4300532: pCylinder42
+    4300534: pCylinder43
+    4300536: pCylinder44
+    4300538: pCylinder45
+    4300540: pCylinder48
+    4300542: pCylinder49
+    4300544: pCylinder50
+    4300546: pCylinder41
+    4300548: pCylinder40
+    4300550: pCylinder39
+    4300552: pCylinder38
+    4300554: pCylinder51
+    4300556: pCylinder58
+    4300558: pCylinder59
+    4300560: pCylinder60
+    4300562: pCylinder61
+    4300564: pCylinder62
+    4300566: pCylinder63
+    4300568: pCylinder65
+    4300570: pCylinder66
+    4300572: pCylinder69
+    4300574: pCylinder70
+    4300576: pCylinder71
+    4300578: pCylinder72
+    4300580: pCylinder73
+    4300582: pCylinder74
+    4300584: pCylinder75
+    4300586: pCylinder76
+    4300588: pCylinder77
+    4300590: pCylinder78
+    4300592: pCylinder79
+    4300594: pCylinder80
+    4300596: pCylinder81
+    4300598: pCylinder82
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
