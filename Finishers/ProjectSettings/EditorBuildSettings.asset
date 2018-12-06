@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Week10-11/Week10StartHere.unity
     guid: 871a95a14e92eb142a2b59dd8b28d74a
   - enabled: 1
+    path: Assets/Scenes/Week10-11/MEME/MEME.unity
+    guid: 3815402a15e94ba4bb532e1acae4f990
+  - enabled: 1
     path: Assets/Scenes/Week8-9/SecretTesting.unity
     guid: 12505152ba56d854d9c4ae89ef3b2788
   m_configObjects: {}
