@@ -104,6 +104,10 @@ public class FinisherMode : MonoBehaviour
     {
         TutorialPopups.Instance.HideTutorialPopup();
     }
+    void SaveGame()
+    {
+        gameStatus.SaveGame();
+    }
 
     // Update is called once per frame
     void Update()
@@ -481,7 +485,8 @@ public class FinisherMode : MonoBehaviour
 
         FinisherIcon.SetActivated(false);
         InFinisherIcons.SetActive(true);
-        RunicRinisherGuides.SetActive(true);
+        if(!PillarFinisherUsed)
+            RunicRinisherGuides.SetActive(true);
 
         //RunicSequence.RestartQue();
         RunicQue.Clear();
@@ -544,6 +549,8 @@ public class FinisherMode : MonoBehaviour
         StartCoroutine(LeavingFinisherMode());
     }
 
+    [SerializeField] GameStatus gameStatus;
+    [SerializeField] GameObject checkpoint;
     IEnumerator LeavingFinisherMode(FinisherAbstract finisherAbstractUsed = null)
     {
         UIanim.Play("idle");
@@ -579,6 +586,9 @@ public class FinisherMode : MonoBehaviour
         else if (!didFail) //TutorialPopupStuff
         {
             Invoke("HidePopup", 4f);
+            gameStatus.CheckpointP = currentTarget.transform.position + currentTarget.transform.forward * 2;
+            Invoke("SaveGame", 2f);
+            IncreaseFinisherMeter(100);
             Destroy(currentTarget);
         }
         else
@@ -624,6 +634,7 @@ public class FinisherMode : MonoBehaviour
         GameObject thisCurrentTarget = null;
         float lowestDistance = Mathf.Infinity;
         GameObject thisCurrentDotTarget = null;
+        GameObject testTarget = null;
         float lowestDotDistance = Mathf.Infinity;
         foreach (GameObject Enemy in Enemies)
         {
@@ -648,6 +659,8 @@ public class FinisherMode : MonoBehaviour
                         lowestDotDistance = dot;
                     }
                 }
+                if(Vector3.Distance(Enemy.transform.position, transform.position) < 5)
+                    testTarget = Enemy;
             }
         }
         if (!GameStatus.InCombat)
@@ -674,13 +687,15 @@ public class FinisherMode : MonoBehaviour
                         }
                     }
                 }
+                if (Vector3.Distance(dummy.transform.position, transform.position) < 5)
+                    testTarget = dummy;
             }
         }
 
         if (thisCurrentTarget != null)
         {
             FinisherIcon.SetActivated(true);
-            if (Vector3.Distance(thisCurrentDotTarget.transform.position,this.transform.position) > 5)
+            if (thisCurrentDotTarget != null && Vector3.Distance(thisCurrentDotTarget.transform.position,this.transform.position) > 5)
             {
                 FinisherIcon.transform.position = thisCurrentDotTarget.transform.position;
                 usedSwordGrapple = true;
@@ -688,6 +703,11 @@ public class FinisherMode : MonoBehaviour
             }
             FinisherIcon.transform.position = thisCurrentTarget.transform.position;
             return thisCurrentTarget;
+        }
+        else if (testTarget != null)
+        {
+            FinisherIcon.transform.position = testTarget.transform.position;
+            return testTarget;
         }
         
         FinisherIcon.SetActivated(false);

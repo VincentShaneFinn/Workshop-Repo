@@ -5005,6 +5005,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224472770764733782}
+  - component: {fileID: 114422977246004642}
   m_Layer: 5
   m_Name: RunicFinisherIcons
   m_TagString: Untagged
@@ -5336,7 +5337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224427818934321064}
   m_Layer: 5
-  m_Name: FourthRow
+  m_Name: FlameSwordTut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5383,7 +5384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224993278775791038}
   m_Layer: 5
-  m_Name: ThirdRow
+  m_Name: SiphoningTut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5546,7 +5547,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224918597894623938}
   m_Layer: 5
-  m_Name: SecondRow
+  m_Name: FlameCircleTut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6235,7 +6236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224972465175143032}
   m_Layer: 5
-  m_Name: FirstRow
+  m_Name: FlamethrowerTut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6267,7 +6268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224633565426636122}
   m_Layer: 5
-  m_Name: FifthRow
+  m_Name: FrostCircleTut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11376,7 +11377,6 @@ MonoBehaviour:
   HealthSlider: {fileID: 114753867066353640}
   FinisherSlider: {fileID: 114899734874593796}
   CheckpointP: {x: 0, y: 1, z: 0}
-  fm: {fileID: 0}
   saveGamePopup: {fileID: 114810680888769616}
 --- !u!114 &114037611160541244
 MonoBehaviour:
@@ -13561,6 +13561,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114422977246004642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1747389023966720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd7ac2116c06ab4bbff94fc55483fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  siphonTut: {fileID: 1810130780451274}
+  fireSwordTut: {fileID: 1806667276193792}
+  flamethrowerTut: {fileID: 1943435207347504}
+  fireCircleTut: {fileID: 1827306089925190}
+  frostCircleTut: {fileID: 1948308230443182}
 --- !u!114 &114424577902544900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15783,7 +15799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keylist: 030000000100000003000000
-  SwordTimer: 7
+  SwordTimer: 5
   sword: {fileID: 114536651454404626}
   FlameSword: {fileID: 1231246885280026}
   Flames: {fileID: 1204369448039206, guid: 822b9b6c49816a34595234dc5b0cfa99, type: 2}
@@ -16912,6 +16928,8 @@ MonoBehaviour:
   PillarTarget: {fileID: 0}
   PillarFinisherUsed: 0
   SwordThrowAnimObj: {fileID: 1349021516817680}
+  gameStatus: {fileID: 114034528800546196}
+  checkpoint: {fileID: 1583628426116146, guid: 711a0df833034ae4a887071544d6d1f2, type: 2}
   FinisherIcon: {fileID: 114131698407563678}
   InFinisherIcons: {fileID: 1148953510261644}
   shc: {fileID: 114430755513715484}

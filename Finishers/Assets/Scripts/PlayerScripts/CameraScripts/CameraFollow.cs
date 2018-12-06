@@ -57,6 +57,7 @@ public class CameraFollow : MonoBehaviour {
 
             Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
             localRotationJustY = Quaternion.Euler(0f, rotY, 0.0f);
+
             transform.rotation = localRotation;
             forwardContainer.transform.rotation = localRotationJustY;
         }
@@ -92,4 +93,6 @@ public class CameraFollow : MonoBehaviour {
     {
         inputSensitivity = SavedSens;
     }
+
+    [SerializeField] float autoRotateSpeed = 5;
 }
