@@ -17294,6 +17294,8 @@ MonoBehaviour:
   finalInputZ: 0
   smoothX: 0
   smoothY: 0
+  autoScrollTime: 1
+  autoScrollCount: 0
 --- !u!114 &114981057773205052
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -25,7 +25,7 @@ public class ThrowLimb : MonoBehaviour {
         if (firedPressed)
         {
             if(!HitWall)
-                transform.Translate(Vector3.forward * Time.deltaTime * 20);
+                transform.Translate(Vector3.forward * Time.deltaTime * 30);
         }
 	}
 
@@ -98,7 +98,10 @@ public class ThrowLimb : MonoBehaviour {
                     col.gameObject.GetComponent<EnemyAI>().KillEnemy(true);
                     CurrentlyKilledCount++;
                     FinMode.IncreaseFinisherMeter(PlayerDamageValues.Instance.SiphoningFinMeterFill);
-                    DeadBodies[CurrentlyKilledCount - 1].SetActive(true);
+                    if(col.gameObject.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.IceEnemy)
+                        DeadBodies[1].SetActive(true);
+                    else
+                        DeadBodies[0].SetActive(true);
                 }
             }
         }
@@ -111,7 +114,10 @@ public class ThrowLimb : MonoBehaviour {
                     Destroy(col.gameObject);
                     CurrentlyKilledCount++;
                     FinMode.IncreaseFinisherMeter(PlayerDamageValues.Instance.SiphoningFinMeterFill);
-                    DeadBodies[CurrentlyKilledCount - 1].SetActive(true);
+                    if (col.gameObject.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.IceEnemy)
+                        DeadBodies[1].SetActive(true);
+                    else
+                        DeadBodies[0].SetActive(true);
                 }
             }
         }

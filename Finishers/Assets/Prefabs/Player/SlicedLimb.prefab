@@ -8741,7 +8741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8596ff5e93fec84f896f87a826c2741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KillLimit: 3
+  KillLimit: 1
   DeadBodies:
   - {fileID: 1024854329167112}
   - {fileID: 1565108200875094}
@@ -10271,7 +10271,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 87acd2642855643448169776c29658a9, type: 2}
+  - {fileID: 2100000, guid: bb77fe8b9ca47a84ebbe526048169fdc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
