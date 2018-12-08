@@ -41,9 +41,12 @@ public class GameStatus : MonoBehaviour {
     public GameObject Door2;
     public GameObject KeyText;
     private bool openedDoors = false;
+    [SerializeField] bool usingKeys = false;
 
     private void Update()
     {
+        if (!usingKeys)
+            return;
         if (Door1 == null)
         {
             Key1.SetActive(false);
