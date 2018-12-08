@@ -66,7 +66,6 @@ public class CameraFollow : MonoBehaviour {
                 {
                     float rotateDirection = (((PlayerModel.transform.eulerAngles.y - transform.eulerAngles.y) + 360f) % 360f) > 180.0f ? -1 : 1;
                     Vector3 cross = Vector3.Cross(transform.rotation * Vector3.forward, PlayerModel.transform.rotation * Vector3.forward); // ideally we want to get this to be 1
-                    print(((PlayerModel.transform.eulerAngles.y - transform.eulerAngles.y) + 360f) % 360f);
                     if (Mathf.Abs(cross.y) > .2f)
                     {
                         if (cross.y < Mathf.Epsilon)

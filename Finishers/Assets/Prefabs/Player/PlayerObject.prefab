@@ -11371,6 +11371,7 @@ MonoBehaviour:
   Door1: {fileID: 0}
   Door2: {fileID: 0}
   KeyText: {fileID: 1579891995011094}
+  usingKeys: 0
   Groups: []
   Pillars: []
   playerT: {fileID: 4902036229805724}
@@ -13218,7 +13219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 6
-  runSpeed: 11
+  runSpeed: 15
   rotationSpeed: 80
   limitDiagonalSpeed: 1
   toggleRun: 0

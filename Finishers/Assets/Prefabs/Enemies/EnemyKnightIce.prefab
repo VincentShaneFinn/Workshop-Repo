@@ -6845,11 +6845,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47d988bbe8ea9d4894b6f1b9965efc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyEnemyType: 1
+  MyEnemyType: 2
   EnemySkin: {fileID: 137056190300311692}
   DummySkin: {fileID: 0}
   FireEnemyMat: {fileID: 2100000, guid: 87acd2642855643448169776c29658a9, type: 2}
   IceEnemyMat: {fileID: 2100000, guid: bb77fe8b9ca47a84ebbe526048169fdc, type: 2}
+  NormalEnemyMat: {fileID: 0}
   isNewKnight: 1
   body: {fileID: 137750584890189790}
   belt: {fileID: 137708723391048696}
@@ -6930,6 +6931,7 @@ MonoBehaviour:
   RestancePercentage: 30
   lowRed: {fileID: 2100000, guid: fc6dda08578f73d4ebf6f24f7b381af6, type: 2}
   lowBlue: {fileID: 2100000, guid: 7760470b4b8edd74e8f60b5487092cc6, type: 2}
+  lowNormal: {fileID: 0}
 --- !u!136 &136459635676479886
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -8125,7 +8127,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 277978f1c32128441a55c5dc159ff960, type: 2}
+  - {fileID: 2100000, guid: e81c49fc1b79258498a84ace2ec35e2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8540,7 +8542,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 277978f1c32128441a55c5dc159ff960, type: 2}
+  - {fileID: 2100000, guid: e81c49fc1b79258498a84ace2ec35e2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

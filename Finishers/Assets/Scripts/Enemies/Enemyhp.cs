@@ -13,6 +13,7 @@ public class Enemyhp : MonoBehaviour {
     public int RestancePercentage = 30;
     public Material lowRed;
     public Material lowBlue;
+    public Material lowNormal;
 
 	// Use this for initialization
 	void Start () {
@@ -36,8 +37,10 @@ public class Enemyhp : MonoBehaviour {
             {
                 if (etc.MyEnemyType == EnemyType.FireEnemy)
                     etc.SetLowHealthSkin(lowRed);
-                else
+                else if (etc.MyEnemyType == EnemyType.IceEnemy)
                     etc.SetLowHealthSkin(lowBlue);
+                else
+                    etc.SetLowHealthSkin(lowNormal);
             }
             else
             {
@@ -57,13 +60,27 @@ public class Enemyhp : MonoBehaviour {
     }
 
     public void damage(float d, AttackType type) {
-        if(etc.MyEnemyType == EnemyType.FireEnemy && type == AttackType.Fire)
+        if(etc.MyEnemyType == EnemyType.FireEnemy)
         {
-            d = (int)(d * ( (100-RestancePercentage) / 100f));
+            if(type == AttackType.Fire)
+            {
+                d = (int)(d * ((100 - RestancePercentage) / 100f));
+            }
+            else if(type == AttackType.Frost)
+            {
+                d = (int)(d * ((100 + RestancePercentage) / 100f));
+            }
         }
-        else if(etc.MyEnemyType == EnemyType.IceEnemy && type == AttackType.Frost)
+        else if(etc.MyEnemyType == EnemyType.IceEnemy)
         {
-            d = (int)(d * ( (100-RestancePercentage) / 100f));
+            if (type == AttackType.Frost)
+            {
+                d = (int)(d * ((100 - RestancePercentage) / 100f));
+            }
+            else if (type == AttackType.Fire)
+            {
+                d = (int)(d * ((100 + RestancePercentage) / 100f));
+            }
         }
 
         //dont damage boss

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyType { FireEnemy, IceEnemy, Boss}
+public enum EnemyType {Normal, FireEnemy, IceEnemy, Boss}
 
 public class EnemyTypeController : MonoBehaviour {
 
@@ -11,6 +11,7 @@ public class EnemyTypeController : MonoBehaviour {
     public MeshRenderer DummySkin = null;
     public Material FireEnemyMat;
     public Material IceEnemyMat;
+    public Material NormalEnemyMat;
 
     public bool isNewKnight = false;
     public SkinnedMeshRenderer body;
@@ -51,9 +52,9 @@ public class EnemyTypeController : MonoBehaviour {
                     shoulders[1].material = IceEnemyMat;
                     break;
                 default:
-                    belt.material = FireEnemyMat;
-                    shoulders[0].material = FireEnemyMat;
-                    shoulders[1].material = FireEnemyMat;
+                    belt.material = NormalEnemyMat;
+                    shoulders[0].material = NormalEnemyMat;
+                    shoulders[1].material = NormalEnemyMat;
                     break;
             }
         }

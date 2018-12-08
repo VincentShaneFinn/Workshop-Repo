@@ -6854,6 +6854,7 @@ MonoBehaviour:
   RestancePercentage: 30
   lowRed: {fileID: 2100000, guid: fc6dda08578f73d4ebf6f24f7b381af6, type: 2}
   lowBlue: {fileID: 2100000, guid: 7760470b4b8edd74e8f60b5487092cc6, type: 2}
+  lowNormal: {fileID: 0}
 --- !u!114 &114674066103042954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6891,11 +6892,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47d988bbe8ea9d4894b6f1b9965efc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyEnemyType: 0
+  MyEnemyType: 1
   EnemySkin: {fileID: 137605631406471616}
   DummySkin: {fileID: 0}
   FireEnemyMat: {fileID: 2100000, guid: 87acd2642855643448169776c29658a9, type: 2}
   IceEnemyMat: {fileID: 2100000, guid: bb77fe8b9ca47a84ebbe526048169fdc, type: 2}
+  NormalEnemyMat: {fileID: 0}
   isNewKnight: 1
   body: {fileID: 137317176977517718}
   belt: {fileID: 137835930022938214}
