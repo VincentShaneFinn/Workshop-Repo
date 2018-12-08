@@ -35,9 +35,9 @@ public class Enemyhp : MonoBehaviour {
             if(gameObject.tag != "TargetDummy")
             {
                 if (etc.MyEnemyType == EnemyType.FireEnemy)
-                    etc.EnemySkin.material = lowRed;
+                    etc.SetLowHealthSkin(lowRed);
                 else
-                    etc.EnemySkin.material = lowBlue;
+                    etc.SetLowHealthSkin(lowBlue);
             }
             else
             {
