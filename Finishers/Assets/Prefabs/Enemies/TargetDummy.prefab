@@ -59,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1756024031493938}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4890080291311222}
@@ -284,12 +284,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currenthp: 0
   hp: 100
-  BloodTrail: {fileID: 1683688547672604, guid: bc56bd78c72f6fe4f96a569ce15715bb, type: 2}
+  BloodTrail: {fileID: 1527087040947626, guid: bc56bd78c72f6fe4f96a569ce15715bb, type: 2}
   IceTrail: {fileID: 1373956950994334, guid: 50311cbdcf0302e4aa26c0ce4cd5801a, type: 2}
   etc: {fileID: 114803209438866752}
   RestancePercentage: 30
   lowRed: {fileID: 2100000, guid: fc6dda08578f73d4ebf6f24f7b381af6, type: 2}
   lowBlue: {fileID: 2100000, guid: 7760470b4b8edd74e8f60b5487092cc6, type: 2}
+  lowNormal: {fileID: 0}
 --- !u!114 &114803209438866752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -306,6 +307,11 @@ MonoBehaviour:
   DummySkin: {fileID: 23940410177142228}
   FireEnemyMat: {fileID: 2100000, guid: 87acd2642855643448169776c29658a9, type: 2}
   IceEnemyMat: {fileID: 2100000, guid: bb77fe8b9ca47a84ebbe526048169fdc, type: 2}
+  NormalEnemyMat: {fileID: 0}
+  isNewKnight: 0
+  body: {fileID: 0}
+  belt: {fileID: 0}
+  shoulders: []
 --- !u!114 &114972789225052938
 MonoBehaviour:
   m_ObjectHideFlags: 1
