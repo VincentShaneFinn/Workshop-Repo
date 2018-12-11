@@ -99,6 +99,8 @@ public class ThrowLimb : MonoBehaviour {
                     CurrentlyKilledCount++;
                     FinMode.IncreaseFinisherMeter(PlayerDamageValues.Instance.SiphoningFinMeterFill);
                     if(col.gameObject.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.IceEnemy)
+                        DeadBodies[2].SetActive(true);
+                    else if (col.gameObject.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.FireEnemy)
                         DeadBodies[1].SetActive(true);
                     else
                         DeadBodies[0].SetActive(true);

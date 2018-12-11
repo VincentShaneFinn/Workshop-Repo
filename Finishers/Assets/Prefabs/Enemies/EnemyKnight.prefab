@@ -6848,7 +6848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currenthp: 0
   hp: 100
-  BloodTrail: {fileID: 1683688547672604, guid: bc56bd78c72f6fe4f96a569ce15715bb, type: 2}
+  BloodTrail: {fileID: 1012416048068320, guid: ef28a97d35cfa3748b5d117f2a99a9c1, type: 2}
   IceTrail: {fileID: 1373956950994334, guid: 50311cbdcf0302e4aa26c0ce4cd5801a, type: 2}
   etc: {fileID: 114750314954373188}
   RestancePercentage: 30

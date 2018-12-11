@@ -45,36 +45,22 @@ public class GameStatus : MonoBehaviour {
 
     private void Update()
     {
-        if (!usingKeys)
-            return;
+        Key1.SetActive(false);
+        Key2.SetActive(false);
+        Key3.SetActive(false);
+        KeyText.SetActive(false);
         if (Door1 == null)
         {
-            Key1.SetActive(false);
-            Key2.SetActive(false);
-            Key3.SetActive(false);
-            KeyText.SetActive(false);
             return;
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            GroupsDefeated = 9;
+            //Add more cheats
         }
-        if(GroupsDefeated >= 3)
+        if (!openedDoors && Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, Door1.transform.position) < 10)
         {
-            Key1.SetActive(true);
-        }
-        if(GroupsDefeated >= 6)
-        {
-            Key2.SetActive(true);
-        }
-        if(GroupsDefeated >= 9)
-        {
-            Key3.SetActive(true);
-            if (!openedDoors && Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, Door1.transform.position) < 20)
-            {
-                openedDoors = true;
-                StartCoroutine(OpenDoors());
-            }
+            openedDoors = true;
+            StartCoroutine(OpenDoors());
         }
     }
 

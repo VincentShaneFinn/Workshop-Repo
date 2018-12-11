@@ -155,7 +155,7 @@ public class FinisherMode : MonoBehaviour
                     {
                         if (currentTarget != null)
                         {
-                            finisherSlider.value = 50;
+                            finisherSlider.value = 25;
                             FinisherFullImage.SetActive(false);
                             StartCoroutine(EnterFinisherMode(usedSwordGrapple));
                         }
@@ -550,9 +550,11 @@ public class FinisherMode : MonoBehaviour
         if (PillarFinisherUsed)
         {
             PillarTutorial.PlayFinisherHit();
+            FinisherToPerform.SetAsPiller();
         }
         yield return new WaitForSecondsRealtime(1f);
         FinisherToPerform.startfinisher(this);
+        FinisherToPerform.RestoreAsPiller();
 
         yield return null; // do stuff to perform the finisher
 

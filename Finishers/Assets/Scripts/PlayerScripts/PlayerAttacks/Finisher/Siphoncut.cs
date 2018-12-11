@@ -21,10 +21,15 @@ public class Siphoncut : FinisherAbstract {
 	void Update () {
 		
 	}
+
     public override void startfinisher(FinisherMode f)
     {
-        GameObject part1 = Instantiate(TopHalf, new Vector3(f.currentTarget.transform.position.x, transform.position.y, f.currentTarget.transform.position.z), f.currentTarget.transform.rotation);
-        GameObject part2 = Instantiate(BottomHalf, new Vector3(f.currentTarget.transform.position.x, transform.position.y - 1f, f.currentTarget.transform.position.z), f.currentTarget.transform.rotation);
+        if (!isPillar)
+        {
+            GameObject part1 = Instantiate(TopHalf, new Vector3(f.currentTarget.transform.position.x, transform.position.y, f.currentTarget.transform.position.z), f.currentTarget.transform.rotation);
+            GameObject part2 = Instantiate(BottomHalf, new Vector3(f.currentTarget.transform.position.x, transform.position.y - 1f, f.currentTarget.transform.position.z), f.currentTarget.transform.rotation);
+        }
+
         shc.AddSword();
         GetComponent<PlayerHealthController>().PlayerHealed(20);
         f.CharAnim.Play("Attack 1");
