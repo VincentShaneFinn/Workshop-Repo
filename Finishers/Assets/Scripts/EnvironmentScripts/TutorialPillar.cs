@@ -9,10 +9,13 @@ public class TutorialPillar : MonoBehaviour {
     private bool inRange = false;
     public Finishers FinisherUnlock;
 
+    Animator animator;
+
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         fm = player.GetComponent<FinisherMode>();
+        animator = GetComponentInChildren<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -30,4 +33,24 @@ public class TutorialPillar : MonoBehaviour {
             fm.FinisherIcon.SetActivated(false);
         }
 	}
+
+    public void PlayFirstHit()
+    {
+        animator.Play("First_Hit");
+    }
+
+    public void PlaySecondHit()
+    {
+        animator.Play("Second_Hit");
+    }
+
+    public void PlayThirdHit()
+    {
+        animator.Play("Third_Hit");
+    }
+
+    public void PlayFinisherHit()
+    {
+        animator.Play("Finisher_Hit");
+    }
 }

@@ -263,7 +263,47 @@ public class FinisherMode : MonoBehaviour
     private ElementType CurrentFinisherElement;
 
     private void AddInput(Direction input)
-    {           
+    {
+        switch (InputList.Count)
+        {
+            case 0:
+                if (PillarFinisherUsed)
+                {
+                    if (PillarTutorial)
+                    {
+                        PillarTutorial.PlayFirstHit();
+                    }
+                }
+                break;
+            case 1:
+                if (PillarFinisherUsed)
+                {
+                    if (PillarTutorial)
+                    {
+                        PillarTutorial.PlaySecondHit();
+                    }
+                }
+                break;
+            case 2:
+                if (PillarFinisherUsed)
+                {
+                    if (PillarTutorial)
+                    {
+                        PillarTutorial.PlayThirdHit();
+                    }
+                }
+                break;
+            case 3:
+                if (PillarFinisherUsed)
+                {
+                    if (PillarTutorial)
+                    {
+                        PillarTutorial.PlayThirdHit();
+                    }
+                }
+                break;
+        }
+
         //might be good to have the state of the element to help with the color
         //so it should be LeftToRightAnim(runic)
         InputList.Add(input);
@@ -349,7 +389,7 @@ public class FinisherMode : MonoBehaviour
         if (Input.GetButtonDown("UpButton"))
         {
             UIanim.Play("RunicUpCarve");
-            CharAnim.Play("Carve 1");
+            CharAnim.Play("Up_Finisher");
             RunicQue.Add(Direction.up);
             psc.PlayRunicStab(Direction.up);
             AddInput(Direction.up);
@@ -357,6 +397,7 @@ public class FinisherMode : MonoBehaviour
         if (Input.GetButtonDown("RightButton"))
         {
             UIanim.Play("RunicRightCarve");
+            CharAnim.Play("Right_Finisher");
             RunicQue.Add(Direction.right);
             psc.PlayRunicStab(Direction.right);
             AddInput(Direction.right);
@@ -364,7 +405,7 @@ public class FinisherMode : MonoBehaviour
         if (Input.GetButtonDown("DownButton"))
         {
             UIanim.Play("RunicDownCarve");
-            CharAnim.Play("Carve 2");
+            CharAnim.Play("Down_Finisher");
             RunicQue.Add(Direction.down);
             psc.PlayRunicStab(Direction.down);
             AddInput(Direction.down);
@@ -372,6 +413,7 @@ public class FinisherMode : MonoBehaviour
         if (Input.GetButtonDown("LeftButton"))
         {
             UIanim.Play("RunicLeftCarve");
+            CharAnim.Play("Left_Finisher");
             RunicQue.Add(Direction.left);
             psc.PlayRunicStab(Direction.left);
             AddInput(Direction.left);
@@ -450,12 +492,12 @@ public class FinisherMode : MonoBehaviour
             SwordThrowAnimObj.transform.localPosition = savedSwordPos;
             SwordThrowAnimObj.transform.localRotation = savedSwordRot;
             SwordThrowAnimObj.SetActive(false);
-            CharAnim.Play("FinisherStart");
+            CharAnim.Play("Finisher_Start");
             yield return null;
         }
         else
         {
-            CharAnim.Play("FinisherStart");
+            CharAnim.Play("Finisher_Start");
             yield return null;
         }
 
@@ -504,7 +546,11 @@ public class FinisherMode : MonoBehaviour
         InFinisherIcons.SetActive(false);
 
         finisherSlider.value = 0;
-        CharAnim.Play("FinisherExecution");
+        CharAnim.Play("Finisher_End");
+        if (PillarFinisherUsed)
+        {
+            PillarTutorial.PlayFinisherHit();
+        }
         yield return new WaitForSecondsRealtime(1f);
         FinisherToPerform.startfinisher(this);
 
@@ -556,7 +602,7 @@ public class FinisherMode : MonoBehaviour
         UIanim.Play("idle");
         if (didFail)
         {
-            CharAnim.Play("FinisherExecution");
+            CharAnim.Play("Finisher_End");
             yield return new WaitForSecondsRealtime(1f);
             CharAnim.Play("Idle");
         }
