@@ -55,7 +55,37 @@ public class GameStatus : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            //Add more cheats
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<Siphoncut>().enabled = true;
+            player.GetComponent<RunicFlamethrower>().enabled = true;
+            player.GetComponent<RunicFireCircle>().enabled = true;
+            player.GetComponent<RunicFireSword>().enabled = true;
+            player.GetComponent<RunicFrostCircle>().enabled = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = Pillars[0].transform.position + Pillars[0].transform.forward;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = Pillars[1].transform.position + Pillars[1].transform.forward;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = Pillars[2].transform.position + Pillars[2].transform.forward;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = Pillars[3].transform.position + Pillars[3].transform.forward;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = Pillars[4].transform.position + Pillars[4].transform.forward;
         }
         if (!openedDoors && Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, Door1.transform.position) < 10)
         {

@@ -16,7 +16,7 @@ public class TempEnemySpawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (GameStatus.InCombat)
+        if (director.GetCombatStarted())
         {
             if (myEnemy == null && !called)
             {

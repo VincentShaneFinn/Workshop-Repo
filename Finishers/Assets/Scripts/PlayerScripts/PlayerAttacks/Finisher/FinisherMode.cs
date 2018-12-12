@@ -666,7 +666,7 @@ public class FinisherMode : MonoBehaviour
     public ChangeButtonIcon FinisherIcon;
     public GameObject InFinisherIcons;
     public SiphonHolsterController shc;
-    public float GrappleFinishRange = 30;
+    private float GrappleFinishRange = 15;
     private bool usedSwordGrapple = false;
 
     public GameObject GetClosestEnemy()
@@ -716,7 +716,7 @@ public class FinisherMode : MonoBehaviour
             GameObject[] TargetDummies = GameObject.FindGameObjectsWithTag("TargetDummy");
             foreach (GameObject dummy in TargetDummies)
             {
-                if (Vector3.Distance(dummy.transform.position, transform.position) < range)
+                if (Vector3.Distance(dummy.transform.position, transform.position) < 4)
                 {
                     //check if the player is in front of you
                     var heading = dummy.transform.position - CameraBase.position;
@@ -735,7 +735,7 @@ public class FinisherMode : MonoBehaviour
                         }
                     }
                 }
-                if (Vector3.Distance(dummy.transform.position, transform.position) < 5)
+                if (Vector3.Distance(dummy.transform.position, transform.position) < 4)
                     testTarget = dummy;
             }
         }
@@ -747,6 +747,8 @@ public class FinisherMode : MonoBehaviour
             {
                 FinisherIcon.transform.position = thisCurrentDotTarget.transform.position;
                 usedSwordGrapple = true;
+                if (thisCurrentDotTarget.tag == "TargetDummy")
+                    usedSwordGrapple = false;
                 return thisCurrentDotTarget;
             }
             FinisherIcon.transform.position = thisCurrentTarget.transform.position;
