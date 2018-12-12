@@ -240,6 +240,7 @@ public class GameStatus : MonoBehaviour {
             GroupsDefeated = save.DeadGroups.Count;
 
             playerT.position =new Vector3(save.playerX, save.playerY, save.playerZ);
+            playerT.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
             Debug.Log("Game Loaded");
 

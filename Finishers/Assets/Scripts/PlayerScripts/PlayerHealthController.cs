@@ -36,11 +36,16 @@ public class PlayerHealthController : MonoBehaviour
 
         if (MaxHealth <= 0 && canDie == true)
         {
-            gameOverText.text = "Game Over";
-            gm.PlayerDied();
+            PlayerKilled();
             //gm.LoadGame();
-          
+
         }
+    }
+
+    public void PlayerKilled()
+    {
+        gameOverText.text = "Game Over";
+        gm.PlayerDied();
     }
 
     public void PlayerHealed(float health)

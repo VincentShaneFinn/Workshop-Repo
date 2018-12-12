@@ -6997,6 +6997,36 @@ Prefab:
       propertyPath: m_Size.y
       value: 1.7584343
       objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxPrimaryAttackers
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: ReturnNormalAttackDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxAttackActions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxNormalAttacks
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxSpecial1Attacks
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxProjectileAttacks
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5, type: 2}
   m_IsPrefabAsset: 0
@@ -7121,6 +7151,36 @@ Prefab:
       propertyPath: Exits.Array.data[5]
       value: 
       objectReference: {fileID: 1067519749}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxPrimaryAttackers
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxAttackActions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxNormalAttacks
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxSpecial1Attacks
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxProjectileAttacks
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: ReturnProjectileAttackDelay
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5, type: 2}
   m_IsPrefabAsset: 0
@@ -24919,6 +24979,16 @@ Prefab:
       propertyPath: bossHomiesObj
       value: 
       objectReference: {fileID: 1855830821}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxAttackActions
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184323029324734, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5,
+        type: 2}
+      propertyPath: MaxPrimaryAttackers
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5, type: 2}
   m_IsPrefabAsset: 0

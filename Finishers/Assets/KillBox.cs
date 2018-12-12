@@ -8,7 +8,7 @@ public class KillBox : MonoBehaviour {
     {
         if(col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<PlayerHealthController>().PlayerHit(500);
+            col.gameObject.GetComponent<PlayerHealthController>().PlayerKilled();
         }
     }
 }
