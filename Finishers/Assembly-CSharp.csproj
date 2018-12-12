@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ActivateFinalCutscene.cs" />
      <Compile Include="Assets\Animation\Ragdoll\Launch_ragdoll.cs" />
      <Compile Include="Assets\KillBox.cs" />
      <Compile Include="Assets\Scenes\Week10-11\MEME\sceneload.cs" />
