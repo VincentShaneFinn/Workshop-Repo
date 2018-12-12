@@ -25,6 +25,9 @@ public class CameraFollow : MonoBehaviour {
     private float rotX = 0.0f;
     Quaternion localRotationJustY;
 
+    [SerializeField] float autoScrollTime = 2f;
+    [SerializeField] float autoScrollCount = 0;
+
 
 
     // Use this for initialization
@@ -57,6 +60,17 @@ public class CameraFollow : MonoBehaviour {
 
             Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
             localRotationJustY = Quaternion.Euler(0f, rotY, 0.0f);
+            if(Mathf.Abs(mouseX) <= Mathf.Epsilon && Mathf.Abs(mouseY) <= Mathf.Epsilon)
+            {
+                //Vector3 playerEulers = PlayerModel.transform.eulerAngles;
+                localRotation = AutoCamRot(localRotation);
+            }
+            else
+            {
+                autoScrollCount = 0;
+            }
+            autoScrollCount += Time.deltaTime;
+
             transform.rotation = localRotation;
             forwardContainer.transform.rotation = localRotationJustY;
         }
@@ -64,6 +78,35 @@ public class CameraFollow : MonoBehaviour {
         {
             CameraUpdater();
         }
+    }
+
+    private Quaternion AutoCamRot(Quaternion localRotation)
+    {
+        if (autoScrollCount > autoScrollTime)
+        {
+            float rotateDirection = (((PlayerModel.transform.eulerAngles.y - transform.eulerAngles.y) + 360f) % 360f) > 180.0f ? -1 : 1;
+            Vector3 cross = Vector3.Cross(transform.rotation * Vector3.forward, PlayerModel.transform.rotation * Vector3.forward); // ideally we want to get this to be 1
+            if (Mathf.Abs(cross.y) > .2f)
+            {
+                if (cross.y < Mathf.Epsilon)
+                {
+                    //rotX += 1;
+                    rotY -= Mathf.Abs(cross.y * 100f * Time.deltaTime);
+                }
+                else
+                {
+                    rotY += Mathf.Abs(cross.y * 100f * Time.deltaTime);
+                }
+            }
+            else if (((PlayerModel.transform.eulerAngles.y - transform.eulerAngles.y) + 360f) % 360f > 160 && ((PlayerModel.transform.eulerAngles.y - transform.eulerAngles.y) + 360f) % 360f < 200)
+            {
+                rotY += 1f;
+            }
+            localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
+            localRotationJustY = Quaternion.Euler(0f, rotY, 0.0f);
+        }
+
+        return localRotation;
     }
 
     void CameraUpdater()

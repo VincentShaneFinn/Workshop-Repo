@@ -41,7 +41,7 @@ public class RunicFireSword : FinisherAbstract {
             {
                 FlameSword.SetActive(true);
                 sword.SetFireSkin();
-                sword.SetSwordDamage(PlayerDamageValues.Instance.GodModeDamage);
+                sword.SetSwordDamage(PlayerDamageValues.Instance.ElementalSwordDamage);
             }
             else
             {

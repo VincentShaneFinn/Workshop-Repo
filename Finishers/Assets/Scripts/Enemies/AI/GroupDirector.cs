@@ -35,6 +35,7 @@ public class GroupDirector : MonoBehaviour {
     public float SendOrderTime = 1;
     private float SendOrderCounter = 0;
     private bool CombatStarted = false;
+    public bool GetCombatStarted() { return CombatStarted; }
     public void Start()
     {
         Enemies = new List<EnemyAI>(GetComponentsInChildren<EnemyAI>());

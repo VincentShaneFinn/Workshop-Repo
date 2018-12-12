@@ -7,6 +7,7 @@ public class PlayerSwordHit : MonoBehaviour {
     public FinisherMode finisherObject;
     public float swordDamage = 1;
     private float currentSwordDamage;
+    public bool isHeavy = false;
     public SkinnedMeshRenderer swordEdge;
     public Material[] OriginalSwordMaterials;
     public Material[] FireMats;
@@ -56,7 +57,15 @@ public class PlayerSwordHit : MonoBehaviour {
             Enemyhp e = null;
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {
-                e.damage(currentSwordDamage, CurrentAttackType);
+                if (isHeavy)
+                {
+                    e.damage(currentSwordDamage * 1.5f, AttackType.HeavyBlade);
+                }
+                else
+                {
+                    e.damage(currentSwordDamage, CurrentAttackType);
+                }
+
                 Debug.Log(gameObject);
             }
         }
@@ -66,7 +75,14 @@ public class PlayerSwordHit : MonoBehaviour {
             Enemyhp e = null;
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {
-                e.damage(currentSwordDamage, CurrentAttackType);
+                if (isHeavy)
+                {
+                    e.damage(currentSwordDamage * 2f, AttackType.HeavyBlade);
+                }
+                else
+                {
+                    e.damage(currentSwordDamage, CurrentAttackType);
+                }
             }
         }
 

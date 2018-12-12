@@ -235,12 +235,45 @@ public class KnightEnemyActions : MonoBehaviour {
 
     public IEnumerator ThrowProjectile()
     {
+        AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
+        AI.ChangeAction(EnemyActions.NormalAttack);
+
+        bool interupped = false;
+        Quaternion savedRot = AI.anim.transform.localRotation;
+        AI.anim.transform.localRotation = Quaternion.Euler(new Vector3(0, 30, 0));
+        AI.anim.Play("Fire throw");
+
+        float tempAnimationTime = 2f;
+        float tempAnimationCount = 0;
+
+        //we need to end prematurely if the enemy is staggered
+        while (tempAnimationCount < tempAnimationTime)
+        {
+            yield return null;
+            tempAnimationCount += Time.deltaTime;
+            if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
+            {
+                interupped = true;
+                break;
+            }
+            if (tempAnimationCount < .3f)
+                AI.transform.LookAt(playerT);
+        }
+
         if (etc.MyEnemyType == EnemyType.FireEnemy)
             Instantiate(FireBall, transform.position, transform.rotation);
         else
             Instantiate(IceBall, transform.position, transform.rotation);
+
+        AI.anim.transform.localRotation = savedRot;
+
+        if (!interupped)
+        {
+            AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+            AI.anim.Play("Idle");
+        }
+        AI.ChangeAction(EnemyActions.None);
         AI.GetDirector().ProjectileAttackCompleted();
-        yield return new WaitForSeconds(.5f);
         AI.CanThrow = true;
     }
 

@@ -104,6 +104,10 @@ public class FinisherMode : MonoBehaviour
     {
         TutorialPopups.Instance.HideTutorialPopup();
     }
+    void SaveGame()
+    {
+        gameStatus.SaveGame();
+    }
 
     // Update is called once per frame
     void Update()
@@ -151,7 +155,7 @@ public class FinisherMode : MonoBehaviour
                     {
                         if (currentTarget != null)
                         {
-                            finisherSlider.value = 50;
+                            finisherSlider.value = 25;
                             FinisherFullImage.SetActive(false);
                             StartCoroutine(EnterFinisherMode(usedSwordGrapple));
                         }
@@ -207,7 +211,16 @@ public class FinisherMode : MonoBehaviour
                     if (goodSoFar)
                     {
                         if (RCombo.check(RunicQue))
+                        {
                             PrimaryAttackPopUp.SetActive(true);
+                            if (PillarFinisherUsed)
+                            {
+                                if (PillarTutorial)
+                                {
+                                    PillarTutorial.PlayFinalHit();
+                                }
+                            }
+                        }
                         break;
                     }
                 }
@@ -259,7 +272,47 @@ public class FinisherMode : MonoBehaviour
     private ElementType CurrentFinisherElement;
 
     private void AddInput(Direction input)
-    {           
+    {
+        switch (InputList.Count)
+        {
+            case 0:
+                if (PillarFinisherUsed)
+                {
+                    if (PillarTutorial)
+                    {
+                        PillarTutorial.PlayFirstHit();
+                    }
+                }
+                break;
+            case 1:
+                if (PillarFinisherUsed)
+                {
+                    if (PillarTutorial)
+                    {
+                        PillarTutorial.PlaySecondHit();
+                    }
+                }
+                break;
+            case 2:
+                if (PillarFinisherUsed)
+                {
+                    if (PillarTutorial)
+                    {
+                        PillarTutorial.PlayThirdHit();
+                    }
+                }
+                break;
+            case 3:
+                if (PillarFinisherUsed)
+                {
+                    if (PillarTutorial)
+                    {
+                        PillarTutorial.PlayThirdHit();
+                    }
+                }
+                break;
+        }
+
         //might be good to have the state of the element to help with the color
         //so it should be LeftToRightAnim(runic)
         InputList.Add(input);
@@ -340,12 +393,18 @@ public class FinisherMode : MonoBehaviour
         }
     }
 
+    [SerializeField] RuntimeAnimatorController enemyAnimatorController;
+    RuntimeAnimatorController savedAnimController;
+    Animator enemyAnimator;
+
     private void ProcessPlayerInput()
     {
         if (Input.GetButtonDown("UpButton"))
         {
             UIanim.Play("RunicUpCarve");
-            CharAnim.Play("Carve 1");
+            CharAnim.Play("Up_Finisher");
+            if(enemyAnimator)
+                enemyAnimator.Play("Up_Finisher");
             RunicQue.Add(Direction.up);
             psc.PlayRunicStab(Direction.up);
             AddInput(Direction.up);
@@ -353,6 +412,9 @@ public class FinisherMode : MonoBehaviour
         if (Input.GetButtonDown("RightButton"))
         {
             UIanim.Play("RunicRightCarve");
+            CharAnim.Play("Right_Finisher");
+            if (enemyAnimator)
+                enemyAnimator.Play("Right_Finisher");
             RunicQue.Add(Direction.right);
             psc.PlayRunicStab(Direction.right);
             AddInput(Direction.right);
@@ -360,7 +422,9 @@ public class FinisherMode : MonoBehaviour
         if (Input.GetButtonDown("DownButton"))
         {
             UIanim.Play("RunicDownCarve");
-            CharAnim.Play("Carve 2");
+            CharAnim.Play("Down_Finisher");
+            if (enemyAnimator)
+                enemyAnimator.Play("Down_Finisher");
             RunicQue.Add(Direction.down);
             psc.PlayRunicStab(Direction.down);
             AddInput(Direction.down);
@@ -368,6 +432,9 @@ public class FinisherMode : MonoBehaviour
         if (Input.GetButtonDown("LeftButton"))
         {
             UIanim.Play("RunicLeftCarve");
+            CharAnim.Play("Left_Finisher");
+            if (enemyAnimator)
+                enemyAnimator.Play("Left_Finisher");
             RunicQue.Add(Direction.left);
             psc.PlayRunicStab(Direction.left);
             AddInput(Direction.left);
@@ -404,6 +471,18 @@ public class FinisherMode : MonoBehaviour
             {
                 currentTarget.GetComponent<EnemyMovementController>().StopMovement();
                 currentTarget.GetComponent<EnemyAI>().BeingFinished();
+
+                if (currentTarget.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.Boss)
+                {
+                    savedAnimController = currentTarget.GetComponent<EnemyAI>().anim.runtimeAnimatorController;
+                }
+
+                if (enemyAnimator = currentTarget.GetComponent<EnemyAI>().anim)
+                {
+                    enemyAnimator.runtimeAnimatorController = enemyAnimatorController;
+                    enemyAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+                    enemyAnimator.Play("Finisher_Start");
+                }
                 yield return null;
             }
         }
@@ -446,12 +525,12 @@ public class FinisherMode : MonoBehaviour
             SwordThrowAnimObj.transform.localPosition = savedSwordPos;
             SwordThrowAnimObj.transform.localRotation = savedSwordRot;
             SwordThrowAnimObj.SetActive(false);
-            CharAnim.Play("FinisherStart");
+            CharAnim.Play("Finisher_Start");
             yield return null;
         }
         else
         {
-            CharAnim.Play("FinisherStart");
+            CharAnim.Play("Finisher_Start");
             yield return null;
         }
 
@@ -481,7 +560,8 @@ public class FinisherMode : MonoBehaviour
 
         FinisherIcon.SetActivated(false);
         InFinisherIcons.SetActive(true);
-        RunicRinisherGuides.SetActive(true);
+        if(!PillarFinisherUsed)
+            RunicRinisherGuides.SetActive(true);
 
         //RunicSequence.RestartQue();
         RunicQue.Clear();
@@ -499,9 +579,20 @@ public class FinisherMode : MonoBehaviour
         InFinisherIcons.SetActive(false);
 
         finisherSlider.value = 0;
-        CharAnim.Play("FinisherExecution");
+        CharAnim.Play("Finisher_End");
+        if (PillarFinisherUsed)
+        {
+            PillarTutorial.PlayFinisherHit();
+            FinisherToPerform.SetAsPiller();
+        }
+        else
+        {
+            if (enemyAnimator)
+                enemyAnimator.Play("Finisher_Start");
+        }
         yield return new WaitForSecondsRealtime(1f);
         FinisherToPerform.startfinisher(this);
+        FinisherToPerform.RestoreAsPiller();
 
         yield return null; // do stuff to perform the finisher
 
@@ -544,12 +635,14 @@ public class FinisherMode : MonoBehaviour
         StartCoroutine(LeavingFinisherMode());
     }
 
+    [SerializeField] GameStatus gameStatus;
+    [SerializeField] GameObject checkpoint;
     IEnumerator LeavingFinisherMode(FinisherAbstract finisherAbstractUsed = null)
     {
         UIanim.Play("idle");
         if (didFail)
         {
-            CharAnim.Play("FinisherExecution");
+            CharAnim.Play("Finisher_End");
             yield return new WaitForSecondsRealtime(1f);
             CharAnim.Play("Idle");
         }
@@ -562,7 +655,14 @@ public class FinisherMode : MonoBehaviour
                 if (finisherAbstractUsed != null && (finisherAbstractUsed is Siphoncut)) //electricity is used for siphoning for now
                     currentTarget.GetComponent<EnemyAI>().KillEnemy(true);
                 else
+                {
                     currentTarget.GetComponent<EnemyAI>().KillEnemy();
+                    enemyAnimator.Play("Death");
+                    if(currentTarget.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.Boss)
+                    {
+                        currentTarget.GetComponent<EnemyAI>().anim.runtimeAnimatorController = savedAnimController;
+                    }
+                }
             else
                 Destroy(currentTarget);
 
@@ -579,6 +679,9 @@ public class FinisherMode : MonoBehaviour
         else if (!didFail) //TutorialPopupStuff
         {
             Invoke("HidePopup", 4f);
+            gameStatus.CheckpointP = currentTarget.transform.position + currentTarget.transform.forward * 2;
+            Invoke("SaveGame", 2f);
+            IncreaseFinisherMeter(100);
             Destroy(currentTarget);
         }
         else
@@ -608,7 +711,7 @@ public class FinisherMode : MonoBehaviour
     public ChangeButtonIcon FinisherIcon;
     public GameObject InFinisherIcons;
     public SiphonHolsterController shc;
-    public float GrappleFinishRange = 30;
+    private float GrappleFinishRange = 15;
     private bool usedSwordGrapple = false;
 
     public GameObject GetClosestEnemy()
@@ -624,6 +727,7 @@ public class FinisherMode : MonoBehaviour
         GameObject thisCurrentTarget = null;
         float lowestDistance = Mathf.Infinity;
         GameObject thisCurrentDotTarget = null;
+        GameObject testTarget = null;
         float lowestDotDistance = Mathf.Infinity;
         foreach (GameObject Enemy in Enemies)
         {
@@ -648,6 +752,8 @@ public class FinisherMode : MonoBehaviour
                         lowestDotDistance = dot;
                     }
                 }
+                if(Vector3.Distance(Enemy.transform.position, transform.position) < 5)
+                    testTarget = Enemy;
             }
         }
         if (!GameStatus.InCombat)
@@ -655,7 +761,7 @@ public class FinisherMode : MonoBehaviour
             GameObject[] TargetDummies = GameObject.FindGameObjectsWithTag("TargetDummy");
             foreach (GameObject dummy in TargetDummies)
             {
-                if (Vector3.Distance(dummy.transform.position, transform.position) < range)
+                if (Vector3.Distance(dummy.transform.position, transform.position) < 4)
                 {
                     //check if the player is in front of you
                     var heading = dummy.transform.position - CameraBase.position;
@@ -674,20 +780,29 @@ public class FinisherMode : MonoBehaviour
                         }
                     }
                 }
+                if (Vector3.Distance(dummy.transform.position, transform.position) < 4)
+                    testTarget = dummy;
             }
         }
 
         if (thisCurrentTarget != null)
         {
             FinisherIcon.SetActivated(true);
-            if (Vector3.Distance(thisCurrentDotTarget.transform.position,this.transform.position) > 5)
+            if (thisCurrentDotTarget != null && Vector3.Distance(thisCurrentDotTarget.transform.position,this.transform.position) > 5)
             {
                 FinisherIcon.transform.position = thisCurrentDotTarget.transform.position;
                 usedSwordGrapple = true;
+                if (thisCurrentDotTarget.tag == "TargetDummy")
+                    usedSwordGrapple = false;
                 return thisCurrentDotTarget;
             }
             FinisherIcon.transform.position = thisCurrentTarget.transform.position;
             return thisCurrentTarget;
+        }
+        else if (testTarget != null)
+        {
+            FinisherIcon.transform.position = testTarget.transform.position;
+            return testTarget;
         }
         
         FinisherIcon.SetActivated(false);

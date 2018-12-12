@@ -23,7 +23,7 @@ public class PlayerDamageValues : MonoBehaviour
     public float FrostTimeToMelt;
 
     //GodMode
-    public float GodModeDamage;
+    public float ElementalSwordDamage;
 
     //finisher bar fill values
     public float NormalAttackFinMeterFill;

@@ -41,37 +41,56 @@ public class GameStatus : MonoBehaviour {
     public GameObject Door2;
     public GameObject KeyText;
     private bool openedDoors = false;
+    [SerializeField] bool usingKeys = false;
 
     private void Update()
     {
+        Key1.SetActive(false);
+        Key2.SetActive(false);
+        Key3.SetActive(false);
+        KeyText.SetActive(false);
         if (Door1 == null)
         {
-            Key1.SetActive(false);
-            Key2.SetActive(false);
-            Key3.SetActive(false);
-            KeyText.SetActive(false);
             return;
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            GroupsDefeated = 8;
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<Siphoncut>().enabled = true;
+            player.GetComponent<RunicFlamethrower>().enabled = true;
+            player.GetComponent<RunicFireCircle>().enabled = true;
+            player.GetComponent<RunicFireSword>().enabled = true;
+            player.GetComponent<RunicFrostCircle>().enabled = true;
         }
-        if(GroupsDefeated >= 3)
+        if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            Key1.SetActive(true);
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = Pillars[0].transform.position + Pillars[0].transform.forward;
         }
-        if(GroupsDefeated >= 6)
+        if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            Key2.SetActive(true);
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = Pillars[1].transform.position + Pillars[1].transform.forward;
         }
-        if(GroupsDefeated >= 9)
+        if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            Key3.SetActive(true);
-            if (!openedDoors && Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, Door1.transform.position) < 20)
-            {
-                openedDoors = true;
-                StartCoroutine(OpenDoors());
-            }
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = Pillars[2].transform.position + Pillars[2].transform.forward;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = Pillars[3].transform.position + Pillars[3].transform.forward;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = Pillars[4].transform.position + Pillars[4].transform.forward;
+        }
+        if (!openedDoors && Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, Door1.transform.position) < 10)
+        {
+            openedDoors = true;
+            StartCoroutine(OpenDoors());
         }
     }
 
@@ -221,6 +240,7 @@ public class GameStatus : MonoBehaviour {
             GroupsDefeated = save.DeadGroups.Count;
 
             playerT.position =new Vector3(save.playerX, save.playerY, save.playerZ);
+            playerT.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
             Debug.Log("Game Loaded");
 

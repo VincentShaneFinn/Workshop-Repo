@@ -15,6 +15,8 @@ public class FinisherMeterPickup : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
+        if (col.gameObject.tag != "Player")
+            return;
         fm.IncreaseFinisherMeter(FinisherMeterFill);
         Destroy(gameObject);
     }

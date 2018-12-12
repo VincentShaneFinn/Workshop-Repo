@@ -8,7 +8,10 @@ public class Checkpoint : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        gm.CheckpointP = transform.position;
-        gm.SaveGame();
+        if (col.gameObject.tag == "Player")
+        {
+            gm.CheckpointP = transform.position;
+            gm.SaveGame();
+        }
     }
 }

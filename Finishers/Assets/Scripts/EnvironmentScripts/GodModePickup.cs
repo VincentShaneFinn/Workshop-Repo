@@ -15,6 +15,8 @@ public class GodModePickup : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
+        if (col.gameObject.tag != "Player")
+            return;
         fm.IncreaseGodModeMeter(GodMeterFill);
         Destroy(gameObject);
     }

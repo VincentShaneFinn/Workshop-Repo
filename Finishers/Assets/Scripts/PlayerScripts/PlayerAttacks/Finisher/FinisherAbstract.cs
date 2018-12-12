@@ -41,6 +41,17 @@ public abstract class FinisherAbstract : MonoBehaviour {
         return goodCombo;
     }
 
+    //terrible bug fix
+    protected bool isPillar = false;
+    public void SetAsPiller()
+    {
+        isPillar = true;
+    }
+    public void RestoreAsPiller()
+    {
+        isPillar = false;
+    }
+
     public bool startfinisher(FinisherMode fm,List<Direction> input) {
         bool goodCombo = check(input);
         if (goodCombo) {

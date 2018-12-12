@@ -51,19 +51,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8965703f7d1b19643a83fa5665284fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LightAttackDamage: 5
-  FlamethrowerWaveDamage: 10
-  FlameAOEDamage: 50
+  LightAttackDamage: 10
+  FlamethrowerWaveDamage: 20
+  FlameAOEDamage: 60
   FrostAOEFreezeCount: 3
   FrostAOEDamage: 20
   FrostAOEExplodeDamge: 30
   FrostTimeToMelt: 8
-  GodModeDamage: 15
-  NormalAttackFinMeterFill: 7.5
-  ElementalSwordAttackFinMeterFill: 12
-  SiphoningFinMeterFill: 10
-  FlameThrowFinMeterFill: 2.5
-  FlameAOEFinMeterFill: 5
+  ElementalSwordDamage: 20
+  NormalAttackFinMeterFill: 9
+  ElementalSwordAttackFinMeterFill: 13
+  SiphoningFinMeterFill: 15
+  FlameThrowFinMeterFill: 4
+  FlameAOEFinMeterFill: 7.5
   ExecuteFinisherGMFill: 34
   SiphoningGainHealth: 25
   NormalAttackDamage: 10

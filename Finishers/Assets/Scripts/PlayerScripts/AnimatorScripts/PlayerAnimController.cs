@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerActions {idle,slashL,slashR,jump,dodge,finish }
+public enum PlayerActions {idle,slashL,slashR, heavySlash, jump,dodge,finish }
 public class PlayerAnimController : MonoBehaviour {
     public PlayerMovementController pmc=null;
 
@@ -95,6 +95,13 @@ public class PlayerAnimController : MonoBehaviour {
             }
 
         }
+        else if (Input.GetButtonDown("SecondaryAttack"))
+        {
+            if (!pmc.isDashing())
+            {
+                next = PlayerActions.heavySlash;
+            }
+        }
         //When we get heavy attack, more work to be done
         //if (Input.GetButtonDown("SecondaryAttack"))
         //{
@@ -146,6 +153,14 @@ public class PlayerAnimController : MonoBehaviour {
                     pmc.PreventMoving();
                     pmc.PreventTuring();
                     StartCoroutine(pmc.StepForward(attack2Time));
+                    LastPrimaryAttackWasSlashL = false;
+                    attack2Count = attack2Time;
+                    break;
+                case PlayerActions.heavySlash:
+                    CharAnim.Play("HeavyAttack");
+                    pmc.PreventMoving();
+                    pmc.PreventTuring();
+                    StartCoroutine(pmc.StepForward(0.866f));
                     LastPrimaryAttackWasSlashL = false;
                     attack2Count = attack2Time;
                     break;

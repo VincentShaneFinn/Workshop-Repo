@@ -15,6 +15,8 @@ public class HealthPickupController : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
+        if (col.gameObject.tag != "Player")
+            return;
         phc.PlayerHealed(HealthMeterFill);
         Destroy(gameObject);
     }
