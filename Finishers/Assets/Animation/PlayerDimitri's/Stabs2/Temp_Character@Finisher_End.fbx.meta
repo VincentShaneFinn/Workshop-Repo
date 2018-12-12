@@ -166,7 +166,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Finisher_End
       takeName: Take 001
-      firstFrame: 114
+      firstFrame: 112
       lastFrame: 137
       wrapMode: 0
       orientationOffsetY: 0

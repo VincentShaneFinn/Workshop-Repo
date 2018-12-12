@@ -166,7 +166,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Down_Finisher
       takeName: Take 001
-      firstFrame: 90
+      firstFrame: 92
       lastFrame: 106
       wrapMode: 0
       orientationOffsetY: 0

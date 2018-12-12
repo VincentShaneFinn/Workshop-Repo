@@ -211,7 +211,16 @@ public class FinisherMode : MonoBehaviour
                     if (goodSoFar)
                     {
                         if (RCombo.check(RunicQue))
+                        {
                             PrimaryAttackPopUp.SetActive(true);
+                            if (PillarFinisherUsed)
+                            {
+                                if (PillarTutorial)
+                                {
+                                    PillarTutorial.PlayFinalHit();
+                                }
+                            }
+                        }
                         break;
                     }
                 }
@@ -384,12 +393,18 @@ public class FinisherMode : MonoBehaviour
         }
     }
 
+    [SerializeField] RuntimeAnimatorController enemyAnimatorController;
+    RuntimeAnimatorController savedAnimController;
+    Animator enemyAnimator;
+
     private void ProcessPlayerInput()
     {
         if (Input.GetButtonDown("UpButton"))
         {
             UIanim.Play("RunicUpCarve");
             CharAnim.Play("Up_Finisher");
+            if(enemyAnimator)
+                enemyAnimator.Play("Up_Finisher");
             RunicQue.Add(Direction.up);
             psc.PlayRunicStab(Direction.up);
             AddInput(Direction.up);
@@ -398,6 +413,8 @@ public class FinisherMode : MonoBehaviour
         {
             UIanim.Play("RunicRightCarve");
             CharAnim.Play("Right_Finisher");
+            if (enemyAnimator)
+                enemyAnimator.Play("Right_Finisher");
             RunicQue.Add(Direction.right);
             psc.PlayRunicStab(Direction.right);
             AddInput(Direction.right);
@@ -406,6 +423,8 @@ public class FinisherMode : MonoBehaviour
         {
             UIanim.Play("RunicDownCarve");
             CharAnim.Play("Down_Finisher");
+            if (enemyAnimator)
+                enemyAnimator.Play("Down_Finisher");
             RunicQue.Add(Direction.down);
             psc.PlayRunicStab(Direction.down);
             AddInput(Direction.down);
@@ -414,6 +433,8 @@ public class FinisherMode : MonoBehaviour
         {
             UIanim.Play("RunicLeftCarve");
             CharAnim.Play("Left_Finisher");
+            if (enemyAnimator)
+                enemyAnimator.Play("Left_Finisher");
             RunicQue.Add(Direction.left);
             psc.PlayRunicStab(Direction.left);
             AddInput(Direction.left);
@@ -450,6 +471,18 @@ public class FinisherMode : MonoBehaviour
             {
                 currentTarget.GetComponent<EnemyMovementController>().StopMovement();
                 currentTarget.GetComponent<EnemyAI>().BeingFinished();
+
+                if (currentTarget.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.Boss)
+                {
+                    savedAnimController = currentTarget.GetComponent<EnemyAI>().anim.runtimeAnimatorController;
+                }
+
+                if (enemyAnimator = currentTarget.GetComponent<EnemyAI>().anim)
+                {
+                    enemyAnimator.runtimeAnimatorController = enemyAnimatorController;
+                    enemyAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+                    enemyAnimator.Play("Finisher_Start");
+                }
                 yield return null;
             }
         }
@@ -552,6 +585,11 @@ public class FinisherMode : MonoBehaviour
             PillarTutorial.PlayFinisherHit();
             FinisherToPerform.SetAsPiller();
         }
+        else
+        {
+            if (enemyAnimator)
+                enemyAnimator.Play("Finisher_Start");
+        }
         yield return new WaitForSecondsRealtime(1f);
         FinisherToPerform.startfinisher(this);
         FinisherToPerform.RestoreAsPiller();
@@ -617,7 +655,14 @@ public class FinisherMode : MonoBehaviour
                 if (finisherAbstractUsed != null && (finisherAbstractUsed is Siphoncut)) //electricity is used for siphoning for now
                     currentTarget.GetComponent<EnemyAI>().KillEnemy(true);
                 else
+                {
                     currentTarget.GetComponent<EnemyAI>().KillEnemy();
+                    enemyAnimator.Play("Death");
+                    if(currentTarget.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.Boss)
+                    {
+                        currentTarget.GetComponent<EnemyAI>().anim.runtimeAnimatorController = savedAnimController;
+                    }
+                }
             else
                 Destroy(currentTarget);
 

@@ -49,8 +49,15 @@ public class TutorialPillar : MonoBehaviour {
         animator.Play("Third_Hit");
     }
 
+    public void PlayFinalHit()
+    {
+        animator.Play("Final_Hit");
+    }
+
     public void PlayFinisherHit()
     {
         animator.Play("Finisher_Hit");
     }
+
+
 }
