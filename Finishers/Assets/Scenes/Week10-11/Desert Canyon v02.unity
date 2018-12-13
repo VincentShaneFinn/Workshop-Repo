@@ -19488,6 +19488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0814b6cd3cc44d4bada008254969b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  postShrine: {fileID: 1308710815392240, guid: 5da01ef35120b4d49ba02fd71c1cd24b, type: 2}
   Player: {fileID: 639564534}
   FinisherTime: 10
   FinisherModeCooldownTime: 1
@@ -19769,8 +19770,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keylist: 000000000100000003000000
-  TopHalf: {fileID: 1383383472105772, guid: 0e07498eaf0895948a9ac934fd8544b1, type: 2}
-  BottomHalf: {fileID: 1359643903492266, guid: 998528f5c1ccd3c42b6c1130c8ce7aa9, type: 2}
+  TopHalf: {fileID: 1786564139995998, guid: 5d529feba4335e947a85f58bf49fc210, type: 2}
+  BottomHalf: {fileID: 1848987941572450, guid: c9eac2a4d736b2a4e96b86c92f88e4e6, type: 2}
   SlicedLimbFirePoint: {fileID: 1751886914}
   shc: {fileID: 1751886912}
 --- !u!114 &639564548
