@@ -50,7 +50,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Finisher_Hit
       takeName: Take 001
-      firstFrame: 134
+      firstFrame: 114
       lastFrame: 148
       wrapMode: 0
       orientationOffsetY: 0

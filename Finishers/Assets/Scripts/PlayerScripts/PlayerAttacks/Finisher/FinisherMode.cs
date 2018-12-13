@@ -196,6 +196,10 @@ public class FinisherMode : MonoBehaviour
                 {
                     currentTarget.transform.position = EnemyFinisherPlacement.position;
                     currentTarget.transform.rotation = EnemyFinisherPlacement.rotation;
+                    if (!PillarFinisherUsed)
+                    {
+                        currentTarget.transform.Rotate(new Vector3(0, -40, 0));
+                    }
                 }
                 if (Input.GetButtonDown("QuickFinish"))
                 {
@@ -280,7 +284,7 @@ public class FinisherMode : MonoBehaviour
                 {
                     if (PillarTutorial)
                     {
-                        PillarTutorial.PlayFirstHit();
+                        PillarTutorial.PlaySecondHit();
                     }
                 }
                 break;
@@ -289,7 +293,7 @@ public class FinisherMode : MonoBehaviour
                 {
                     if (PillarTutorial)
                     {
-                        PillarTutorial.PlaySecondHit();
+                        PillarTutorial.PlayThirdHit();
                     }
                 }
                 break;
@@ -471,6 +475,7 @@ public class FinisherMode : MonoBehaviour
             {
                 currentTarget.GetComponent<EnemyMovementController>().StopMovement();
                 currentTarget.GetComponent<EnemyAI>().BeingFinished();
+           
 
                 if (currentTarget.GetComponent<EnemyTypeController>().MyEnemyType == EnemyType.Boss)
                 {
@@ -536,6 +541,10 @@ public class FinisherMode : MonoBehaviour
 
         currentTarget.transform.position = EnemyFinisherPlacement.position;
         currentTarget.transform.rotation = EnemyFinisherPlacement.rotation;
+        if (!PillarFinisherUsed)
+        {
+            currentTarget.transform.Rotate(new Vector3(0, -40, 0));
+        }
         //currentTarget.transform.parent = EnemyFinisherPlacement;
         if (PillarFinisherUsed)
         {
@@ -545,7 +554,10 @@ public class FinisherMode : MonoBehaviour
 
         //moves camera
         cam.MoveToFinisherModeLocation(); //Mark make sure camera takes as long as the animation
-
+        if (PillarFinisherUsed)
+        {
+            PillarTutorial.PlayFirstHit();
+        }
         while (cam.GetIsMoving())
         {
             CameraBase.rotation = Quaternion.Slerp(CameraBase.rotation, PlayerRotWrapper.rotation, .5f);
@@ -554,6 +566,8 @@ public class FinisherMode : MonoBehaviour
         //waits till the camera and or animation is done
         CameraBase.rotation = PlayerRotWrapper.rotation;
         GetComponent<PlayerMovementController>().Aiming = false;
+
+
 
         PerformingFinisher = true;
         FinisherCount = FinisherTime;
