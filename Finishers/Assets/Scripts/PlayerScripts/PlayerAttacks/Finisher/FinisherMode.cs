@@ -9,7 +9,7 @@ public enum Direction { up, right, down, left }
 
 public class FinisherMode : MonoBehaviour
 {
-
+    public GameObject postShrine;
     public GameObject Player;
 
     public float FinisherTime;
@@ -59,6 +59,7 @@ public class FinisherMode : MonoBehaviour
 
     private List<Direction> RunicQue;
     private List<FinisherAbstract> FinisherMoves = new List<FinisherAbstract>();
+
     public void AddFinisherMove(FinisherAbstract finisher)
     {
         FinisherMoves.Add(finisher);
@@ -682,6 +683,7 @@ public class FinisherMode : MonoBehaviour
             gameStatus.CheckpointP = currentTarget.transform.position + currentTarget.transform.forward * 2;
             Invoke("SaveGame", 2f);
             IncreaseFinisherMeter(100);
+            Instantiate(postShrine,currentTarget.transform.position,currentTarget.transform.rotation);
             Destroy(currentTarget);
         }
         else

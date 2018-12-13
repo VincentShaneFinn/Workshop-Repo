@@ -8,7 +8,6 @@ public class TutorialPillar : MonoBehaviour {
     private FinisherMode fm;
     private bool inRange = false;
     public Finishers FinisherUnlock;
-
     Animator animator;
 
 	// Use this for initialization
@@ -57,6 +56,7 @@ public class TutorialPillar : MonoBehaviour {
     public void PlayFinisherHit()
     {
         animator.Play("Finisher_Hit");
+
     }
 
 
