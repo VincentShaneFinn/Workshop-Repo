@@ -8208,6 +8208,20 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.455822
       objectReference: {fileID: 0}
+    - target: {fileID: 1713960265321780, guid: ad6c0980710879c47a4a7f3cb272f95e, type: 2}
+      propertyPath: m_Name
+      value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 137750584890189790, guid: ad6c0980710879c47a4a7f3cb272f95e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100004, guid: 7f636c539abd74941a18d4d98bda71bd, type: 3}
+    - target: {fileID: 137534165343413616, guid: ad6c0980710879c47a4a7f3cb272f95e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100004, guid: 7f636c539abd74941a18d4d98bda71bd, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad6c0980710879c47a4a7f3cb272f95e, type: 2}
   m_IsPrefabAsset: 0
@@ -11805,7 +11819,8 @@ Prefab:
       propertyPath: Exits.Array.data[4]
       value: 
       objectReference: {fileID: 1607367989}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65348140972273396, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 7bedd8a7e2929bb4b9c3bd7d86c89da5, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &303543232 stripped
@@ -19749,7 +19764,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 639564534}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99cb30e6586495b4d9b17de786f1881b, type: 3}
   m_Name: 
