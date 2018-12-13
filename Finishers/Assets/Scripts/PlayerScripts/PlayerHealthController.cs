@@ -11,14 +11,14 @@ public class PlayerHealthController : MonoBehaviour
 
     public float MaxHealth = 100;
     public Slider healthSlider;
-    public Text gameOverText;
+    public Canvas gameOverText;
     public PlayerUpdater pUpdater;
     public GameStatus gm;
 
     void Start()
     {
         healthSlider.value = MaxHealth;
-        gameOverText.text = "";
+        gameOverText.enabled=false;
     }
 
     public void PlayerHit(float damage)
@@ -44,7 +44,7 @@ public class PlayerHealthController : MonoBehaviour
 
     public void PlayerKilled()
     {
-        gameOverText.text = "Game Over";
+        gameOverText.enabled=true;
         gm.PlayerDied();
     }
 
