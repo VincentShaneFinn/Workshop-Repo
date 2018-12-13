@@ -151,7 +151,7 @@ public class KnightEnemyActions : MonoBehaviour {
 
         while (elapse_time < flightDuration)
         {
-            transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
+            transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx *.8f * Time.deltaTime);
 
             elapse_time += Time.deltaTime;
 

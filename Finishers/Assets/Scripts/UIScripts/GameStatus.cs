@@ -239,7 +239,7 @@ public class GameStatus : MonoBehaviour {
             FinisherSlider.value = save.finisherMeter;
             GroupsDefeated = save.DeadGroups.Count;
 
-            playerT.position =new Vector3(save.playerX, save.playerY, save.playerZ);
+            playerT.position =new Vector3(save.playerX, save.playerY + .5f, save.playerZ);
             playerT.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
             Debug.Log("Game Loaded");

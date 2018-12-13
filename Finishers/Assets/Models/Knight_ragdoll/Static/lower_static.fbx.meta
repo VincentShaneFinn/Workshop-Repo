@@ -1,24 +1,38 @@
 fileFormatVersion: 2
-guid: e31ab57dc2ed15346bdb736cc3b3970f
+guid: a68ccbc70bb52204db66e13d3309a27d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Casing_L_j
-    100002: Casing_R_j
-    100004: Gem_j
-    100006: Inner_j
-    100008: Mid_j
-    100010: Outer_j
-    100012: //RootNode
-    400000: Casing_L_j
-    400002: Casing_R_j
-    400004: Gem_j
-    400006: Inner_j
-    400008: Mid_j
-    400010: Outer_j
-    400012: //RootNode
-    7400000: First_Hit
-    9500000: //RootNode
+    100000: Belt
+    100002: l_gauntlet1
+    100004: lower
+    100006: //RootNode
+    100008: r_leg
+    100010: skirt
+    400000: Belt
+    400002: l_gauntlet1
+    400004: lower
+    400006: //RootNode
+    400008: r_leg
+    400010: skirt
+    2100000: lambert2
+    2100002: BodyTexture
+    2100004: redMetal
+    2300000: Belt
+    2300002: l_gauntlet1
+    2300004: lower
+    2300006: r_leg
+    2300008: skirt
+    3300000: Belt
+    3300002: l_gauntlet1
+    3300004: lower
+    3300006: r_leg
+    3300008: skirt
+    4300000: l_gauntlet1
+    4300002: skirt
+    4300004: r_leg
+    4300006: Belt
+    4300008: lower
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -46,35 +60,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: First_Hit
-      takeName: Take 001
-      firstFrame: 4
-      lastFrame: 40
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -98,8 +84,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -124,7 +110,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

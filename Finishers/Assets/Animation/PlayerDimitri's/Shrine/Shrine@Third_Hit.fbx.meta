@@ -50,7 +50,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Third_Hit
       takeName: Take 001
-      firstFrame: 58
+      firstFrame: 57
       lastFrame: 76
       wrapMode: 0
       orientationOffsetY: 0
