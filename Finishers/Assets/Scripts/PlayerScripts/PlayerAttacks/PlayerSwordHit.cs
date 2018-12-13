@@ -5,19 +5,23 @@ using UnityEngine;
 public class PlayerSwordHit : MonoBehaviour {
 
     public FinisherMode finisherObject;
-    public int swordDamage = 1;
-    private int currentSwordDamage;
+    public float swordDamage = 1;
+    private float currentSwordDamage;
+    public bool isHeavy = false;
     public SkinnedMeshRenderer swordEdge;
     public Material[] OriginalSwordMaterials;
     public Material[] FireMats;
+    public AttackType CurrentAttackType;
     private bool isFinisher = false;
 
     void Start()
     {
+        swordDamage = PlayerDamageValues.Instance.LightAttackDamage;
         currentSwordDamage = swordDamage;
+        CurrentAttackType = AttackType.NormalBlade;
     }
 
-    public void SetSwordDamage(int d)
+    public void SetSwordDamage(float d)
     {
         currentSwordDamage = d;
     }
@@ -30,30 +34,55 @@ public class PlayerSwordHit : MonoBehaviour {
     {
         swordEdge.materials = FireMats;
         isFinisher = true;
+        CurrentAttackType = AttackType.Fire;
     }
     public void RestoreSwordSkin()
     {
         swordEdge.materials = OriginalSwordMaterials;
+        CurrentAttackType = AttackType.NormalBlade;
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag.Equals("Enemy"))
         {
-            finisherObject.IncreaseFinisherMeter();
+            if (CurrentAttackType == AttackType.NormalBlade)
+            {
+                finisherObject.IncreaseFinisherMeter(PlayerDamageValues.Instance.NormalAttackFinMeterFill);
+            }
+            else
+            {
+                finisherObject.IncreaseFinisherMeter(PlayerDamageValues.Instance.ElementalSwordAttackFinMeterFill);
+            }
             Enemyhp e = null;
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {
-                e.damage(currentSwordDamage,isFinisher);
+                if (isHeavy)
+                {
+                    e.damage(currentSwordDamage * 1.5f, AttackType.HeavyBlade);
+                }
+                else
+                {
+                    e.damage(currentSwordDamage, CurrentAttackType);
+                }
+
+                Debug.Log(gameObject);
             }
         }
         else if (col.gameObject.tag.Equals("TargetDummy"))
         {
-            finisherObject.IncreaseFinisherMeter();
+            finisherObject.IncreaseFinisherMeter(PlayerDamageValues.Instance.NormalAttackFinMeterFill);
             Enemyhp e = null;
             if ((e = col.GetComponent<Enemyhp>()) != null)
             {
-                e.damage(currentSwordDamage,isFinisher);
+                if (isHeavy)
+                {
+                    e.damage(currentSwordDamage * 2f, AttackType.HeavyBlade);
+                }
+                else
+                {
+                    e.damage(currentSwordDamage, CurrentAttackType);
+                }
             }
         }
 

@@ -9,26 +9,21 @@ public class PlayerHealthController : MonoBehaviour
     //For debugging purposes
     public bool canDie = true;
 
-    public int MaxHealth = 100;
+    public float MaxHealth = 100;
     public Slider healthSlider;
-    public Text gameOverText;
+    public Canvas gameOverText;
     public PlayerUpdater pUpdater;
     public GameStatus gm;
 
     void Start()
     {
         healthSlider.value = MaxHealth;
-        gameOverText.text = "";
+        gameOverText.enabled=false;
     }
 
-    public void PlayerHit()
+    public void PlayerHit(float damage)
     {
-        PlayerHit(10);
-    }
-
-    public void PlayerHit(int damage)
-    {
-        if (pUpdater.ImmuneCount < pUpdater.ImmuneTime || GetComponent<PlayerMovementController>().isDashing())
+        if (pUpdater.ImmuneCount < pUpdater.ImmuneTime || GetComponent<PlayerMovementController>().isDashing() || GameStatus.FinisherModeActive)
             return;
         else
             pUpdater.ImmuneCount = 0;
@@ -37,16 +32,23 @@ public class PlayerHealthController : MonoBehaviour
 
         healthSlider.value = MaxHealth;
 
+        GetComponent<PlayerSoundController>().PlayHitSound();
+
         if (MaxHealth <= 0 && canDie == true)
         {
-            gameOverText.text = "Game Over";
-            gm.PlayerDied();
+            PlayerKilled();
             //gm.LoadGame();
-          
+
         }
     }
 
-    public void PlayerHealed(int health)
+    public void PlayerKilled()
+    {
+        gameOverText.enabled=true;
+        gm.PlayerDied();
+    }
+
+    public void PlayerHealed(float health)
     {
         MaxHealth += health;
         if (MaxHealth > 100)

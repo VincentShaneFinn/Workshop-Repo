@@ -73,6 +73,8 @@ public class PlayerMovementController : MonoBehaviour
     public LayerMask Ground;
     public Transform GroundChecker;
     public float GroundDistance = 0.2f;
+    public Transform CameraBase;
+    public bool Aiming = false;
 
     void Start()
     {
@@ -93,7 +95,7 @@ public class PlayerMovementController : MonoBehaviour
 
         // If the run button is set to toggle, then switch between walk/run speed. (We use Update for this...
         // FixedUpdate is a poor place to use GetButtonDown, since it doesn't necessarily run every frame and can miss the event)
-        if (toggleRun && grounded && Input.GetButtonDown("Run"))
+        if (toggleRun && !GameStatus.InCombat && grounded && Input.GetButtonDown("Run"))
             speed = (speed == walkSpeed ? runSpeed : walkSpeed);
 
         float inputX = Input.GetAxisRaw("Horizontal");
@@ -130,7 +132,7 @@ public class PlayerMovementController : MonoBehaviour
 
             // If running isn't on a toggle, then use the appropriate speed depending on whether the run button is down
             if (!toggleRun)
-                speed = Input.GetButton("Run") ? runSpeed : walkSpeed;
+                speed = Input.GetButton("Run") && !GameStatus.InCombat ? runSpeed : walkSpeed;
 
             //// If sliding (and it's allowed), or if we're on an object tagged "Slide", get a vector pointing down the slope we're on
             //if ((sliding && slideWhenOverSlopeLimit) || (slideOnTaggedObjects && hit.collider.tag == "Slide"))
@@ -159,8 +161,8 @@ public class PlayerMovementController : MonoBehaviour
                 }
                 else if (jumpTimer >= antiBunnyHopFactor && CanMove)
                 {
-                    myRigidbody.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
                     jumpTimer = 0;
+                    jumpPressed = true;
                 }
             }
 
@@ -220,12 +222,19 @@ public class PlayerMovementController : MonoBehaviour
         {
             
             Vector3 movement = new Vector3((moveDirection).x, 0.0f, (moveDirection).z);
-            if (movement != Vector3.zero)
-            {
-                //print((float)(Time.deltaTime + (1.0 - Time.timeScale)));
-                //this doesnt get run if the timeScale is 0
-                rotationwrapper.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * rotationSpeed);
-                //rotationwrapper.transform.rotation = Quaternion.LookRotation(movement);
+            if (!Aiming) {
+                if (movement != Vector3.zero)
+                {
+                    //print((float)(Time.deltaTime + (1.0 - Time.timeScale)));
+                    //this doesnt get run if the timeScale is 0
+                    rotationwrapper.transform.rotation = Quaternion.Lerp(PlayerModel.transform.rotation, Quaternion.LookRotation(movement), Time.deltaTime * rotationSpeed);
+                    //rotationwrapper.transform.rotation = Quaternion.LookRotation(movement);
+                }
+            }
+            else {
+                float y = CameraBase.transform.eulerAngles.y;
+                rotationwrapper.transform.eulerAngles = new Vector3(0, y, 0);
+                //rotationwrapper.transform.rotation = CameraBaseRotJustY;
             }
         }
         dashed = false;
@@ -242,21 +251,34 @@ public class PlayerMovementController : MonoBehaviour
     public float slopeThreshold = .2f;
     public CapsuleCollider myCollider;
     public Animator CharAnim;
+    private bool jumpPressed = false;
+
     void FixedUpdate()
     {
         if (CanMove)
         {
-            if (grounded && myRigidbody.velocity.y > 0)
-                desiredVelocity = new Vector3(moveDirection.x,0, moveDirection.z);
+            if (grounded && myRigidbody.velocity.y > 0) //measure to prevent up velocity if moving on a slope, but dont do this if just jumped
+            {
+                if (jumpTimer > 1f)
+                {
+                    desiredVelocity = new Vector3(moveDirection.x, 0, moveDirection.z);
+                }
+                else
+                {
+                    desiredVelocity = new Vector3(moveDirection.x, myRigidbody.velocity.y, moveDirection.z);
+                }
+            }
             else
+            {
                 desiredVelocity = new Vector3(moveDirection.x, myRigidbody.velocity.y, moveDirection.z);
+            }
             myRigidbody.velocity = desiredVelocity;
         }
         else
             myRigidbody.velocity = new Vector3(0, myRigidbody.velocity.y, 0);
         myRigidbody.AddForce(new Vector3(0, -gravity * myRigidbody.mass, 0));
 
-        if (CanMove && (moveDirection.x != 0 || moveDirection.z != 0))
+        if (CanMove && (moveDirection.x != 0 || moveDirection.z != 0) && speed >= 6) //MARK: temporary until get flamethrower animations
         {
             AnimatorStateInfo state = CharAnim.GetCurrentAnimatorStateInfo(0);
             moveDirection.y = 0;
@@ -265,7 +287,10 @@ public class PlayerMovementController : MonoBehaviour
             CharAnim.SetFloat("Running", animSpeed);
         }
         else
-            CharAnim.SetFloat("Running", 0); 
+            CharAnim.SetFloat("Running", 0);
+        if(jumpPressed)
+            myRigidbody.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+        jumpPressed = false;
     }
 
     // If falling damage occured, this is the place to do something about it. You can make the player
@@ -336,9 +361,31 @@ public class PlayerMovementController : MonoBehaviour
             float currentKnockbackSpeed = speed - walkSpeed;
             myRigidbody.MovePosition(myRigidbody.position + dir * (walkSpeed + currentKnockbackSpeed * (1 - count / time)) * Time.deltaTime);
         }
-
         AllowTurning();
         AllowMoving();
     }
-    
+
+    void OnCollisionStay(Collision col)
+    {
+        if (dashing && !restorePhysicsStarted)
+        {
+            if (col.gameObject.tag == "Enemy" || col.gameObject.tag == "TargetDummy")
+            {
+                restorePhysicsStarted = true;
+                Physics.IgnoreCollision(GetComponent<CapsuleCollider>(), col.collider,true);
+                StartCoroutine(RestorePhysics(GetComponent<CapsuleCollider>(), col.collider, dashFactor - dashTimer));
+            }
+        }
+    }
+
+    private bool restorePhysicsStarted = false;
+
+    IEnumerator RestorePhysics(Collider start, Collider end, float time)
+    {
+        if (time < 0)
+            time = 0;
+        yield return new WaitForSeconds(time);
+        Physics.IgnoreCollision(start, end, false);
+        restorePhysicsStarted = false;
+    }
 }

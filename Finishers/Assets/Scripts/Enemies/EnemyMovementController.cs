@@ -8,6 +8,7 @@ public class EnemyMovementController : MonoBehaviour {
     public bool UseDestination = false;
     private Vector3 Destination;
     public NavMeshAgent agent;
+    private bool LockToGround;
     private float savedSpeed;
     private float savedAcc;
     private float pauseTime = .3f;
@@ -22,10 +23,26 @@ public class EnemyMovementController : MonoBehaviour {
         savedAcc = agent.acceleration;
         pauseCount = pauseTime;
         Target = GameObject.FindGameObjectWithTag("Player").transform;
+        LockToGround = true;
     }
 
     // Update is called once per frame
     void Update () {
+        RaycastHit hit;
+
+        // Does the ray intersect any objects excluding the player layer
+        if (LockToGround)
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, collisionLayer))
+            {
+                transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
+            }
+            else if (Physics.Raycast(transform.position, Vector3.up, out hit, 3, collisionLayer))
+            {
+                transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
+            }
+        }
+
         if (agent.isActiveAndEnabled && agent.isOnNavMesh)
         {
             if (UseDestination)
@@ -33,6 +50,7 @@ public class EnemyMovementController : MonoBehaviour {
             else
                 agent.SetDestination(Target.position);
         }
+
     }
 
     public void SetTarget(Transform NewTarget)
@@ -76,19 +94,24 @@ public class EnemyMovementController : MonoBehaviour {
         agent.speed = savedSpeed;
     }
 
+    public void SetLockToGround(bool b)
+    {
+        LockToGround = b;
+    }
+
     public void StopMovement()
     {
-        RaycastHit hit;
+        //RaycastHit hit;
 
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, collisionLayer))
-        {
-            transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
-        }
-        else if (Physics.Raycast(transform.position, Vector3.up, out hit, 3, collisionLayer))
-        {
-            transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
-        }
+        //// Does the ray intersect any objects excluding the player layer
+        //if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, collisionLayer))
+        //{
+        //    transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
+        //}
+        //else if (Physics.Raycast(transform.position, Vector3.up, out hit, 3, collisionLayer))
+        //{
+        //    transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
+        //}
 
         if(agent.isOnNavMesh)
             agent.isStopped = true;
@@ -102,17 +125,17 @@ public class EnemyMovementController : MonoBehaviour {
 
     public void ResumeMovement()
     {
-        RaycastHit hit;
+        //RaycastHit hit;
 
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 20, collisionLayer))
-        {
-            transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
-        }
-        else if (Physics.Raycast(transform.position, Vector3.up, out hit, 3, collisionLayer))
-        {
-            transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
-        }
+        //// Does the ray intersect any objects excluding the player layer
+        //if (Physics.Raycast(transform.position, Vector3.down, out hit, 20, collisionLayer))
+        //{
+        //    transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
+        //}
+        //else if (Physics.Raycast(transform.position, Vector3.up, out hit, 3, collisionLayer))
+        //{
+        //    transform.position = new Vector3(hit.point.x, hit.point.y + agent.baseOffset, hit.point.z);
+        //}
 
         if (agent.isOnNavMesh)
             agent.isStopped = false;
@@ -141,24 +164,25 @@ public class EnemyMovementController : MonoBehaviour {
     public void EnableNavAgent()
     {
         agent.enabled = true;
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z); //MARK WILL NOT WORK IN BASEMENTS
         ResumeMovement();
     }
 
-    public void HelpKnockback()
+    public void HelpKnockback(float optionalFactor = 7f)
     {
-        StartCoroutine(KnockbackEnemy());
+        StartCoroutine(KnockbackEnemy(optionalFactor));
     }
 
-    private IEnumerator KnockbackEnemy()
+    //currently a fundamental issue with this, we need to handle this a better way, basically restart if this coroutine is in progress
+    private IEnumerator KnockbackEnemy(float speed)
     {
         if (agent.isActiveAndEnabled)
         {
+            GetComponent<EnemyAI>().ResetStaggeredCheck();
+
             GetComponent<EnemyAI>().anim.Play("Hit4");
             GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.Staggered);
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            float time = .4f;//.15f;
-            float speed = 7; // keep greater than 6
+            float time = .3f;//.15f;
             Vector3 dir = (transform.position - player.transform.position).normalized;
             dir.y = 0;
             float count = 0;
@@ -176,24 +200,16 @@ public class EnemyMovementController : MonoBehaviour {
                 yield return null;
                 pcount += Time.deltaTime;
             }
-
-            if (GetComponent<EnemyAI>().PreviousStatus != EnemyBehaviorStatus.Staggered)
-            {
-                GetComponent<EnemyAI>().ChangeStatus(GetComponent<EnemyAI>().PreviousStatus); //return to what it was originally doing
-            }
-            else
-            {
-                GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.SurroundPlayer);
-            }
+            //this stuff doesn't work great just use an outside timer to restore status to waiting
+            //if (GetComponent<EnemyAI>().PreviousStatus != EnemyBehaviorStatus.Staggered)
+            //{
+            //    GetComponent<EnemyAI>().ChangeStatus(GetComponent<EnemyAI>().PreviousStatus); //return to what it was originally doing
+            //}
+            //else
+            //{
+            //    GetComponent<EnemyAI>().ChangeStatus(EnemyBehaviorStatus.SurroundPlayer);
+            //}
         }
 
-    }
-
-    void OnTriggerEnter(Collider col)
-    {
-        if(col.gameObject.name == "PlayerSwordTrigger")
-        {
-            StartCoroutine(KnockbackEnemy());
-        }
     }
 }

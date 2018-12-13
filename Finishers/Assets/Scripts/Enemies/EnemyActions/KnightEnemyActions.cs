@@ -6,8 +6,7 @@ public class KnightEnemyActions : MonoBehaviour {
 
     public EnemyMovementController MovementCtrl;
     public EnemyAI AI;
-    public GameObject Sword;
-    public GameObject HeavySword;
+    public EnemySword sword;
     private Transform playerT;
 
     public float firingAngle = 45.0f;
@@ -24,27 +23,73 @@ public class KnightEnemyActions : MonoBehaviour {
         MovementCtrl.SetSpeed(1f);
         AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
         AI.ChangeAction(EnemyActions.NormalAttack);
-        //set animation
-        //attack()
-        //Sword.SetActive(true); //tempAniamtionFake
+        sword.damage = PlayerDamageValues.Instance.NormalAttackDamage;
 
         //Animation Section
         //AI.anim.applyRootMotion = true;
-        AI.anim.Play("RunningAttack");
-        //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
 
-        float tempAnimationTime = 1f;
-        float tempAnimationCount = 0;
+        //Attack animatin is currently .1 meters higher than normal
+        //AI.anim.transform.position = new Vector3(AI.anim.transform.position.x, AI.anim.transform.position.y - .15f, AI.anim.transform.position.z);
+        int attackIndex = Random.Range(0, 2);
+        //attackIndex = 1;//MARK: UNTIL WE FIX THE ATTACK ANIMATIONS
+        bool interupped = false;
 
-        //we need to end prematurely if the enemy is staggered
-        while(tempAnimationCount < tempAnimationTime && AI.CurrentStatus != EnemyBehaviorStatus.Staggered)
+        if (attackIndex == 0)
         {
-            yield return null;
-            tempAnimationCount += Time.deltaTime;
-            if(AI.CurrentStatus == EnemyBehaviorStatus.BeingFinished)
+
+            AI.anim.Play("RunningAttack");
+            //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
+
+            float tempAnimationTime = 2f;
+            float tempAnimationCount = 0;
+
+            //we need to end prematurely if the enemy is staggered
+            while (tempAnimationCount < tempAnimationTime)
             {
-                break;
+                yield return null;
+                tempAnimationCount += Time.deltaTime;
+                if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
+                {
+                    interupped = true;
+                    break;
+                }
+                if (tempAnimationCount > 1.1f)
+                {
+                    MovementCtrl.SetSpeed(0);
+                }
             }
+        }
+        else
+        {
+            MovementCtrl.SetSpeed(0);
+            Quaternion savedRot = AI.anim.transform.localRotation;
+            AI.anim.transform.localRotation = Quaternion.Euler(new Vector3(0, 170, 0));
+            AI.anim.Play("BranchAttack_swing1");
+            //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
+
+            float tempAnimationTime = 1.6f;
+            float tempAnimationCount = 0;
+
+            //we need to end prematurely if the enemy is staggered
+            while (tempAnimationCount < tempAnimationTime)
+            {
+                yield return null;
+                tempAnimationCount += Time.deltaTime;
+                if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
+                {
+                    interupped = true;
+                    break;
+                }
+                if (tempAnimationCount > 1.1f)
+                {
+                    MovementCtrl.SetSpeed(0);
+                }
+                else
+                {
+                    AI.transform.LookAt(playerT.position);
+                }
+            }
+            AI.anim.transform.localRotation = savedRot;
         }
 
         //Sword.SetActive(false);//tempAniamtionFake
@@ -53,23 +98,31 @@ public class KnightEnemyActions : MonoBehaviour {
         //transform.position = AI.anim.transform.position;
         //AI.anim.transform.localPosition = new Vector3(0, -1, 0);
         AI.GetDirector().NormalAttackCompleted();
-        AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+        if (!interupped)
+        {
+            AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+            AI.anim.Play("Idle");
+        }
         AI.ChangeAction(EnemyActions.None);
         MovementCtrl.RestoreSpeed();
-        AI.anim.Play("Idle");
+        //MovementCtrl.ResumeMovement();
     }
 
     //Leap Attack for a knight
     IEnumerator PerformSpecial1Attack()
     {
         MovementCtrl.StopMovement();
+        MovementCtrl.SetLockToGround(false);
         AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
         AI.ChangeAction(EnemyActions.Special1);
+        sword.damage = PlayerDamageValues.Instance.JumpAttackDamage;
         //set animation
         //attack()
         //Animation
         //AI.anim.applyRootMotion = true;
-        AI.anim.Play("JumpAttack"); 
+
+        AI.anim.Play("JumpAttack");
+
         //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
 
         GetComponent<EnemyMovementController>().DisableNavAgent();
@@ -94,26 +147,146 @@ public class KnightEnemyActions : MonoBehaviour {
 
         GetComponent<CapsuleCollider>().isTrigger = true;
 
+        bool interupted = false;
+
         while (elapse_time < flightDuration)
         {
             transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
 
             elapse_time += Time.deltaTime;
 
+            if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
+            {
+                interupted = true;
+                break;
+            }
+
             yield return null;
         }
 
+        yield return new WaitForSeconds(.2f);
+
         GetComponent<CapsuleCollider>().isTrigger = false;
-        //HeavySword.SetActive(false);//tempAniamtionFake
-        //Animation Section
-        //AI.anim.applyRootMotion = false;
-        //transform.position = AI.anim.transform.position;
-        //AI.anim.transform.localPosition = new Vector3(0, -1, 0);
 
         GetComponent<EnemyMovementController>().EnableNavAgent();
         AI.GetDirector().Special1AttackCompleted();
-        AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+
         AI.ChangeAction(EnemyActions.None);
-        AI.anim.Play("Idle");
+
+        MovementCtrl.SetLockToGround(true);
+
+        if (!interupted)
+        {
+            AI.anim.Play("Idle");
+            AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+        }
     }
+
+    public void PerformUnblockableAttack()
+    {
+        StartCoroutine(UnblockableAttack());
+    }
+
+    IEnumerator UnblockableAttack()
+    {
+        AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
+        AI.ChangeAction(EnemyActions.NormalAttack);
+        sword.damage = PlayerDamageValues.Instance.NormalAttackDamage;
+
+        bool interupped = false;
+
+        Quaternion savedRot = AI.anim.transform.localRotation;
+        AI.anim.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        AI.anim.Play("StabAttack");
+        //AI.anim.transform.localEulerAngles = new Vector3(0, 0, 0);
+
+        float tempAnimationTime = 2f;
+        float tempAnimationCount = 0;
+
+        //we need to end prematurely if the enemy is staggered
+        while (tempAnimationCount < tempAnimationTime)
+        {
+            yield return null;
+            tempAnimationCount += Time.deltaTime;
+            if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
+            {
+                interupped = true;
+                break;
+            }
+            if(tempAnimationCount < .3f)
+                AI.transform.LookAt(playerT);
+        }
+        AI.anim.transform.localRotation = savedRot;
+
+        if (!interupped)
+        {
+            AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+            AI.anim.Play("Idle");
+        }
+        AI.ChangeAction(EnemyActions.None);
+        GetComponent<EnemyStaggerController>().poiseActive = false;
+        GetComponent<EnemyStaggerController>().staggerCount = 0;
+        MovementCtrl.RestoreSpeed();
+    }
+
+    public GameObject FireBall;
+    public GameObject IceBall;
+    public EnemyTypeController etc;
+
+    public IEnumerator ThrowProjectile()
+    {
+        AI.ChangeStatus(EnemyBehaviorStatus.Attacking);
+        AI.ChangeAction(EnemyActions.NormalAttack);
+
+        bool interupped = false;
+        Quaternion savedRot = AI.anim.transform.localRotation;
+        AI.anim.transform.localRotation = Quaternion.Euler(new Vector3(0, 30, 0));
+        AI.anim.Play("Fire throw");
+
+        float tempAnimationTime = 2f;
+        float tempAnimationCount = 0;
+
+        //we need to end prematurely if the enemy is staggered
+        while (tempAnimationCount < tempAnimationTime)
+        {
+            yield return null;
+            tempAnimationCount += Time.deltaTime;
+            if (AI.GetDirector().IsInterupted(AI.GetCurrentStatus()))
+            {
+                interupped = true;
+                break;
+            }
+            if (tempAnimationCount < .3f)
+                AI.transform.LookAt(playerT);
+        }
+
+        if (etc.MyEnemyType == EnemyType.FireEnemy)
+            Instantiate(FireBall, transform.position, transform.rotation);
+        else
+            Instantiate(IceBall, transform.position, transform.rotation);
+
+        AI.anim.transform.localRotation = savedRot;
+
+        if (!interupped)
+        {
+            AI.ChangeStatus(EnemyBehaviorStatus.Waiting);
+            AI.anim.Play("Idle");
+        }
+        AI.ChangeAction(EnemyActions.None);
+        AI.GetDirector().ProjectileAttackCompleted();
+        AI.CanThrow = true;
+    }
+
+
+    public GameObject FireAOE;
+    //This is a boss only attack
+    public IEnumerator ThrowFireAOE()
+    {
+        AI.CanThrowAOE = false;
+        Instantiate(FireBall, transform.position, Quaternion.LookRotation(playerT.transform.position - transform.position));//set to look at player
+
+        yield return new WaitForSeconds(1f);
+        AI.CanThrowAOE = true;
+    }
+
 }

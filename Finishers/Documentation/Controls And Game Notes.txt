@@ -1,0 +1,28 @@
+Mouse and Keyboard and PS4 controls, Xbox controller not supported
+
+Movement - WASD / Left Stick
+Camera - Mouse / Right Stick
+
+Run - Left Shift / L1
+
+Jump -  Space / X
+
+Dodge - Left Ctrl / Circle
+
+Attack - Left click / Right Trigger
+
+Activate Finisher Mode (When bar full and near enemy) - F / R3
+
+Acticate God Mode (When bar full) - Q / R1
+	New(Press the right button to continue to the streak - 5 second timeout)
+
+While In Finisher mode, you can perform 3 combos to activate either flamethrower or slice enemy
+UI guides are there to help while in game
+
+Flamethrower combo: A -> W -> S -> Left Mouse / Square -> Triangle -> X -> Right Trigger  
+FlameCircle combo: A -> W -> D -> S -> Left Mouse / Square -> Triangle -> Circle -> X -> Right Trigger 
+FlameSword combo(NEW):  A -> D -> W -> Left Mouse / Square -> Circle -> Triangle -> Right Trigger 
+Slice Enemy combo: D -> W -> S -> Left Mouse / Circle -> Triangle -> X -> Right Trigger  
+	Right Mouse, Left Trigger to Aim and throw a sword, can collect multiple swords
+
+NOTE: ENEMIES CAN ONLY BE KILLED WITH FINISHERS

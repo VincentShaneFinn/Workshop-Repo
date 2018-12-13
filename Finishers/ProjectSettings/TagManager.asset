@@ -10,6 +10,9 @@ TagManager:
   - CameraTarget
   - Platform
   - TargetDummy
+  - CameraBase
+  - EnemyProjectileStraight
+  - FinisherEffect
   layers:
   - Default
   - TransparentFX

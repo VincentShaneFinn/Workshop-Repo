@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2018.2.12f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -306,15 +308,28 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Animation\Ragdoll\Launch_ragdoll.cs" />
+    <Compile Include="Assets\Scenes\Week10-11\MEME\sceneload.cs" />
+    <Compile Include="Assets\Scripts\DestroyInNSeconds.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\ActionManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\ArcAngles.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\Enemies\AI\EnemyTypeController.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\GroupDirector.cs" />
+    <Compile Include="Assets\Scripts\Enemies\AI\TempEnemySpawn.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyActions\EnemyProjectileStraight.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyActions\KnightEnemyActions.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyConditionManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemyhp.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyMovementController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyStaggerController.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemySword.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemySwordRange.cs" />
+    <Compile Include="Assets\Scripts\EnvironmentScripts\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\EnvironmentScripts\FinisherMeterPickup.cs" />
+    <Compile Include="Assets\Scripts\EnvironmentScripts\GodModePickup.cs" />
+    <Compile Include="Assets\Scripts\EnvironmentScripts\HealthPickupController.cs" />
+    <Compile Include="Assets\Scripts\EnvironmentScripts\TutorialPillar.cs" />
     <Compile Include="Assets\Scripts\LookAtTarget.cs" />
     <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshLink.cs" />
     <Compile Include="Assets\Scripts\NavMeshComponents\Scripts\NavMeshModifier.cs" />
@@ -329,22 +344,43 @@
     <Compile Include="Assets\Scripts\PlayerScripts\CameraScripts\ChangeCameraPerpective.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\FinisherAbstract.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\FinisherMode.cs" />
-    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFire.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFireCircle.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFireSword.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFlamethrower.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicFrostCircle.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicMoves\AOEFireRunicAttack.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicMoves\AOEFrostRunicAttack.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicMoves\FrostConeDamge.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicMoves\MoveFlames.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\RunicMoves\WieldingFlamethrower.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\Siphoncut.cs" />
-    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\FinisherAreaController.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\Finisher\SiphonHolsterController.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\GodMode.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\PlayerSwordAttack.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\PlayerSwordHit.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\RunicBeamBlast.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttacks\RunicInputHelper.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerDamageValues.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerHealthController.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovementController.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerTriggerCollider.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerUpdater.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerCC.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\SavedCharControllers\PlayerMovementControllerRigidbody.cs" />
+    <Compile Include="Assets\Scripts\Save.cs" />
+    <Compile Include="Assets\Scripts\SoundScripts\EnemySoundController.cs" />
+    <Compile Include="Assets\Scripts\SoundScripts\MusicController.cs" />
+    <Compile Include="Assets\Scripts\SoundScripts\PlayerFootStepController.cs" />
+    <Compile Include="Assets\Scripts\SoundScripts\PlayerSoundController.cs" />
+    <Compile Include="Assets\Scripts\SoundScripts\PlayerSwordSoundController.cs" />
+    <Compile Include="Assets\Scripts\TeleportToBossScene.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\AnimateLine.cs" />
     <Compile Include="Assets\Scripts\UIScripts\ChangeButtonIcon.cs" />
     <Compile Include="Assets\Scripts\UIScripts\ControlMethodDetector.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\FinisherLineAnimator.cs" />
     <Compile Include="Assets\Scripts\UIScripts\GameStatus.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\GodModeText.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\TutorialPopups.cs" />
     <Compile Include="Assets\Scripts\UIScripts\UIManager.cs" />
     <Compile Include="Assets\ThrowLimb.cs" />
     <Compile Include="Assets\ThrowPart.cs" />

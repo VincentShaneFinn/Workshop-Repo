@@ -10,7 +10,7 @@ public class ChangeCameraPerpective : MonoBehaviour {
     {
         if(col.gameObject.tag == "Player")
         {
-            cam.MoveToOOCLocation();
+            cam.SwitchCombatLocation();
         }
     }
 
@@ -18,7 +18,7 @@ public class ChangeCameraPerpective : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
-            cam.MoveToCombatLocation();
+            cam.SwitchCombatLocation();
         }
     }
 }

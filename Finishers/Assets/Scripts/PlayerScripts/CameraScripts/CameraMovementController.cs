@@ -7,26 +7,29 @@ public class CameraMovementController : MonoBehaviour {
     public Transform CombatCameraLocation;
     public Transform OOCCameraLocation;
     public Transform FinisherModeCameraLocation;
+    public Transform AimingCameraLocation;
+
+    public PlayerMovementController PMC;
 
     private Transform currentTargetLocation;
     private float currentSpeed;
 
-    public void MoveToCombatLocation()
-    {
-        //transform.position = CombatCameraLocation.position;
-
-        currentTargetLocation = CombatCameraLocation;
-        currentSpeed = .4f;
-        CallCoroutineHelper();
-    }
-
-    public void MoveToOOCLocation()
+    public void SwitchCombatLocation()
     {
         //transform.position = OOCCameraLocation.position;
-
-        currentTargetLocation = OOCCameraLocation;
-        currentSpeed = .4f;
-        CallCoroutineHelper();
+        if (currentTargetLocation != AimingCameraLocation)
+        {
+            if (GameStatus.InCombat)
+            {
+                currentTargetLocation = CombatCameraLocation;
+            }
+            else
+            {
+                currentTargetLocation = OOCCameraLocation;
+            }
+            currentSpeed = .4f;
+            CallCoroutineHelper(false);
+        }
     }
 
     public void MoveToFinisherModeLocation()
@@ -35,18 +38,37 @@ public class CameraMovementController : MonoBehaviour {
 
         currentTargetLocation = FinisherModeCameraLocation;
         currentSpeed = .45f;
-        CallCoroutineHelper();
+        CallCoroutineHelper(true);
+    }
+
+    //We will need to test these next two
+    public void MoveToAimingLocation(bool unscaled)
+    {
+        PMC.Aiming = true;
+        currentTargetLocation = AimingCameraLocation;
+        currentSpeed = .1f;
+        CallCoroutineHelper(unscaled);
+    }
+    public void ReturnFromAimingLocation()
+    {
+        PMC.Aiming = false;
+        if (GameStatus.InCombat)
+            currentTargetLocation = CombatCameraLocation;
+        else
+            currentTargetLocation = OOCCameraLocation;
+        currentSpeed = .1f;
+        CallCoroutineHelper(false);
     }
 
     Coroutine co;
 
-    public void CallCoroutineHelper()
+    public void CallCoroutineHelper(bool unscaled)
     {
         // stop the coroutine
         if(co != null)
             StopCoroutine(co);
 
-        IEnumerable move = moveToCurrentTarget();
+        IEnumerable move = moveToCurrentTarget(unscaled);
 
         // start the coroutine:
         co = StartCoroutine(move.GetEnumerator());
@@ -54,7 +76,7 @@ public class CameraMovementController : MonoBehaviour {
 
     bool isMoving = false;
 
-    IEnumerable moveToCurrentTarget()
+    IEnumerable moveToCurrentTarget(bool unscaled)
     {
         //Make sure there is only one instance of this function running
         if (isMoving)
@@ -71,7 +93,10 @@ public class CameraMovementController : MonoBehaviour {
 
         while (counter < currentSpeed)
         {
-            counter += Time.deltaTime;
+            if (unscaled)
+                counter += Time.unscaledDeltaTime;
+            else
+                counter += Time.deltaTime;
             transform.localPosition = Vector3.Lerp(startPos, currentTargetLocation.localPosition, counter / currentSpeed);
             transform.localRotation = Quaternion.Lerp(startRot, currentTargetLocation.localRotation, counter / currentSpeed);
             yield return null;

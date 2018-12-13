@@ -12,6 +12,10 @@ public class ActionManager {
     public int MaxSpecial1Attacks = 1;
     public int CurrentSpecial1Attacks = 0;
 
+    //Dont check MaxAttackActions
+    public int MaxProjectileAttacks = 2;
+    public int CurrentProjectileAttacks = 0;
+
     public ActionManager() { }
 
     //take and return normal
@@ -48,6 +52,23 @@ public class ActionManager {
             CurrentSpecial1Attacks = 0;
     }
 
+    //take and return projectile
+    public bool TryProjectileAttack()
+    {
+        if (CanPerformProjectile())
+        {
+            CurrentProjectileAttacks++;
+            return true;
+        }
+        return false;
+    }
+    public void ProjectileAttackCompleted()
+    {
+        CurrentProjectileAttacks--;
+        if (CurrentProjectileAttacks < 0)
+            CurrentProjectileAttacks = 0;
+    }
+
 
     //if they perform the action, will they exceed the limits
     public bool CanPerfromAttackAction()
@@ -67,6 +88,13 @@ public class ActionManager {
     public bool CanPerformSpecial1()
     {
         if (CurrentSpecial1Attacks < MaxSpecial1Attacks)
+            return true;
+        return false;
+    }
+
+    public bool CanPerformProjectile()
+    {
+        if (CurrentProjectileAttacks < MaxProjectileAttacks)
             return true;
         return false;
     }

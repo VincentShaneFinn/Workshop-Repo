@@ -15,5 +15,11 @@ public class PlayerTriggerCollider : MonoBehaviour {
             StartCoroutine(player.KnockbackPlayer(col.transform.parent.gameObject));
             healthC.PlayerHit(col.gameObject.GetComponent<EnemySword>().damage);
         }
+        if(col.gameObject.tag == "EnemyProjectileStraight")
+        {
+            StartCoroutine(player.KnockbackPlayer(col.transform.gameObject));
+            healthC.PlayerHit(col.gameObject.GetComponent<EnemyProjectileStraight>().damage);
+            col.gameObject.GetComponent<EnemyProjectileStraight>().HitPlayer();
+        }
     }
 }

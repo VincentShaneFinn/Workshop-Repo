@@ -23,15 +23,16 @@ public class EnemyAI : MonoBehaviour {
     private float ArcAngle = 360; //use 360 as a sub for null
     private Vector3 ArcTarget;
     // Use this for initialization
-    void Start () {
+    void Start() {
         GetEnemyMovementCtrl = GetComponent<EnemyMovementController>();
-        director = GetComponentInParent<GroupDirector>();
+        SetDirector(GetComponentInParent<GroupDirector>());
         playerT = GameObject.FindGameObjectWithTag("Player").transform;
         myAction = EnemyActions.None;
     }
 
     private float StaggeredCheckTime = .7f;
     private float StaggeredCheckCount = 0;
+    public void ResetStaggeredCheck() { StaggeredCheckCount = 0; }
 
     // Update is called once per frame
     void Update () {
@@ -47,7 +48,10 @@ public class EnemyAI : MonoBehaviour {
         {
             StaggeredCheckCount += Time.deltaTime;
             if (StaggeredCheckCount >= StaggeredCheckTime)
+            {
                 ChangeStatus(EnemyBehaviorStatus.Waiting);
+                anim.Play("Idle");
+            }
         }
         else
         {
@@ -62,28 +66,59 @@ public class EnemyAI : MonoBehaviour {
             GetEnemyMovementCtrl.SetTarget(playerT);
         }
 
+        //we will need to make some new moves if it is a boss, currently preventing boss from jumping
+
         //obviosuly if your currently doing something, or shouldnt be able to do something, you can't attack
-        if (checkplayer(attackrange) && !director.IsBusy(CurrentStatus) && myAction == EnemyActions.None)
-        {
-            //check if the player is in front of you
-            var heading = playerT.position - transform.position;
-            float dot = Vector3.Dot(heading, transform.forward);
-            if (dot > .5) // must be 30 degrees in front
+        if (!director.IsBusy(CurrentStatus) && myAction == EnemyActions.None) {
+            if (checkplayer(attackrange))
             {
-                //If two many attacks recently, continue doing what they were doing
-                if (director.TryNormalAttack())
-                    KnightActions.StartCoroutine("PerformNormalAttack");
-                else
-                    KeepDistance();
+                //check if the player is in front of you
+                var heading = playerT.position - transform.position;
+                float dot = Vector3.Dot(heading, transform.forward);
+                if (dot > .5) // must be 30 degrees in front
+                {
+                    //If two many attacks recently, continue doing what they were doing
+                    if (director.TryNormalAttack())
+                        KnightActions.StartCoroutine("PerformNormalAttack");
+                    else
+                        KeepDistance();
+                }
+            }
+            //This will need to go to KnightEnemyActions and check which attack it should attempt, rather than using range
+            else if (checkplayer(Special1RangeTEMP) && Vector3.Distance(transform.position, playerT.position) > Special1RangeTEMP - 1 && etc.MyEnemyType != EnemyType.Boss) // we will need an alternative way to check if doing special 1 is right that is specific to the enemy
+            {
+                if (director.TrySpecial1Attack())
+                    KnightActions.StartCoroutine("PerformSpecial1Attack");
+            }
+            else if (CurrentStatus == EnemyBehaviorStatus.SurroundPlayer && Vector3.Distance(transform.position, playerT.position) > ProjectileLaunchDistance)
+            {
+                if (CanThrow)
+                {
+                    if (director.TryProjectileAttack())
+                    {
+                        CanThrow = false;
+                        StartCoroutine(KnightActions.ThrowProjectile());
+                    }
+                }
             }
         }
-        //This will need to go to KnightEnemyActions and check which attack it should attempt, rather than using range
-        else if (checkplayer(Special1RangeTEMP) && Vector3.Distance(transform.position, playerT.position) > 4 && !director.IsBusy(CurrentStatus) && myAction == EnemyActions.None) // we will need an alternative way to check if doing special 1 is right that is specific to the enemy
+        if(CurrentStatus == EnemyBehaviorStatus.Busy && CanThrowAOE) //BossComment
         {
-            if (director.TrySpecial1Attack())
-                KnightActions.StartCoroutine("PerformSpecial1Attack");
+            StartCoroutine(KnightActions.ThrowFireAOE());
+        }
+        if(StartupCheck && CurrentStatus != EnemyBehaviorStatus.Sleeping) {
+            startupTime += Time.deltaTime;
+            if(startupTime > director.ReturnProjectileAttackDelay)
+            {
+                CanThrow = true;
+                StartupCheck = false;
+            }
         }
     }
+    public float ProjectileLaunchDistance = 10;
+    private bool StartupCheck = true;
+    public bool CanThrow = false;
+    private float startupTime = 0;
 
     public EnemyBehaviorStatus GetCurrentStatus() { return CurrentStatus; }
     public void ChangeStatus(EnemyBehaviorStatus s) { PreviousStatus = CurrentStatus;  CurrentStatus = s; }
@@ -158,12 +193,13 @@ public class EnemyAI : MonoBehaviour {
             {
                 //guard
                 //StartCoroutine("GuardState");
+                anim.SetBool("TempSurround", false);
             }
             else
             {
                 transform.Translate(Vector3.left * dx / x * Time.deltaTime * sidespeed);
+                anim.SetBool("TempSurround", true);
             }
-            anim.SetBool("TempSurround", true);
         }
         else
         {
@@ -211,8 +247,14 @@ public class EnemyAI : MonoBehaviour {
         return a;
     }
 
+    public int finishersToKill = 1; //BossComment stuff
+    private int timesKilled = 0;
+    public int GetTimesKilled() { return timesKilled; }
+    public EnemyTypeController etc;
+    public Transform FountainTop;
+    public bool CanThrowAOE = true ;
     //THIS IS THE ONLY WAY AN ENEMY SHOULD BE KILLED
-    public void KillEnemy()
+    public void KillEnemy(bool forceDestroy = false)
     {
         if (ArcAngle != 360 && CurrentStatus != EnemyBehaviorStatus.ArcRunner)
         {
@@ -232,7 +274,55 @@ public class EnemyAI : MonoBehaviour {
                     break;
             }
 
+        timesKilled++;
+        if (timesKilled >= finishersToKill) //kill enemy with an animation playing
+        {
+            if (forceDestroy)
+                Destroy(gameObject);
+            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+            GetEnemyMovementCtrl.enabled = false;
+            CurrentStatus = EnemyBehaviorStatus.Dying;
+            
+            GetComponent<CapsuleCollider>().enabled = false;
+            anim.Play("Death");
+            this.enabled = false;
+            StartCoroutine(DestroyEnemy());
+        }
+
+        //BossComment specific code
+        if (etc.MyEnemyType == EnemyType.Boss && (float)(finishersToKill - GetTimesKilled()) / finishersToKill < .34f)
+        {
+            etc.EnemySkin.material = GetComponent<Enemyhp>().lowRed;
+            GetEnemyMovementCtrl.ResumeMovement();
+            GetEnemyMovementCtrl.SetLockToGround(true);
+            GetComponent<EnemyMovementController>().EnableNavAgent();
+        }
+        else if(etc.MyEnemyType == EnemyType.Boss && (float)(finishersToKill - GetTimesKilled()) / finishersToKill < .68f)
+        {
+            StartCoroutine(PutOnFountain());
+        }
+    }
+
+    IEnumerator DestroyEnemy()
+    {
+        yield return new WaitForSecondsRealtime(1.7f);
         Destroy(gameObject);
+    }
+    IEnumerator PutOnFountain()
+    {
+        yield return new WaitForSeconds(1);
+        ChangeStatus(EnemyBehaviorStatus.Busy);
+        GetEnemyMovementCtrl.StopMovement();
+        GetEnemyMovementCtrl.SetLockToGround(false);
+        GetComponent<EnemyMovementController>().DisableNavAgent();
+        yield return null;
+        transform.position = FountainTop.position;
+    }
+
+    public void BeingFinished()
+    {
+        ChangeStatus(EnemyBehaviorStatus.BeingFinished);
+        anim.Play("Hit4");
     }
 
     public void wakeup() {
@@ -244,21 +334,24 @@ public class EnemyAI : MonoBehaviour {
 
     IEnumerator WakeUpAnimate()
     {
-        //Animation Section Start
-        //anim.applyRootMotion = true;
         anim.SetFloat("SleepModifier", 1);
         yield return new WaitForSeconds(3.4f);
-        //anim.applyRootMotion = false;
-        anim.Play("Idle");
-        //anim.transform.localPosition = new Vector3(0, -1, 0);
-        //anim.transform.localEulerAngles = new Vector3(0, 55, 0);
-        CurrentStatus = EnemyBehaviorStatus.Waiting;
+        if (!director.IsInterupted(CurrentStatus))
+        {
+            anim.Play("Idle");
+            CurrentStatus = EnemyBehaviorStatus.Waiting;
+        }
         //Animation Section End
     }
 
     public GroupDirector GetDirector()
     {
         return director;
+    }
+    public void SetDirector(GroupDirector d)
+    {
+        if(d != null)
+            director = d;
     }
 
     //IEnumerator GuardState() {

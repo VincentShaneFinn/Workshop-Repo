@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !GameStatus.FinisherModeActive)
         {
             PauseMenu.SetActive(true);
             GameStatus.GamePaused = true;
