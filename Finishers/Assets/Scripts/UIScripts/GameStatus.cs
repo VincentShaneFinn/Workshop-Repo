@@ -18,6 +18,7 @@ public class GameStatus : MonoBehaviour {
 
     void Start()
     {
+        Debug.Log(gameObject);
         GamePaused = false;
         FinisherModeActive = false;
         InCombat = false;
